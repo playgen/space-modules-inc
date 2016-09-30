@@ -1,0 +1,3 @@
+[submodule "GameWork"]
+	path = GameWork
+	url = git@github.com:playgenhub/GameWork.git
