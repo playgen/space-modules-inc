@@ -1,4 +1,5 @@
-﻿using GameWork.Interfacing;
+﻿using GameWork.Commands.States;
+using GameWork.Interfacing;
 
 public class LoadingStateInterface : StateInterface
 {
@@ -9,11 +10,13 @@ public class LoadingStateInterface : StateInterface
 
     public override void Enter()
     {
-        throw new System.NotImplementedException();
+        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanel").SetActive(true);
+        // Load stuff
+        EnqueueCommand(new NextStateCommand());
     }
 
     public override void Exit()
     {
-        throw new System.NotImplementedException();
+        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanel").SetActive(false);
     }
 }
