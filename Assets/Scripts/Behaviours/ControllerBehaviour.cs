@@ -6,26 +6,28 @@ using UnityEngine.Networking;
 public class ControllerBehaviour : MonoBehaviour
 {
 
-    private TickableStateController<TickableSequenceState> _stateController;
+	private TickableStateController<TickableSequenceState> _stateController;
 
 	void Awake ()
 	{
-	    DontDestroyOnLoad(transform.gameObject);
+		DontDestroyOnLoad(transform.gameObject);
 
-        _stateController = new TickableStateController<TickableSequenceState>(
-            new LoadingState(new LoadingStateInterface()),
-            new MenuState(new MenuStateInterface())
-            );
-        _stateController.Initialize();
+		_stateController = new TickableStateController<TickableSequenceState>(
+			new LoadingState(new LoadingStateInterface()),
+			new MenuState(new MenuStateInterface()),
+			new LevelState(new LevelStateInterface()),
+            new GameState(new GameStateInterface())
+			);
+		_stateController.Initialize();
 	}
 
-    void Start()
-    {
-        _stateController.SetState(LoadingState.StateName);
-    }
+	void Start()
+	{
+		_stateController.SetState(LoadingState.StateName);
+	}
 
 	void Update ()
-    {
-	    _stateController.Tick(Time.deltaTime);
+	{
+		_stateController.Tick(Time.deltaTime);
 	}
 }

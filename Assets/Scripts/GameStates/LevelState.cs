@@ -1,19 +1,15 @@
 ﻿using GameWork.States;
 
-public class LoadingState : TickableSequenceState
+public class LevelState : TickableSequenceState
 {
-    private LoadingStateInterface _interface;
+    private LevelStateInterface _interface;
 
-    public const string StateName = "LoadingState";
+    public const string StateName = "LevelState";
 
-    public LoadingState(LoadingStateInterface @interface)
+    public LevelState(LevelStateInterface @interface)
     {
+
         _interface = @interface;
-    }
-
-    public override string Name
-    {
-        get { return StateName; }
     }
 
     public override void Initialize()
@@ -38,12 +34,17 @@ public class LoadingState : TickableSequenceState
 
     public override void NextState()
     {
-        ChangeState(MenuState.StateName);
+        ChangeState(GameState.StateName);
     }
 
     public override void PreviousState()
     {
-        throw new System.NotImplementedException();
+        ChangeState(MenuState.StateName);
+    }
+
+    public override string Name
+    {
+        get { return StateName; }
     }
 
     public override void Tick(float deltaTime)
@@ -63,3 +64,4 @@ public class LoadingState : TickableSequenceState
         }
     }
 }
+

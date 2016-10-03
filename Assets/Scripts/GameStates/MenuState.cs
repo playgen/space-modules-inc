@@ -37,7 +37,7 @@ public class MenuState : TickableSequenceState
 
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        ChangeState(LevelState.StateName);
     }
 
     public override void PreviousState()
@@ -47,6 +47,18 @@ public class MenuState : TickableSequenceState
 
     public override void Tick(float deltaTime)
     {
-        throw new System.NotImplementedException();
+        if (_interface.HasCommands)
+        {
+            var command = _interface.TakeFirstCommand();
+
+            //var quickGameCommand = command as QuickGameCommand;
+            //if (quickGameCommand != null)
+            //{
+            //    quickGameCommand.Execute(_controller);
+            //}
+
+            var commandResolver = new StateCommandResolver();
+            commandResolver.HandleSequenceStates(command, this);
+        }
     }
 }
