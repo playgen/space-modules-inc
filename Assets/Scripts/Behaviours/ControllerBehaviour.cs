@@ -13,7 +13,8 @@ public class ControllerBehaviour : MonoBehaviour
 	    DontDestroyOnLoad(transform.gameObject);
 
         _stateController = new TickableStateController<TickableSequenceState>(
-            new LoadingState(new LoadingStateInterface())
+            new LoadingState(new LoadingStateInterface()),
+            new MenuState(new MenuStateInterface())
             );
         _stateController.Initialize();
 	}

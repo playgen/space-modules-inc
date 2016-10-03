@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ButtonList
 {
-    private GameObject[] _buttons;
+    private readonly GameObject[] _buttons;
 
     public ButtonList(string menuPath, bool standardBestFit = false)
     {
@@ -29,8 +29,16 @@ public class ButtonList
         }
     }
 
-    public Button GetButton(string containerName)
+    public Button GetButton(string buttonName, bool hasContainer = false)
     {
-        return _buttons.First(o => o.name.Equals(containerName)).transform.GetChild(0).GetComponent<Button>();
+        var button = _buttons.First(o => o.name.Equals(buttonName));
+        if (!hasContainer)
+        {
+            return button.GetComponent<Button>();
+        }
+        else
+        {
+            return button.transform.GetChild(0).GetComponent<Button>();
+        }
     }
 }

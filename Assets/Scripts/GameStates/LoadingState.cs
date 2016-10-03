@@ -38,10 +38,10 @@ public class LoadingState : TickableSequenceState
 
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        ChangeState(MenuState.StateName);
     }
 
-  public override void PreviousState()
+    public override void PreviousState()
     {
         throw new System.NotImplementedException();
     }

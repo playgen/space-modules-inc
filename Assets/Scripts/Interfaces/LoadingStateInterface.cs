@@ -10,13 +10,13 @@ public class LoadingStateInterface : StateInterface
 
     public override void Enter()
     {
-        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanel").SetActive(true);
+        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
         // Load stuff
         EnqueueCommand(new NextStateCommand());
     }
 
     public override void Exit()
     {
-        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanel").SetActive(false);
+        GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(false);
     }
 }
