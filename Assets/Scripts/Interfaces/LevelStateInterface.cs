@@ -9,6 +9,9 @@ public class LevelStateInterface : StateInterface
 
         // TODO: For loop to iterate all of these and attach appropriate listeners.
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
+
+        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+
     }
 
     public override void Enter()
@@ -20,6 +23,11 @@ public class LevelStateInterface : StateInterface
     {
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(false);
         GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
+    }
+
+    private void OnBackClick()
+    {
+        EnqueueCommand(new PreviousStateCommand());
     }
 
     private void LoadLevel()
