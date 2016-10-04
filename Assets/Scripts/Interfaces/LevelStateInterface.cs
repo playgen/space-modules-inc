@@ -19,6 +19,7 @@ public class LevelStateInterface : StateInterface
     public override void Exit()
     {
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(false);
+        GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
     }
 
     private void LoadLevel()

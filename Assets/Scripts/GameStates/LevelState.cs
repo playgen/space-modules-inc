@@ -34,7 +34,7 @@ public class LevelState : TickableSequenceState
 
     public override void NextState()
     {
-        ChangeState(GameState.StateName);
+        ChangeState(CallState.StateName);
     }
 
     public override void PreviousState()

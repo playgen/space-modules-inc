@@ -1,24 +1,43 @@
 ﻿using GameWork.States;
 
-public class GameState : TickableSequenceState
+public class CallState : TickableSequenceState
 {
-    private readonly GameStateInterface _interface;
+    private CallStateInterface _interface;
 
-    public GameState(GameStateInterface @interface)
+    public const string StateName = "CallState";
+
+    public CallState(CallStateInterface @interface)
     {
         _interface = @interface;
     }
-
-    public const string StateName = "GameState";
 
     public override string Name
     {
         get { return StateName; }
     }
 
+    public override void Initialize()
+    {
+        _interface.Initialize();
+    }
+
+    public override void Terminate()
+    {
+        _interface.Terminate();
+    }
+
+    public override void Enter()
+    {
+        _interface.Enter();
+    }
+
+    public override void Exit()
+    {
+        _interface.Exit();
+    }
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        ChangeState(GameState.StateName);
     }
 
     public override void PreviousState()
