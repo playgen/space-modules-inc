@@ -12,10 +12,12 @@ public class ControllerBehaviour : MonoBehaviour
 	{
 		DontDestroyOnLoad(transform.gameObject);
 
+        var scenarioController = new ScenarioController();
+
 		_stateController = new TickableStateController<TickableSequenceState>(
-			new LoadingState(new LoadingStateInterface()),
+			new LoadingState(scenarioController, new LoadingStateInterface()),
 			new MenuState(new MenuStateInterface()),
-			new LevelState(new LevelStateInterface()),
+			new LevelState(scenarioController, new LevelStateInterface()),
             new CallState(new CallStateInterface()),
             new GameState(new GameStateInterface())
 			);

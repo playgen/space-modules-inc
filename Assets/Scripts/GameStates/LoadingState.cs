@@ -3,11 +3,13 @@
 public class LoadingState : TickableSequenceState
 {
     private LoadingStateInterface _interface;
+    private ScenarioController _scenarioController;
 
     public const string StateName = "LoadingState";
 
-    public LoadingState(LoadingStateInterface @interface)
+    public LoadingState(ScenarioController scenarioController, LoadingStateInterface @interface)
     {
+        _scenarioController = scenarioController;
         _interface = @interface;
     }
 
@@ -29,6 +31,7 @@ public class LoadingState : TickableSequenceState
     public override void Enter()
     {
         _interface.Enter();
+        _scenarioController.Initialize();
     }
 
     public override void Exit()

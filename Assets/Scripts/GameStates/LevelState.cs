@@ -3,18 +3,20 @@
 public class LevelState : TickableSequenceState
 {
     private LevelStateInterface _interface;
+    private ScenarioController _scenarioController;
 
     public const string StateName = "LevelState";
 
-    public LevelState(LevelStateInterface @interface)
+    public LevelState(ScenarioController scenarioController, LevelStateInterface @interface)
     {
-
+        _scenarioController = scenarioController;
         _interface = @interface;
     }
 
     public override void Initialize()
     {
         _interface.Initialize();
+
     }
 
     public override void Terminate()
@@ -24,6 +26,7 @@ public class LevelState : TickableSequenceState
 
     public override void Enter()
     {
+        _scenarioController.RefreshSuccessEvent += _interface.UpdateLevelList;
         _interface.Enter();
     }
 
@@ -53,11 +56,11 @@ public class LevelState : TickableSequenceState
         {
             var command = _interface.TakeFirstCommand();
 
-            //var quickGameCommand = command as QuickGameCommand;
-            //if (quickGameCommand != null)
-            //{
-            //    quickGameCommand.Execute(_controller);
-            //}
+            var refreshLevelDataCommand = command as RefreshLevelDataCommand;
+            if (refreshLevelDataCommand != null)
+            {
+                refreshLevelDataCommand.Execute(_scenarioController);
+            }
 
             var commandResolver = new StateCommandResolver();
             commandResolver.HandleSequenceStates(command, this);

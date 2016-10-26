@@ -5,6 +5,7 @@ public class GameStateInterface : StateInterface
     public override void Initialize()
     {
         
+
     }
 
     public override void Enter()

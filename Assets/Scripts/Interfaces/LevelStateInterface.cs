@@ -1,15 +1,23 @@
-﻿using GameWork.Commands.States;
+﻿using System;
+using GameWork.Commands.States;
 using GameWork.Interfacing;
+using RolePlayCharacter;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelStateInterface : StateInterface
 {
+    private GameObject _gridLayout;
+    private GameObject _itemPrefab;
+
     public override void Initialize()
     {
+        _gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
+        ConfigureGridSize(3, 3);
+        _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
 
         // TODO: For loop to iterate all of these and attach appropriate listeners.
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
-
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
 
     }
@@ -17,6 +25,7 @@ public class LevelStateInterface : StateInterface
     public override void Enter()
     {
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
+        EnqueueCommand(new RefreshLevelDataCommand());
     }
 
     public override void Exit()
@@ -33,5 +42,28 @@ public class LevelStateInterface : StateInterface
     private void LoadLevel()
     {
         EnqueueCommand(new NextStateCommand());
+    }
+
+    public void UpdateLevelList(RolePlayCharacterAsset[] Levels)
+    {
+        // Clear List
+
+
+        for (var i = 0; i < Levels.Length; i++)
+        {
+            var levelItem = GameObject.Instantiate(_itemPrefab);
+            levelItem.GetComponent<LevelItemBehaviour>().SetupItem(0, "LINE " + i);
+            levelItem.transform.SetParent(_gridLayout.transform);
+            levelItem.GetComponent<Button>().onClick.AddListener(LoadLevel);
+        }
+    }
+
+    private void ConfigureGridSize(int rows, int cols)
+    {
+        var gridRect = _gridLayout.GetComponent<RectTransform>();
+        var buttonHeight = gridRect.rect.height / rows;           
+        var buttonWidth = gridRect.rect.width / cols;            
+        var gridLayoutGroup = _gridLayout.GetComponent<GridLayoutGroup>();
+        gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonHeight);
     }
 }

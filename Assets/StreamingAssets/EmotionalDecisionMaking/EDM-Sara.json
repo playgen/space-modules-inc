@@ -1,0 +1,450 @@
+{
+	"root":
+		{
+			"classId": 0,
+			"DefaultActionCooldown": 5,
+			"ActionTendencies": [
+					{
+						"Action": "Speak(silence_response,silence)",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"[me] = Self",
+								"EventElapsedTime(EventId(Property-change,[me], Front([me]), Computer)) > 3",
+								"Count(EventId(Action,*, Speak(*,*), Self))=0"
+							]
+						},
+						"Cooldown": 5
+					},
+					{
+						"Action": "Speak(silence_response2,silence)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"Front(Self) = Computer",
+								"IsBroken(Computer) = true",
+								"LastEventId(Action,[x],Speak(*,*),Self) = [id1]",
+								"EventElapsedTime([id1])>10"
+							]
+						},
+						"Cooldown": 5
+					},
+					{
+						"Action": "Speak(distress_greeting,Greating)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"StrongestEmotion(Self) = Distress",
+								"EventId(Action,[x], Speak(*,Greating), SELF) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,SELF, Speak(*,*), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(bad_greeting,Greating)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"StrongestEmotion(Self) != Distress",
+								"EventId(Action,[x], Speak(*,Greating), SELF) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,SELF, Speak(*,*), [x])) = 0",
+								"Mood(Self) < 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(normal_greeting,Greating)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"StrongestEmotion(Self) != Distress",
+								"EventId(Action,[x], Speak(*,Greating), SELF) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,SELF, Speak(*,*), [x])) = 0",
+								"Mood(Self) >= 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(bad_mood_explain,Explain)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,[type]), [x]) = [id]",
+								"[type] = Greating",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) <= 0",
+								"Count(EventId(Action,Self, Speak(*,Explain), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(good_mood_explain,Explain)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,[type]), [x]) = [id]",
+								"[type] = Greating",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) > 0",
+								"Count(EventId(Action,Self, Speak(*,Explain), [x])) = 0"
+							]
+						},
+						"Cooldown": 0.5
+					},
+					{
+						"Action": "Speak(distress_explain_end,misc)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,Explain), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"StrongestEmotion(Self) = Distress",
+								"Count(EventId(Action,[x], Speak(*,Problem), Self)) = 0",
+								"Count(EventId(Action,Self, Speak(*,misc), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(reproach_problem_ack,problem_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"LastEventId(Action,[x],Speak(*,Problem),Self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) = Reproach",
+								"Count(EventId(Action,Self, Speak(*,problem_ack), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(anger_problem_ack,problem_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"LastEventId(Action,[x],Speak(*,Problem),Self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) = Anger",
+								"Count(EventId(Action,Self, Speak(*,problem_ack), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(bad_mood_problem_ack,problem_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"LastEventId(Action,[x],Speak(*,Problem),Self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) != Anger",
+								"StrongestEmotion(Self) != Reproach",
+								"Count(EventId(Action,Self, Speak(*,problem_ack), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(good_mood_problem_ack,problem_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"LastEventId(Action,[x],Speak(*,Problem),Self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Mood(Self) > 0",
+								"Count(EventId(Action,Self, Speak(*,problem_ack), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Fix",
+						"Target": "[t]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self,Speak(*,problem_ack),*) = [id]",
+								"[t] = computer",
+								"IsBroken([t]) = true",
+								"Count(EventId(Action,Self, Fix, [t])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(good_fixed,fixed_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,[x],Speak(*,problem),Self) = [sol_id]",
+								"LastEventId(Property-Change,*, IsBroken(computer), false) = [fix_id]",
+								"EventElapsedTime([fix_id]) < EventElapsedTime([sol_id])",
+								"Count(EventId(Action,Self, Speak(*,fixed_ack), [x])) = 0",
+								"Mood(Self) > 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(bad_fixed,fixed_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,[x],Speak(*,problem),Self) = [sol_id]",
+								"LastEventId(Property-Change,*, IsBroken(computer), false) = [fix_id]",
+								"EventElapsedTime([fix_id]) < EventElapsedTime([sol_id])",
+								"Count(EventId(Action,Self, Speak(*,fixed_ack), [x])) = 0",
+								"Mood(Self) <= 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(silent_farewell,farewell_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self,Speak(*,fixed_ack),[x]) = [my_lastTalk_id]",
+								"LastEventId(Action,[x],Speak(*,*),Self) = [other_lastTalk_id]",
+								"EventElapsedTime([my_lastTalk_id])<EventElapsedTime([other_lastTalk_id])",
+								"EventElapsedTime([other_lastTalk_id]) > 15",
+								"Count(EventId(Action,Self, Speak(*,farewell_ack), [x])) = 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(no_problem_good,farewell_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = false",
+								"LastEventId(Action,[x],Speak(*,Farewell),self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,farewell_ack), [x])) = 0",
+								"Mood(Self) > 0"
+							]
+						}
+					},
+					{
+						"Action": "Speak(no_problem_bad,farewell_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = false",
+								"LastEventId(Action,[x],Speak(*,Farewell),self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,farewell_ack), [x])) = 0",
+								"Mood(Self)<=0",
+								"StrongestEmotion(Self) != Anger"
+							]
+						}
+					},
+					{
+						"Action": "Speak(no_problem_anger,farewell_ack)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = false",
+								"LastEventId(Action,[x],Speak(*,Farewell),self) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,farewell_ack), [x])) = 0",
+								"Mood(Self)<=0",
+								"StrongestEmotion(Self) = Anger"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_anger,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) = Anger"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_reproach,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) = Reproach"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_bad,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) <= 0",
+								"StrongestEmotion(Self) != Reproach",
+								"StrongestEmotion(Self) != Anger"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_admiration,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) > 0",
+								"StrongestEmotion(Self) = Admiration"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_gratitude,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) > 0",
+								"StrongestEmotion(Self) = Gratitude"
+							]
+						}
+					},
+					{
+						"Action": "Speak(farewell_good,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,farewell_ack), [x]) = [id]",
+								"EventElapsedTime([id]) > 1",
+								"Count(EventId(Action,Self, Speak(*,endConversation), [x])) = 0",
+								"Mood(Self) > 0",
+								"StrongestEmotion(Self) != Gratitude",
+								"StrongestEmotion(Self) != Admiration"
+							]
+						}
+					},
+					{
+						"Action": "Speak(give_up,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"Mood(Self)<=-9",
+								"Count(EventId(Action,Self, Speak(*,*), [x])) > 0",
+								"EmotionIntensity(Self,Anger) < 2",
+								"EmotionIntensity(Self,Reproach) < 4"
+							]
+						}
+					},
+					{
+						"Action": "Speak(give_up_anger,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"Mood(Self)<=-9",
+								"Count(EventId(Action,Self, Speak(*,*), [x])) > 0",
+								"EmotionIntensity(Self,Anger) >= 2",
+								"EmotionIntensity(Self,Reproach) < 4"
+							]
+						}
+					},
+					{
+						"Action": "Speak(give_up_reproach,endConversation)",
+						"Target": "[x]",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"IsBroken(Computer) = true",
+								"Mood(Self)<=-9",
+								"Count(EventId(Action,Self, Speak(*,*), [x])) > 0",
+								"EmotionIntensity(Self,Anger) < 2",
+								"EmotionIntensity(Self,Reproach) >= 4"
+							]
+						}
+					},
+					{
+						"Action": "Disconnect",
+						"Conditions": 
+						{
+							"Set":
+							[
+								"LastEventId(Action,Self, Speak(*,endConversation), *) = [id]",
+								"EventElapsedTime([id]) > 1"
+							]
+						}
+					}
+				]
+		},
+	"types": [
+		{
+			"TypeId": 0,
+			"ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+		}]
+}
