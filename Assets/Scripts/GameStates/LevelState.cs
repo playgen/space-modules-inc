@@ -62,6 +62,11 @@ public class LevelState : TickableSequenceState
                 refreshLevelDataCommand.Execute(_scenarioController);
             }
 
+            var setLevelCommand = command as SetLevelCommand;
+            if (setLevelCommand != null)
+            {
+                setLevelCommand.Execute(_scenarioController);
+            }
             var commandResolver = new StateCommandResolver();
             commandResolver.HandleSequenceStates(command, this);
         }

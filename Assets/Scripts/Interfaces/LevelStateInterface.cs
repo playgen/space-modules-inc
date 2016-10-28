@@ -16,9 +16,8 @@ public class LevelStateInterface : StateInterface
         ConfigureGridSize(3, 3);
         _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
 
-        // TODO: For loop to iterate all of these and attach appropriate listeners.
-        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
-        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+        //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
+        //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
 
     }
 
@@ -39,8 +38,9 @@ public class LevelStateInterface : StateInterface
         EnqueueCommand(new PreviousStateCommand());
     }
 
-    private void LoadLevel()
+    private void LoadLevel(string name)
     {
+        EnqueueCommand(new SetLevelCommand(name));
         EnqueueCommand(new NextStateCommand());
     }
 
@@ -54,7 +54,12 @@ public class LevelStateInterface : StateInterface
             var levelItem = GameObject.Instantiate(_itemPrefab);
             levelItem.GetComponent<LevelItemBehaviour>().SetupItem(0, "LINE " + i);
             levelItem.transform.SetParent(_gridLayout.transform);
-            levelItem.GetComponent<Button>().onClick.AddListener(LoadLevel);
+            var index = i;
+            levelItem.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                LoadLevel( Levels[index].CharacterName); 
+                
+            });
         }
     }
 
@@ -67,3 +72,4 @@ public class LevelStateInterface : StateInterface
         gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonHeight);
     }
 }
+ 

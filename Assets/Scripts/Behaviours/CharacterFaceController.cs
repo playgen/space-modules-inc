@@ -7,10 +7,8 @@ using UnityEngine.UI;
 public class CharacterFaceController : MonoBehaviour
 {
 
-    [SerializeField]
-    private string _characterId = "01";    // '<Gender>_Character_<number>', e.g 'Female_Character_01'
-
-    [SerializeField] private string _gender = "Female";
+    public string CharacterId;    // '<Gender>_Character_<number>', e.g 'Female_Character_01'
+    public string Gender;
 
     [Serializable]
     private class FacialExpression
@@ -59,6 +57,7 @@ public class CharacterFaceController : MonoBehaviour
         {
             _eyebrowRenderer.sprite = expression.Eyebrows;
             _eyeRenderer.sprite = expression.Eyes;
+
             _mouthRenderer.sprite = expression.Mouth;
             StartCoroutine(IdleAnimation(expression));
         }
@@ -82,7 +81,7 @@ public class CharacterFaceController : MonoBehaviour
 
     private void LoadSprites()
     {
-        var eyebrowSprites = Resources.LoadAll<Sprite>("Sprites/Characters/" + _gender + "_Character_" + _characterId + "/Eyebrows");
+        var eyebrowSprites = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Character_" + CharacterId + "/Eyebrows");
         _facialExpressions = new FacialExpression[eyebrowSprites.Length];
         for (var i = 0; i < eyebrowSprites.Length; i++)
         {
@@ -106,8 +105,8 @@ public class CharacterFaceController : MonoBehaviour
                     break;
             }
 
-            var eyeFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + _gender + "_Base/Eyes/" + emotionName);
-            var mouthFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + _gender + "_Base/Mouth/Mouth_Loop_" + mouthId);
+            var eyeFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Eyes/" + emotionName);
+            var mouthFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Mouth/Mouth_Loop_" + mouthId);
             var expression = new FacialExpression()
             {
                 Name = emotionName,

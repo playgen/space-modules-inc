@@ -1,14 +1,17 @@
-﻿using GameWork.States;
+﻿using System.Diagnostics;
+using GameWork.States;
 
 public class GameState : TickableSequenceState
 {
     private readonly GameStateInterface _interface;
+    private ScenarioController _controller;
 
     public const string StateName = "GameState";
 
-    public GameState(GameStateInterface @interface)
+    public GameState(ScenarioController controller, GameStateInterface @interface)
     {
         _interface = @interface;
+        _controller = controller;
     }
 
     public override void Initialize()
@@ -23,6 +26,7 @@ public class GameState : TickableSequenceState
 
     public override void Enter()
     {
+        _interface.ShowCharacter(_controller.CurrentCharacter);
         _interface.Enter();
     }
 

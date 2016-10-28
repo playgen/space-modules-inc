@@ -19,7 +19,7 @@ public class ControllerBehaviour : MonoBehaviour
 			new MenuState(new MenuStateInterface()),
 			new LevelState(scenarioController, new LevelStateInterface()),
             new CallState(new CallStateInterface()),
-            new GameState(new GameStateInterface())
+            new GameState(scenarioController, new GameStateInterface())
 			);
 		_stateController.Initialize();
 	}
