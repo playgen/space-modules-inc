@@ -4,8 +4,10 @@ using System.Linq;
 using AssetManagerPackage;
 using GameWork.Commands.Interfaces;
 using IntegratedAuthoringTool;
+using IntegratedAuthoringTool.DTOs;
 using RolePlayCharacter;
 using UnityEngine;
+using WellFormedNames;
 
 public class ScenarioController : ICommandAction
 {
@@ -14,6 +16,7 @@ public class ScenarioController : ICommandAction
 
     public RolePlayCharacterAsset CurrentCharacter;
     public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
+    public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SIDemo.iat";
@@ -29,10 +32,21 @@ public class ScenarioController : ICommandAction
 
     }
 
+
     public void RefreshCharacterArray()
     {
         _characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
         if (RefreshSuccessEvent != null) RefreshSuccessEvent(_characters);
+    }
+
+
+    public void GetPlayerDialogueOptions()
+    {
+        var currentState = _integratedAuthoringTool.GetCurrentDialogueState(CurrentCharacter.CharacterName);
+        var stateName = Name.BuildName(currentState);
+        var dialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, stateName).ToArray();
+        if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(dialogue);
+
     }
 
     public void SetCharacter(string name)

@@ -37,7 +37,7 @@ public class CharacterFaceController : MonoBehaviour
     [SerializeField]
     private FacialExpression[] _facialExpressions;
 
-    void Awake()
+    void Start()
     {
         LoadSprites();
         SetEmotion("Idle");

@@ -12,17 +12,18 @@ public class LevelStateInterface : StateInterface
 
     public override void Initialize()
     {
-        _gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
-        ConfigureGridSize(3, 3);
+        
         _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
 
         //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
-        //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
 
     }
 
     public override void Enter()
     {
+        _gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
+        ConfigureGridSize(3, 3);
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
         EnqueueCommand(new RefreshLevelDataCommand());
     }
@@ -47,13 +48,18 @@ public class LevelStateInterface : StateInterface
     public void UpdateLevelList(RolePlayCharacterAsset[] Levels)
     {
         // Clear List
+        foreach (var cell in _gridLayout.transform)
+        {
+            var cellGameObject = cell as Transform;
+            if (cellGameObject != null) GameObject.Destroy(cellGameObject.gameObject);
+        }
 
 
         for (var i = 0; i < Levels.Length; i++)
         {
             var levelItem = GameObject.Instantiate(_itemPrefab);
             levelItem.GetComponent<LevelItemBehaviour>().SetupItem(0, "LINE " + i);
-            levelItem.transform.SetParent(_gridLayout.transform);
+            levelItem.transform.SetParent(_gridLayout.transform, false);
             var index = i;
             levelItem.GetComponent<Button>().onClick.AddListener(delegate
             {
@@ -70,6 +76,7 @@ public class LevelStateInterface : StateInterface
         var buttonWidth = gridRect.rect.width / cols;            
         var gridLayoutGroup = _gridLayout.GetComponent<GridLayoutGroup>();
         gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonHeight);
+
     }
 }
  

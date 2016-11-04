@@ -1,4 +1,5 @@
-﻿using GameWork.Commands.States;
+﻿using System.Diagnostics;
+using GameWork.Commands.States;
 using GameWork.Interfacing;
 
 public class MenuStateInterface : StateInterface

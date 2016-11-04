@@ -32,6 +32,7 @@ public class LevelState : TickableSequenceState
 
     public override void Exit()
     {
+        _scenarioController.RefreshSuccessEvent -= _interface.UpdateLevelList;
         _interface.Exit();
     }
 

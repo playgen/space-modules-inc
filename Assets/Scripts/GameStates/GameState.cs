@@ -26,12 +26,14 @@ public class GameState : TickableSequenceState
 
     public override void Enter()
     {
+        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerPlayerDialogue;
         _interface.ShowCharacter(_controller.CurrentCharacter);
         _interface.Enter();
     }
 
     public override void Exit()
     {
+        _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerPlayerDialogue;
         _interface.Exit();
     }
 
@@ -56,11 +58,11 @@ public class GameState : TickableSequenceState
         {
             var command = _interface.TakeFirstCommand();
 
-            //var quickGameCommand = command as QuickGameCommand;
-            //if (quickGameCommand != null)
-            //{
-            //    quickGameCommand.Execute(_controller);
-            //}
+            var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
+            if (refreshPlayerDialogueCommand != null)
+            {
+                refreshPlayerDialogueCommand.Execute(_controller);
+            }
 
             var commandResolver = new StateCommandResolver();
             commandResolver.HandleSequenceStates(command, this);
