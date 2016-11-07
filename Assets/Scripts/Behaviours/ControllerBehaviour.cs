@@ -36,9 +36,10 @@ public class ControllerBehaviour : MonoBehaviour
             var W = portrait;
             var H = 1;
             Camera.main.rect = new Rect(new Vector2(x, y), new Vector2(W,H));
-
         }
     }
+
+    
 
     void Start()
 	{

@@ -26,6 +26,7 @@ public class LevelState : TickableSequenceState
 
     public override void Enter()
     {
+        Tracker.T.accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
         _scenarioController.RefreshSuccessEvent += _interface.UpdateLevelList;
         _interface.Enter();
     }

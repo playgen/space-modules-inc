@@ -52,13 +52,18 @@ public class GameStateInterface : StateInterface
 
         RefreshPlayerDialogueOptions();
     }
-    // 
-    private void RefreshPlayerDialogueOptions()
+
+    public void UpdateCharacterExpression(string emotion)
+    {
+        _characterController.SetEmotion(emotion);
+    }
+
+    public void RefreshPlayerDialogueOptions()
     {
         EnqueueCommand(new RefreshPlayerDialogueCommand());
     }
 
-    public void UpdatePlayerPlayerDialogue(DialogueStateActionDTO[] dialogueActions)
+    public void UpdatePlayerDialogue(DialogueStateActionDTO[] dialogueActions)
     {
         foreach (var child in _dialoguePanel.transform)
         {
@@ -67,13 +72,15 @@ public class GameStateInterface : StateInterface
         }
 
 
+        // TODO: Refactor
         GameObject dialogueObject;
         if (dialogueActions.Length == 3)
         {
             dialogueObject = GameObject.Instantiate(_multipleChoicePrefab);
             for (var i = 0; i < dialogueActions.Length; i++)
             {
-                var optionText = dialogueActions[i].Utterance;
+                var dialogueAction = dialogueActions[i];
+                var optionText = dialogueAction.Utterance;
                 var optionObject = dialogueObject.transform.GetChild(i).GetChild(0);
                 optionObject.GetComponent<Text>().text = optionText;
             }
@@ -85,20 +92,30 @@ public class GameStateInterface : StateInterface
 
             for (var i = 0; i < dialogueActions.Length; i++)
             {
-                var optionText = dialogueActions[i].Utterance;
+                var dialogueAction = dialogueActions[i];
+                var optionText = dialogueAction.Utterance;
                 var choiceItem = GameObject.Instantiate(choiceItemPrefab);
                 choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
                 var offset = i*choiceItem.GetComponent<RectTransform>().rect.height;
                 choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
+                choiceItem.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    OnDialogueOptionClick(dialogueAction);
+                });
                 choiceItem.transform.SetParent(dialogueObject.GetComponent<ScrollRect>().content, false);
-                //dialogueObject.GetComponent<ScrollRect>().
             }
-            
+
         }
-
-        
-
-
         dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
+    }
+
+    private void OnDialogueOptionClick(DialogueStateActionDTO dialogueAction)
+    {
+        EnqueueCommand(new SetPlayerActionCommand(dialogueAction.Id));
+        foreach (var s in dialogueAction.Style)
+        {
+            Debug.Log(s);
+
+        }
     }
 }

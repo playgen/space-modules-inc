@@ -22,6 +22,7 @@ public class MenuState : TickableSequenceState
 
     public override void Enter()
     {
+        Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
         _interface.Enter();
     }
 

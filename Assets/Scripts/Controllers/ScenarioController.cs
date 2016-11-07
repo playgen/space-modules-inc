@@ -21,6 +21,10 @@ public class ScenarioController : ICommandAction
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SIDemo.iat";
 
+    private Name _currentStateName;
+    private DialogueStateActionDTO[] _currentPlayerDialogue;
+    private List<string> _events = new List<string>();
+
     public ScenarioController()
     {
         AssetManager.Instance.Bridge = new AssetManagerBridge();
@@ -42,10 +46,9 @@ public class ScenarioController : ICommandAction
 
     public void GetPlayerDialogueOptions()
     {
-        var currentState = _integratedAuthoringTool.GetCurrentDialogueState(CurrentCharacter.CharacterName);
-        var stateName = Name.BuildName(currentState);
-        var dialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, stateName).ToArray();
-        if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(dialogue);
+        UpdateCurrentState();
+        _currentPlayerDialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
+        if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
 
     }
 
@@ -54,4 +57,28 @@ public class ScenarioController : ICommandAction
         CurrentCharacter = _characters.FirstOrDefault(asset => asset.CharacterName.Equals(name));
     }
 
+    public void SetPlayerAction(Guid actionId)
+    {
+        UpdateCurrentState(); // Might not need this
+        var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
+        var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
+
+        _events.Add(string.Format("Event(Action-Start, Player,{0},Client)", actionFormat));
+        // Wait?
+        _events.Add(string.Format("Event(Action-Finished, Player,{0},Client)", actionFormat));
+        _events.Add(string.Format("Event(Property-change,Player,DialogueState(Player),{0})", reply.NextState));
+
+        // Update EmotionExpression
+
+        _integratedAuthoringTool.SetDialogueState(CurrentCharacter.CharacterName, reply.NextState);
+        UpdateCurrentState();
+
+
+    }
+
+    private void UpdateCurrentState()
+    {
+        var currentState = _integratedAuthoringTool.GetCurrentDialogueState(CurrentCharacter.CharacterName);
+        _currentStateName = Name.BuildName(currentState);
+    }
 }

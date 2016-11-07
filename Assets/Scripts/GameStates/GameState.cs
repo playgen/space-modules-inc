@@ -26,14 +26,14 @@ public class GameState : TickableSequenceState
 
     public override void Enter()
     {
-        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerPlayerDialogue;
+        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
         _interface.ShowCharacter(_controller.CurrentCharacter);
         _interface.Enter();
     }
 
     public override void Exit()
     {
-        _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerPlayerDialogue;
+        _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
         _interface.Exit();
     }
 
