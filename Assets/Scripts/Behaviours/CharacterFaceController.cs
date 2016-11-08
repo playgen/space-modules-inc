@@ -51,6 +51,14 @@ public class CharacterFaceController : MonoBehaviour
     public void SetEmotion(string emotion)
     {
         StopAllCoroutines();
+        Debug.Log(emotion);
+        foreach (var expressions in _facialExpressions)
+        {
+            if (expressions.Name.Equals(emotion))
+            {
+                
+            }
+        }
         var expression = _facialExpressions.FirstOrDefault(facialExpression => facialExpression.Name.Equals(emotion));
         Debug.Log(expression.Name);
         if (expression != null)

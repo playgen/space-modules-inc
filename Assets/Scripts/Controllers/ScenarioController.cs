@@ -17,6 +17,7 @@ public class ScenarioController : ICommandAction
     public RolePlayCharacterAsset CurrentCharacter;
     public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
     public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
+    public event Action<string> GetCharacterStrongestEmotionSuccessEvent;
 
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SIDemo.iat";
@@ -33,7 +34,6 @@ public class ScenarioController : ICommandAction
     public void Initialize()
     {
         _integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioFile);
-
     }
 
 
@@ -50,6 +50,12 @@ public class ScenarioController : ICommandAction
         _currentPlayerDialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
         if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
 
+    }
+
+    public void GetCharacterStrongestEmotion()
+    {
+        var emotion = CurrentCharacter.GetStrongestActiveEmotion().EmotionType;
+        if (GetCharacterStrongestEmotionSuccessEvent != null) GetCharacterStrongestEmotionSuccessEvent(emotion);
     }
 
     public void SetCharacter(string name)
@@ -69,6 +75,7 @@ public class ScenarioController : ICommandAction
         _events.Add(string.Format("Event(Property-change,Player,DialogueState(Player),{0})", reply.NextState));
 
         // Update EmotionExpression
+        GetCharacterStrongestEmotion();
 
         _integratedAuthoringTool.SetDialogueState(CurrentCharacter.CharacterName, reply.NextState);
         UpdateCurrentState();

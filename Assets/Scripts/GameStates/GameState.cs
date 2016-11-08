@@ -27,12 +27,14 @@ public class GameState : TickableSequenceState
     public override void Enter()
     {
         _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
+        _controller.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
         _interface.ShowCharacter(_controller.CurrentCharacter);
         _interface.Enter();
     }
 
     public override void Exit()
     {
+        _controller.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
         _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
         _interface.Exit();
     }
@@ -62,6 +64,12 @@ public class GameState : TickableSequenceState
             if (refreshPlayerDialogueCommand != null)
             {
                 refreshPlayerDialogueCommand.Execute(_controller);
+            }
+
+            var setPlayerActionCommand = command as SetPlayerActionCommand;
+            if (setPlayerActionCommand != null)
+            {
+                setPlayerActionCommand.Execute(_controller);
             }
 
             var commandResolver = new StateCommandResolver();
