@@ -1,5 +1,5 @@
 ﻿using System;
-using GameWork.Commands.Interfaces;
+using GameWork.Core.Commands.Interfaces;
 
 public class SetPlayerActionCommand : ICommand<ScenarioController>
 {

@@ -1,6 +1,5 @@
-﻿using System;
-using GameWork.Commands.States;
-using GameWork.Interfacing;
+﻿using GameWork.Core.Commands.States;
+using GameWork.Core.Interfacing;
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.UI;

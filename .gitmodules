@@ -1,6 +1,6 @@
-[submodule "GameWork"]
-	path = GameWork
-	url = git@github.com:playgenhub/GameWork.git
 [submodule "Assets/Plugins/unity-tracker"]
 	path = Assets/Plugins/unity-tracker
 	url = https://github.com/e-ucm/unity-tracker.git
+[submodule "GameWork.Unity"]
+	path = GameWork.Unity
+	url = git@github.com:Game-Work/GameWork.Unity.git

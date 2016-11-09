@@ -1,6 +1,6 @@
-﻿using GameWork.Commands.Interfaces;
-using GameWork.Commands.States;
-using GameWork.States;
+﻿using GameWork.Core.Commands.Interfaces;
+using GameWork.Core.Commands.States;
+using GameWork.Core.States;
 
 public class StateCommandResolver
 {

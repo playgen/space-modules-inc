@@ -1,4 +1,4 @@
-﻿using GameWork.Interfacing;
+﻿using GameWork.Core.Interfacing;
 using IntegratedAuthoringTool.DTOs;
 using RolePlayCharacter;
 using UnityEngine;
@@ -13,18 +13,20 @@ public class GameStateInterface : StateInterface
 
     private GameObject _listChoicePrefab;
     private GameObject _multipleChoicePrefab;
+    private GameObject _npcDialoguePanel;
 
+    /// <summary>
+    /// 
+    /// </summary>
     public override void Initialize()
     {
         _characterPrefab = Resources.Load("Prefabs/Characters/Female") as GameObject;
-        _characterController = _characterPrefab.GetComponent<CharacterFaceController>();
         _characterPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/CharacterPanel");
-
         _listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
         _multipleChoicePrefab = Resources.Load("Prefabs/MultipleChoiceGroup") as GameObject;
         _dialoguePanel =
             GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
-
+        _npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCText");
 
     }
 
@@ -32,6 +34,7 @@ public class GameStateInterface : StateInterface
     {
         GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
+        RefreshCharacterDialogueText();
     }
 
     public override void Exit()
@@ -43,14 +46,14 @@ public class GameStateInterface : StateInterface
 
     public void ShowCharacter(RolePlayCharacterAsset currentCharacter)
     {
+        var characterObject = GameObject.Instantiate(_characterPrefab);
+        _characterController = characterObject.GetComponent<CharacterFaceController>();
         _characterController.CharacterId = "01";//currentCharacter.BodyName; 
         _characterController.Gender = "Female";//currentCharacter.GetBeliefValue("Gender");
-        var characterObject = GameObject.Instantiate(_characterPrefab);
+
         characterObject.transform.SetParent(_characterPanel.transform, false);
         characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;
         characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
-
-        RefreshPlayerDialogueOptions();
     }
 
     public void UpdateCharacterExpression(string emotion)
@@ -63,12 +66,17 @@ public class GameStateInterface : StateInterface
         EnqueueCommand(new RefreshPlayerDialogueCommand());
     }
 
+    public void RefreshCharacterDialogueText()
+    {
+        EnqueueCommand(new RefreshCharacterResponseCommand());
+    }
+
     public void UpdatePlayerDialogue(DialogueStateActionDTO[] dialogueActions)
     {
         foreach (var child in _dialoguePanel.transform)
         {
-            var childGameObject = child as GameObject;
-            GameObject.Destroy(childGameObject);
+            var childGameObject = child as Transform;
+            GameObject.Destroy(childGameObject.gameObject);
         }
 
 
@@ -82,7 +90,7 @@ public class GameStateInterface : StateInterface
                 var dialogueAction = dialogueActions[i];
                 var optionText = dialogueAction.Utterance;
                 var optionObject = dialogueObject.transform.GetChild(i).GetChild(0);
-                optionObject.GetComponent<Text>().text = optionText;
+                optionObject.GetComponent<Text>().text = optionText;//
             }
         }
         else
@@ -96,6 +104,7 @@ public class GameStateInterface : StateInterface
                 var optionText = dialogueAction.Utterance;
                 var choiceItem = GameObject.Instantiate(choiceItemPrefab);
                 choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
+                //choiceItem.GetComponent<RectTransform>().rect = dialogueObject.GetComponent<Rect>().height;
                 var offset = i*choiceItem.GetComponent<RectTransform>().rect.height;
                 choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
                 choiceItem.GetComponent<Button>().onClick.AddListener(delegate
@@ -112,10 +121,11 @@ public class GameStateInterface : StateInterface
     private void OnDialogueOptionClick(DialogueStateActionDTO dialogueAction)
     {
         EnqueueCommand(new SetPlayerActionCommand(dialogueAction.Id));
-        foreach (var s in dialogueAction.Style)
-        {
-            Debug.Log(s);
+    }
 
-        }
+    public void UpdateCharacterDialogue(string text)
+    {
+        _npcDialoguePanel.GetComponent<Text>().text = text;
+        RefreshPlayerDialogueOptions();
     }
 }

@@ -1,4 +1,4 @@
-﻿using GameWork.Commands.Interfaces;
+﻿using GameWork.Core.Commands.Interfaces;
 
 public class SetLevelCommand : ICommand<ScenarioController>
 {

@@ -1,4 +1,4 @@
-﻿using GameWork.States;
+﻿using GameWork.Core.States;
 
 public class MenuState : TickableSequenceState
 {

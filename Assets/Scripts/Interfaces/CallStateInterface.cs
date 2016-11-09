@@ -1,5 +1,5 @@
-﻿using GameWork.Commands.States;
-using GameWork.Interfacing;
+﻿using GameWork.Core.Commands.States;
+using GameWork.Core.Interfacing;
 using UnityEngine.UI;
 
 public class CallStateInterface : StateInterface

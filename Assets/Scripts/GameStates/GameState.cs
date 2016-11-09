@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using GameWork.States;
+using GameWork.Core.States;
 
 public class GameState : TickableSequenceState
 {
@@ -26,15 +26,17 @@ public class GameState : TickableSequenceState
 
     public override void Enter()
     {
-        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
-        _controller.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
         _interface.ShowCharacter(_controller.CurrentCharacter);
+        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
+        _controller.GetCharacterDialogueSuccessEvent += _interface.UpdateCharacterDialogue;
+        _controller.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
         _interface.Enter();
     }
 
     public override void Exit()
     {
         _controller.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
+        _controller.GetCharacterDialogueSuccessEvent -= _interface.UpdateCharacterDialogue;
         _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
         _interface.Exit();
     }
@@ -70,6 +72,12 @@ public class GameState : TickableSequenceState
             if (setPlayerActionCommand != null)
             {
                 setPlayerActionCommand.Execute(_controller);
+            }
+
+            var refreshCharacterResponseCommand = command as RefreshCharacterResponseCommand;
+            if (refreshCharacterResponseCommand != null)
+            {
+                refreshCharacterResponseCommand.Execute(_controller);
             }
 
             var commandResolver = new StateCommandResolver();

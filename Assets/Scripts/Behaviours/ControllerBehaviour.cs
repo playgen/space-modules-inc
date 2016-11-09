@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
-using GameWork.States;
-using UnityEngine.Networking;
+using GameWork.Core.States;
+using GameWork.Core.States.Controllers;
 
 public class ControllerBehaviour : MonoBehaviour
 {
@@ -43,7 +42,7 @@ public class ControllerBehaviour : MonoBehaviour
 
 	void Start()
 	{
-		_stateController.SetState(LoadingState.StateName);
+		_stateController.ChangeState(LoadingState.StateName);
 	}
 
 	void Update ()
