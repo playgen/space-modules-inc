@@ -4,14 +4,16 @@ using GameWork.Core.States;
 public class GameState : TickableSequenceState
 {
     private readonly GameStateInterface _interface;
-    private ScenarioController _controller;
+    private ScenarioController _scenarioController;
+    private ModulesController _modulesController;
 
     public const string StateName = "GameState";
 
-    public GameState(ScenarioController controller, GameStateInterface @interface)
+    public GameState(ScenarioController scenarioController, ModulesController modulesController, GameStateInterface @interface)
     {
         _interface = @interface;
-        _controller = controller;
+        _scenarioController = scenarioController;
+        _modulesController = modulesController;
     }
 
     public override void Initialize()
@@ -26,18 +28,18 @@ public class GameState : TickableSequenceState
 
     public override void Enter()
     {
-        _interface.ShowCharacter(_controller.CurrentCharacter);
-        _controller.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
-        _controller.GetCharacterDialogueSuccessEvent += _interface.UpdateCharacterDialogue;
-        _controller.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
+        _interface.ShowCharacter(_scenarioController.CurrentCharacter);
+        _scenarioController.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
+        _scenarioController.GetCharacterDialogueSuccessEvent += _interface.UpdateCharacterDialogue;
+        _scenarioController.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
         _interface.Enter();
     }
 
     public override void Exit()
     {
-        _controller.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
-        _controller.GetCharacterDialogueSuccessEvent -= _interface.UpdateCharacterDialogue;
-        _controller.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
+        _scenarioController.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
+        _scenarioController.GetCharacterDialogueSuccessEvent -= _interface.UpdateCharacterDialogue;
+        _scenarioController.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
         _interface.Exit();
     }
 
@@ -65,19 +67,25 @@ public class GameState : TickableSequenceState
             var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
             if (refreshPlayerDialogueCommand != null)
             {
-                refreshPlayerDialogueCommand.Execute(_controller);
+                refreshPlayerDialogueCommand.Execute(_scenarioController);
             }
 
             var setPlayerActionCommand = command as SetPlayerActionCommand;
             if (setPlayerActionCommand != null)
             {
-                setPlayerActionCommand.Execute(_controller);
+                setPlayerActionCommand.Execute(_scenarioController);
             }
 
             var refreshCharacterResponseCommand = command as RefreshCharacterResponseCommand;
             if (refreshCharacterResponseCommand != null)
             {
-                refreshCharacterResponseCommand.Execute(_controller);
+                refreshCharacterResponseCommand.Execute(_scenarioController);
+            }
+
+            var toggleModulesCommand = command as ToggleModulesCommand;
+            if (toggleModulesCommand != null)
+            {
+                toggleModulesCommand.Execute(_modulesController);
             }
 
             var commandResolver = new StateCommandResolver();

@@ -14,13 +14,14 @@ public class ControllerBehaviour : MonoBehaviour
 		FixScreenRatio();
 
 		var scenarioController = new ScenarioController();
+		var modulesController = new ModulesController();
 
 		_stateController = new TickableStateController<TickableSequenceState>(
 			new LoadingState(scenarioController, new LoadingStateInterface()),
 			new MenuState(new MenuStateInterface()),
 			new LevelState(scenarioController, new LevelStateInterface()),
 			new CallState(new CallStateInterface()),
-			new GameState(scenarioController, new GameStateInterface())
+			new GameState(scenarioController, modulesController, new GameStateInterface())
 			);
 		_stateController.Initialize();
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using AssetManagerPackage;
 using GameWork.Core.Commands.Interfaces;
 using IntegratedAuthoringTool;
@@ -88,7 +89,6 @@ public class ScenarioController : ICommandAction
     public void GetCharacterResponse()
     {
         GetCharacterStrongestEmotion();
-        UpdateCurrentState();
         var action = CurrentCharacter.PerceptionActionLoop(_events);
         _events.Clear();
         //CurrentCharacter.Update();
@@ -100,11 +100,17 @@ public class ScenarioController : ICommandAction
         if (actionKey == "Speak")
         {
             var nextState = action.Parameters[1];
-            var characterDialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.AGENT, _currentStateName).FirstOrDefault(dto => string.Equals(dto.Meaning[0], action.Parameters[2].ToString(), StringComparison.CurrentCultureIgnoreCase) && string.Equals(dto.Style[0], action.Parameters[3].ToString(), StringComparison.CurrentCultureIgnoreCase));
+            var dialogues = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.AGENT, action.Parameters[0]);
+            var characterDialogue = dialogues.FirstOrDefault(dto => string.Equals(dto.Meaning[0], action.Parameters[2].ToString(), StringComparison.CurrentCultureIgnoreCase) && string.Equals(dto.Style[0], action.Parameters[3].ToString(), StringComparison.CurrentCultureIgnoreCase));
+
             var characterDialogueText = characterDialogue.Utterance;
             _integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
+
             if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
+
+            UpdateCurrentState();
         }
+        CurrentCharacter.ActionFinished(action);
 
     }
 

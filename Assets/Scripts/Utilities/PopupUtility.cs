@@ -9,6 +9,7 @@ public static class PopupUtility
     {
         if (LogErrorEvent != null)
         {
+
             LogErrorEvent(message);
         }
     }

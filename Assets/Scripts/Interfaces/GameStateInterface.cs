@@ -27,7 +27,8 @@ public class GameStateInterface : StateInterface
         _dialoguePanel =
             GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
         _npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCText");
-
+        var modulesButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton");
+        modulesButton.GetComponent<Button>().onClick.AddListener(delegate { EnqueueCommand(new ToggleModulesCommand()); });
     }
 
     public override void Enter()
@@ -82,15 +83,19 @@ public class GameStateInterface : StateInterface
 
         // TODO: Refactor
         GameObject dialogueObject;
-        if (dialogueActions.Length == 3)
+        if (dialogueActions.Length == 4)
         {
             dialogueObject = GameObject.Instantiate(_multipleChoicePrefab);
             for (var i = 0; i < dialogueActions.Length; i++)
             {
                 var dialogueAction = dialogueActions[i];
                 var optionText = dialogueAction.Utterance;
-                var optionObject = dialogueObject.transform.GetChild(i).GetChild(0);
-                optionObject.GetComponent<Text>().text = optionText;//
+                var optionObject = dialogueObject.transform.GetChild(i);
+                optionObject.GetChild(0).GetComponent<Text>().text = optionText;//
+                optionObject.GetComponent<Button>().onClick.AddListener(delegate
+                {
+                    OnDialogueOptionClick(dialogueAction);
+                });
             }
         }
         else
