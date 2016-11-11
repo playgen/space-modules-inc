@@ -14,22 +14,20 @@ public class ModulesController : ICommandAction
         public string Id;
         public string Type;
         public string Manufacturer;
-        public ModuleDescription Description;
+        public Dictionary<string,string> Description;
 
-    }
-
-    struct ModuleDescription
-    {
-        public string Firmware;
-        public string OSsupport;
-        public string Info;
     }
 
     private readonly GameObject _modulesPopup;
-    private List<IGrouping<string, ModuleEntry>> _modulesList = new List<IGrouping<string, ModuleEntry>>();
-    private GameObject _popupContent;
-    private GameObject _moduleItemPrefab;
-    private Sprite[] _moduleIcons;
+    private readonly GameObject _popupContent;
+    private readonly GameObject _moduleItemPrefab;
+    private readonly GameObject _moduleIndexItemPrefab;
+    private readonly GameObject _moduleDescriptionItemPrefab;
+
+    private readonly Sprite[] _moduleIcons;
+    private int _stateLevel;
+    private Dictionary<string, ModuleEntry[]> _modulesDict = new Dictionary<string, ModuleEntry[]>();
+    private Button _backButton;
     private const string FilePath = "ModulesDatabase/modules";
 
 
@@ -38,61 +36,99 @@ public class ModulesController : ICommandAction
         _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
         _moduleItemPrefab = Resources.Load("Prefabs/ModuleItem") as GameObject;
+        _moduleIndexItemPrefab = Resources.Load("Prefabs/ModuleIndexItem") as GameObject;
+        _moduleDescriptionItemPrefab = Resources.Load("Prefabs/ModuleDescriptionItem") as GameObject;
         _moduleIcons = Resources.LoadAll<Sprite>("Sprites/Modules/Icons");
-        LoadJSONModules();
-    }
 
-    public void Initialize()
-    {
-        LoadIndex();
+        var backButtonObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton");
+        _backButton = backButtonObject.GetComponent<Button>();
+
+        LoadJSONModules();
     }
 
     private void LoadIndex()
     {
         ClearList();
+        var moduleTypes = _modulesDict.Keys.ToArray();
 
-        for (var i = 0; i < _modulesList.Count; i++)
+        for (var i = 0; i < moduleTypes.Length; i++)
         {
-            var moduleName = _modulesList[i].Key;
-            var listItem = GameObject.Instantiate(_moduleItemPrefab);
-            listItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
-            listItem.transform.FindChild("Text").GetComponent<Text>().text = moduleName;
-            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(moduleName));
+            var moduleType = moduleTypes[i];
+            var listItem = InstantiateListItem(_moduleIndexItemPrefab);
+
+            listItem.transform.FindChild("Text").GetComponent<Text>().text = moduleType;
+            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(moduleType));
+
             var offset = i * listItem.GetComponent<RectTransform>().rect.height;
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
-            var modulesArray = _modulesList[i].ToArray();
             listItem.GetComponent<Button>().onClick.AddListener(delegate
             {
-                LoadModules(moduleName, modulesArray);
+                LoadModules(moduleType);
             });
         }
+        
+        _backButton.onClick.AddListener(TogglePopup);
+
     }
 
-    private void LoadModules(string moduleTypeName, ModuleEntry[] modules)
+    private void LoadModules(string moduleTypeName)
     {
         ClearList();
 
+        var modules = _modulesDict[moduleTypeName];
+
         for (var i = 0; i < modules.Length; i++)
         {
-            var moduleName = modules[i].Name;
-            var listItem = GameObject.Instantiate(_moduleItemPrefab);
-            listItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
-            listItem.transform.FindChild("Text").GetComponent<Text>().text = moduleName;
-            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(moduleName));
+            var module = modules[i];
+            var listItem = InstantiateListItem(_moduleItemPrefab);
+
+            listItem.transform.FindChild("Text").GetComponent<Text>().text = module.Name;
+            listItem.transform.FindChild("Id").GetComponent<Text>().text = module.Id;
+            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(moduleTypeName));
+
             var offset = i * listItem.GetComponent<RectTransform>().rect.height;
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
+            listItem.GetComponent<Button>().onClick.AddListener(delegate
+            {
+                LoadModule(module, listItem);
+            });
+        }
+        _backButton.onClick.AddListener(LoadIndex);
+
+    }
+
+    private void LoadModule(ModuleEntry module, GameObject listItem)
+    {
+        var moduleItem = GameObject.Instantiate(listItem);
+        ClearList();
+        moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
+
+        moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+
+        var previousOffset = moduleItem.GetComponent<RectTransform>().rect.height;
+        foreach (var description in module.Description)
+        {
+            var desriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+            desriptionItem.transform.FindChild("Title").GetComponent<Text>().text = description.Key;
+            desriptionItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -previousOffset);
+            previousOffset -= desriptionItem.transform.FindChild("Panel").GetChild(0).GetComponent<RectTransform>().rect.height;
+            
         }
 
+        _backButton.onClick.AddListener(delegate
+        {
+            LoadModules(module.Type);
+        });
     }
 
 
     private void ClearList()
     {
+        _backButton.onClick.RemoveAllListeners();
         foreach (RectTransform child in _popupContent.GetComponent<ScrollRect>().content)
         {
             GameObject.Destroy(child.gameObject);
         }
-
     }
 
     private void LoadJSONModules()
@@ -108,20 +144,37 @@ public class ModulesController : ICommandAction
                 Id = json[i]["Id"],
                 Type = json[i]["Type"],
                 Manufacturer = json[i]["Manufacturer"],
-                Description = new ModuleDescription()
+                Description = new Dictionary<string, string>()
                 {
-                    Firmware = json[i]["Description"]["firmware"],
-                    OSsupport = json[i]["Description"]["OSsupport"],
-                    Info = json[i]["Description"]["Info"]
+                    {"Firmware", json[i]["Description"]["firmware"]},
+                    {"OSsupport", json[i]["Description"]["OSsupport"]},
+                    {"Info", json[i]["Description"]["Info"]}
                 }
             });
         }
-        _modulesList = moduleslist.GroupBy(entry => entry.Type).ToList();
+        _modulesDict = moduleslist.GroupBy(entry => entry.Type).ToDictionary(k=>k.Key, v=>v.ToArray());
+
+
+    }
+
+    private GameObject InstantiateListItem(GameObject prefab)
+    {
+        var listItem = GameObject.Instantiate(prefab);
+        listItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
+        return listItem;
     }
 
     public void TogglePopup()
     {
-        _modulesPopup.SetActive(!_modulesPopup.activeInHierarchy);
-        Initialize();
+        if (_modulesPopup.activeInHierarchy)
+        {
+            _modulesPopup.SetActive(false);
+        }
+        else
+        {
+            _modulesPopup.SetActive(true);
+            LoadIndex();
+        }
+        //_modulesPopup.SetActive(!_modulesPopup.activeInHierarchy);
     }
 }
