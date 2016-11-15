@@ -50,7 +50,7 @@ public class GameState : TickableSequenceState
 
     public override void NextState()
     {
-        throw new System.NotImplementedException();
+        ChangeState(ReviewState.StateName);
     }
 
     public override void PreviousState()

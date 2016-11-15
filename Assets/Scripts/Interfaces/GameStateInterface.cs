@@ -14,6 +14,7 @@ public class GameStateInterface : StateInterface
     private GameObject _listChoicePrefab;
     private GameObject _multipleChoicePrefab;
     private GameObject _npcDialoguePanel;
+    private Image _characterMood;
 
     /// <summary>
     /// 
@@ -28,6 +29,8 @@ public class GameStateInterface : StateInterface
             GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
         _npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCText");
         var modulesButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton");
+        _characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
+
         modulesButton.GetComponent<Button>().onClick.AddListener(delegate { EnqueueCommand(new ToggleModulesCommand()); });
     }
 
@@ -57,9 +60,14 @@ public class GameStateInterface : StateInterface
         characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
     }
 
-    public void UpdateCharacterExpression(string emotion)
+    public void UpdateCharacterExpression(string emotion, float mood)
     {
-        _characterController.SetEmotion(emotion);
+        Debug.Log("EMOTION: " + emotion + ". MOOD: " + mood );
+        _characterMood.fillAmount = (mood + 10)/20;
+        if (emotion != null)
+        {
+            _characterController.SetEmotion(emotion);
+        }
     }
 
     public void RefreshPlayerDialogueOptions()

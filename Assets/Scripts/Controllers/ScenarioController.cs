@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Runtime.InteropServices;
 using AssetManagerPackage;
@@ -19,8 +20,9 @@ public class ScenarioController : ICommandAction
     public RolePlayCharacterAsset CurrentCharacter;
     public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
     public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
+    public event Action<OrderedDictionary> GetChatHistorySuccessEvent;
     public event Action<string> GetCharacterDialogueSuccessEvent;
-    public event Action<string> GetCharacterStrongestEmotionSuccessEvent;
+    public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
 
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
@@ -28,6 +30,7 @@ public class ScenarioController : ICommandAction
     private Name _currentStateName;
     private DialogueStateActionDTO[] _currentPlayerDialogue;
     private List<string> _events = new List<string>();
+    private OrderedDictionary _chatHistory = new OrderedDictionary();
 
     public ScenarioController()
     {
@@ -56,11 +59,18 @@ public class ScenarioController : ICommandAction
     public void GetCharacterStrongestEmotion()
     {
         var emotion = CurrentCharacter.GetStrongestActiveEmotion();
+        string emotionType = null;
         if (emotion != null)
         {
-            var emotionType = emotion.EmotionType;
-            if (GetCharacterStrongestEmotionSuccessEvent != null) GetCharacterStrongestEmotionSuccessEvent(emotionType);
+            emotionType = emotion.EmotionType;
         }
+        if (GetCharacterStrongestEmotionSuccessEvent != null) GetCharacterStrongestEmotionSuccessEvent(emotionType, CurrentCharacter.Mood);
+
+    }
+
+    public void GetChatHistory()
+    {
+        if (GetChatHistorySuccessEvent != null) GetChatHistorySuccessEvent(_chatHistory);
     }
 
     public void SetCharacter(string name)
@@ -81,6 +91,8 @@ public class ScenarioController : ICommandAction
         _events.Add(string.Format("Event(Property-change,Player,DialogueState(Player),{0})", reply.NextState));
 
         _integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), reply.NextState);
+        _chatHistory.Add("Player", reply.Utterance);
+
         // Update EmotionExpression
         GetCharacterResponse();
         //GetPlayerDialogueOptions();
@@ -88,7 +100,6 @@ public class ScenarioController : ICommandAction
 
     public void GetCharacterResponse()
     {
-        GetCharacterStrongestEmotion();
         var action = CurrentCharacter.PerceptionActionLoop(_events);
         _events.Clear();
         //CurrentCharacter.Update();
@@ -105,13 +116,13 @@ public class ScenarioController : ICommandAction
 
             var characterDialogueText = characterDialogue.Utterance;
             _integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-
+            _chatHistory.Add("Client", characterDialogueText);
             if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
 
             UpdateCurrentState();
         }
         CurrentCharacter.ActionFinished(action);
-
+        GetCharacterStrongestEmotion();
     }
 
     private void UpdateCurrentState()
