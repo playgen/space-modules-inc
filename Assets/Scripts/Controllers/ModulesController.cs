@@ -23,7 +23,7 @@ public class ModulesController : ICommandAction
     private readonly GameObject _moduleItemPrefab;
     private readonly GameObject _moduleIndexItemPrefab;
     private readonly GameObject _moduleDescriptionItemPrefab;
-    private readonly GameObject _modulesContent;
+    private readonly RectTransform _modulesContent;
 
     private readonly Sprite[] _moduleIcons;
     private int _stateLevel;
@@ -36,7 +36,7 @@ public class ModulesController : ICommandAction
     {
         _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
-        _modulesContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View/Viewport/Content");
+        _modulesContent = _popupContent.GetComponent<ScrollRect>().content;
         
         _moduleItemPrefab = Resources.Load("Prefabs/ModuleItem") as GameObject;
         _moduleIndexItemPrefab = Resources.Load("Prefabs/ModuleIndexItem") as GameObject;
@@ -102,7 +102,7 @@ public class ModulesController : ICommandAction
 
     private void LoadModule(ModuleEntry module, GameObject listItem)
     {
-        _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = true;
+        _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
         var moduleItem = GameObject.Instantiate(listItem);
         ClearList();
         moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
@@ -116,7 +116,7 @@ public class ModulesController : ICommandAction
 
         _backButton.onClick.AddListener(delegate
         {
-            _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = false;
+            _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = false;
             LoadModules(module.Type);
         });
     }
@@ -172,7 +172,7 @@ public class ModulesController : ICommandAction
         }
         else
         {
-            _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = false;
+            _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = false;
             _modulesPopup.SetActive(true);
             LoadIndex();
         }

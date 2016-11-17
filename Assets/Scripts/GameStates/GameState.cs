@@ -4,8 +4,8 @@ using GameWork.Core.States;
 public class GameState : TickableSequenceState
 {
     private readonly GameStateInterface _interface;
-    private ScenarioController _scenarioController;
-    private ModulesController _modulesController;
+    private readonly ScenarioController _scenarioController;
+    private readonly ModulesController _modulesController;
 
     public const string StateName = "GameState";
 
@@ -32,6 +32,7 @@ public class GameState : TickableSequenceState
         _scenarioController.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
         _scenarioController.GetCharacterDialogueSuccessEvent += _interface.UpdateCharacterDialogue;
         _scenarioController.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
+        _scenarioController.FinalStateEvent += _interface.HandleFinalState;
         _interface.Enter();
     }
 
@@ -40,6 +41,7 @@ public class GameState : TickableSequenceState
         _scenarioController.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
         _scenarioController.GetCharacterDialogueSuccessEvent -= _interface.UpdateCharacterDialogue;
         _scenarioController.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
+        _scenarioController.FinalStateEvent -= _interface.HandleFinalState;
         _interface.Exit();
     }
 

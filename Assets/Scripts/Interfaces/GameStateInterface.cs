@@ -1,4 +1,5 @@
-﻿using GameWork.Core.Interfacing;
+﻿using GameWork.Core.Commands.States;
+using GameWork.Core.Interfacing;
 using IntegratedAuthoringTool.DTOs;
 using RolePlayCharacter;
 using UnityEngine;
@@ -140,5 +141,11 @@ public class GameStateInterface : StateInterface
     {
         _npcDialoguePanel.GetComponent<Text>().text = text;
         RefreshPlayerDialogueOptions();
+    }
+
+    public void HandleFinalState()
+    {
+        // put in a delay here (e.g. delayLastState command)
+        EnqueueCommand(new NextStateCommand());
     }
 }

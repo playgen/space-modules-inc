@@ -25,19 +25,19 @@ public class ReviewState : TickableSequenceState
 
     public override void Enter()
     {
-        _scenarioController.GetChatHistorySuccessEvent += _interface.BuildChatHistory;
+        _scenarioController.GetReviewDataSuccessEvent += _interface.BuildReviewData;
         _interface.Enter();
     }
 
     public override void Exit()
     {
+        _scenarioController.GetReviewDataSuccessEvent -= _interface.BuildReviewData;
         _interface.Exit();
     }
 
     public override string Name
     {
         get { return StateName; }
-
     }
 
     public override void NextState()
@@ -48,19 +48,19 @@ public class ReviewState : TickableSequenceState
     public override void PreviousState()
     {
         ChangeState(GameState.StateName);
-    }
-
+    } 
+    
     public override void Tick(float deltaTime)
     {
         if (_interface.HasCommands)
         {
             var command = _interface.TakeFirstCommand();
 
-            //var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
-            //if (refreshPlayerDialogueCommand != null)
-            //{
-            //    refreshPlayerDialogueCommand.Execute(_scenarioController);
-            //}
+            var getReviewDataCommand = command as GetReviewDataCommand;
+            if (getReviewDataCommand != null)
+            {
+                getReviewDataCommand.Execute(_scenarioController);
+            }
 
             var commandResolver = new StateCommandResolver();
             commandResolver.HandleSequenceStates(command, this);

@@ -20,9 +20,10 @@ public class ScenarioController : ICommandAction
     public RolePlayCharacterAsset CurrentCharacter;
     public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
     public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-    public event Action<OrderedDictionary> GetChatHistorySuccessEvent;
+    public event Action<OrderedDictionary, float> GetReviewDataSuccessEvent;
     public event Action<string> GetCharacterDialogueSuccessEvent;
     public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
+    public event Action FinalStateEvent;
 
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
@@ -50,10 +51,9 @@ public class ScenarioController : ICommandAction
 
     public void GetPlayerDialogueOptions()
     {
-        UpdateCurrentState();
+        //UpdateCurrentState();
         _currentPlayerDialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
         if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
-
     }
 
     public void GetCharacterStrongestEmotion()
@@ -68,9 +68,9 @@ public class ScenarioController : ICommandAction
 
     }
 
-    public void GetChatHistory()
+    public void GetReviewData()
     {
-        if (GetChatHistorySuccessEvent != null) GetChatHistorySuccessEvent(_chatHistory);
+        if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
     }
 
     public void SetCharacter(string name)
@@ -91,7 +91,7 @@ public class ScenarioController : ICommandAction
         _events.Add(string.Format("Event(Property-change,Player,DialogueState(Player),{0})", reply.NextState));
 
         _integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), reply.NextState);
-        _chatHistory.Add("Player", reply.Utterance);
+        _chatHistory.Add(reply.Utterance, "Player");
 
         // Update EmotionExpression
         GetCharacterResponse();
@@ -116,7 +116,7 @@ public class ScenarioController : ICommandAction
 
             var characterDialogueText = characterDialogue.Utterance;
             _integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-            _chatHistory.Add("Client", characterDialogueText);
+            _chatHistory.Add(characterDialogueText, "Client");
             if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
 
             UpdateCurrentState();
@@ -129,5 +129,10 @@ public class ScenarioController : ICommandAction
     {
         var currentState = _integratedAuthoringTool.GetCurrentDialogueState(CurrentCharacter.CharacterName);
         _currentStateName = Name.BuildName(currentState);
+        if (currentState == "End")
+        {
+            if (FinalStateEvent != null) FinalStateEvent();
+        }
+        Debug.Log(currentState);
     }
 }
