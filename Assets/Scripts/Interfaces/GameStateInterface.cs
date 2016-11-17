@@ -37,9 +37,9 @@ public class GameStateInterface : StateInterface
 
     public override void Enter()
     {
+        RefreshCharacterDialogueText();
         GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
-        RefreshCharacterDialogueText();
     }
 
     public override void Exit()

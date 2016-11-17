@@ -28,9 +28,9 @@ public class ReviewStateInterface : StateInterface
 
     public override void Enter()
     {
+        EnqueueCommand(new GetReviewDataCommand());
         GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
-        EnqueueCommand( new GetReviewDataCommand());
     }
 
     public override void Exit()

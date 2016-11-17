@@ -22,7 +22,7 @@ public class LevelItemBehaviour : MonoBehaviour
         }
 
         _itemText.text = name;
-        for (int i = 0; i < stars; i++)
+        for (var i = 0; i < stars; i++)
         {
             _starSlots[i].GetComponent<Image>().sprite = _starSprite;
         }

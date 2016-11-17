@@ -22,7 +22,8 @@ public class ControllerBehaviour : MonoBehaviour
 			new LevelState(scenarioController, new LevelStateInterface()),
 			new CallState(new CallStateInterface()),
 			new GameState(scenarioController, modulesController, new GameStateInterface()),
-            new ReviewState(scenarioController, new ReviewStateInterface())
+            new ReviewState(scenarioController, new ReviewStateInterface()),
+            new ScoreState(scenarioController, new ScoreStateInterface())
 			);
 		_stateController.Initialize();
 	}
@@ -34,13 +35,11 @@ public class ControllerBehaviour : MonoBehaviour
 			var portrait = 1/(Camera.main.aspect * Camera.main.aspect);
 			var x = (1 - portrait)/2;
 			var y = 0;
-			var W = portrait;
-			var H = 1;
-			Camera.main.rect = new Rect(new Vector2(x, y), new Vector2(W,H));
+			var w = portrait;
+			var h = 1;
+			Camera.main.rect = new Rect(new Vector2(x, y), new Vector2(w,h));
 		}
 	}
-
-	
 
 	void Start()
 	{

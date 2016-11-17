@@ -13,11 +13,13 @@ public class MenuStateInterface : StateInterface
     public override void Enter()
     {
         GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
+        GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
     }
 
     public override void Exit()
     {
         GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(false);
+        GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
     }
 
     private void OnPlayClick()

@@ -13,25 +13,34 @@ using WellFormedNames;
 
 public class ScenarioController : ICommandAction
 {
+    public struct ScoreObject
+    {
+        public int Stars;
+        public int Score;
+        public string ScoreComment;
+        public bool MoodImage;
+        public string EmotionText;
+        public int Bonus;
+    }
+
+    [SerializeField]
+    private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
+
     private IntegratedAuthoringToolAsset _integratedAuthoringTool;
     private RolePlayCharacterAsset[] _characters;
-
+    private Name _currentStateName;
+    private DialogueStateActionDTO[] _currentPlayerDialogue;
+    private readonly List<string> _events = new List<string>();
+    private readonly OrderedDictionary _chatHistory = new OrderedDictionary();
 
     public RolePlayCharacterAsset CurrentCharacter;
     public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
     public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
     public event Action<OrderedDictionary, float> GetReviewDataSuccessEvent;
+    public event Action<ScoreObject> GetScoreDataSuccessEvent;
     public event Action<string> GetCharacterDialogueSuccessEvent;
     public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
     public event Action FinalStateEvent;
-
-    [SerializeField]
-    private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
-
-    private Name _currentStateName;
-    private DialogueStateActionDTO[] _currentPlayerDialogue;
-    private List<string> _events = new List<string>();
-    private OrderedDictionary _chatHistory = new OrderedDictionary();
 
     public ScenarioController()
     {
@@ -71,6 +80,22 @@ public class ScenarioController : ICommandAction
     public void GetReviewData()
     {
         if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
+        Reset();
+    }
+
+    public void GetScoreData()
+    {
+        var mood = (CurrentCharacter.Mood + 10) / 20;
+
+        if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(new ScoreObject()
+        {
+            Stars = Mathf.CeilToInt(mood*3),
+            Score = Mathf.CeilToInt(mood * 99999),
+            ScoreComment = (mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
+            MoodImage = (mood >= 0.5),
+            EmotionText = (mood >= 0.5) ? "Great!" : "Poor",
+            Bonus = Mathf.CeilToInt(mood * 999)
+        });
     }
 
     public void SetCharacter(string name)
@@ -133,6 +158,13 @@ public class ScenarioController : ICommandAction
         {
             if (FinalStateEvent != null) FinalStateEvent();
         }
-        Debug.Log(currentState);
     }
+
+    private void Reset()
+    {
+        Initialize();
+        _chatHistory.Clear();
+        _events.Clear();
+    }
+
 }

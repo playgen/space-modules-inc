@@ -24,6 +24,8 @@ public class LevelStateInterface : StateInterface
         _gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
         ConfigureGridSize(3, 3);
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
+        GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
+
         EnqueueCommand(new RefreshLevelDataCommand());
     }
 

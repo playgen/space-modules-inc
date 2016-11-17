@@ -1,13 +1,12 @@
 ﻿using GameWork.Core.States;
 
-public class ReviewState : TickableSequenceState
+public class ScoreState : TickableSequenceState
 {
-    private readonly ReviewStateInterface _interface;
-    private ScenarioController _scenarioController;
-    public const string StateName = "ReviewState";
+    private readonly ScoreStateInterface _interface;
+    private readonly ScenarioController _scenarioController;
+    public const string StateName = "ScoreState";
 
-
-    public ReviewState(ScenarioController scenarioController, ReviewStateInterface @interface)
+    public ScoreState(ScenarioController scenarioController, ScoreStateInterface @interface)
     {
         _interface = @interface;
         _scenarioController = scenarioController;
@@ -25,13 +24,13 @@ public class ReviewState : TickableSequenceState
 
     public override void Enter()
     {
-        _scenarioController.GetReviewDataSuccessEvent += _interface.BuildReviewData;
+        _scenarioController.GetScoreDataSuccessEvent += _interface.UpdateScore;
         _interface.Enter();
     }
 
     public override void Exit()
     {
-        _scenarioController.GetReviewDataSuccessEvent -= _interface.BuildReviewData;
+        _scenarioController.GetScoreDataSuccessEvent -= _interface.UpdateScore;
         _interface.Exit();
     }
 
@@ -42,24 +41,24 @@ public class ReviewState : TickableSequenceState
 
     public override void NextState()
     {
-        ChangeState(ScoreState.StateName);
+        ChangeState(LevelState.StateName);
     }
 
     public override void PreviousState()
     {
-        ChangeState(GameState.StateName);
-    } 
-    
+        ChangeState(ReviewState.StateName);
+    }
+
     public override void Tick(float deltaTime)
     {
         if (_interface.HasCommands)
         {
             var command = _interface.TakeFirstCommand();
 
-            var getReviewDataCommand = command as GetReviewDataCommand;
-            if (getReviewDataCommand != null)
+            var getScoreDataCommand = command as GetScoreDataCommand;
+            if (getScoreDataCommand != null)
             {
-                getReviewDataCommand.Execute(_scenarioController);
+                getScoreDataCommand.Execute(_scenarioController);
             }
 
             var commandResolver = new StateCommandResolver();
