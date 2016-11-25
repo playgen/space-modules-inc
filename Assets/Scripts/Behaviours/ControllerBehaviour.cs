@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using GameWork.Core.States;
 using GameWork.Core.States.Controllers;
+using UnityEngine.SocialPlatforms.GameCenter;
 
 public class ControllerBehaviour : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class ControllerBehaviour : MonoBehaviour
 	void Awake ()
 	{
 		DontDestroyOnLoad(transform.gameObject);
+
+	    Social.Active = new GameCenterPlatform();
 
 		FixScreenRatio();
 
