@@ -1,5 +1,6 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
+using SUGAR.Unity;
 
 public class LoadingStateInterface : StateInterface
 {
@@ -12,7 +13,13 @@ public class LoadingStateInterface : StateInterface
     {
         GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
         // Load stuff
-        EnqueueCommand(new NextStateCommand());
+        SUGARManager.Account.SignIn(success =>
+        {
+            if (success)
+            {
+                EnqueueCommand(new NextStateCommand());
+            }
+        });
     }
 
     public override void Exit()

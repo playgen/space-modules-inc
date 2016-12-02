@@ -14,7 +14,7 @@ public static class SeedAchievements
     public static void SeedAchivements()
     {
         SUGARManager.Client = new SUGARClient("http://localhost:62312/");
-        SUGARManager.GameId = 0;
+        SUGARManager.GameId = 1;
         var response = LoginAdmin();
         if (response != null)
         {
@@ -30,29 +30,29 @@ public static class SeedAchievements
         var achievementClient = SUGARManager.Client.Achievement;
         var gameId = SUGARManager.GameId;
 
-        var mod1 = 1;
-        achievementClient.Create(new EvaluationCreateRequest()
-        {
-            Name = String.Format("Score over {0} point!", mod1),
-            Description = String.Format("Score over {0} point in a single game", mod1),
-            ActorType = ActorType.User,
-            GameId = gameId,
-            Token = String.Format("score_{0}_point_one_game", mod1),
-            EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-            {
-                new EvaluationCriteriaCreateRequest()
-                {
-                    Key = "score",
-                    ComparisonType = ComparisonType.GreaterOrEqual,
-                    CriteriaQueryType = CriteriaQueryType.Any,
-                    DataType = SaveDataType.Long,
-                    Scope = CriteriaScope.Actor,
-                    Value = String.Format("{0}", mod1)
-                }
-            }
-        });
+        //var mod1 = 1;
+        //achievementClient.Create(new EvaluationCreateRequest()
+        //{
+        //    Name = String.Format("Score over {0} point!", mod1),
+        //    Description = String.Format("Score over {0} point in a single game", mod1),
+        //    ActorType = ActorType.User,
+        //    GameId = gameId,
+        //    Token = String.Format("score_{0}_point_one_game", mod1),
+        //    EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
+        //    {
+        //        new EvaluationCriteriaCreateRequest()
+        //        {
+        //            Key = "score",
+        //            ComparisonType = ComparisonType.GreaterOrEqual,
+        //            CriteriaQueryType = CriteriaQueryType.Any,
+        //            DataType = SaveDataType.Long,
+        //            Scope = CriteriaScope.Actor,
+        //            Value = String.Format("{0}", mod1)
+        //        }
+        //    }
+        //});
 
-        var mod2 = 5; 
+        var mod2 = 5;
         achievementClient.Create(new EvaluationCreateRequest()
         {
             Name = String.Format("Get {0} stars!", mod2),
@@ -146,11 +146,10 @@ public static class SeedAchievements
     {
         try
         {
-            return SUGARManager.Client.Account.Login(new AccountRequest()
+            return SUGARManager.Client.Session.Login(new AccountRequest()
             {
                 Name = "admin",
                 Password = "admin",
-                AutoLogin = false,
                 SourceToken = "SUGAR"
             });
         }
