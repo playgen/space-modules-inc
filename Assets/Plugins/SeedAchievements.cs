@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if UNITY_EDITOR
+using System;
 using System.Collections.Generic;
 using PlayGen.SUGAR.Client;
 using PlayGen.SUGAR.Common.Shared;
@@ -161,3 +162,4 @@ public static class SeedAchievements
         }
     }
 }
+#endif

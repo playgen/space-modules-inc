@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Contracts.Shared;
 using UnityEngine;
@@ -52,24 +53,33 @@ namespace SUGAR.Unity
 
 		public void DisplayList()
 		{
-			GetAchievements();
-			_achievementListInterface.Display();
+			GetAchievements(success =>
+			{
+				_achievementListInterface.Display(success);
+			});
 		}
 
-		private void GetAchievements()
+		private void GetAchievements(Action<bool> success)
 		{
+			_progress.Clear();
 			if (SUGARManager.CurrentUser != null)
 			{
 				SUGARManager.Client.Achievement.GetGameProgressAsync(SUGARManager.GameId, SUGARManager.CurrentUser.Id,
 				response =>
 				{
 					_progress = response.ToList();
+					success(true);
 				},
 				exception =>
 				{
 					string error = "Failed to get achievements list. " + exception.Message;
 					Debug.LogError(error);
+					success(false);
 				});
+			}
+			else
+			{
+				success(false);
 			}
 		}
 

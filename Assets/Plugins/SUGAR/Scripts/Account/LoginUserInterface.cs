@@ -15,6 +15,8 @@ namespace SUGAR.Unity
 		[SerializeField]
 		private Button _registerButton;
 		[SerializeField]
+		private Button _closeButton;
+		[SerializeField]
 		private Text _statusText;
 
 		public event EventHandler<LoginEventArgs> Login;
@@ -22,6 +24,7 @@ namespace SUGAR.Unity
 		void Awake()
 		{
 			_loginButton.onClick.AddListener(InvokeLogin);
+			_closeButton.onClick.AddListener(Hide);
 		}
 
 		public virtual void Show()

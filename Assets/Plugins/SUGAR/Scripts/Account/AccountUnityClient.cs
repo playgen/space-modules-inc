@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Unity;
 using UnityEngine;
@@ -31,9 +32,32 @@ namespace SUGAR.Unity
 			_loginUserInterface.gameObject.SetActive(false);
 		}
 
-		public void SignIn(Action<bool> success)
+
+	    public void TrySignIn(Action<bool> success)
+	    {
+            _signInCallback = success;
+
+            if (SUGARManager.Client != null)
+	        {
+	            SignIn();
+	        }
+	        else
+	        {
+	            StartCoroutine(CheckConfigLoad());
+	        }
+	    }
+
+	    private IEnumerator CheckConfigLoad()
+	    {
+	        while (SUGARManager.Client == null)
+	        {
+	            yield return new WaitForFixedUpdate();
+	        }
+            SignIn();
+	    }
+
+	    private void SignIn()
 		{
-			_signInCallback = success;
 		#if UNITY_EDITOR
 			_options = CommandLineUtility.ParseArgs(new [] { "-ujim" , "-sSPL", "-a"});
 			Debug.Log(_options.UserId + " : " + _options.AuthenticationSource);

@@ -1,6 +1,7 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
 using RolePlayCharacter;
+using SUGAR.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +14,8 @@ public class LevelStateInterface : StateInterface
     {
         
         _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
-
         //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
-
     }
 
     public override void Enter()
@@ -25,7 +24,6 @@ public class LevelStateInterface : StateInterface
         ConfigureGridSize(3, 3);
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
-
         EnqueueCommand(new RefreshLevelDataCommand());
     }
 
