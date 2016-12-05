@@ -37,3 +37,5 @@ test_Data/
 test.exe
 *.mdb.meta
 *.pdb.meta
+SMI_Data/
+SMI.exe

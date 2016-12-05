@@ -51,6 +51,10 @@ public class ControllerBehaviour : MonoBehaviour
 
 	void Update ()
 	{
+	    if (Input.GetKeyDown(KeyCode.Escape))
+	    {
+	        Application.Quit();
+	    }
 		_stateController.Tick(Time.deltaTime);
 	}
 }

@@ -1,1 +1,1 @@
-start test.exe -u jim -s SPL -a
+start SMI.exe -u jim -s SPL -a
