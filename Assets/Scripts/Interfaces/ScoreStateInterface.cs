@@ -34,11 +34,7 @@ public class ScoreStateInterface : StateInterface
 
     public void UpdateScore(ScenarioController.ScoreObject obj)
     {
-        long score = obj.Score;
-        SUGARManager.GameData.Send("score", score);
-        SUGARManager.GameData.Send("plays", 1);
-        long stars = obj.Stars;
-        SUGARManager.GameData.Send("stars", stars);
+        
         _scorePanelScript.SetScorePanel(obj.Stars, obj.Score, obj.ScoreComment, obj.MoodImage, obj.EmotionText, obj.Bonus);
     }
 }

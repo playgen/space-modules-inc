@@ -44,7 +44,7 @@ public class LevelStateInterface : StateInterface
         EnqueueCommand(new NextStateCommand());
     }
 
-    public void UpdateLevelList(RolePlayCharacterAsset[] Levels)
+    public void UpdateLevelList(ScenarioController.LevelObject[] Levels)
     {
         // Clear List
         foreach (var cell in _gridLayout.transform)
@@ -57,12 +57,12 @@ public class LevelStateInterface : StateInterface
         for (var i = 0; i < Levels.Length; i++)
         {
             var levelItem = GameObject.Instantiate(_itemPrefab);
-            levelItem.GetComponent<LevelItemBehaviour>().SetupItem(0, "LINE " + i);
+            levelItem.GetComponent<LevelItemBehaviour>().SetupItem(Levels[i].Stars, "LINE " + i);
             levelItem.transform.SetParent(_gridLayout.transform, false);
             var index = i;
             levelItem.GetComponent<Button>().onClick.AddListener(delegate
             {
-                LoadLevel( Levels[index].CharacterName); 
+                LoadLevel( Levels[index].Name); 
                 
             });
         }

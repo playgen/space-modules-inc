@@ -7,7 +7,9 @@ using AssetManagerPackage;
 using GameWork.Core.Commands.Interfaces;
 using IntegratedAuthoringTool;
 using IntegratedAuthoringTool.DTOs;
+using PlayGen.SUGAR.Common.Shared;
 using RolePlayCharacter;
+using SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
 
@@ -23,6 +25,12 @@ public class ScenarioController : ICommandAction
         public int Bonus;
     }
 
+    public struct LevelObject
+    {
+        public string Name;
+        public int Stars;
+    }
+
     [SerializeField]
     private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
 
@@ -34,7 +42,7 @@ public class ScenarioController : ICommandAction
     private readonly OrderedDictionary _chatHistory = new OrderedDictionary();
 
     public RolePlayCharacterAsset CurrentCharacter;
-    public event Action<RolePlayCharacterAsset[]> RefreshSuccessEvent;
+    public event Action<LevelObject[]> RefreshSuccessEvent;
     public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
     public event Action<OrderedDictionary, float> GetReviewDataSuccessEvent;
     public event Action<ScoreObject> GetScoreDataSuccessEvent;
@@ -55,7 +63,21 @@ public class ScenarioController : ICommandAction
     public void RefreshCharacterArray()
     {
         _characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
-        if (RefreshSuccessEvent != null) RefreshSuccessEvent(_characters);
+        var levelList = _characters.ToDictionary(k => "level_" + k.CharacterName.ToLower() + "_stars", v => new LevelObject() {Name = v.CharacterName});
+
+        var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), SaveDataType.Long);
+
+        foreach (var star in stars)
+        {
+            LevelObject levelObject;
+            if (levelList.TryGetValue(star.Key, out levelObject))
+            {
+                levelObject.Stars = Int32.Parse(star.Value);
+            }
+            levelList[star.Key] = levelObject;
+        }
+
+        if (RefreshSuccessEvent != null) RefreshSuccessEvent(levelList.Values.ToArray());
     }
 
     public void GetPlayerDialogueOptions()
@@ -86,16 +108,25 @@ public class ScenarioController : ICommandAction
     public void GetScoreData()
     {
         var mood = (CurrentCharacter.Mood + 10) / 20;
-
-        if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(new ScoreObject()
+        var scoreObj = new ScoreObject()
         {
             Stars = Mathf.CeilToInt(mood*3),
-            Score = Mathf.CeilToInt(mood * 99999),
+            Score = Mathf.CeilToInt(mood*99999),
             ScoreComment = (mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
             MoodImage = (mood >= 0.5),
             EmotionText = (mood >= 0.5) ? "Great!" : "Poor",
-            Bonus = Mathf.CeilToInt(mood * 999)
-        });
+            Bonus = Mathf.CeilToInt(mood*999)
+        };
+
+
+        if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
+
+        long score = scoreObj.Score;
+        SUGARManager.GameData.Send("score", score);
+        SUGARManager.GameData.Send("plays", 1);
+        long stars = scoreObj.Stars;
+        SUGARManager.GameData.Send("stars", stars);
+        SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToLower() + "_stars", stars);
     }
 
     public void SetCharacter(string name)

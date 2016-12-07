@@ -5890,7 +5890,7 @@ Prefab:
     - target: {fileID: 114000011669735270, guid: 991ef3e1f70851f458b55f5f7eae55a2,
         type: 2}
       propertyPath: _gameId
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000011669735270, guid: 991ef3e1f70851f458b55f5f7eae55a2,
         type: 2}
@@ -5912,6 +5912,16 @@ Prefab:
       propertyPath: _achievementPopup
       value: 
       objectReference: {fileID: 894133785}
+    - target: {fileID: 1000013799670484, guid: 991ef3e1f70851f458b55f5f7eae55a2, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010768160430, guid: 991ef3e1f70851f458b55f5f7eae55a2,
+        type: 2}
+      propertyPath: _achievementListInterface
+      value: 
+      objectReference: {fileID: 114000011852622874, guid: 8c23181849348fc40bf51c11a2951b10,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 991ef3e1f70851f458b55f5f7eae55a2, type: 2}
   m_IsPrefabParent: 0

@@ -1,5 +1,5 @@
-﻿using System.Globalization;
-
+﻿using System.Collections.Generic;
+using System.Globalization;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using UnityEngine;
@@ -8,6 +8,13 @@ namespace SUGAR.Unity
 {
 	public class GameDataUnityClient
 	{
+
+	    public IEnumerable<SaveDataResponse> GetHighest(string[] keys, SaveDataType dataType)
+	    {
+	        var response = SUGARManager.Client.GameData.GetHighest(SUGARManager.CurrentUser.Id, SUGARManager.GameId, keys, dataType);
+	        return response;
+	    }
+
 		public void Send(string key, string value)
 		{
 			Send(key, value, SaveDataType.String);

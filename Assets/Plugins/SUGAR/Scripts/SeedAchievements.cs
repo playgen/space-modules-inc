@@ -21,143 +21,76 @@ namespace SUGAR.Unity
 			window.ShowPopup();
 		}
 
-		public static void LogInUser(string username, string password)
-		{
-			var unityManager = GameObject.FindObjectsOfType(typeof(SUGARUnityManager)).FirstOrDefault() as SUGARUnityManager;
-			if (unityManager == null)
-			{
-				return;
-			}
-			SUGARManager.Client = new SUGARClient(unityManager.baseAddress);
-			var response = LoginAdmin(username,password);
-			if (response != null)
-			{
+        public static void LogInUser(string username, string password)
+        {
+            var unityManager = GameObject.FindObjectsOfType(typeof(SUGARUnityManager)).FirstOrDefault() as SUGARUnityManager;
+            if (unityManager == null)
+            {
+                return;
+            }
+            SUGARManager.Client = new SUGARClient(unityManager.baseAddress);
+            var response = LoginAdmin(username, password);
+            if (response != null)
+            {
                 Debug.Log("Admin Login SUCCESS");
-			    var game = SUGARManager.Client.Game.Get(unityManager.gameToken).FirstOrDefault();
-			    if (game != null)
-			    {
+                var game = SUGARManager.Client.Game.Get(unityManager.gameToken).FirstOrDefault();
+                if (game != null)
+                {
                     Debug.Log("Game Found");
                     unityManager.gameId = game.Id;
                     SUGARManager.GameId = game.Id;
                 }
-			    else
-			    {
-			        Debug.Log("Creating Game");
-			        var gameResponse = SUGARManager.Client.Game.Create(new GameRequest()
-			        {
-			            Name = unityManager.gameToken
-			        });
-			        if (gameResponse != null)
-			        {
-			            unityManager.gameId = gameResponse.Id;
-			            SUGARManager.GameId = gameResponse.Id;
-			        }
-			        else
-			        {
-			            Debug.LogError("Unable to create game");
+                else
+                {
+                    Debug.Log("Creating Game");
+                    var gameResponse = SUGARManager.Client.Game.Create(new GameRequest()
+                    {
+                        Name = unityManager.gameToken
+                    });
+                    if (gameResponse != null)
+                    {
+                        unityManager.gameId = gameResponse.Id;
+                        SUGARManager.GameId = gameResponse.Id;
+                    }
+                    else
+                    {
+                        Debug.LogError("Unable to create game");
                         return;
-			        }
+                    }
 
-			    }
-				CreateAchievements();
-				CreateLeaderboards();
-				SUGARManager.Client.Session.Logout();
-			}
-		}
+                }
+                CreateAchievements();
+                CreateLeaderboards();
+                SUGARManager.Client.Session.Logout();
+            }
+        }
 
-		private static void CreateAchievements()
+        private static void CreateAchievements()
 		{
 			var achievementClient = SUGARManager.Client.Achievement;
 			var gameId = SUGARManager.GameId;
-           
-            var mod2 = 5;
-            achievementClient.Create(new EvaluationCreateRequest()
-            {
-                Name = String.Format("Get {0} stars!", mod2),
-                Description = String.Format("Accumulate at least {0} stars", mod2),
-                ActorType = ActorType.User,
-                GameId = gameId,
-                Token = String.Format("get_{0}_stars", mod2),
-                EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-            {
-                new EvaluationCriteriaCreateRequest()
-                {
-                    Key = "stars",
-                    ComparisonType = ComparisonType.GreaterOrEqual,
-                    CriteriaQueryType = CriteriaQueryType.Sum,
-                    DataType = SaveDataType.Long,
-                    Scope = CriteriaScope.Actor,
-                    Value = String.Format("{0}", mod2)
-                }
-            }
-            });
 
-            var mod3 = 3;
-            achievementClient.Create(new EvaluationCreateRequest()
-            {
-                Name = String.Format("Get {0} stars in one game!", mod3),
-                Description = String.Format("Get {0} stars in a single game", mod3),
-                ActorType = ActorType.User,
-                GameId = gameId,
-                Token = String.Format("get_{0}_stars_one_game", mod3),
-                EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-            {
-                new EvaluationCriteriaCreateRequest()
-                {
-                    Key = "stars",
-                    ComparisonType = ComparisonType.GreaterOrEqual,
-                    CriteriaQueryType = CriteriaQueryType.Any,
-                    DataType = SaveDataType.Long,
-                    Scope = CriteriaScope.Actor,
-                    Value = String.Format("{0}", mod3)
-                }
-            }
-            });
-
-            var mod4 = 2;
-            achievementClient.Create(new EvaluationCreateRequest()
-            {
-                Name = String.Format("Play {0} games!", mod4),
-                Description = String.Format("Play at least {0} games", mod4),
-                ActorType = ActorType.User,
-                GameId = gameId,
-                Token = String.Format("play_{0}_games", mod4),
-                EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-            {
-                new EvaluationCriteriaCreateRequest()
-                {
-                    Key = "plays",
-                    ComparisonType = ComparisonType.GreaterOrEqual,
-                    CriteriaQueryType = CriteriaQueryType.Sum,
-                    DataType = SaveDataType.Long,
-                    Scope = CriteriaScope.Actor,
-                    Value = String.Format("{0}", mod4)
-                }
-            }
-            });
-
-            var mod5 = 2;
-            achievementClient.Create(new EvaluationCreateRequest()
-            {
-                Name = String.Format("Accumulate {0} points!", mod5),
-                Description = String.Format("Accumulate {0} points", mod5),
-                ActorType = ActorType.User,
-                GameId = gameId,
-                Token = String.Format("score_{0}_point", mod5),
-                EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>()
-            {
-                new EvaluationCriteriaCreateRequest()
-                {
-                    Key = "score",
-                    ComparisonType = ComparisonType.GreaterOrEqual,
-                    CriteriaQueryType = CriteriaQueryType.Sum,
-                    DataType = SaveDataType.Long,
-                    Scope = CriteriaScope.Actor,
-                    Value = String.Format("{0}", mod5)
-                }
-            }
-            });
-        }
+			/*achievementClient.Create(new EvaluationCreateRequest
+			{
+				Name = "",
+				Description = "",
+				ActorType = ActorType.,
+				GameId = gameId,
+				Token = "",
+				EvaluationCriterias = new List<EvaluationCriteriaCreateRequest>
+				{
+				new EvaluationCriteriaCreateRequest
+					{
+						Key = "",
+						ComparisonType = ComparisonType.,
+						CriteriaQueryType = CriteriaQueryType.,
+						DataType = SaveDataType.,
+						Scope = CriteriaScope.,
+						Value = ""
+					}
+				}
+			});*/
+		}
 
 		private static void CreateLeaderboards()
 		{
