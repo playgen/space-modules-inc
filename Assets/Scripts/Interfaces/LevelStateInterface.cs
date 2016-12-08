@@ -10,14 +10,6 @@ public class LevelStateInterface : StateInterface
     private GameObject _gridLayout;
     private GameObject _itemPrefab;
 
-    public override void Initialize()
-    {
-        
-        _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
-        //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
-        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
-    }
-
     public override void Enter()
     {
         _gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
@@ -25,6 +17,14 @@ public class LevelStateInterface : StateInterface
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
         EnqueueCommand(new RefreshLevelDataCommand());
+    }
+
+    public override void Initialize()
+    {
+        
+        _itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
+        //GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
+        GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
     }
 
     public override void Exit()

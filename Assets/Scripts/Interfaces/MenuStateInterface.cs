@@ -1,7 +1,7 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
-using UnityEngine;
-using UnityEngine.UI;
+using PlayGen.SUGAR.Common.Shared;
+using SUGAR.Unity;
 
 public class MenuStateInterface : StateInterface
 {
@@ -10,6 +10,11 @@ public class MenuStateInterface : StateInterface
         var buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
         var playButton = buttons.GetButton("PlayButton");
         playButton.onClick.AddListener(OnPlayClick);
+        var leaderboardButton = buttons.GetButton("LeaderboardButton");
+        leaderboardButton.onClick.AddListener(delegate
+        {
+            SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
+        });
     }
 
     public override void Enter()
