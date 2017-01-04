@@ -8,13 +8,21 @@
       Privileged
     </Condition>
 
+
+
+
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <MediaTemplate />
 
     <Property Id="INSTALLDIR">
       <RegistrySearch Id="PlayGenSplLauncherRegistry" Type="raw" Root="HKLM" Key="SOFTWARE\[Manufacturer]\SPL Launcher" Name="InstallDir"/>
     </Property>
 
+
+
+    <Condition Message="Launcher not found. Please install the Launcher before installing games.">
+      Installed OR INSTALLDIR
+    </Condition>
 
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="INSTALLDIR">

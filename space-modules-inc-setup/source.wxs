@@ -7,37 +7,37 @@
     </Fragment>
     <Fragment>
         <ComponentGroup Id="SourceComponentGroup">
-            <Component Id="cmp5BCCA5666E30B9FE7AEC1A04FD2C813A" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{7BD0EA90-138C-461D-ACE1-6EBD74ABFA40}">
+            <Component Id="cmp5BCCA5666E30B9FE7AEC1A04FD2C813A" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{CD6CD172-9558-44B1-9F98-D763CDB03C9B}">
                 <File Id="filEB1EABBE9A8962CAB1672921DA4590A3" KeyPath="yes" Source="$(var.SourcePath)\app.info" />
             </Component>
-            <Component Id="cmp13B99C2E5FF7A522D99944F3DA234425" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{04A1799F-D977-4146-8437-77270DC1FC57}">
+            <Component Id="cmp13B99C2E5FF7A522D99944F3DA234425" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{ADFB25F6-DB03-4E03-BE7D-4F63A8311C5A}">
                 <File Id="fil6316FD98D8DDFC8FC73FA26F2C24539D" KeyPath="yes" Source="$(var.SourcePath)\globalgamemanagers" />
             </Component>
-            <Component Id="cmp16DDA9364767E97C41BCBD7352C2E176" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{2EBFE42D-A594-4426-B5EF-F671A7A16935}">
+            <Component Id="cmp16DDA9364767E97C41BCBD7352C2E176" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{E943889A-CC3B-4B56-AAAE-ADBEE1D51726}">
                 <File Id="fil3212E645681D8704183DD0B4EF466927" KeyPath="yes" Source="$(var.SourcePath)\globalgamemanagers.assets" />
             </Component>
-            <Component Id="cmp5CE38D642BC30B9D8BFC09BD6D4838D1" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{69DCDC51-9274-47D5-A643-F9216F996373}">
+            <Component Id="cmp5CE38D642BC30B9D8BFC09BD6D4838D1" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{7AE0DD2B-EA30-40AF-86C6-6FCE2783F675}">
                 <File Id="fil818866459BFF03B654F20D36A7A7E7B0" KeyPath="yes" Source="$(var.SourcePath)\level0" />
             </Component>
-            <Component Id="cmpE360FB994FD7F99974182F9AD9AD5852" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{7B2C4FD6-62FE-469D-9794-02487E1736EF}">
+            <Component Id="cmpE360FB994FD7F99974182F9AD9AD5852" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{A3FB7B31-64C6-44FF-9E52-04CE49DF24DA}">
                 <File Id="filB242E516B7C07FD87E163F2AC7655FC3" KeyPath="yes" Source="$(var.SourcePath)\output_log.txt" />
             </Component>
-            <Component Id="cmp97B68BCE9840127CFD64EF9657201F7C" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{3851717F-4C36-4366-8C25-8B84561236C5}">
+            <Component Id="cmp97B68BCE9840127CFD64EF9657201F7C" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{AE3C731C-1EE4-4FD8-9A86-07E4E2532C9B}">
                 <File Id="fil1F9D1A03B0FDE4E80506DF43A25EA354" KeyPath="yes" Source="$(var.SourcePath)\resources.assets" />
             </Component>
-            <Component Id="cmp95A476E5D118F93D2029C900B713530E" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{8DE811F0-8949-4D91-9DE9-8B8CF0BEA4C8}">
+            <Component Id="cmp95A476E5D118F93D2029C900B713530E" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{164C86C6-B302-42B8-805A-D4E3157B227E}">
                 <File Id="fil5A24FAB1723751B062635D36E813D539" KeyPath="yes" Source="$(var.SourcePath)\resources.assets.resS" />
             </Component>
-            <Component Id="cmp042729AD80B6A528AE16E31CFB3D2CD4" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{8C18D4BB-3942-4DD3-85F7-CCBA09CEF70B}">
+            <Component Id="cmp042729AD80B6A528AE16E31CFB3D2CD4" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{04A44D5D-3EEE-4D36-80AD-B50F3ECC1B90}">
                 <File Id="filB62B2C158AF010FD5263ED8728189ECF" KeyPath="yes" Source="$(var.SourcePath)\sharedassets0.assets" />
             </Component>
-            <Component Id="cmpC2B1DDC1FE0D2213F940167C33C175C7" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{DAE98078-7009-4A34-B37A-65404F067585}">
+            <Component Id="cmpC2B1DDC1FE0D2213F940167C33C175C7" Directory="dirBFEAEC23D877A0B95483FD177183CF59" Guid="{49211E3D-9DF7-449E-8F69-320CDB1F5205}">
                 <File Id="fil6B522875E8CB80F7F7F9531C111114AB" KeyPath="yes" Source="$(var.SourcePath)\sharedassets0.assets.resS" />
             </Component>
-            <Component Id="cmp4C16F0A3ACF38DF506B554A3D1237E69" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{BB99DE20-A536-41ED-8E09-943E7362BE81}">
+            <Component Id="cmp4C16F0A3ACF38DF506B554A3D1237E69" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{719D459B-9161-4C49-A7CA-8FC97A454080}">
                 <File Id="filFE95F037303C5DFB1595E5225EAD4A1F" KeyPath="yes" Source="$(var.SourcePath)\Managed\ActionLibrary.dll" />
             </Component>
-            <Component Id="cmpBE5B0D631B282A452EDDD3184A059114" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{9963AF10-526D-4625-8F85-96D5A4D30FFF}">
+            <Component Id="cmpBE5B0D631B282A452EDDD3184A059114" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{8DC7C1CC-6BB7-4CB2-85A7-CC09DB022673}">
                 <Class Id="{0326A4F9-AA61-39DD-BA62-672E8C985315}" Context="InprocServer32" Description="XApiFormat" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="XApiFormat" Description="XApiFormat" />
                 </Class>
@@ -381,7 +381,7 @@
                 <RegistryValue Root="HKCR" Key="Record\{BD8BB300-7FF1-3558-8434-2A4547F7C2DD}\0.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{BD8BB300-7FF1-3558-8434-2A4547F7C2DD}\0.0.0.0" Name="CodeBase" Value="file:///[#fil25F9EFD690ABF9E108307E6578333B95]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp98AB8C5319017B56F5A48661E24857F1" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{3F7AEE69-4979-4A10-BFFF-F472E9CB90A7}">
+            <Component Id="cmp98AB8C5319017B56F5A48661E24857F1" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{4783A8CF-B12D-4700-B2FF-701D6147D883}">
                 <Class Id="{03D9A19C-9B4D-37EE-8D68-EC413E642BEF}" Context="InprocServer32" Description="GameStateInterface" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="GameStateInterface" Description="GameStateInterface" />
                 </Class>
@@ -817,25 +817,25 @@
                 <RegistryValue Root="HKCR" Key="Record\{E5D1CB81-01D4-3478-A3D6-F3DA610567DE}\0.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{E5D1CB81-01D4-3478-A3D6-F3DA610567DE}\0.0.0.0" Name="CodeBase" Value="file:///[#fil50C790FC83CA248B858E0B891991314E]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpF979C08AB27BCF450464F98B69CB8E85" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{FB933086-934D-40FE-99A3-6C46EEBACCC7}">
+            <Component Id="cmpF979C08AB27BCF450464F98B69CB8E85" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{DA38A1CB-F784-4752-80CB-1F65031555EF}">
                 <File Id="filFDA5EF5A48C3DF27637D71384578C702" KeyPath="yes" Source="$(var.SourcePath)\Managed\AutobiographicMemory.dll" />
             </Component>
-            <Component Id="cmp1D950EA6D848606107A518A6254CB596" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{ACA7658A-547E-4559-A5F1-6D1869B225F1}">
+            <Component Id="cmp1D950EA6D848606107A518A6254CB596" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{0D88A0E2-D883-4F28-9BC8-492A5DB8EBCF}">
                 <File Id="fil1C80622FDE4FF588CA5ED57FC4DD1551" KeyPath="yes" Source="$(var.SourcePath)\Managed\CommandLine.dll" />
             </Component>
-            <Component Id="cmp092CF0346668C1596AF7A5EA2FB67DC0" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{D532AAE0-0C12-4D0E-8B47-195B251FB701}">
+            <Component Id="cmp092CF0346668C1596AF7A5EA2FB67DC0" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{E8996847-6E96-4A12-86CC-4340F5C3D22B}">
                 <File Id="filC082D1FD363563FAD9F71889A1516E7F" KeyPath="yes" Source="$(var.SourcePath)\Managed\Conditions.dll" />
             </Component>
-            <Component Id="cmpD053A15F3FC501AB18B1710FDD04902C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{CBC4C30B-2E35-45E3-BB27-C32CD2B21A69}">
+            <Component Id="cmpD053A15F3FC501AB18B1710FDD04902C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{B91732A1-7A3C-4C0B-93DD-20A312DA89F5}">
                 <File Id="fil46B26932E4FAA12A1BD31DFACE5868D5" KeyPath="yes" Source="$(var.SourcePath)\Managed\EmotionalAppraisal.dll" />
             </Component>
-            <Component Id="cmpA736170015C9C11A6398D48E815DE492" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{CA4B3619-4AFD-4107-98E5-1EC9D0255576}">
+            <Component Id="cmpA736170015C9C11A6398D48E815DE492" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{D41D891D-30E3-453D-890F-16CD41DA8634}">
                 <File Id="filB27743C28730583CC7880A5A5438B941" KeyPath="yes" Source="$(var.SourcePath)\Managed\EmotionalDecisionMaking.dll" />
             </Component>
-            <Component Id="cmp6B9E213EDCC4D5ACE561ADBC58CFBCF1" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{22551AB4-2136-4B00-A0AF-93E90EB2B894}">
+            <Component Id="cmp6B9E213EDCC4D5ACE561ADBC58CFBCF1" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{6727A8D6-B90B-4E9A-B819-E8502830E77A}">
                 <File Id="filE5A35E769C34FF334201F302763EC44F" KeyPath="yes" Source="$(var.SourcePath)\Managed\GAIPS.Rage.dll" />
             </Component>
-            <Component Id="cmp2C643508DCE79F0D1EFFF8E94218B48A" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{780AA425-4214-4761-AC83-4FC21EBFB434}">
+            <Component Id="cmp2C643508DCE79F0D1EFFF8E94218B48A" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{F718CBFC-2682-41DD-9755-1E40672F767E}">
                 <Class Id="{03B4D45B-2FCF-35A9-8335-AC5C1193CD6D}" Context="InprocServer32" Description="SerializationUtilities.Attributes.NonSerializedAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="SerializationUtilities.Attributes.NonSerializedAttribute" Description="SerializationUtilities.Attributes.NonSerializedAttribute" />
                 </Class>
@@ -862,31 +862,31 @@
                 <RegistryValue Root="HKCR" Key="CLSID\{E765B473-5F03-313A-B687-173EB3A2C248}\InprocServer32" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="CLSID\{E765B473-5F03-313A-B687-173EB3A2C248}\InprocServer32" Name="CodeBase" Value="file:///[#filF171EA06BA6D9B207D63D1E85FCBCF0E]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp3BF936753CC3EF8CD7EA61899A5E149E" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{86524AF3-EBCB-4D7E-9D46-75870833D293}">
+            <Component Id="cmp3BF936753CC3EF8CD7EA61899A5E149E" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{A4E98A42-0556-44F6-A5C6-346960B46515}">
                 <File Id="fil92DE002E01150FA1DC5AD6655060045D" KeyPath="yes" Source="$(var.SourcePath)\Managed\IntegratedAuthoringTool.dll" />
             </Component>
-            <Component Id="cmp8D902968E9D098808DC72BF11376A1B3" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{0B4E1C13-00D9-4627-AC82-0FC11B02069D}">
+            <Component Id="cmp8D902968E9D098808DC72BF11376A1B3" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{F9AA5D04-F57E-425B-892D-55F65984912A}">
                 <File Id="fil00CDB819A319BCBBFFA7C23C36A870E2" KeyPath="yes" Source="$(var.SourcePath)\Managed\KnowledgeBase.dll" />
             </Component>
-            <Component Id="cmp81C1473E3A0C6599BDBB106A1E00478C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{AF44F968-9363-4C6A-9539-BC483B8E40F4}">
+            <Component Id="cmp81C1473E3A0C6599BDBB106A1E00478C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{19696F9D-7FAB-407E-9E58-714FB966034E}">
                 <File Id="fil14482023A0A9482F57533678F72E4A0D" KeyPath="yes" Source="$(var.SourcePath)\Managed\Mono.Security.dll" />
             </Component>
-            <Component Id="cmpA6FC23673E2A81FD94C7ED2B7C4B42DC" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{DB12139A-8A48-492B-98AE-DAF8896BE15B}">
+            <Component Id="cmpA6FC23673E2A81FD94C7ED2B7C4B42DC" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{98E19695-1FD9-489E-BC4A-6D54161BEE63}">
                 <File Id="fil2AC96AC71C77E817EAF31781E7083F58" KeyPath="yes" Source="$(var.SourcePath)\Managed\mscorlib.dll" />
             </Component>
-            <Component Id="cmpEEB1FD0B2859C344CB80B4664C75FAB2" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{B365881C-B497-4CA9-B789-3C11CF90069C}">
+            <Component Id="cmpEEB1FD0B2859C344CB80B4664C75FAB2" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{ED836E3E-FD65-40FA-B857-9ED6960253AD}">
                 <File Id="fil1A83A5D120CE5D564FD765615CE7A5FA" KeyPath="yes" Source="$(var.SourcePath)\Managed\Newtonsoft.Json.dll" />
             </Component>
-            <Component Id="cmp1413C2CD5EA98B9C3CDCE668E6809E8E" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{B9E79860-630A-432D-8696-6D3693AA74FE}">
+            <Component Id="cmp1413C2CD5EA98B9C3CDCE668E6809E8E" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{8730F6FE-6C52-4E07-8F96-8F16BFF9E340}">
                 <File Id="fil906AD02702C2222D6C1A168FEDDD16EF" KeyPath="yes" Source="$(var.SourcePath)\Managed\PlayGen.SUGAR.Client.dll" />
             </Component>
-            <Component Id="cmp962EF21E45DDCC4DF5FAAD25E3A12030" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{4B7FC6AC-1ED1-4793-B256-F0CCD135AFC7}">
+            <Component Id="cmp962EF21E45DDCC4DF5FAAD25E3A12030" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{F65FD8F2-01A1-40E5-90AC-BD11ABD647C1}">
                 <File Id="fil8DE636B3F8A9AB05050E9E50D29290E9" KeyPath="yes" Source="$(var.SourcePath)\Managed\PlayGen.SUGAR.Client.Unity.dll" />
             </Component>
-            <Component Id="cmp06FBA9F2FE96E222B637E9D486EC5B43" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{612014CA-71A3-484C-88FA-AA2F71F99C63}">
+            <Component Id="cmp06FBA9F2FE96E222B637E9D486EC5B43" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{A86543F1-08C1-4583-A874-78034BE16AF9}">
                 <File Id="filB873823133FE1A9BA0727C6008142D85" KeyPath="yes" Source="$(var.SourcePath)\Managed\PlayGen.SUGAR.Unity.dll" />
             </Component>
-            <Component Id="cmpB78EA4012CE41DE27895F18FB59AFB25" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{A91A6882-9F10-4330-8E63-AF56CFDD7D46}">
+            <Component Id="cmpB78EA4012CE41DE27895F18FB59AFB25" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{E1BF8C7E-3FA4-4A90-BA78-E7AE8543A9A6}">
                 <Class Id="{0320AAD7-50BF-34E2-AD98-0CDA0E10C4A5}" Context="InprocServer32" Description="AssetPackage.BaseAsset" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="AssetPackage.BaseAsset" Description="AssetPackage.BaseAsset" />
                 </Class>
@@ -994,19 +994,19 @@
                 <RegistryValue Root="HKCR" Key="Record\{B5B3577D-4208-39A0-8D06-5B5EF4EFE7F5}\1.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{B5B3577D-4208-39A0-8D06-5B5EF4EFE7F5}\1.0.0.0" Name="CodeBase" Value="file:///[#fil619350787475FDA579199C2E5A199BD0]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpEF318448828D653023F51B8270308DCB" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{EEDDF137-0194-4230-881E-5D4F63B71B2B}">
+            <Component Id="cmpEF318448828D653023F51B8270308DCB" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{E47168B8-4887-466D-897F-11CB81B97A3B}">
                 <File Id="fil37C51ED94E96B6D1E2F8652B1B79B0C7" KeyPath="yes" Source="$(var.SourcePath)\Managed\RolePlayCharacter.dll" />
             </Component>
-            <Component Id="cmp81D1C4E37D7415C8579E008C2716C25C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{35D1299C-5ACA-4741-809C-2DBFEDCAC3F6}">
+            <Component Id="cmp81D1C4E37D7415C8579E008C2716C25C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{1ED0A2CA-3728-4DBE-AB7A-5BCC27AD304F}">
                 <File Id="filC10C71EA7875104D8F3D879D5ED8155E" KeyPath="yes" Source="$(var.SourcePath)\Managed\SocialImportanceAsset.dll" />
             </Component>
-            <Component Id="cmpB8A893265DF2DCB6A7902A9B7739B246" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{C3661DB3-A5D8-4770-8C5E-48181A28623C}">
+            <Component Id="cmpB8A893265DF2DCB6A7902A9B7739B246" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{964EF1C1-D5E7-44C3-B779-3F434BC12A40}">
                 <File Id="fil0559AF477765CC1BA2968576EF22455F" KeyPath="yes" Source="$(var.SourcePath)\Managed\System.ComponentModel.DataAnnotations.dll" />
             </Component>
-            <Component Id="cmp6C9A5E7E1E4CC30BEDE2453536B9949B" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{BD0AEA60-797C-4AC9-B71D-54196B496BF8}">
+            <Component Id="cmp6C9A5E7E1E4CC30BEDE2453536B9949B" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{28638982-FE7B-4D96-9F58-34E8DD518E49}">
                 <File Id="fil5AF860CB9DB98F0936675EC7EB6A72EE" KeyPath="yes" Source="$(var.SourcePath)\Managed\System.Core.dll" />
             </Component>
-            <Component Id="cmpBE62D23BB5DD5FACF8D446C3750D995C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{021BB4AD-D0EF-4640-B6F1-16D3D6DA637B}">
+            <Component Id="cmpBE62D23BB5DD5FACF8D446C3750D995C" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{6AAC4452-56EA-4AD6-80A9-9A6196F69B5D}">
                 <Class Id="{031A6B24-BFAA-3D76-B6DA-59C9C469A0FB}" Context="InprocServer32" Description="System.CodeDom.CodeMethodReturnStatement" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="System.CodeDom.CodeMethodReturnStatement" Description="System.CodeDom.CodeMethodReturnStatement" />
                 </Class>
@@ -2097,13 +2097,13 @@
                 <RegistryValue Root="HKCR" Key="Record\{AC5C943A-C585-311B-A920-33C6CCE59F2F}\4.0.0.0" Name="RuntimeVersion" Value="v4.0.30319" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{AC5C943A-C585-311B-A920-33C6CCE59F2F}\4.0.0.0" Name="CodeBase" Value="file:///C:/WINDOWS/Microsoft.Net/assembly/GAC_MSIL/System/v4.0_4.0.0.0__b77a5c561934e089/System.dll" Type="string" Action="write" />
             </Component>
-            <Component Id="cmpE9A7A897A84844FB532C13AFF533B016" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{378940B7-23F1-40A3-9CE7-C94C8B723C52}">
+            <Component Id="cmpE9A7A897A84844FB532C13AFF533B016" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{679060A9-5730-41AA-89B8-B65A9F6803D1}">
                 <File Id="fil388C7D817E51AE04082D2A970D07B20C" KeyPath="yes" Source="$(var.SourcePath)\Managed\System.Runtime.Serialization.dll" />
             </Component>
-            <Component Id="cmpBD73886D6AAFBB8EFCF76C2896CEBE2D" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{2A24C329-0803-4B96-B8E0-EBB198A2AD65}">
+            <Component Id="cmpBD73886D6AAFBB8EFCF76C2896CEBE2D" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{DD39AD6C-B898-4B08-9E56-B73796C9BD6A}">
                 <File Id="fil0F3A1A67B8640B0A66CAF5810680FE0A" KeyPath="yes" Source="$(var.SourcePath)\Managed\System.Xml.dll" />
             </Component>
-            <Component Id="cmpEFA4F8160E946A18070A1E372514A777" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{04A3B4F2-68B9-49B5-B73B-E0AD6EB2C861}">
+            <Component Id="cmpEFA4F8160E946A18070A1E372514A777" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{B992A95D-3A74-4731-93E0-B136A50D265C}">
                 <Class Id="{0007C19B-CEDD-3821-9DAD-A5208EB5F001}" Context="InprocServer32" Description="UnityEngine.MultilineAttribute" ThreadingModel="both" ForeignServer="mscoree.dll">
                     <ProgId Id="UnityEngine.MultilineAttribute" Description="UnityEngine.MultilineAttribute" />
                 </Class>
@@ -6843,82 +6843,82 @@
                 <RegistryValue Root="HKCR" Key="Record\{FFC1E3F3-3F4E-3504-9779-D2230B4C7C0D}\0.0.0.0" Name="RuntimeVersion" Value="v2.0.50727" Type="string" Action="write" />
                 <RegistryValue Root="HKCR" Key="Record\{FFC1E3F3-3F4E-3504-9779-D2230B4C7C0D}\0.0.0.0" Name="CodeBase" Value="file:///[#filB8D3048E4945256BD0D44EFC0C05FF57]" Type="string" Action="write" />
             </Component>
-            <Component Id="cmp32B5DA993AD02288F524C10C9173D9AA" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{CC6182C5-E8BB-4FEB-8B65-05A566C141E3}">
+            <Component Id="cmp32B5DA993AD02288F524C10C9173D9AA" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{BF98641F-9A2E-4876-B1EB-3DEA57242A12}">
                 <File Id="filCB13518EF60461DBDBDEDC173D071033" KeyPath="yes" Source="$(var.SourcePath)\Managed\UnityEngine.dll.mdb" />
             </Component>
-            <Component Id="cmpB99BA881A06D85B610793D5A58ACB2A4" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{3CD49160-CAFA-4CF3-8066-F9A8319D7D49}">
+            <Component Id="cmpB99BA881A06D85B610793D5A58ACB2A4" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{C9558F4F-6BFF-43E5-B4BC-C874CCC9DEB1}">
                 <File Id="fil251E594F01760F0B620B2B6B8B598EB0" KeyPath="yes" Source="$(var.SourcePath)\Managed\UnityEngine.Networking.dll" />
             </Component>
-            <Component Id="cmpB4C7A7B94A2E4603C6514721783B9D8A" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{BEF73154-686C-4C85-AF0D-DE3BEA70925E}">
+            <Component Id="cmpB4C7A7B94A2E4603C6514721783B9D8A" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{B7D979A5-2D02-49A9-A982-11DCE085D4DB}">
                 <File Id="fil1420DE39DF4FE393CD311D90EB2B3A69" KeyPath="yes" Source="$(var.SourcePath)\Managed\UnityEngine.UI.dll" />
             </Component>
-            <Component Id="cmpC1BD2D1F2BE0C9AE5196EF4E806FF946" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{C9691A02-8CA1-4F6D-83AF-8E7EDC047A98}">
+            <Component Id="cmpC1BD2D1F2BE0C9AE5196EF4E806FF946" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{7C829F55-351C-4D5B-BCB4-6CF30CEE3A88}">
                 <File Id="fil2D0BD9F8FE8AA997CA8969DD4D213531" KeyPath="yes" Source="$(var.SourcePath)\Managed\UnityEngine.xml" />
             </Component>
-            <Component Id="cmpEEF2BAFF00C35E39F6E2DA16248C9527" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{233D97B6-7E82-4FDC-9D44-3835D66BBB76}">
+            <Component Id="cmpEEF2BAFF00C35E39F6E2DA16248C9527" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{A6949D61-B66C-45FA-9724-05C6160EA773}">
                 <File Id="filAF203074467D3CBA53C4B1F568851E97" KeyPath="yes" Source="$(var.SourcePath)\Managed\Utilities.dll" />
             </Component>
-            <Component Id="cmp04793183E14B733F9A12084015AADB35" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{C481E708-DB71-4FC6-B649-D66F6785E635}">
+            <Component Id="cmp04793183E14B733F9A12084015AADB35" Directory="dirCE18B61ACDE3D9E8FB8B63B505E110CB" Guid="{5777C317-D4FB-42BC-A895-70614C797F77}">
                 <File Id="fil97DD6EA9CAE1ACF69BE6D4F5B49C5A49" KeyPath="yes" Source="$(var.SourcePath)\Managed\WellFormedNames.dll" />
             </Component>
-            <Component Id="cmp72DEDA843861B8F5F2ADCBBC1D132CE5" Directory="dir0860F8A06F056AA2F9776A5155E3E38F" Guid="{017F5F13-B422-492B-9BEB-6D31229AECCE}">
+            <Component Id="cmp72DEDA843861B8F5F2ADCBBC1D132CE5" Directory="dir0860F8A06F056AA2F9776A5155E3E38F" Guid="{ED068F01-D9E4-4CC4-8841-1954B734A1F4}">
                 <File Id="filE99A65257C7DF43AC542697B15C374EC" KeyPath="yes" Source="$(var.SourcePath)\Mono\mono.dll" />
             </Component>
-            <Component Id="cmp215F5B849E51A03A4929B862421BB0C2" Directory="dir4194ACA1FCE48E11C3F68A4586356D6F" Guid="{BCEA12E5-506E-48D7-BEE6-E14B2CB7AC20}">
+            <Component Id="cmp215F5B849E51A03A4929B862421BB0C2" Directory="dir4194ACA1FCE48E11C3F68A4586356D6F" Guid="{A2F83789-35B0-48D0-8A7F-4F084E7ACABC}">
                 <File Id="fil46B00417B2679E80B42E1BF72DBB70FD" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\browscap.ini" />
             </Component>
-            <Component Id="cmpCDF45D1C32CA2852EE8754D907EBEE18" Directory="dir4194ACA1FCE48E11C3F68A4586356D6F" Guid="{75770667-75DE-4F71-90FD-4223D7AAF049}">
+            <Component Id="cmpCDF45D1C32CA2852EE8754D907EBEE18" Directory="dir4194ACA1FCE48E11C3F68A4586356D6F" Guid="{5C3172DB-BB9F-463D-9DD4-E08CDB8E80F5}">
                 <File Id="fil54F70B056E88C3A1373FE9D0E83E7599" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\config" />
             </Component>
-            <Component Id="cmpC5A8A7D86B903CE44CDC4EE7E4B7DF5B" Directory="dirA6F2E7FFE62BB2A0DBADBE310CD98B2E" Guid="{2467565F-018A-440D-983F-B0E372276CDF}">
+            <Component Id="cmpC5A8A7D86B903CE44CDC4EE7E4B7DF5B" Directory="dirA6F2E7FFE62BB2A0DBADBE310CD98B2E" Guid="{FC5DA8BF-F4FA-48E3-A39C-5F360E598DE5}">
                 <File Id="filEDEA4B63960D4A66A830B2546BE8CB54" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\1.0\DefaultWsdlHelpGenerator.aspx" />
             </Component>
-            <Component Id="cmpEB06BF1E8F00A01B53B9F694D97C5641" Directory="dirA6F2E7FFE62BB2A0DBADBE310CD98B2E" Guid="{05FA8C76-AB9A-46D2-AF44-A5957DB7070C}">
+            <Component Id="cmpEB06BF1E8F00A01B53B9F694D97C5641" Directory="dirA6F2E7FFE62BB2A0DBADBE310CD98B2E" Guid="{30A13AF7-98DA-441F-8382-68D1FC903082}">
                 <File Id="filB0EEE4372BDF678A54910B285F14B0B6" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\1.0\machine.config" />
             </Component>
-            <Component Id="cmp2D51E549A46E3D3A2A81A03648E3D59F" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{511AB3CF-683C-4739-BD3A-DCC9F695EC04}">
+            <Component Id="cmp2D51E549A46E3D3A2A81A03648E3D59F" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{FF7D6E36-EC82-4B01-B067-3116C153603C}">
                 <File Id="fil6C72F5FD062AA5E08524146BF7A9CB78" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\2.0\DefaultWsdlHelpGenerator.aspx" />
             </Component>
-            <Component Id="cmp4E9328569DDA3E7F90605B7B8A2E3328" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{18EFDFA3-467D-4571-BACC-A3057DC50715}">
+            <Component Id="cmp4E9328569DDA3E7F90605B7B8A2E3328" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{5B266DB4-A128-4826-93F8-554AB3368D2E}">
                 <File Id="filD097F080F3054D4EAD3394B1ACB8BF52" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\2.0\machine.config" />
             </Component>
-            <Component Id="cmp41879E208F2B798019C8B3E980B8911D" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{DB8ED840-9817-44E1-870A-243C1DD7AEF3}">
+            <Component Id="cmp41879E208F2B798019C8B3E980B8911D" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{C052A05C-50D2-4054-8C88-FC78839E969D}">
                 <File Id="fil57D80BC10AF9D3B55FFACA258E27C6BC" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\2.0\settings.map" />
             </Component>
-            <Component Id="cmpA7BF1A879974ACA947FA6F14924E1721" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{C0979E3E-7026-411E-BD9A-C1F5FD592635}">
+            <Component Id="cmpA7BF1A879974ACA947FA6F14924E1721" Directory="dir898CED3C8A2C1B3246DBB95064A5C4D8" Guid="{7AF3E53A-8D3C-44DF-822C-E32F87B79450}">
                 <File Id="fil26B46E999800276317FE0E470386322C" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\2.0\web.config" />
             </Component>
-            <Component Id="cmp708336C2A50EE6AF9FF5F9952B137625" Directory="dirF4D23B034FE9F29F8B5D4011DF4B555D" Guid="{0C2B41BB-888F-48A5-BF0C-F56108B025B5}">
+            <Component Id="cmp708336C2A50EE6AF9FF5F9952B137625" Directory="dirF4D23B034FE9F29F8B5D4011DF4B555D" Guid="{1BBD9BB2-F08E-4C7C-AFA2-49F1173C68C2}">
                 <File Id="fil4EE3DC57A55CAADCAF353EC814FA9E59" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\2.0\Browsers\Compat.browser" />
             </Component>
-            <Component Id="cmp18C9DBDE3FB44A8058B03A757E00FEA9" Directory="dir81E714B5807327BF49B316DCC05F490E" Guid="{BC25C8B4-B025-4C5E-B0B3-E6154ACEC1EE}">
+            <Component Id="cmp18C9DBDE3FB44A8058B03A757E00FEA9" Directory="dir81E714B5807327BF49B316DCC05F490E" Guid="{35BC0301-F9A3-4FDA-9105-CFA48D0D29EB}">
                 <File Id="fil0D1EE4F360DE3CCD0924493265320A65" KeyPath="yes" Source="$(var.SourcePath)\Mono\etc\mono\mconfig\config.xml" />
             </Component>
-            <Component Id="cmp2395D3458B066D6760C1FED4450BC045" Directory="dirD5A042D04D43EB1704F218AE10825A6A" Guid="{A802CC13-B1E9-4293-95EC-434A28D47FC5}">
+            <Component Id="cmp2395D3458B066D6760C1FED4450BC045" Directory="dirD5A042D04D43EB1704F218AE10825A6A" Guid="{017B8BFB-E63F-46A6-AD35-28F8F249C543}">
                 <File Id="filE34FDC6CEC16CDEC9FAAB0E3A8BE3504" KeyPath="yes" Source="$(var.SourcePath)\Resources\unity default resources" />
             </Component>
-            <Component Id="cmp401BAABEB26B6561A91D978D443CE460" Directory="dirD5A042D04D43EB1704F218AE10825A6A" Guid="{2980C46B-4C57-48A4-956B-75E3B61B7A34}">
+            <Component Id="cmp401BAABEB26B6561A91D978D443CE460" Directory="dirD5A042D04D43EB1704F218AE10825A6A" Guid="{005022BB-B45D-4679-B01A-335C83BD819A}">
                 <File Id="fil6AA506DB076041062971DAD930270B9E" KeyPath="yes" Source="$(var.SourcePath)\Resources\unity_builtin_extra" />
             </Component>
-            <Component Id="cmpDB4BAD7A503E1477970A2C6751F6D878" Directory="dir288EC623D19FA97D6606FAFE954BDEB6" Guid="{F5BD3C78-26D9-47F4-B966-E27B2A1BEC08}">
+            <Component Id="cmpDB4BAD7A503E1477970A2C6751F6D878" Directory="dir288EC623D19FA97D6606FAFE954BDEB6" Guid="{5DB301AD-95BB-4B64-A582-61ADBC75B4D1}">
                 <File Id="fil68B117A904E9C48131CBF63A06AB2A69" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\config.json" />
             </Component>
-            <Component Id="cmp79B88858FD1AD5370E84E96C704D5731" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{AFDD646C-2D39-4153-8AA0-0B773C9AAC02}">
+            <Component Id="cmp79B88858FD1AD5370E84E96C704D5731" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{9493DF4E-D5D1-448C-997A-E3C71A97D751}">
                 <File Id="fil7298B6BDF54C3EEA8DCB2CB46C2CCCB0" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\MoodResponse.edm" />
             </Component>
-            <Component Id="cmp0CFECFD6B598D03E1D01C1A2C2D28C55" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{6F3818D6-05A7-42A4-B03F-8582BD73A88D}">
+            <Component Id="cmp0CFECFD6B598D03E1D01C1A2C2D28C55" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{4D095EEA-EC19-4DF0-96C8-D04AC9C4D99D}">
                 <File Id="fil9EFEC60398154F6743455CE3774EE350" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\NegativeMoodEA.ea" />
             </Component>
-            <Component Id="cmp4A7E9237BC01F4E2C423C4E6B0FE22B5" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{A0A579C9-796F-4FDB-B43B-9F8148DBA064}">
+            <Component Id="cmp4A7E9237BC01F4E2C423C4E6B0FE22B5" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{379A3441-E181-4EF0-B6D5-511EA3F8008E}">
                 <File Id="fil52E84DAD698F834433735A88AEB4CCA8" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\NeutralMoodEA.ea" />
             </Component>
-            <Component Id="cmp3B87FC5B6F1DBAB3DBA1F55D5DD2B7DC" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{AE5BD816-4D3E-42EC-82FC-6982D0188159}">
+            <Component Id="cmp3B87FC5B6F1DBAB3DBA1F55D5DD2B7DC" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{C255A059-47F1-4736-B0AA-8D6107B5D4AA}">
                 <File Id="fil0A6D0ECF6ACF92D8768C93F57D36C1D0" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\SpaceModulesRPC.rpc" />
             </Component>
-            <Component Id="cmp04FC1B37779B81F26DBDA67EEF7CDD8E" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{CB068A84-D29F-4F1E-9335-774DA22D08A6}">
+            <Component Id="cmp04FC1B37779B81F26DBDA67EEF7CDD8E" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{219E9ADB-A26A-48FC-8096-56EC0426100D}">
                 <File Id="fil9C152098BC47C3A0F85D4DAF9435D25F" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\SpaceModulesRPC2.rpc" />
             </Component>
-            <Component Id="cmp425EA759668DEF9E23E4D82ED7CD4AF5" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{5F4F9D76-59B1-44CC-B149-019384EDCB9E}">
+            <Component Id="cmp425EA759668DEF9E23E4D82ED7CD4AF5" Directory="dir8F2A4E084EE317DB4336814364923AAF" Guid="{BCBC1379-4982-44D1-B81E-F371CFFEEEF9}">
                 <File Id="filCFD600637757128C762787457C9C931A" KeyPath="yes" Source="$(var.SourcePath)\StreamingAssets\Scenarios\SpaceModules\SpaceModulesScenarioA.iat" />
             </Component>
         </ComponentGroup>
