@@ -13,8 +13,8 @@ public class ModulesController : ICommandAction
         public string Name;
         public string Id;
         public string Type;
-        public string Manufacturer;
-        public Dictionary<string,string> Description;
+        public string Description;
+        public Dictionary<string,string> Faq;
 
     }
 
@@ -108,7 +108,7 @@ public class ModulesController : ICommandAction
         moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
         moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
-        foreach (var description in module.Description)
+        foreach (var description in module.Faq)
         {
             var desriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
             desriptionItem.transform.FindChild("Title").GetComponent<Text>().text = description.Key;
@@ -143,8 +143,8 @@ public class ModulesController : ICommandAction
                 Name = json[i]["Name"],
                 Id = json[i]["Id"],
                 Type = json[i]["Type"],
-                Manufacturer = json[i]["Manufacturer"],
-                Description = new Dictionary<string, string>()
+                Description = json[i]["Manufacturer"],
+                Faq = new Dictionary<string, string>()
                 {
                     {"Firmware", json[i]["Description"]["firmware"]},
                     {"OSsupport", json[i]["Description"]["OSsupport"]},

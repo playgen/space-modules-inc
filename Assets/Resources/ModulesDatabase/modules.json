@@ -2,91 +2,146 @@
 {
     "Database": 
     [
-        {
-            "Name": "Prototype Warp Drive MK II",
-            "Id" : "X223332",
-            "Type" : "Engines",
-            "Manufacturer" : "Fang Xenotech",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "Interstellar Continuum Drive",
-            "Id" : "X52422",
-            "Type" : "Engines",
-            "Manufacturer" : "Newfarer-Terragraphics",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "Annular Cosmic Energy Scanner",
-            "Id" : "X36209",
-            "Type" : "Sensors",
-            "Manufacturer" : "Tang-Turner Technologies",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "QMF42 Quantum Magnascopic Field ",
-            "Id" : "X41299",
-            "Type" : "Sensors",
-            "Manufacturer" : "Newfarer-Terragraphics",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "9-Axis Nuclear Synthesiser",
-            "Id" : "X47531",
-            "Type" : "Fabricators",
-            "Manufacturer" : "Solar Ridge Industries",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "Ion Cell 48GW",
-            "Id" : "X91134",
-            "Type" : "Power Cells",
-            "Manufacturer" : "Fang Xenotech",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-        {
-            "Name": "Light-Cell Transistor",
-            "Id" : "X91156",
-            "Type" : "Power Cells",
-            "Manufacturer" : "Solar Ridge Industries",
-            "Description": 
-            {
-                "firmware": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "OSsupport": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
-                "Info": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
-            }
-        },
-       
-
+      {
+        "Name": "Prototype Warp Drive MK II",
+        "Id": "X223332",
+        "Type": "Engines",
+        "Description": "Fang Xenotech",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+        
+      },
+      {
+        "Name": "Interstellar Continuum Drive",
+        "Id" : "X52422",
+        "Type" : "Engines",
+        "Description" : "Newfarer-Terragraphics",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      },
+      {
+        "Name": "Annular Cosmic Energy Scanner",
+        "Id" : "X36209",
+        "Type" : "Sensors",
+        "Description" : "Tang-Turner Technologies",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      },
+      {
+        "Name": "QMF42 Quantum Magnascopic Field ",
+        "Id" : "X41299",
+        "Type" : "Sensors",
+        "Description" : "Newfarer-Terragraphics",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      },
+      {
+        "Name": "9-Axis Nuclear Synthesiser",
+        "Id" : "X47531",
+        "Type" : "Fabricators",
+        "Description" : "Solar Ridge Industries",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      },
+      {
+        "Name": "Ion Cell 48GW",
+        "Id" : "X91134",
+        "Type" : "Power Cells",
+        "Description" : "Fang Xenotech",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      },
+      {
+        "Name": "Light-Cell Transistor",
+        "Id" : "X91156",
+        "Type" : "Power Cells",
+        "Description" : "Solar Ridge Industries",
+        "Faq": [
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          },
+          {
+            "Problem": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad.",
+            "Solution": "Lorem ipsum dolor sit amet, vel vitae animal facilisis an. No vel ignota oblique ceteros, est munere noluisse partiendo at. Altera persius ex nec. Pri te possim iisque erroribus, soluta perfecto vel ad."
+          }
+        ]
+      }
     ]
 }
