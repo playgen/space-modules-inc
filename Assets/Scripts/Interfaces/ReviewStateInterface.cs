@@ -65,8 +65,6 @@ public class ReviewStateInterface : StateInterface
                 chatObject.FindChild("Panel").GetChild(0).GetComponent<Text>().text = dialogues[i];
                 chatObject.transform.SetParent(_reviewContent.GetComponent<ScrollRect>().content, false);
             }
-               
-
         }
     }
 

@@ -2039,7 +2039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &295218671
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6789,7 +6789,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1164846665}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
   m_Name: 
@@ -9420,9 +9420,9 @@ MonoBehaviour:
   - {fileID: 2099714697}
   - {fileID: 1958368673}
   _scoreText: {fileID: 17450080}
-  _scoreCommentText: {fileID: 776679256}
+  _scoreFeedbackText: {fileID: 0}
   _emotionImage: {fileID: 1181020852}
-  _emotionText: {fileID: 798370553}
+  _emotionComment: {fileID: 0}
   _emotionPositiveSprite: {fileID: 21300000, guid: a7d3f379e389b4b46b0b811bf26145ee,
     type: 3}
   _emotionNegativeSprite: {fileID: 21300000, guid: 5285c77a9caad6b4093c923535bd9603,

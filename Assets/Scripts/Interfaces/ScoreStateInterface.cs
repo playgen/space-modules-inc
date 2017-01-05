@@ -35,7 +35,7 @@ public class ScoreStateInterface : StateInterface
     public void UpdateScore(ScenarioController.ScoreObject obj)
     {
         
-        _scorePanelScript.SetScorePanel(obj.Stars, obj.Score, obj.ScoreComment, obj.MoodImage, obj.EmotionText, obj.Bonus);
+        _scorePanelScript.SetScorePanel(obj.Stars, obj.Score, obj.ScoreFeedbackToken, obj.MoodImage, obj.EmotionCommentToken, obj.Bonus);
     }
 }
 

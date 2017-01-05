@@ -19,9 +19,9 @@ public class ScenarioController : ICommandAction
     {
         public int Stars;
         public int Score;
-        public string ScoreComment;
+        public string ScoreFeedbackToken;
         public bool MoodImage;
-        public string EmotionText;
+        public string EmotionCommentToken;
         public int Bonus;
     }
 
@@ -108,13 +108,14 @@ public class ScenarioController : ICommandAction
     public void GetScoreData()
     {
         var mood = (CurrentCharacter.Mood + 10) / 20;
+        var stars = Mathf.CeilToInt(mood*3);
         var scoreObj = new ScoreObject()
         {
-            Stars = Mathf.CeilToInt(mood*3),
+            Stars = stars,
             Score = Mathf.CeilToInt(mood*99999),
-            ScoreComment = (mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
+            ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
             MoodImage = (mood >= 0.5),
-            EmotionText = (mood >= 0.5) ? "Great!" : "Poor",
+            EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
             Bonus = Mathf.CeilToInt(mood*999)
         };
 
@@ -124,10 +125,58 @@ public class ScenarioController : ICommandAction
         long score = scoreObj.Score;
         SUGARManager.GameData.Send("score", score);
         SUGARManager.GameData.Send("plays", 1);
-        long stars = scoreObj.Stars;
         SUGARManager.GameData.Send("stars", stars);
         SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToLower() + "_stars", stars);
     }
+
+    // TODO: Code for tracking individual score categories.
+    //public void UpdateScore(DialogueStateActionDTO reply)
+    //{
+    //    // var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(), reply.GetStylesName());
+    //    // Debug.Log("Dialogue" + reply.Utterance);
+    //    // Debug.Log("Dialogue" + reply.Style[0]);
+    //    // Debug.Log("Dialogue" + reply.Meaning[0]);
+    //    // Debug.Log(reply.Meaning.Length + reply.Utterance);
+
+    //    foreach (var meaning in reply.Meaning)
+    //    {
+    //        HandleKeywords(meaning);
+    //    }
+
+    //    foreach (var style in reply.Style)
+    //    {
+    //        HandleKeywords(style);
+    //    }
+    //}
+
+    //private void HandleKeywords(string s)
+    //{
+    //    char[] delimitedChars = { '(', ')' };
+    //    string[] result = s.Split(delimitedChars);
+    //    if (result.Length > 1)
+    //        switch (result[0])
+    //        {
+    //            case "Inquire":
+    //                score.GetComponent<ScoreManager>().AddI(Int32.Parse(result[1]));
+    //                break;
+
+    //            case "FAQ":
+    //                score.GetComponent<ScoreManager>().AddF(Int32.Parse(result[1]));
+    //                break;
+
+    //            case "Closure":
+    //                score.GetComponent<ScoreManager>().AddC(Int32.Parse(result[1]));
+    //                break;
+
+    //            case "Empathy":
+    //                score.GetComponent<ScoreManager>().AddE(Int32.Parse(result[1]));
+    //                break;
+
+    //            case "Polite":
+    //                score.GetComponent<ScoreManager>().AddP(Int32.Parse(result[1]));
+    //                break;
+    //        }
+    //}
 
     public void SetCharacter(string name)
     {
