@@ -10,11 +10,18 @@ public class MenuStateInterface : StateInterface
         var buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
         var playButton = buttons.GetButton("PlayButton");
         playButton.onClick.AddListener(OnPlayClick);
+        var settingsButton = buttons.GetButton("SettingsButton");
+        settingsButton.onClick.AddListener(OnSettingsClick);
         var leaderboardButton = buttons.GetButton("LeaderboardButton");
         leaderboardButton.onClick.AddListener(delegate
         {
             SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
         });
+    }
+
+    private void OnSettingsClick()
+    {
+        EnqueueCommand(new ChangeStateCommand(SettingsState.StateName));
     }
 
     public override void Enter()

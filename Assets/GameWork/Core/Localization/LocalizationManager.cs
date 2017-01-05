@@ -1,6 +1,6 @@
-﻿using GameWork.Core.Logging.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using GameWork.Core.Logging.PlatformAdaptors;
 
 namespace GameWork.Core.Localization
 {

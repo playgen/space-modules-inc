@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using GameWork.Core.Logging.Interfaces;
+using GameWork.Core.Logging.PlatformAdaptors;
 
 namespace GameWork.Core.Logging
 {
@@ -8,33 +7,66 @@ namespace GameWork.Core.Logging
     {
         private static ILogger _logger;
 
-        public LogUtil(ILogger logger)
+        public static LogLevel LogLevel { get; set; }
+        
+        public static void SetLogger(ILogger logger)
         {
             _logger = logger;
         }
 
-        [Conditional("LOGGING_ENABLED_DEBUG"), Conditional("LOGGING_ENABLED_ALL")]
-        public static void Debug(string message)
+        public static void Fatal(Exception exception)
         {
-            _logger.Debug(message);
+            if (LogLevel.Fatal <= LogLevel)
+            {
+                _logger.Fatal(exception);
+            }
         }
 
-        [Conditional("LOGGING_ENABLED_WARNING"), Conditional("LOGGING_ENABLED_ALL")]
-        public static void Warning(string message)
+        public static void Fatal(string message)
         {
-            _logger.Warning(message);
+            if (LogLevel.Fatal <= LogLevel)
+            {
+                _logger.Fatal(message);
+            }
         }
 
-        [Conditional("LOGGING_ENABLED_ERROR"), Conditional("LOGGING_ENABLED_ALL")]
+        public static void Error(Exception exception)
+        {
+            if (LogLevel.Error <= LogLevel)
+            {
+                _logger.Error(exception);
+            }
+        }
+        
         public static void Error(string message)
         {
-            _logger.Error(message);
+            if (LogLevel.Error <= LogLevel)
+            {
+                _logger.Error(message);
+            }
         }
 
-        [Conditional("LOGGING_ENABLED_EXCEPTION"), Conditional("LOGGING_ENABLED_ALL")]
-        public static void Exception(Exception exception)
+        public static void Warning(string message)
         {
-            _logger.Exception(exception);
+            if (LogLevel.Warning <= LogLevel)
+            {
+                _logger.Warning(message);
+            }
+        }
+
+        public static void Debug(string message)
+        {
+            if (LogLevel.Debug <= LogLevel)
+            {
+                _logger.Debug(message);
+            }
+        }
+        public static void Info(string message)
+        {
+            if(LogLevel.Info <= LogLevel)
+            {
+                _logger.Info(message);
+            }
         }
     }
 }

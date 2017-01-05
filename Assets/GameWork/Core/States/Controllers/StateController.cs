@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameWork.Core.Commands.States.Interfaces;
 using GameWork.Core.Interfaces;
 using GameWork.Core.States.Interfaces;
+using GameWork.Core.Commands.Interfaces;
 
 namespace GameWork.Core.States.Controllers
 {
@@ -15,11 +17,15 @@ namespace GameWork.Core.States.Controllers
     public class StateController<TState> : IInitializable, IChangeStateAction
 		where TState : IState
 	{
+		public event Action<string> ChangeParentStateEvent;
+
 		protected readonly Dictionary<string, TState> States  = new Dictionary<string, TState>();
 
-        public string ActiveState { get; protected set; }
-        
-        public StateController(params TState[] states)
+		private string _backStateName;
+
+		public string ActiveState { get; protected set; }
+
+		public StateController(params TState[] states)
 		{
 			foreach (var state in states)
 			{
@@ -29,23 +35,30 @@ namespace GameWork.Core.States.Controllers
 
 		public void ChangeState(string name)
 		{
-			var newState = States[name];
-
-			if(ActiveState != null)
-			{ 
-				var prevState = States[ActiveState];
-				
-				prevState.ChangeStateEvent -= ChangeState;
-				prevState.Exit();
+			if (!States.ContainsKey(name))
+			{
+				ChangeParentStateEvent(name);
 			}
+			else
+			{
+				var newState = States[name];
 
-			ActiveState = name;
+				if (ActiveState != null)
+				{
+					_backStateName = ActiveState;
+					var prevState = States[ActiveState];
+					ExitState(prevState);
+				}
 
-			newState.ChangeStateEvent += ChangeState;
-			newState.Enter();
+				ActiveState = name;
+
+				newState.ChangeStateEvent += ChangeState;
+				newState.BackStateEvent += PreviousState;
+				newState.Enter();
+			}
 		}
 
-        public void ExitActiveState()
+		public void ExitActiveState()
         {
             if (States.ContainsKey(ActiveState))
             {
@@ -69,6 +82,18 @@ namespace GameWork.Core.States.Controllers
 			{
 				state.Terminate();
 			}
+		}
+
+		private void PreviousState()
+		{
+			ChangeState(_backStateName);
+		}
+
+		private void ExitState(TState state)
+		{
+			state.ChangeStateEvent -= ChangeState;
+			state.BackStateEvent -= PreviousState;
+			state.Exit();
 		}
     }
 }

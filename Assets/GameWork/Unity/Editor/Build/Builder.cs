@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.CompilerServices;
 using UnityEditor;
 
 namespace GameWork.Unity.Editor.Build
@@ -29,8 +28,6 @@ namespace GameWork.Unity.Editor.Build
                     case BuildTarget.StandaloneLinux:
                     case BuildTarget.StandaloneLinux64:
                     case BuildTarget.StandaloneLinuxUniversal:
-                    case BuildTarget.PS3:
-                    case BuildTarget.XBOX360:
                     case BuildTarget.StandaloneOSXUniversal:
                     case BuildTarget.StandaloneOSXIntel:
                     case BuildTarget.StandaloneOSXIntel64:
@@ -41,7 +38,6 @@ namespace GameWork.Unity.Editor.Build
                     case BuildTarget.PSM:
                     case BuildTarget.XboxOne:
                     case BuildTarget.SamsungTV:
-                    case BuildTarget.Nintendo3DS:
                     case BuildTarget.WiiU:
                     case BuildTarget.tvOS:
                         throw new NotImplementedException();

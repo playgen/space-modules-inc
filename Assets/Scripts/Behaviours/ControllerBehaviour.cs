@@ -23,6 +23,7 @@ public class ControllerBehaviour : MonoBehaviour
 		_stateController = new TickableStateController<TickableSequenceState>(
 			new LoadingState(scenarioController, new LoadingStateInterface()),
 			new MenuState(new MenuStateInterface()),
+            new SettingsState(new SettingsStateInterface()),
 			new LevelState(scenarioController, new LevelStateInterface()),
 			new CallState(new CallStateInterface()),
 			new GameState(scenarioController, modulesController, new GameStateInterface()),

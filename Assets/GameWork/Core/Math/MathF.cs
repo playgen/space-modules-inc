@@ -4,18 +4,13 @@
 	{
 		public static float Lerp(float start, float end, float weight)
 		{
-			weight = weight.Clamp(0f, 1f);
+            weight = weight.Clamp(0f, 1f);
 
-			var difference = (end - start);
-			var progress = difference * weight; 
+            var range = (end - start);
+            var progress = range * weight;
 
-			if(progress < 0)
-			{
-				progress = Abs(difference) + progress;
-			}
-
-			return progress;
-		}
+            return start + progress;
+        }
 
 		public static float Clamp(this float val, float min, float max)
 		{

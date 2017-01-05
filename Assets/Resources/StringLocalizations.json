@@ -1,25 +1,155 @@
-[{"key":"EXAMPLE_TEXT_1","en-gb":"English","nl":"Nederlands"},
-{"key":"LOADING","en-gb":"Loading","nl":"Laden"},
-{"key":"LOADING_FORMAT","en-gb":"Loading {0}%","nl":"Laden {0}%"},
-{"key":"PLAY","en-gb":"Play","nl":"Speel"},
-{"key":"SETTINGS","en-gb":"Settings","nl":"Instellingen"},
-{"key":"LEADERBOARD","en-gb":"Leaderboard","nl":"Leaderboard"},
-{"key":"LEVEL_TITLE","en-gb":"Customer Line","nl":"Klant Gesprek"},
-{"key":"LEVEL_SUBTITLE","en-gb":"Choose a call line below","nl":"Kies hieronder een gesprek"},
-{"key":"BACK","en-gb":"Back","nl":"Terug"},
-{"key":"LINE","en-gb":"LINE {0}","nl":"GESPREK {0}"},
-{"key":"INCOMING_CALL","en-gb":"INCOMING \\nINTERCOM CALL","nl":"INKOMEND \\nINTERCOM GESPREK"},
-{"key":"ANSWER","en-gb":"Answer","nl":"Antwoord"},
-{"key":"MODULES","en-gb":"Modules","nl":"Modules"},
-{"key":"REVIEW_TITLE","en-gb":"Review","nl":"Overzicht"},
-{"key":"NEXT","en-gb":"Next","nl":"Volgende"},
-{"key":"CUSTOMER_SATISFACTION","en-gb":"Customer Satisfaction","nl":"Tevredenheid Klant"},
-{"key":"RESULT_TITLE","en-gb":"Overall Result","nl":"Eindresultaat"},
-{"key":"SCORE","en-gb":"Score","nl":"Score"},
-{"key":"AVERAGE_CUSTOMER_EMOTION","en-gb":"Average Customer Emotion","nl":"Gemiddelde Emotie Klant"},
-{"key":"FEEDBACK_1","en-gb":"Try a bit harder next time","nl":"XXX"},
-{"key":"FEEDBACK_2","en-gb":"Not Bad Keep it Up!","nl":"Niet Slecht, Ga Zo Door!"},
-{"key":"FEEDBACK_3","en-gb":"Excellent!","nl":"XXX"},
-{"key":"COMMENT_POSITIVE","en-gb":"Great!","nl":"Geweldig!"},
-{"key":"COMMENT_NEGATIVE","en-gb":"Poor","nl":"XXX"},
-{"key":"BONUS","en-gb":"Bonus","nl":"Bonus"}]
+[
+  {
+    "Key": "EXAMPLE_TEXT_1",
+    "English": "English",
+    "Dutch": "Nederlands"
+  },
+  {
+    "Key": "PLAY",
+    "English": "Play",
+    "Dutch": "Speel"
+  },
+  {
+    "Key": "LOADING",
+    "English": "Loading",
+    "Dutch": "Laden"
+  },
+  {
+    "Key": "LOADING_FORMAT",
+    "English": "Loading {0}%",
+    "Dutch": "Laden {0}%"
+  },
+
+  {
+    "Key": "SETTINGS",
+    "English": "Settings",
+    "Dutch": "Instellingen"
+  },
+  {
+    "Key": "LEADERBOARD",
+    "English": "Leaderboard",
+    "Dutch": "Leaderboard"
+  },
+  {
+    "Key": "LEVEL_TITLE",
+    "English": "Customer Line",
+    "Dutch": "Klant Gesprek"
+  },
+  {
+    "Key": "LEVEL_SUBTITLE",
+    "English": "Choose a call line below",
+    "Dutch": "Kies hieronder een gesprek"
+  },
+  {
+    "Key": "BACK",
+    "English": "Back",
+    "Dutch": "Terug"
+  },
+  {
+    "Key": "LINE",
+    "English": "LINE {0}",
+    "Dutch": "GESPREK {0}"
+  },
+  {
+    "Key": "INCOMING_CALL",
+    "English": "INCOMING \\nINTERCOM CALL",
+    "Dutch": "INKOMEND \\nINTERCOM GESPREK"
+  },
+  {
+    "Key": "ANSWER",
+    "English": "Answer",
+    "Dutch": "Antwoord"
+  },
+  {
+    "Key": "MODULES",
+    "English": "Modules",
+    "Dutch": "Modules"
+  },
+  {
+    "Key": "REVIEW_TITLE",
+    "English": "Review",
+    "Dutch": "Overzicht"
+  },
+  {
+    "Key": "NEXT",
+    "English": "Next",
+    "Dutch": "Volgende"
+  },
+  {
+    "Key": "CUSTOMER_SATISFACTION",
+    "English": "Customer Satisfaction",
+    "Dutch": "Tevredenheid Klant"
+  },
+  {
+    "Key": "RESULT_TITLE",
+    "English": "Overall Result",
+    "Dutch": "Eindresultaat"
+  },
+  {
+    "Key": "SCORE",
+    "English": "Score",
+    "Dutch": "Score"
+  },
+  {
+    "Key": "AVERAGE_CUSTOMER_EMOTION",
+    "English": "Average Customer Emotion",
+    "Dutch": "Gemiddelde Emotie Klant"
+  },
+  {
+    "Key": "FEEDBACK_1",
+    "English": "Try a bit harder next time",
+    "Dutch": "XXX"
+  },
+  {
+    "Key": "FEEDBACK_2",
+    "English": "Not Bad Keep it Up!",
+    "Dutch": "Niet Slecht, Ga Zo Door!"
+  },
+  {
+    "Key": "FEEDBACK_3",
+    "English": "Excellent!",
+    "Dutch": "XXX"
+  },
+  {
+    "Key": "COMMENT_POSITIVE",
+    "English": "Great!",
+    "Dutch": "Geweldig!"
+  },
+  {
+    "Key": "COMMENT_NEGATIVE",
+    "English": "Poor",
+    "Dutch": "XXX"
+  },
+  {
+    "Key": "BONUS",
+    "English": "Bonus",
+    "Dutch": "Bonus"
+  },
+  {
+    "Key": "Language",
+    "English": "Language",
+    "Dutch": "x"
+  },
+
+  {
+    "Key": "Apply",
+    "English": "Apply",
+    "Dutch": "x"
+  },
+  {
+    "Key": "Cancel",
+    "English": "Back",
+    "Dutch": "x"
+  },
+  {
+    "Key": "English",
+    "English": "English (British)",
+    "Dutch": "x"
+  },
+
+  {
+    "Key": "Dutch",
+    "English": "Dutch",
+    "Dutch": "x"
+  }
+]

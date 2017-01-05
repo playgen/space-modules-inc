@@ -1,4 +1,5 @@
-﻿using GameWork.Core.Interfaces;
+﻿using GameWork.Core.Commands.Interfaces;
+using GameWork.Core.Interfaces;
 using System;
 
 namespace GameWork.Core.States.Interfaces
@@ -11,6 +12,10 @@ namespace GameWork.Core.States.Interfaces
 
 		event Action<string> ChangeStateEvent;
 
+		event Action BackStateEvent;
+
 		void ChangeState(string toStateName);
+
+		void BackState();
 	}
 }
