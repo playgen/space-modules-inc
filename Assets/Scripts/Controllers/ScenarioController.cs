@@ -9,7 +9,7 @@ using IntegratedAuthoringTool;
 using IntegratedAuthoringTool.DTOs;
 using PlayGen.SUGAR.Common.Shared;
 using RolePlayCharacter;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
 
@@ -65,7 +65,7 @@ public class ScenarioController : ICommandAction
         _characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
         var levelList = _characters.ToDictionary(k => "level_" + k.CharacterName.ToLower() + "_stars", v => new LevelObject() {Name = v.CharacterName});
 
-        var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), SaveDataType.Long);
+        var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), EvaluationDataType.Long);
 
         foreach (var star in stars)
         {

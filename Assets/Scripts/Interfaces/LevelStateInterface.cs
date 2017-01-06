@@ -1,7 +1,7 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
 using RolePlayCharacter;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -29,6 +29,7 @@ public class LevelStateInterface : StateInterface
 
     public override void Exit()
     {
+        ClearList();
         GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(false);
         GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
     }
@@ -44,7 +45,7 @@ public class LevelStateInterface : StateInterface
         EnqueueCommand(new NextStateCommand());
     }
 
-    public void UpdateLevelList(ScenarioController.LevelObject[] Levels)
+    private void ClearList()
     {
         // Clear List
         foreach (var cell in _gridLayout.transform)
@@ -52,12 +53,14 @@ public class LevelStateInterface : StateInterface
             var cellGameObject = cell as Transform;
             if (cellGameObject != null) GameObject.Destroy(cellGameObject.gameObject);
         }
+    }
 
-
+    public void UpdateLevelList(ScenarioController.LevelObject[] Levels)
+    {
         for (var i = 0; i < Levels.Length; i++)
         {
             var levelItem = GameObject.Instantiate(_itemPrefab);
-            levelItem.GetComponent<LevelItemBehaviour>().SetupItem(Levels[i].Stars, "LINE " + i);
+            levelItem.GetComponent<LevelItemBehaviour>().SetupItem(Levels[i].Stars, Localization.GetAndFormat("LINE", true, i));
             levelItem.transform.SetParent(_gridLayout.transform, false);
             var index = i;
             levelItem.GetComponent<Button>().onClick.AddListener(delegate

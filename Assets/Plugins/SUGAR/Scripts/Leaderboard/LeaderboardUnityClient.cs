@@ -6,7 +6,7 @@ using PlayGen.SUGAR.Contracts.Shared;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SUGAR.Unity
+namespace PlayGen.SUGAR.Unity
 {
 	[DisallowMultipleComponent]
 	public class LeaderboardUnityClient : MonoBehaviour
@@ -23,19 +23,24 @@ namespace SUGAR.Unity
 
 		internal void CreateInterface(Canvas canvas)
 		{
-			bool inScene = _leaderboardInterface.gameObject.scene == SceneManager.GetActiveScene();
-			if (!inScene)
+			if (_leaderboardInterface)
 			{
-				var newInterface = Instantiate(_leaderboardInterface.gameObject, canvas.transform, false) as GameObject;
-				newInterface.name = _leaderboardInterface.name;
-				_leaderboardInterface = newInterface.GetComponent<LeaderboardUserInterface>();
+				bool inScene = _leaderboardInterface.gameObject.scene == SceneManager.GetActiveScene();
+				if (!inScene)
+				{
+					var newInterface = Instantiate(_leaderboardInterface.gameObject, canvas.transform, false);
+					newInterface.name = _leaderboardInterface.name;
+					_leaderboardInterface = newInterface.GetComponent<LeaderboardUserInterface>();
+				}
+				_leaderboardInterface.gameObject.SetActive(false);
 			}
-			_leaderboardInterface.gameObject.SetActive(false);
 		}
 
 		public void Display(string token, LeaderboardFilterType filter = LeaderboardFilterType.Top)
 		{
-			GetLeaderboard(token, success =>
+			if (_leaderboardInterface)
+			{
+				GetLeaderboard(token, success =>
 				{
 					if (success)
 					{
@@ -50,6 +55,12 @@ namespace SUGAR.Unity
 						_leaderboardInterface.Display(filter, Enumerable.Empty<LeaderboardStandingsResponse>(), false);
 					}
 				});
+			}
+		}
+
+		public void Hide()
+		{
+			SUGARManager.Unity.DisableObject(_leaderboardInterface.gameObject);
 		}
 
 		private void GetLeaderboard(string token, Action<bool> success)

@@ -9,7 +9,7 @@ using System.Linq;
 
 using UnityEngine.SceneManagement;
 
-namespace SUGAR.Unity
+namespace PlayGen.SUGAR.Unity
 {
 	[DisallowMultipleComponent]
 	public class LeaderboardListUnityClient : MonoBehaviour
@@ -26,22 +26,33 @@ namespace SUGAR.Unity
 
 		internal void CreateInterface(Canvas canvas)
 		{
-			bool inScene = _leaderboardListInterface.gameObject.scene == SceneManager.GetActiveScene();
-			if (!inScene)
+			if (_leaderboardListInterface)
 			{
-				var newInterface = Instantiate(_leaderboardListInterface.gameObject, canvas.transform, false) as GameObject;
-				newInterface.name = _leaderboardListInterface.name;
-				_leaderboardListInterface = newInterface.GetComponent<LeaderboardListUserInterface>();
+				bool inScene = _leaderboardListInterface.gameObject.scene == SceneManager.GetActiveScene();
+				if (!inScene)
+				{
+					var newInterface = Instantiate(_leaderboardListInterface.gameObject, canvas.transform, false);
+					newInterface.name = _leaderboardListInterface.name;
+					_leaderboardListInterface = newInterface.GetComponent<LeaderboardListUserInterface>();
+				}
+				_leaderboardListInterface.gameObject.SetActive(false);
 			}
-			_leaderboardListInterface.gameObject.SetActive(false);
 		}
 
 		public void DisplayList(ActorType filter = ActorType.User)
 		{
-			GetLeaderboards(success =>
+			if (_leaderboardListInterface)
+			{
+				GetLeaderboards(success =>
 				{
 					_leaderboardListInterface.Display(filter, success);
 				});
+			}
+		}
+
+		public void Hide()
+		{
+			SUGARManager.Unity.DisableObject(_leaderboardListInterface.gameObject);
 		}
 
 		private void GetLeaderboards(Action<bool> success)

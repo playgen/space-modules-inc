@@ -7,16 +7,26 @@ using System.Linq;
 
 public enum Language
 {
+	[Name("en-gb")]
 	English = 1,
-	//AmericanEnglish,
-	//French,
-	//Spanish,
-	//Italian,
-	//German,
+	[Name("AmericanEnglish")]
+	AmericanEnglish,
+	[Name("French")]
+	French,
+	[Name("Spanish")]
+	Spanish,
+	[Name("Italian")]
+	Italian,
+	[Name("German")]
+	German,
+	[Name("nl")]
 	Dutch,
-	//Greek,
-	//Japanese,
-	//ChineseSimplified
+	[Name("Greek")]
+	Greek,
+	[Name("Japanese")]
+	Japanese,
+	[Name("ChineseSimplified")]
+	ChineseSimplified
 }
 
 public class Localization : MonoBehaviour
@@ -30,33 +40,33 @@ public class Localization : MonoBehaviour
 	public static Language SelectedLanguage { get; set; }
 	public static event Action LanguageChange = delegate { };
 
-	void Awake()
+	private static void GetLocalizationDictionary()
 	{
-		if (SelectedLanguage != 0)
-		{
-			return;
-		}
 		TextAsset jsonTextAsset = Resources.Load(filePath) as TextAsset;
 
 		var N = JSON.Parse(jsonTextAsset.text);
 		foreach (Language l in Enum.GetValues(typeof(Language)))
 		{
+			var fieldInfo = typeof(Language).GetField(l.ToString());
+			var attributes = (NameAttribute[])fieldInfo.GetCustomAttributes(typeof(NameAttribute), false);
+			var languageHeader = attributes.Any() ? attributes.First().Name : l.ToString();
 			Dictionary<string, string> languageStrings = new Dictionary<string, string>();
 			for (int i = 0; i < N.Count; i++)
 			{
 				//go through the list and add the strings to the dictionary
-				string _key = N[i][0].ToString();
-				_key = _key.Replace("\"", "").ToUpper();
-				if (N[i][l.ToString()] != null)
+				string key = N[i][0].ToString();
+				key = key.Replace("\"", "").ToUpper();
+				if (N[i][languageHeader] != null)
 				{
-					string _value = N[i][l.ToString()].ToString();
-					_value = _value.Replace("\"", "");
-					languageStrings[_key] = _value;
+					string value = N[i][languageHeader].ToString();
+					value = value.Replace("\"", "");
+					languageStrings[key] = value;
 				}
 			}
 			LocalizationDict[l] = languageStrings;
 		}
 		GetSystemLanguage();
+		Debug.Log(SelectedLanguage);
 	}
 
 	void OnEnable()
@@ -66,6 +76,10 @@ public class Localization : MonoBehaviour
 
 	public static string Get(string key, bool toUpper = false)
 	{
+		if (SelectedLanguage == 0)
+		{
+			GetLocalizationDictionary();
+		}
 		if (string.IsNullOrEmpty(key))
 		{
 			return string.Empty;
@@ -105,47 +119,70 @@ public class Localization : MonoBehaviour
 		_text.text = Get(Key, ToUpper);
 	}
 
-	private void GetSystemLanguage()
+	private static void GetSystemLanguage()
 	{
 		switch (Application.systemLanguage)
 		{
 			case SystemLanguage.English:
-				SelectedLanguage = Language.English;
-				return;
-			//case SystemLanguage.French:
-			//	SelectedLanguage = Language.French;
-			//	return;
-			//case SystemLanguage.Spanish:
-			//	SelectedLanguage = Language.Spanish;
-			//	return;
-			//case SystemLanguage.Italian:
-			//	SelectedLanguage = Language.Italian;
-			//	return;
-			//case SystemLanguage.German:
-			//	SelectedLanguage = Language.German;
-			//	return;
+				SelectedLanguage = LocalizationDict[Language.English].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.French:
+				SelectedLanguage = LocalizationDict[Language.French].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.Spanish:
+				SelectedLanguage = LocalizationDict[Language.Spanish].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.Italian:
+				SelectedLanguage = LocalizationDict[Language.Italian].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.German:
+				SelectedLanguage = LocalizationDict[Language.German].Count > 0 ? Language.English : 0;
+				break;
 			case SystemLanguage.Dutch:
-				SelectedLanguage = Language.Dutch;
-				return;
-			//case SystemLanguage.Greek:
-			//	SelectedLanguage = Language.Greek;
-			//	return;
-			//case SystemLanguage.Japanese:
-			//	SelectedLanguage = Language.Japanese;
-			//	return;
-			//case SystemLanguage.ChineseSimplified:
-			//	SelectedLanguage = Language.ChineseSimplified;
-			//	return;
-			default:
+				SelectedLanguage = LocalizationDict[Language.Dutch].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.Greek:
+				SelectedLanguage = LocalizationDict[Language.Greek].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.Japanese:
+				SelectedLanguage = LocalizationDict[Language.Japanese].Count > 0 ? Language.English : 0;
+				break;
+			case SystemLanguage.ChineseSimplified:
+				SelectedLanguage = LocalizationDict[Language.ChineseSimplified].Count > 0 ? Language.English : 0;
+				break;
+		}
+		if (SelectedLanguage == 0)
+		{
+			SelectedLanguage = ((Language[])Enum.GetValues(typeof(Language))).FirstOrDefault(lang => LocalizationDict[lang].Count > 0);
+			if (SelectedLanguage == 0)
+			{
 				SelectedLanguage = Language.English;
-				return;
+			}
 		}
 	}
 
-	public static void UpdateLanguage(Language language)
+	public static List<string> AvailableLanguages()
 	{
-		SelectedLanguage = language;
+		var languages = (Language[])Enum.GetValues(typeof(Language));
+		var usedLanguages = languages.Where(lang => LocalizationDict[lang].Count > 0).Select(lang => lang.ToString()).ToList();
+		return usedLanguages;
+	}
+
+	public static void UpdateLanguage(int language)
+	{
+		SelectedLanguage = (Language)Enum.Parse(typeof(Language), AvailableLanguages()[language]);
 		((Localization[])FindObjectsOfType(typeof(Localization))).ToList().ForEach(l => l.Set());
 		LanguageChange();
+	}
+}
+
+[AttributeUsage(AttributeTargets.Field)]
+public class NameAttribute : Attribute
+{
+	public string Name { get; set; }
+
+	public NameAttribute(string name)
+	{
+		Name = name;
 	}
 }

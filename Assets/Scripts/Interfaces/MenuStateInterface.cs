@@ -1,7 +1,7 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
 using PlayGen.SUGAR.Common.Shared;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 
 public class MenuStateInterface : StateInterface
 {

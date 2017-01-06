@@ -1,6 +1,6 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,7 +20,7 @@ public class LoadingStateInterface : StateInterface
     {
         GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
         // Load stuff
-        SUGARManager.Account.TrySignIn(success =>
+        SUGARManager.Account.DisplayPanel(success =>
         {
             if (success)
             {

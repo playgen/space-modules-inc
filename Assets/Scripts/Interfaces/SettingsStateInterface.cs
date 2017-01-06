@@ -28,7 +28,7 @@ public class SettingsStateInterface : StateInterface
 
     private void OnApplyClick(Dropdown language)
     {
-        Localization.UpdateLanguage((Language)language.value+1);
+        Localization.UpdateLanguage(language.value);
     }
 
     private void OnBackClick()

@@ -1,155 +1,152 @@
 [
   {
-    "Key": "EXAMPLE_TEXT_1",
-    "English": "English",
-    "Dutch": "Nederlands"
+    "key": "EXAMPLE_TEXT_1",
+    "en-gb": "English",
+    "nl": "Nederlands"
   },
   {
-    "Key": "PLAY",
-    "English": "Play",
-    "Dutch": "Speel"
+    "key": "LOADING",
+    "en-gb": "Loading",
+    "nl": "Laden"
   },
   {
-    "Key": "LOADING",
-    "English": "Loading",
-    "Dutch": "Laden"
+    "key": "LOADING_FORMAT",
+    "en-gb": "Loading {0}%",
+    "nl": "Laden {0}%"
   },
   {
-    "Key": "LOADING_FORMAT",
-    "English": "Loading {0}%",
-    "Dutch": "Laden {0}%"
-  },
-
-  {
-    "Key": "SETTINGS",
-    "English": "Settings",
-    "Dutch": "Instellingen"
+    "key": "PLAY",
+    "en-gb": "Play",
+    "nl": "Speel"
   },
   {
-    "Key": "LEADERBOARD",
-    "English": "Leaderboard",
-    "Dutch": "Leaderboard"
+    "key": "SETTINGS",
+    "en-gb": "Settings",
+    "nl": "Instellingen"
   },
   {
-    "Key": "LEVEL_TITLE",
-    "English": "Customer Line",
-    "Dutch": "Klant Gesprek"
+    "key": "LEADERBOARD",
+    "en-gb": "Leaderboard",
+    "nl": "Leaderboard"
   },
   {
-    "Key": "LEVEL_SUBTITLE",
-    "English": "Choose a call line below",
-    "Dutch": "Kies hieronder een gesprek"
+    "key": "LEVEL_TITLE",
+    "en-gb": "Customer Line",
+    "nl": "Klant Gesprek"
   },
   {
-    "Key": "BACK",
-    "English": "Back",
-    "Dutch": "Terug"
+    "key": "LEVEL_SUBTITLE",
+    "en-gb": "Choose a call line below",
+    "nl": "Kies hieronder een gesprek"
   },
   {
-    "Key": "LINE",
-    "English": "LINE {0}",
-    "Dutch": "GESPREK {0}"
+    "key": "BACK",
+    "en-gb": "Back",
+    "nl": "Terug"
   },
   {
-    "Key": "INCOMING_CALL",
-    "English": "INCOMING \\nINTERCOM CALL",
-    "Dutch": "INKOMEND \\nINTERCOM GESPREK"
+    "key": "LINE",
+    "en-gb": "LINE {0}",
+    "nl": "GESPREK {0}"
   },
   {
-    "Key": "ANSWER",
-    "English": "Answer",
-    "Dutch": "Antwoord"
+    "key": "INCOMING_CALL",
+    "en-gb": "INCOMING \nINTERCOM CALL",
+    "nl": "INKOMEND \nINTERCOM GESPREK"
   },
   {
-    "Key": "MODULES",
-    "English": "Modules",
-    "Dutch": "Modules"
+    "key": "ANSWER",
+    "en-gb": "Answer",
+    "nl": "Antwoord"
   },
   {
-    "Key": "REVIEW_TITLE",
-    "English": "Review",
-    "Dutch": "Overzicht"
+    "key": "MODULES",
+    "en-gb": "Modules",
+    "nl": "Modules"
   },
   {
-    "Key": "NEXT",
-    "English": "Next",
-    "Dutch": "Volgende"
+    "key": "REVIEW_TITLE",
+    "en-gb": "Review",
+    "nl": "Overzicht"
   },
   {
-    "Key": "CUSTOMER_SATISFACTION",
-    "English": "Customer Satisfaction",
-    "Dutch": "Tevredenheid Klant"
+    "key": "NEXT",
+    "en-gb": "Next",
+    "nl": "Volgende"
   },
   {
-    "Key": "RESULT_TITLE",
-    "English": "Overall Result",
-    "Dutch": "Eindresultaat"
+    "key": "CUSTOMER_SATISFACTION",
+    "en-gb": "Customer Satisfaction",
+    "nl": "Tevredenheid Klant"
   },
   {
-    "Key": "SCORE",
-    "English": "Score",
-    "Dutch": "Score"
+    "key": "RESULT_TITLE",
+    "en-gb": "Overall Result",
+    "nl": "Eindresultaat"
   },
   {
-    "Key": "AVERAGE_CUSTOMER_EMOTION",
-    "English": "Average Customer Emotion",
-    "Dutch": "Gemiddelde Emotie Klant"
+    "key": "SCORE",
+    "en-gb": "Score",
+    "nl": "Score"
   },
   {
-    "Key": "FEEDBACK_1",
-    "English": "Try a bit harder next time",
-    "Dutch": "XXX"
+    "key": "AVERAGE_CUSTOMER_EMOTION",
+    "en-gb": "Average Customer Emotion",
+    "nl": "Gemiddelde Emotie Klant"
   },
   {
-    "Key": "FEEDBACK_2",
-    "English": "Not Bad Keep it Up!",
-    "Dutch": "Niet Slecht, Ga Zo Door!"
+    "key": "FEEDBACK_1",
+    "en-gb": "Try a bit harder next time",
+    "nl": "Volgende keer beter proberen"
   },
   {
-    "Key": "FEEDBACK_3",
-    "English": "Excellent!",
-    "Dutch": "XXX"
+    "key": "FEEDBACK_2",
+    "en-gb": "Not Bad Keep it Up!",
+    "nl": "Niet Slecht, Ga Zo Door!"
   },
   {
-    "Key": "COMMENT_POSITIVE",
-    "English": "Great!",
-    "Dutch": "Geweldig!"
+    "key": "FEEDBACK_3",
+    "en-gb": "Excellent!",
+    "nl": "Perfect!"
   },
   {
-    "Key": "COMMENT_NEGATIVE",
-    "English": "Poor",
-    "Dutch": "XXX"
+    "key": "COMMENT_POSITIVE",
+    "en-gb": "Great!",
+    "nl": "Geweldig!"
   },
   {
-    "Key": "BONUS",
-    "English": "Bonus",
-    "Dutch": "Bonus"
+    "key": "COMMENT_NEGATIVE",
+    "en-gb": "Poor",
+    "nl": "Kan Beter"
   },
   {
-    "Key": "Language",
-    "English": "Language",
-    "Dutch": "x"
-  },
-
-  {
-    "Key": "Apply",
-    "English": "Apply",
-    "Dutch": "x"
+    "key": "BONUS",
+    "en-gb": "Bonus",
+    "nl": "Bonus"
   },
   {
-    "Key": "Cancel",
-    "English": "Back",
-    "Dutch": "x"
+    "key": "LANGUAGE",
+    "en-gb": "Language",
+    "nl": "Taal"
   },
   {
-    "Key": "English",
-    "English": "English (British)",
-    "Dutch": "x"
+    "key": "APPLY",
+    "en-gb": "Apply",
+    "nl": "Toepassen"
   },
-
   {
-    "Key": "Dutch",
-    "English": "Dutch",
-    "Dutch": "x"
+    "key": "CANCEL",
+    "en-gb": "Back",
+    "nl": "Terug"
+  },
+  {
+    "key": "ENGLISH",
+    "en-gb": "English",
+    "nl": "Engels"
+  },
+  {
+    "key": "DUTCH",
+    "en-gb": "Dutch",
+    "nl": "Nederlands"
   }
 ]

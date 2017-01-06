@@ -72,6 +72,7 @@ public class SettingCreation : MonoBehaviour
 		{
 			resolutions = resolutions.Concat(newResolutions).Distinct().ToList();
 		}
+		resolutions = resolutions.Where(res => res.width >= minWidth && res.height >= minHeight).ToList();
 		var current = new Resolution { height = Screen.height, width = Screen.width };
 		if (!resolutions.Any(res => res.width == current.width && res.height == current.height))
 		{
@@ -97,9 +98,9 @@ public class SettingCreation : MonoBehaviour
 	{
 		var newObj = Custom<Dropdown>(title, SettingObjectType.Dropdown, showOnMobile, layoutHorizontal);
 		newObj.ClearOptions();
-		var languages = Enum.GetNames(typeof(Language)).ToList();
+		var languages = Localization.AvailableLanguages();
 		newObj.GetComponent<DropdownLocalization>().SetOptions(languages);
-		newObj.value = (int)Localization.SelectedLanguage;
+		newObj.value = (int)Localization.SelectedLanguage - 1;
 		return newObj;
 	}
 
@@ -296,14 +297,14 @@ public class SettingCreation : MonoBehaviour
 			var newSize = GetFontSizeAtBestFit(text);
 			if (text.GetComponentInParent<Dropdown>())
 			{
-				var currentValue = text.GetComponentInParent<Dropdown>().value;
+				var currentValue = text.text;
 				foreach (var value in text.GetComponentInParent<Dropdown>().options)
 				{
 					text.text = value.text;
 					var newTextSize = GetFontSizeAtBestFit(text);
 					newSize = newTextSize < newSize ? newTextSize : newSize;
 				}
-				text.text = text.GetComponentInParent<Dropdown>().options[currentValue].text;
+				text.text = currentValue;
 			}
 			if (newSize < smallestFontSize || smallestFontSize == 0)
 			{

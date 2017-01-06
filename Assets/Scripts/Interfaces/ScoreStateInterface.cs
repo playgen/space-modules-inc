@@ -1,6 +1,6 @@
 ﻿using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 
 public class ScoreStateInterface : StateInterface

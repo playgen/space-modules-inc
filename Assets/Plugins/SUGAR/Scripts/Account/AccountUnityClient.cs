@@ -1,18 +1,42 @@
 ﻿using System;
 using System.Collections;
 using PlayGen.SUGAR.Contracts.Shared;
-using PlayGen.SUGAR.Unity;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace SUGAR.Unity
+namespace PlayGen.SUGAR.Unity
 {
 	[DisallowMultipleComponent]
 	public class AccountUnityClient : MonoBehaviour
 	{
 		[SerializeField] private LoginUserInterface _loginUserInterface;
 
+		internal bool HasInterface
+		{
+			get { return _loginUserInterface; }
+		}
+
 		[SerializeField] private bool _allowAutoLogin;
+
+		public bool AllowAutoLogin
+		{
+			get { return _allowAutoLogin; }
+		}
+
+		#if UNITY_EDITOR
+		private string _autoLoginSourceToken;
+
+		private bool _autoLoginSourcePassRequired;
+
+		private string _autoLoginUsername;
+
+		private string _autoLoginPassword;
+
+		private bool _autoLoginAuto;
+		#endif
 
 		[SerializeField] private bool _allowRegister;
 
@@ -24,68 +48,95 @@ namespace SUGAR.Unity
 
 		internal void CreateInterface(Canvas canvas)
 		{
-			bool inScene = _loginUserInterface.gameObject.scene == SceneManager.GetActiveScene();
-			if (!inScene)
+			if (_loginUserInterface)
 			{
-				var newInterface = Instantiate(_loginUserInterface.gameObject, canvas.transform, false) as GameObject;
-				newInterface.name = _loginUserInterface.name;
-				_loginUserInterface = newInterface.GetComponent<LoginUserInterface>();
+				bool inScene = _loginUserInterface.gameObject.scene == SceneManager.GetActiveScene();
+				if (!inScene)
+				{
+					var newInterface = Instantiate(_loginUserInterface.gameObject, canvas.transform, false);
+					newInterface.name = _loginUserInterface.name;
+					_loginUserInterface = newInterface.GetComponent<LoginUserInterface>();
+				}
 				_loginUserInterface.RegisterButtonDisplay(_allowRegister);
+				_loginUserInterface.gameObject.SetActive(false);
 			}
-			_loginUserInterface.gameObject.SetActive(false);
 		}
 
-
-	    public void TrySignIn(Action<bool> success)
-	    {
-            _signInCallback = success;
-
-            if (SUGARManager.Client != null)
-	        {
-	            SignIn();
-	        }
-	        else
-	        {
-	            StartCoroutine(CheckConfigLoad());
-	        }
-	    }
-
-	    private IEnumerator CheckConfigLoad()
-	    {
-	        while (SUGARManager.Client == null)
-	        {
-	            yield return new WaitForFixedUpdate();
-	        }
-            SignIn();
-	    }
-
-	    public void SignIn()
+		public void DisplayPanel(Action<bool> success)
 		{
-		#if UNITY_EDITOR
-			_options = CommandLineUtility.ParseArgs(new [] { "-ujim" , "-sSPL", "-a"});
-			Debug.Log(_options.UserId + " : " + _options.AuthenticationSource);
-		#else
-			_options = CommandLineUtility.ParseArgs(System.Environment.GetCommandLineArgs());
-		#endif
+			_signInCallback = success;
 
-			if (_options.AuthenticationSource == null)
+			if (SUGARManager.Client != null)
+			{
+				SignIn();
+			}
+			else
+			{
+				StartCoroutine(CheckConfigLoad());
+			}
+		}
+
+		public void Hide()
+		{
+			if (_loginUserInterface)
+			{
+				_loginUserInterface.Hide();
+				_loginUserInterface.Login -= LoginUserInterfaceOnLogin;
+				_loginUserInterface.Register -= LoginUserInterfaceOnRegister;
+			}
+		}
+
+		private IEnumerator CheckConfigLoad()
+		{
+			while (SUGARManager.Client == null)
+			{
+				yield return new WaitForFixedUpdate();
+			}
+			SignIn();
+		}
+
+		private void SignIn()
+		{
+			if (_allowAutoLogin)
+			{
+				#if UNITY_EDITOR
+				_autoLoginSourcePassRequired = !EditorPrefs.HasKey("AutoLoginSourcePassRequired") || EditorPrefs.GetBool("AutoLoginSourcePassRequired");
+				_autoLoginAuto = !EditorPrefs.HasKey("AutoLoginAuto") || EditorPrefs.GetBool("AutoLoginAuto");
+				_autoLoginUsername = EditorPrefs.HasKey("AutoLoginUsername") ? EditorPrefs.GetString("AutoLoginUsername") : string.Empty;
+				_autoLoginPassword = EditorPrefs.HasKey("AutoLoginUsername") ? EditorPrefs.GetString("AutoLoginPassword") : string.Empty;
+				_autoLoginSourceToken = EditorPrefs.HasKey("AutoLoginUsername") ? EditorPrefs.GetString("AutoLoginSourceToken") : string.Empty;
+				if (_autoLoginSourcePassRequired)
+				{
+					_options = CommandLineUtility.ParseArgs(new[] { "-u" + _autoLoginUsername, "-p" + _autoLoginPassword, "-s" + _autoLoginSourceToken, _autoLoginAuto ? "-a" : "" });
+				}
+				else
+				{
+					_options = CommandLineUtility.ParseArgs(new[] { "-u" + _autoLoginUsername, "-s" + _autoLoginSourceToken, _autoLoginAuto ? "-a" : "" });
+				}
+				Debug.Log(_options.UserId + " : " + _options.AuthenticationSource + " : " + _options.Password);
+				#else
+				_options = CommandLineUtility.ParseArgs(System.Environment.GetCommandLineArgs());
+				#endif
+			}
+			if (_options != null && _options.AuthenticationSource == null)
 			{
 				_options.AuthenticationSource = _defaultSourceToken;
 			}
 
-			if (_allowAutoLogin && _options.AutoLogin)
+			if (_options != null && _allowAutoLogin && _options.AutoLogin)
 			{
-				LoginUser(_options.UserId, _options.AuthenticationSource, string.Empty);
+				LoginUser(_options.UserId, _options.AuthenticationSource, _options.Password ?? string.Empty);
 			}
 			else
 			{
-				if (_loginUserInterface != null)
+				if (_loginUserInterface)
 				{
 					_loginUserInterface.Login += LoginUserInterfaceOnLogin;
 					_loginUserInterface.Register += LoginUserInterfaceOnRegister;
 					_loginUserInterface.Show();
 				}
 			}
+			_allowAutoLogin = false;
 		}
 
 		private void LoginUser(string user, string sourceToken, string pass)
@@ -95,18 +146,18 @@ namespace SUGAR.Unity
 			response =>
 			{
 				Debug.Log("SUCCESS");
-				if (_loginUserInterface != null)
+				if (_loginUserInterface)
 				{
 					_loginUserInterface.SetStatus("Success! " + response.User.Id + ": " + response.User.Name);
-					_loginUserInterface.Hide();
 				}
 				SUGARManager.CurrentUser = response.User;
 				_signInCallback(true);
+				Hide();
 			},
 			exception =>
 			{
 				Debug.LogError(exception);
-				if (_loginUserInterface != null)
+				if (_loginUserInterface)
 				{
 					_loginUserInterface.SetStatus("Login Error: " + exception.Message);
 				}
@@ -121,7 +172,7 @@ namespace SUGAR.Unity
 			response =>
 			{
 				Debug.Log("SUCCESS");
-				if (_loginUserInterface != null)
+				if (_loginUserInterface)
 				{
 					Debug.Log("Successful Register! " + response.User.Id + ": " + response.User.Name);
 					LoginUser(response.User.Name, sourceToken, pass);
@@ -130,7 +181,7 @@ namespace SUGAR.Unity
 			exception =>
 			{
 				Debug.LogError(exception);
-				if (_loginUserInterface != null)
+				if (_loginUserInterface)
 				{
 					_loginUserInterface.SetStatus("Registration Error: " + exception.Message);
 				}

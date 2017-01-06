@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using GameWork.Core.States;
 using GameWork.Core.States.Controllers;
-using SUGAR.Unity;
+using PlayGen.SUGAR.Unity;
 using UnityEngine.SocialPlatforms.GameCenter;
 
 public class ControllerBehaviour : MonoBehaviour
