@@ -29,7 +29,7 @@ public class ButtonList
         }
     }
 
-    public void BestFit()
+    public void BestFit(string ignore = null)
     {
         if (_buttons != null && _buttons.Length > 0)
         {
@@ -39,7 +39,7 @@ public class ButtonList
         foreach (var textObj in _buttons)
         {
             var text = textObj.GetComponentInChildren<Text>();
-            if (!text)
+            if (!text || textObj.name == ignore)
             {
                 continue;
             }

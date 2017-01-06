@@ -5,14 +5,16 @@ using PlayGen.SUGAR.Unity;
 
 public class MenuStateInterface : StateInterface
 {
-    public override void Initialize()
+	private ButtonList _buttons;
+
+	public override void Initialize()
     {
-        var buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
-        var playButton = buttons.GetButton("PlayButton");
+        _buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
+        var playButton = _buttons.GetButton("PlayButton");
         playButton.onClick.AddListener(OnPlayClick);
-        var settingsButton = buttons.GetButton("SettingsButton");
+        var settingsButton = _buttons.GetButton("SettingsButton");
         settingsButton.onClick.AddListener(OnSettingsClick);
-        var leaderboardButton = buttons.GetButton("LeaderboardButton");
+        var leaderboardButton = _buttons.GetButton("LeaderboardButton");
         leaderboardButton.onClick.AddListener(delegate
         {
             SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
@@ -26,6 +28,7 @@ public class MenuStateInterface : StateInterface
 
     public override void Enter()
     {
+		_buttons.BestFit("PlayButton");
         GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
     }
