@@ -1,0 +1,15 @@
+{
+	"Rounds": [
+
+		[
+			"KnownCheck-Expert-",
+			"KnownOK-Expert-",
+			"Unknown-Novice-"
+		],
+		[
+			"KnownOK-Novice-",
+			"Unknown-Expert-",
+			"KnownCheck-Novice-"
+		]
+	]	
+}
