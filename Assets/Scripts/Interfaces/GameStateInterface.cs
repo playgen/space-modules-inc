@@ -37,10 +37,12 @@ public class GameStateInterface : StateInterface
 
     public override void Enter()
     {
-        RefreshCharacterDialogueText();
+		RefreshPlayerDialogueOptions();
+		//RefreshCharacterDialogueText();
         GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
         GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
-    }
+		_npcDialoguePanel.GetComponent<Text>().text = "";
+	}
 
     public override void Exit()
     {

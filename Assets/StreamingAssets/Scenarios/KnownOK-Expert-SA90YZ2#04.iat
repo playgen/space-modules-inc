@@ -1,0 +1,508 @@
+{
+  "root":
+  {
+    "classId": 0,
+    "ScenarioName": "Space Modules - KnownOK / Expert: Device SA90YZ2 - problem 4",
+    "Description": "Scenario for Space Modules Inc.",
+    "Characters": [
+      {
+        "Name": "Positive",
+        "Source": "RPCPositive.rpc"
+      },
+      {
+        "Name": "Neutral",
+        "Source": "RPCNeutral.rpc"
+      },
+      {
+        "Name": "Negative",
+        "Source": "RPCNegative.rpc"
+      }
+    ],
+    "PlayerDialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening1",
+        "Meaning": [],
+        "Style": ["Polite(1)"],
+        "Utterance": "Hi, Space Modules Inc. Go ahead."
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening1",
+        "Meaning": [],
+        "Style": [],
+        "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?"
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening2",
+        "Meaning": [],
+        "Style": ["Polite(-1)"],
+        "Utterance": "Hi, what's up?"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "AnswerDetails",
+        "Meaning": [],
+        "Style": ["Polite(1)"],
+        "Utterance": "I am sorry to hear that. Can you tell me what the problem is?"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "AnswerDetails",
+        "Meaning": [],
+        "Style": ["Polite(-1)"],
+        "Utterance": "What is the problem then?"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "AnswerType3",
+        "Meaning": ["Inquire(-1)"],
+        "Style": ["Polite(1)"],
+        "Utterance": "Can you tell me the type number?"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "AnswerType3",
+        "Meaning": ["Inquire(-1)"],
+        "Style": ["Polite(-1)"],
+        "Utterance": "Type number?"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "DealAnger1",
+        "Meaning": [],
+        "Style": ["Polite(1)"],
+        "Utterance": "I can hear you are angry, which I can totally understand. I would like to help you to solve this problem as quickly as possible"
+      },
+      {
+        "CurrentState": "FirstResponse",
+        "NextState": "DealAnger2",
+        "Meaning": [],
+        "Style": ["Polite(-1)"],
+        "Utterance": "I can't help you when you are angry. It is best if you calm down first."
+      },
+      {
+        "CurrentState": "SecondChance",
+        "NextState": "DealAnger1",
+        "Meaning": [],
+        "Style": ["Polite(1)"],
+        "Utterance": "I can hear you are angry, which I can totally understand. I would like to help you to solve this problem as quickly as possible"
+      },
+      {
+        "CurrentState": "SecondChance",
+        "NextState": "DealAnger2",
+        "Meaning": [],
+        "Style": ["Polite(-1)"],
+        "Utterance": "I can't help you when you are angry. It is best if you calm down first."
+      },
+      {
+        "CurrentState": "SecondChance",
+        "NextState": "BadFinish",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Polite(-1)"],
+        "Utterance": "Well, if you don’t answer my questions I can't help you!"
+      },
+      {
+        "CurrentState": "SecondChance",
+        "NextState": "Reroute",
+        "Meaning": ["Empathy(-1)", "Faq(-1)"],
+        "Style": ["Polite(1)"],
+        "Utterance": "Unfortunately I have to redirect you to our specialist. The phonenumber is 999-452345"
+      },
+      {
+        "CurrentState": "AskProblem1",
+        "NextState": "AnswerDetails",
+        "Meaning": [],
+        "Style": ["Polite(1)"],
+        "Utterance": "Can you tell me what the problem is?"
+      },
+      {
+        "CurrentState": "AskProblem1",
+        "NextState": "AnswerDetails",
+        "Meaning": [],
+        "Style": ["Polite(-1)"],
+        "Utterance": "What is the problem then?"
+      },
+      {
+        "CurrentState": "AskProblem1",
+        "NextState": "AnswerType3",
+        "Meaning": ["Inquire(-1)"],
+        "Style": ["Polite(1)"],
+        "Utterance": "Can you tell me the type number?"
+      },
+      {
+        "CurrentState": "AskProblem1",
+        "NextState": "AnswerType3",
+        "Meaning": ["Inquire(-1)"],
+        "Style": ["Polite(-1)"],
+        "Utterance": "Type number?"
+      },
+      {
+        "CurrentState": "DataCollected",
+        "NextState": "WaitForAnswer",
+        "Meaning": [],
+        "Style": [],
+        "Utterance": "I will look it up for you…"
+      },
+      {
+        "CurrentState": "DataCollected",
+        "NextState": "Reroute",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Unfortunately I have to redirect you to our specialist. The phonenumber is 999-452345"
+      },
+      {
+        "CurrentState": "DataCollected",
+        "NextState": "AnswerType3",
+        "Meaning": ["Inquire(-1)"],
+        "Style": [],
+        "Utterance": "What was the type number again?"
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "The sensors are too cold in that case. Turn on the heating of the sensor array."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "The sensor array is getting too little power then. Increase output to the array,"
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "There's probably some wiring broken. You should go to a mechanic."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Try rebooting your system, the software is malfunctioning"
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "This problem occurs when the ship is travelling too fast. Decrease output to the engine."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "This problem arises when the array gets too hot. Not flying too close to a sun should avoid this problem."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Sensors are broken, replace them."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Clean the sensors, something is stuck on them."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(1)"],
+        "Style": [],
+        "Utterance": "This type is sensitive to magnetic fields. If this occurs too often you can have it shielded or replaced by a less sensitive type."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "Reroute",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "Utterance": "Unfortunately I couldn't find a solution. I will give you the number of our specialist: 999-452345. He can help you further."
+      },
+      {
+        "CurrentState": "Closure",
+        "NextState": "Goodbye1",
+        "Meaning": ["Closure(1)"],
+        "Style": ["Polite(1)"],
+        "Utterance": "Fine. Is there anything else I can do for you?"
+      },
+      {
+        "CurrentState": "Closure",
+        "NextState": "Goodbye2",
+        "Meaning": ["Closure(-1)"],
+        "Style": ["Polite(1)"],
+        "Utterance": "Fine. Have a nice day."
+      },
+      {
+        "CurrentState": "Closure",
+        "NextState": "Goodbye2",
+        "Meaning": ["Closure(-1)"],
+        "Style": ["Polite(-1)"],
+        "Utterance": "Bye now."
+      }
+    ],
+    "AgentDialogues": [
+      {
+        "CurrentState": "Opening1",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Hi there, I'm having trouble with the sensor array. It's type SA90YZ2"
+      },
+      {
+        "CurrentState": "Opening1",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "Hi, I'm having trouble with the sensor array again. It's type SA90YZ2"
+      },
+      {
+        "CurrentState": "Opening1",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "the sensor array, type SA90YZ2 has failed again, it's worthless! What kind of junk do you guys sell anyway?"
+      },
+      {
+        "CurrentState": "Opening2",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Hi there, I'm having trouble with the sensor array. It's type SA90YZ2"
+      },
+      {
+        "CurrentState": "Opening2",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "Hi, I'm having trouble with the sensor array again. It's type SA90YZ2"
+      },
+      {
+        "CurrentState": "Opening2",
+        "NextState": "FirstResponse",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "What's up? What's up?! the sensor array, type SA90YZ2, has failed once again!! It's worthless!"
+      },
+      {
+        "CurrentState": "DealAnger1",
+        "NextState": "AskProblem1",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Positive"],
+        "Utterance": "Good to hear, but I'm not angry, you know"
+      },
+      {
+        "CurrentState": "DealAnger1",
+        "NextState": "AskProblem1",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Neutral"],
+        "Utterance": "Good to hear…"
+      },
+      {
+        "CurrentState": "DealAnger1",
+        "NextState": "AskProblem1",
+        "Meaning": ["Empathy(1)"],
+        "Style": ["Negative"],
+        "Utterance": "I hope so too, because it's quite annoying"
+      },
+      {
+        "CurrentState": "DealAnger2",
+        "NextState": "AskProblem1",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Positive"],
+        "Utterance": "What kind of remark is that? I'm not angry at all, but ok…"
+      },
+      {
+        "CurrentState": "DealAnger2",
+        "NextState": "AskProblem1",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Neutral"],
+        "Utterance": "This is a good way to make me angry, yeah…Can you help me or not?"
+      },
+      {
+        "CurrentState": "DealAnger2",
+        "NextState": "End",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Negative"],
+        "Utterance": "Well, that's up to me isn't it? I will call your boss instead!"
+      },
+      {
+        "CurrentState": "WaitForAnswer",
+        "NextState": "FaqResponse",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Ok, I'll wait patiently"
+      },
+      {
+        "CurrentState": "WaitForAnswer",
+        "NextState": "FaqResponse",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "If it doesn’t take too long…"
+      },
+      {
+        "CurrentState": "WaitForAnswer",
+        "NextState": "FaqResponse",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "Pffff...So be it…"
+      },
+      {
+        "CurrentState": "Reroute",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Too bad, but ok. I will call that specialist. Thanks"
+      },
+      {
+        "CurrentState": "Reroute",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "Oh, right. Bye then and I'll call that specialist."
+      },
+      {
+        "CurrentState": "Reroute",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "Pfff, this really helps! Thanks a lot…"
+      },
+      {
+        "CurrentState": "AnswerDetails",
+        "NextState": "DataCollected",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "The sensors see very large objects but it only happens very rarely."
+      },
+      {
+        "CurrentState": "AnswerDetails",
+        "NextState": "DataCollected",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "The sensors see very large objects but it only happens very rarely."
+      },
+      {
+        "CurrentState": "AnswerDetails",
+        "NextState": "SecondChance",
+        "Meaning": ["Empathy(-1)"],
+        "Style": ["Negative"],
+        "Utterance": "Like I said…it's broken!!"
+      },
+      {
+        "CurrentState": "AnswerType3",
+        "NextState": "DataCollected",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "O, bad memory? It's SA90YZ2"
+      },
+      {
+        "CurrentState": "AnswerType3",
+        "NextState": "DataCollected",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "I already told you that…it's SA90YZ2"
+      },
+      {
+        "CurrentState": "AnswerType3",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "Well, I'm sorry but I already gave you that! I will try another of your employees!"
+      },
+      {
+        "CurrentState": "RespSolution",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Ok, thanks for the answer. Thta's what I'll do then."
+      },
+      {
+        "CurrentState": "RespSolution",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "Ok, that's what I'll do then."
+      },
+      {
+        "CurrentState": "RespSolution",
+        "NextState": "Closure",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "Ok, I hope that will work then..."
+      },
+      {
+        "CurrentState": "Goodbye1",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "No, thanks for asking. Have a good day"
+      },
+      {
+        "CurrentState": "Goodbye1",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "No, thanks. It's fine. Bye."
+      },
+      {
+        "CurrentState": "Goodbye1",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "No, this has taken enough time already! Bye."
+      },
+      {
+        "CurrentState": "Goodbye2",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "Utterance": "Thanks and good bye"
+      },
+      {
+        "CurrentState": "Goodbye2",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "Utterance": "Bye."
+      },
+      {
+        "CurrentState": "Goodbye2",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "Yeah…bye…"
+      },
+      {
+        "CurrentState": "BadFinish",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "Utterance": "It's clear you can't help me indeed. I will try a collegue of yours."
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

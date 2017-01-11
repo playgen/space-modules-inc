@@ -18,9 +18,11 @@ public class StreamingAssetsStorageProvider : IStorageProvider
 
 	private static string RootPath(string path)
 	{
-		if (Path.IsPathRooted(path))
-			return Application.streamingAssetsPath + path;
-		return Path.Combine(Application.streamingAssetsPath, path);
+		if (!Path.IsPathRooted(path))
+			//return Application.streamingAssetsPath + path;
+			return Path.Combine(Application.streamingAssetsPath, path);
+		//return Path.Combine(Application.streamingAssetsPath, path);
+		return path;
 	}
 }
 

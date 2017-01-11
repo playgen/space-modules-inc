@@ -2,76 +2,80 @@
 
 public class LevelState : TickableSequenceState
 {
-    private LevelStateInterface _interface;
-    private ScenarioController _scenarioController;
+	private LevelStateInterface _interface;
+	private ScenarioController _scenarioController;
 
-    public const string StateName = "LevelState";
+	public const string StateName = "LevelState";
 
-    public LevelState(ScenarioController scenarioController, LevelStateInterface @interface)
-    {
-        _scenarioController = scenarioController;
-        _interface = @interface;
-    }
+	public LevelState(ScenarioController scenarioController, LevelStateInterface @interface)
+	{
+		_scenarioController = scenarioController;
+		_interface = @interface;
+	}
 
-    public override void Initialize()
-    {
-        _interface.Initialize();
+	public override void Initialize()
+	{
+		_interface.Initialize();
 
-    }
+	}
 
-    public override void Terminate()
-    {
-        _interface.Terminate();
-    }
+	public override void Terminate()
+	{
+		_interface.Terminate();
+	}
 
-    public override void Enter()
-    {
-        Tracker.T.accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
-        _scenarioController.RefreshSuccessEvent += _interface.UpdateLevelList;
-        _interface.Enter();
-    }
+	public override void Enter()
+	{
+		Tracker.T.accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
+		//_scenarioController.RefreshSuccessEvent += _interface.UpdateLevelList;
+		//_interface.Enter();
 
-    public override void Exit()
-    {
-        _scenarioController.RefreshSuccessEvent -= _interface.UpdateLevelList;
-        _interface.Exit();
-    }
+		// Round based
+		_scenarioController.NextLevel();
+		NextState();
+	}
 
-    public override void NextState()
-    {
-        ChangeState(CallState.StateName);
-    }
+	public override void Exit()
+	{
+		//_scenarioController.RefreshSuccessEvent -= _interface.UpdateLevelList;
+		//_interface.Exit();
+	}
 
-    public override void PreviousState()
-    {
-        ChangeState(MenuState.StateName);
-    }
+	public override void NextState()
+	{
+		ChangeState(CallState.StateName);
+	}
 
-    public override string Name
-    {
-        get { return StateName; }
-    }
+	public override void PreviousState()
+	{
+		ChangeState(MenuState.StateName);
+	}
 
-    public override void Tick(float deltaTime)
-    {
-        if (_interface.HasCommands)
-        {
-            var command = _interface.TakeFirstCommand();
+	public override string Name
+	{
+		get { return StateName; }
+	}
 
-            var refreshLevelDataCommand = command as RefreshLevelDataCommand;
-            if (refreshLevelDataCommand != null)
-            {
-                refreshLevelDataCommand.Execute(_scenarioController);
-            }
+	public override void Tick(float deltaTime)
+	{
+		if (_interface.HasCommands)
+		{
+			var command = _interface.TakeFirstCommand();
 
-            var setLevelCommand = command as SetLevelCommand;
-            if (setLevelCommand != null)
-            {
-                setLevelCommand.Execute(_scenarioController);
-            }
-            var commandResolver = new StateCommandResolver();
-            commandResolver.HandleSequenceStates(command, this);
-        }
-    }
+			var refreshLevelDataCommand = command as RefreshLevelDataCommand;
+			if (refreshLevelDataCommand != null)
+			{
+				refreshLevelDataCommand.Execute(_scenarioController);
+			}
+
+			var setLevelCommand = command as SetLevelCommand;
+			if (setLevelCommand != null)
+			{
+				setLevelCommand.Execute(_scenarioController);
+			}
+			var commandResolver = new StateCommandResolver();
+			commandResolver.HandleSequenceStates(command, this);
+		}
+	}
 }
 

@@ -1,0 +1,677 @@
+{
+  "Database":
+  [
+    {
+      "Name": "Warp Drive 500 WideAngle 3",
+      "Id": "WD500PX43W",
+      "Type": "the star drive",
+      "Description": "Very reliable stardrive from Fang Xenotech. With its wide raycatcher of 300 degrees, high speeds are easy for this drive.",
+      "Faq": [
+        {
+          "Problem": "Pressing start gives three short beeps and the engine won't start.",
+          "Solution": "It's a warning for being close to a planet. Hold start button for 5 seconds."
+        },
+        {
+          "Problem": "The engine is very hot and won't start.",
+          "Solution": "This engine has to cool off first. You can speed that up by holding the reset button for 5 seconds."
+        },
+        {
+          "Problem": "The engine won't start and the red light under the start button flashes briefly.",
+          "Solution": "It's a warning you're low on fuel. Press start twice within 5 seconds to start it up anyway."
+        },
+        {
+          "Problem": "The engine shuts down after an hour and the display shows error code EC5612.",
+          "Solution": "This is a known problem that has been fixed recently. Upgrade the firmware."
+        },
+        {
+          "Problem": "The engine shuts down after an hour, and a warning sounds until Reset is pressed.",
+          "Solution": "It's a warning for being close to a planet. You first have to fly away from it."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6112 is shown.",
+          "Solution": "Make sure the engine is running for half an hour before turning the sensors on."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6231 is shown.",
+          "Solution": "The power cap is loose. Tightening it will fix the problem."
+        },
+        {
+          "Problem": "The red warninglight flashes at 50% thrust. You can't increase thrust above that.",
+          "Solution": "Your powercell is supplying the engine not with the right amount of power. Recalibrate it."
+        },
+        {
+          "Problem": "The red warning light is on when the engine is running. Maximal thrust is 50%.",
+          "Solution": "There's a hull breach somewhere on the ship. Get that repaired ASAP."
+        },
+        {
+          "Problem": "The engine won't go beyond 50% thrust.",
+          "Solution": "Safetymode is on, turn it off."
+        }
+      ]
+    },
+    {
+      "Name": "Warp Drive 500 WideAngle 2",
+      "Id": "WD500PS42D",
+      "Type": "the star drive",
+      "Description": "Reliable stardrive from Fang Xenotech. The fitted raycatcher of 200 degrees makes a quiet and fast travel through space possible.",
+      "Faq": [
+        {
+          "Problem": "Pressing start gives three short beeps and the engine won't start.",
+          "Solution": "It's a warning for being close to a planet. You first have to fly away from it."
+        },
+        {
+          "Problem": "The engine is very hot and won't start.",
+          "Solution": "This type has to cool off first. You'll have to wait for an hour."
+        },
+        {
+          "Problem": "The engine shuts down after an hour and the display shows error code EC5612.",
+          "Solution": "Probably the cooler liquid is almost depleted. Try refilling that first."
+        },
+        {
+          "Problem": "The engine becomes very hot and shuts down after an hour.",
+          "Solution": "There's some sort of oxygen leak near the engine. You should go to a mechanic."
+        },
+        {
+          "Problem": "The engine shuts down after an hour, and a warning sounds until Reset is pressed.",
+          "Solution": "This is a known problem that has been fixed recently. Upgrade the firmware."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6112 is shown.",
+          "Solution": "You need to hard reset, press Reset for five seconds."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC8508 is shown.",
+          "Solution": "Your powercell is supplying the engine not with the right amount of power. Recalibrate it."
+        },
+        {
+          "Problem": "The red warninglight flashes at 50% thrust. You can't increase thrust above that.",
+          "Solution": "There's a hull breach somewhere on the ship. Get that repaired ASAP."
+        },
+        {
+          "Problem": "The red warning light is on when the engine is running. Maximal thrust is 50%.",
+          "Solution": "The power cap is loose. Tightening it will fix the problem."
+        }
+      ]
+    },
+    {
+      "Name": "Flash Drive 5.1 2D",
+      "Id": "FD501PY42D",
+      "Type": "the star drive",
+      "Description": "Stardrive from Newfarer Terragraphics. Small controlled nucelar explosions are at the heart of this powerful engine. Very good choice for small ships due to the small space needed for fuel storage.",
+      "Faq": [
+        {
+          "Problem": "Pressing start gives three short beeps and the engine won't start.",
+          "Solution": "It's a warning for being close to a planet. Press start button twice within 5 seconds."
+        },
+        {
+          "Problem": "The engine is very hot and won't start.",
+          "Solution": "That is a safe guard. If you want to start the engine anyway, first press reset and then within 5 seconds press the start button."
+        },
+        {
+          "Problem": "The engine won't start and the red light under the start button flashes briefly.",
+          "Solution": "It's a warning you're low on fuel. Press and hold start for 5 seconds to start it up anyway."
+        },
+        {
+          "Problem": "The engine becomes very hot and shuts down after an hour.",
+          "Solution": "Probably the cooler liquid is almost depleted. Try refilling that first."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6231 is shown.",
+          "Solution": "You need to hard reset, press Reset for five seconds."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6231 is shown.",
+          "Solution": "This is a known problem that has been fixed recently. Upgrade the firmware."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC8508 is shown.",
+          "Solution": "Your engine and sensors are not compatible, go to a servicepoint of us for advice."
+        },
+        {
+          "Problem": "The red warning light is on when the engine is running. Maximal thrust is 50%.",
+          "Solution": "Your powercell is supplying the engine not with the right amount of power. Recalibrate it."
+        },
+        {
+          "Problem": "The engine won't go beyond 50% thrust.",
+          "Solution": "The power cap is loose. Tightening it will fix the problem."
+        }
+      ]
+    },
+    {
+      "Name": "Continuum Drive 50W",
+      "Id": "CD50PY32W",
+      "Type": "the star drive",
+      "Description": "Engine from StellarLabs Inc, which uses catched starlight for it's propulsion. Suited for very long travels, and not so much for travelling short distances.",
+      "Faq": [
+        {
+          "Problem": "Pressing start gives three short beeps and the engine won't start.",
+          "Solution": "It's a warning for being close to a planet. Press start and reset at the same time."
+        },
+        {
+          "Problem": "The engine won't start and the red light under the start button flashes briefly.",
+          "Solution": "It's a warning you're low on fuel. Press reset first and then start within 5 seconds to start it up anyway."
+        },
+        {
+          "Problem": "The engine shuts down after an hour and the display shows error code EC5612.",
+          "Solution": "You need to hard reset, press Reset for five seconds."
+        },
+        {
+          "Problem": "The engine becomes very hot and shuts down after an hour.",
+          "Solution": "This type has to cool off first. You'll have to wait for an hour."
+        },
+        {
+          "Problem": "The engine shuts down after an hour, and a warning sounds until Reset is pressed.",
+          "Solution": "The engine's fuel managing circuit is malfunctioning. Turn it off for now and have it repaired when possible."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6231 is shown.",
+          "Solution": "Your powercell is supplying the engine not with the right amount of power. Recalibrate it."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC8508 is shown.",
+          "Solution": "This is a known problem that has been fixed recently. Upgrade the firmware."
+        },
+        {
+          "Problem": "The red warninglight flashes at 50% thrust. You can't increase thrust above that.",
+          "Solution": "The engine isn't secured in place enough. Retighten all its bolts."
+        },
+        {
+          "Problem": "The engine won't go beyond 50% thrust.",
+          "Solution": "In this area there isn't enough starlight. At other times it should work."
+        }
+      ]
+    },
+    {
+      "Name": "Interstellar Drive Y-Band",
+      "Id": "ID502YZ20",
+      "Type": "the star drive",
+      "Description": "This almost mystical drive from Tang-Turner Technologies is surrounded by strange rumors. The workings of this engine is still a well kept secret, but it has proven to work good and reliable! There have only been a few (fatal) accidents since it came on the market 2 years ago.",
+      "Faq": [
+        {
+          "Problem": "The engine is very hot and won't start.",
+          "Solution": "Probably the cooler liquid is almost depleted. Try refilling that first."
+        },
+        {
+          "Problem": "The engine won't start and the red light under the start button flashes briefly.",
+          "Solution": "Your fuel is almost depleted. You will have refill it first!"
+        },
+        {
+          "Problem": "The engine shuts down after an hour and the display shows error code EC5612.",
+          "Solution": "There's some sort of oxygen leak near the engine. You should go to a mechanic."
+        },
+        {
+          "Problem": "The engine becomes very hot and shuts down after an hour.",
+          "Solution": "Your powercell is supplying the engine not with the right amount of power. Recalibrate it."
+        },
+        {
+          "Problem": "The engine shuts down after an hour, and a warning sounds until Reset is pressed.",
+          "Solution": "You need to hard reset, press Reset for five seconds."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6112 is shown.",
+          "Solution": "Turn off the engine, then turn on the sensors before starting the engine again."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC6112 is shown.",
+          "Solution": "Press the start button until it turns back on."
+        },
+        {
+          "Problem": "De engine goes offline when turning on a sensor array. Error message EC8508 is shown.",
+          "Solution": "Make sure the engine is running for half an hour before turning the sensors on."
+        },
+        {
+          "Problem": "The red warninglight flashes at 50% thrust. You can't increase thrust above that.",
+          "Solution": "This is a known problem that has been fixed recently. Upgrade the firmware."
+        },
+        {
+          "Problem": "The red warning light is on when the engine is running. Maximal thrust is 50%.",
+          "Solution": "The engine isn't secured in place enough. Retighten all its bolts."
+        }
+      ]
+    },
+    {
+      "Name": "NuclearCell 1000PK X1",
+      "Id": "NC1KPKX1",
+      "Type": "the power cell",
+      "Description": "Good power cell with a nuclear core from StellarLabs Inc. With a good shielding hardly any radiation leaks out. Cheap in usage.",
+      "Faq": [
+        {
+          "Problem": "The power cell heats up and the red warning light starts flashing.",
+          "Solution": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        },
+        {
+          "Problem": "The power cell heats up and there is smoke visible.",
+          "Solution": "This happens when the contacts get corroded. Clean the cell contact strip first."
+        },
+        {
+          "Problem": "The power cell heats up quickly. It then shuts down (Most ships switch to the backup generator).",
+          "Solution": "The power cell housing is broken, and must be replaced."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose, tighten the screws."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound that gets higher over time.",
+          "Solution": "Your power cell is probably still in load mode. Switch it to normal mode."
+        },
+        {
+          "Problem": "Devices shut down after being hooked up to the power cell for a few seconds.",
+          "Solution": "You need to replace your power cell."
+        },
+        {
+          "Problem": "Only high priority devices receive power, all other devices don't.",
+          "Solution": "This happens when the power cell is only filled for 20% or less. Refill it should fix this."
+        },
+        {
+          "Problem": "The power cell depletes quickly. After an hour almost 80% is used up.",
+          "Solution": "The humidity on the ship is too high. Humidity should range from 5% to 40%"
+        },
+        {
+          "Problem": "The control panel doesn't show the light of the power cell, even when it is refilled.",
+          "Solution": "The power cell housing is loose. Open and close the lid, making sure it snaps shut."
+        },
+        {
+          "Problem": "The power cell depletes qucikly. The glass container shows cracks.",
+          "Solution": "You need to replace your power cell."
+        }
+      ]
+    },
+    {
+      "Name": "NuclearCell 1500PK X",
+      "Id": "NC1K5PKX",
+      "Type": "the power cell",
+      "Description": "Power cell for heavy duty with a nuclear core from StellarLabs Inc. Good shielding is required to prevent radiation problems. Good price/quality ratio.",
+      "Faq": [
+        {
+          "Problem": "The power cell heats up and the red warning light starts flashing.",
+          "Solution": "Sometimes the cooling cap springs loose. Check whether it is closed."
+        },
+        {
+          "Problem": "The power cell heats up quickly. It then shuts down (Most ships switch to the backup generator).",
+          "Solution": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        },
+        {
+          "Problem": "The power cell emits a intermittend sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is broken, and must be replaced."
+        },
+        {
+          "Problem": "Devices shut down after being hooked up to the power cell for a few seconds.",
+          "Solution": "This happens when the contacts get corroded. Clean the cell contact strip first."
+        },
+        {
+          "Problem": "The power cell doesn't operate good. Devices get power but don't function properly.",
+          "Solution": "You need to replace your power cell."
+        },
+        {
+          "Problem": "The power cell depletes quickly. After an hour almost 80% is used up.",
+          "Solution": "Let it charge for a full twelve hours before the next use."
+        },
+        {
+          "Problem": "The control panel doesn't show the light of the power cell, even when it is refilled.",
+          "Solution": "The power cell housing is loose, tighten the screws."
+        },
+        {
+          "Problem": "The power cell depletes qucikly. The glass container shows cracks.",
+          "Solution": "You need to replace your power cell."
+        }
+      ]
+    },
+    {
+      "Name": "HydroCell 3400A",
+      "Id": "HC34HA",
+      "Type": "the power cell",
+      "Description": "Hydrogen power cell for clean energy from Tang-Turner Technologies. Downside is the big sizecompared to other types.",
+      "Faq": [
+        {
+          "Problem": "The power cell heats up and the red warning light starts flashing.",
+          "Solution": "Your power cell is probably still in load mode. Switch it to normal mode."
+        },
+        {
+          "Problem": "The power cell heats up and there is smoke visible.",
+          "Solution": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        },
+        {
+          "Problem": "The power cell heats up quickly. It then shuts down (Most ships switch to the backup generator).",
+          "Solution": "The humidity on the ship is too high. Humidity should range from 5% to 40%"
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is broken, and must be replaced."
+        },
+        {
+          "Problem": "The power cell emits a intermittend sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose, undo the clamps, wipe the housing with a cloth and retighten."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound that gets higher over time.",
+          "Solution": "You need to replace your power cell."
+        },
+        {
+          "Problem": "Devices shut down after being hooked up to the power cell for a few seconds.",
+          "Solution": "The power cell housing is loose. Open and close the lid, making sure it snaps shut."
+        },
+        {
+          "Problem": "The power cell doesn't operate good. Devices get power but don't function properly.",
+          "Solution": "This happens when the contacts get corroded. Clean the cell contact strip first."
+        },
+        {
+          "Problem": "Only high priority devices receive power, all other devices don't.",
+          "Solution": "A nearby star is emitting solar flares, navigating away will solve this problem."
+        },
+        {
+          "Problem": "The control panel doesn't show the light of the power cell, even when it is refilled.",
+          "Solution": "Let it charge for a full twelve hours before the next use."
+        }
+      ]
+    },
+    {
+      "Name": "PowerCell Z-Tech 1215",
+      "Id": "PC1215Z",
+      "Type": "the power cell",
+      "Description": "Power cell based on the Z-fuel from Fang Xenotech. Specifically known for its lng lifetime.",
+      "Faq": [
+        {
+          "Problem": "The power cell heats up and the red warning light starts flashing.",
+          "Solution": "Is there a Matter-Rearranger nearby? Their magnetic fields are known to disrupt these types of powercells."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose. Open and close the lid, making sure it snaps shut."
+        },
+        {
+          "Problem": "The power cell emits a intermittend sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose, tighten the screws."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound that gets higher over time.",
+          "Solution": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        },
+        {
+          "Problem": "The power cell doesn't operate good. Devices get power but don't function properly.",
+          "Solution": "The humidity on the ship is too high. Humidity should range from 5% to 40%"
+        },
+        {
+          "Problem": "Only high priority devices receive power, all other devices don't.",
+          "Solution": "This happens when the contacts get corroded. Clean the cell contact strip first."
+        },
+        {
+          "Problem": "The power cell depletes quickly. After an hour almost 80% is used up.",
+          "Solution": "Your power cell is probably still in load mode. Switch it to normal mode."
+        },
+        {
+          "Problem": "The control panel doesn't show the light of the power cell, even when it is refilled.",
+          "Solution": "You need to replace your power cell."
+        },
+        {
+          "Problem": "The power cell depletes qucikly. The glass container shows cracks.",
+          "Solution": "Fill the cracks with thermal paste."
+        }
+      ]
+    },
+    {
+      "Name": "PowerCell Z-Tech 1417",
+      "Id": "PC1417Z",
+      "Type": "the power cell",
+      "Description": "This power cell based on the Z-fuel from Fang Xenotech is the top of the bill. Suited for heavy duty and long travels.",
+      "Faq": [
+        {
+          "Problem": "The power cell heats up and there is smoke visible.",
+          "Solution": "Sometimes the cooling cap springs loose. Check whether it is closed."
+        },
+        {
+          "Problem": "The power cell heats up and there is smoke visible.",
+          "Solution": "These powercells do get hot. Probably just dust on the cell that turns to smoke. No worries."
+        },
+        {
+          "Problem": "The power cell heats up quickly. It then shuts down (Most ships switch to the backup generator).",
+          "Solution": "Is there a Matter-Rearranger nearby? Their magnetic fields are known to disrupt these types of powercells."
+        },
+        {
+          "Problem": "The power cell emits a high pitched sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose, undo the clamps, wipe the housing with a cloth and retighten."
+        },
+        {
+          "Problem": "The power cell emits a intermittend sound when it is heavily used (for example by the engine).",
+          "Solution": "The power cell housing is loose. Open and close the lid, making sure it snaps shut."
+        },
+        {
+          "Problem": "Devices shut down after being hooked up to the power cell for a few seconds.",
+          "Solution": "The humidity on the ship is too high. Humidity should range from 5% to 40%"
+        },
+        {
+          "Problem": "The power cell doesn't operate good. Devices get power but don't function properly.",
+          "Solution": "A nearby star is emitting solar flares, navigating away will solve this problem."
+        },
+        {
+          "Problem": "Only high priority devices receive power, all other devices don't.",
+          "Solution": "You need to replace your power cell."
+        },
+        {
+          "Problem": "The power cell depletes quickly. After an hour almost 80% is used up.",
+          "Solution": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        },
+        {
+          "Problem": "The power cell depletes qucikly. The glass container shows cracks.",
+          "Solution": "Fill the cracks with thermal paste."
+        }
+      ]
+    },
+    {
+      "Name": "SensArr Y-Band 3",
+      "Id": "SA67YY3",
+      "Type": "the sensor array",
+      "Description": "Standard sensor array from Fang Zenotech. Active and passive sensors on the Y-band provide a 360 degree view around the ship.",
+      "Faq": [
+        {
+          "Problem": "The manual scan of the sensor array refuses to work.",
+          "Solution": "Try rebooting your system, the software is malfunctioning"
+        },
+        {
+          "Problem": "The testprocedure doesn't report any errors, but the array doesn't detect anything.",
+          "Solution": "Clean the sensors, something is stuck on them."
+        },
+        {
+          "Problem": "The screen of the array displays a lot of small objects.",
+          "Solution": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+        },
+        {
+          "Problem": "The sensor array sometimes displays large objects that are not there.",
+          "Solution": "Update software to newest version."
+        },
+        {
+          "Problem": "The sensor array displays objects nearer then they are.",
+          "Solution": "This type is sensitive to magnetic fields. If this occurs too often you can have it shielded or replaced by a less sensitive type."
+        },
+        {
+          "Problem": "The sensor array displays objects further away then they are.",
+          "Solution": "The sensor array is getting too little power then. Increase output to the array,"
+        },
+        {
+          "Problem": "The screen of the sensor array starts to shake and then the array goes offline.",
+          "Solution": "There's probably some wiring broken. You should go to a mechanic."
+        },
+        {
+          "Problem": "Different warning lights start to flash on the control panel and then the array goes offline.",
+          "Solution": "The sensors are too cold in that case. Turn on the heating of the sensor array."
+        }
+      ]
+    },
+    {
+      "Name": "SensArr YZ-Band 2",
+      "Id": "SA90YZ2",
+      "Type": "the sensor array",
+      "Description": "Sensor array from Fang Zenotech that uses both Y- and Z-band sensors. This makes this array more reliable then most other types.",
+      "Faq": [
+        {
+          "Problem": "The manual scan of the sensor array refuses to work.",
+          "Solution": "Clean the sensors, something is stuck on them."
+        },
+        {
+          "Problem": "The sensor array fails to detect whether the ship is moving.",
+          "Solution": "Try rebooting your system, the software is malfunctioning"
+        },
+        {
+          "Problem": "The screen of the array displays a lot of small objects.",
+          "Solution": "This problem occurs when the ship is travelling too fast. Decrease output to the engine."
+        },
+        {
+          "Problem": "The sensor array sometimes displays large objects that are not there.",
+          "Solution": "This type is sensitive to magnetic fields. If this occurs too often you can have it shielded or replaced by a less sensitive type."
+        },
+        {
+          "Problem": "The sensor array reports taht the ship is stuck in a large mass.",
+          "Solution": "The sensor array is getting too little power then. Increase output to the array,"
+        },
+        {
+          "Problem": "The sensor array displays objects nearer then they are.",
+          "Solution": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+        },
+        {
+          "Problem": "The screen of the sensor array starts to shake and then the array goes offline.",
+          "Solution": "This problem arises when the array gets too hot. Not flying too close to a sun should avoid this problem."
+        },
+        {
+          "Problem": "Different warning lights start to flash on the control panel and then the array goes offline.",
+          "Solution": "Sensors are broken, replace them."
+        },
+        {
+          "Problem": "The screen of the sensor array freezes and then the array goes offline.",
+          "Solution": "The sensors are too cold in that case. Turn on the heating of the sensor array."
+        }
+      ]
+    },
+    {
+      "Name": "SeGrid 3.2 Beta",
+      "Id": "SG3200B",
+      "Type": "the sensor array",
+      "Description": "Basic model for the most important readings from StellarLabs Inc. Uses both passive and active sensors.",
+      "Faq": [
+        {
+          "Problem": "The manual scan of the sensor array refuses to work.",
+          "Solution": "Sensors are broken, replace them."
+        },
+        {
+          "Problem": "The sensor array fails to detect whether the ship is moving.",
+          "Solution": "Update software to newest version."
+        },
+        {
+          "Problem": "The testprocedure doesn't report any errors, but the array doesn't detect anything.",
+          "Solution": "There's probably some wiring broken. You should go to a mechanic."
+        },
+        {
+          "Problem": "The screen of the array displays a lot of small objects.",
+          "Solution": "Clean the sensors, something is stuck on them."
+        },
+        {
+          "Problem": "The sensor array reports taht the ship is stuck in a large mass.",
+          "Solution": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+        },
+        {
+          "Problem": "The sensor array displays objects nearer then they are.",
+          "Solution": "The sensor array is getting too little power then. Increase output to the array,"
+        },
+        {
+          "Problem": "The sensor array displays objects further away then they are.",
+          "Solution": "This problem arises when the array gets too hot. Not flying too close to a sun should avoid this problem."
+        },
+        {
+          "Problem": "The screen of the sensor array starts to shake and then the array goes offline.",
+          "Solution": "Try rebooting your system, the software is malfunctioning"
+        },
+        {
+          "Problem": "The screen of the sensor array freezes and then the array goes offline.",
+          "Solution": "This problem occurs when the ship is travelling too fast. Decrease output to the engine."
+        }
+      ]
+    },
+    {
+      "Name": "TotalVision 1000 X1",
+      "Id": "TV1KX1",
+      "Type": "the sensor array",
+      "Description": "Sensor array that provides sensory info in all known spectra. Produced by Alpha VisionTech and meant for the more expensive ships.",
+      "Faq": [
+        {
+          "Problem": "The manual scan of the sensor array refuses to work.",
+          "Solution": "Update software to newest version."
+        },
+        {
+          "Problem": "The sensor array fails to detect whether the ship is moving.",
+          "Solution": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+        },
+        {
+          "Problem": "The testprocedure doesn't report any errors, but the array doesn't detect anything.",
+          "Solution": "Try rebooting your system, the software is malfunctioning"
+        },
+        {
+          "Problem": "The sensor array sometimes displays large objects that are not there.",
+          "Solution": "Clean the sensors, something is stuck on them."
+        },
+        {
+          "Problem": "The sensor array reports taht the ship is stuck in a large mass.",
+          "Solution": "The sensors are too cold in that case. Turn on the heating of the sensor array."
+        },
+        {
+          "Problem": "The sensor array displays objects nearer then they are.",
+          "Solution": "This problem arises when the array gets too hot. Not flying too close to a sun should avoid this problem."
+        },
+        {
+          "Problem": "The sensor array displays objects further away then they are.",
+          "Solution": "This type is sensitive to magnetic fields. If this occurs too often you can have it shielded or replaced by a less sensitive type."
+        },
+        {
+          "Problem": "Different warning lights start to flash on the control panel and then the array goes offline.",
+          "Solution": "This problem occurs when the ship is travelling too fast. Decrease output to the engine."
+        },
+        {
+          "Problem": "The screen of the sensor array freezes and then the array goes offline.",
+          "Solution": "Sensors are broken, replace them."
+        }
+      ]
+    },
+    {
+      "Name": "TotalVision 2000 ZeroBack",
+      "Id": "TV2KZB",
+      "Type": "the sensor array",
+      "Description": "The sensor array for not missing any information. Best model produced by Alpha VisionTech and due to the used ZeroBack technology also suited for military purposes.",
+      "Faq": [
+        {
+          "Problem": "The sensor array fails to detect whether the ship is moving.",
+          "Solution": "Sensors are broken, replace them."
+        },
+        {
+          "Problem": "The testprocedure doesn't report any errors, but the array doesn't detect anything.",
+          "Solution": "The sensor array is getting too little power then. Increase output to the array,"
+        },
+        {
+          "Problem": "The screen of the array displays a lot of small objects.",
+          "Solution": "This problem arises when the array gets too hot. Not flying too close to a sun should avoid this problem."
+        },
+        {
+          "Problem": "The sensor array sometimes displays large objects that are not there.",
+          "Solution": "The sensors are too cold in that case. Turn on the heating of the sensor array."
+        },
+        {
+          "Problem": "The sensor array reports taht the ship is stuck in a large mass.",
+          "Solution": "Clean the sensors, something is stuck on them."
+        },
+        {
+          "Problem": "The sensor array displays objects further away then they are.",
+          "Solution": "Probably the sensor array has drifted off a bit. Recalibrate the array, that should fix it"
+        },
+        {
+          "Problem": "The screen of the sensor array starts to shake and then the array goes offline.",
+          "Solution": "This problem occurs when the ship is travelling too fast. Decrease output to the engine."
+        },
+        {
+          "Problem": "Different warning lights start to flash on the control panel and then the array goes offline.",
+          "Solution": "There's probably some wiring broken. You should go to a mechanic."
+        },
+        {
+          "Problem": "The screen of the sensor array freezes and then the array goes offline.",
+          "Solution": "Update software to newest version."
+        }
+      ]
+    }
+  ]
+}

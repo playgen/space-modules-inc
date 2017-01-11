@@ -1,15 +1,34 @@
 {
 	"Rounds": [
-
-		[
-			"KnownCheck-Expert-",
-			"KnownOK-Expert-",
-			"Unknown-Novice-"
-		],
-		[
-			"KnownOK-Novice-",
-			"Unknown-Expert-",
-			"KnownCheck-Novice-"
-		]
+		{
+			"Levels": [
+				{
+					"Id": 1,
+					"Prefix": "TestScen",
+					"Character": "Positive",
+				}
+			],
+			"PostQuestions": "False"
+		},
+		{
+			"Levels": [
+				{
+					"Id": 1,
+					"Prefix": "KnownCheck-Expert-",
+					"Character": "Positive",
+				},
+				{
+					"Id": 2,
+					"Prefix": "KnownOK-Novice-",
+					"Character": "Positive",
+				},
+				{
+					"Id": 3,
+					"Prefix": "KnownOK-Expert-",
+					"Character": "Positive",
+				}
+			],
+			"PostQuestions": "True"
+		}
 	]	
 }
