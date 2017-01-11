@@ -15,17 +15,22 @@ using WellFormedNames;
 using System.Collections;
 using System.IO;
 using System.Text;
+using Assets.Scripts;
+using GameWork.Core.Audio;
+using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
 using Random = System.Random;
 
 public class ScenarioController : ICommandAction
 {
+	#region Config Classes
+
 	public class ScenarioData
 	{
 		private readonly string[] _scenarioPaths;
 		public readonly string Character;
 		public int LevelId;
-		
+
 		//public IntegratedAuthoringToolAsset IAT {  get { return _iat; } }
 		//private IntegratedAuthoringToolAsset _iat;
 
@@ -46,7 +51,6 @@ public class ScenarioController : ICommandAction
 			//var iat = IntegratedAuthoringToolAsset.LoadFromFile("/Scenarios/KnownCheck-Expert-PC1417Z#04.iat");
 			return iat;
 		}
-
 	}
 
 	public struct RoundConfig
@@ -66,7 +70,7 @@ public class ScenarioController : ICommandAction
 		public string Prefix { get; set; }
 		public string Character { get; set; }
 	}
-	
+
 	public struct ScoreObject
 	{
 		public int Stars;
@@ -83,8 +87,9 @@ public class ScenarioController : ICommandAction
 		public int Stars;
 	}
 
-	[SerializeField]
-	private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
+	#endregion
+
+	[SerializeField] private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
 	private RolePlayCharacterAsset[] _characters;
@@ -94,12 +99,15 @@ public class ScenarioController : ICommandAction
 	private readonly List<Name> _events = new List<Name>();
 	private readonly OrderedDictionary _chatHistory = new OrderedDictionary();
 	private string[] _allScenarioPaths;
+	private Dictionary<string, int> _scores;
 
 	// Round Based
-	private int _currentLevel;
-
+	public int CurrentLevel;
+	public int LevelMax;
 
 	public RolePlayCharacterAsset CurrentCharacter;
+	private AudioController _audioController;
+	private AudioClipModel _audioClip;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<OrderedDictionary, float> GetReviewDataSuccessEvent;
@@ -108,9 +116,10 @@ public class ScenarioController : ICommandAction
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
 	public event Action FinalStateEvent;
 
-	public ScenarioController()
+	public ScenarioController(AudioController audioController)
 	{
 		AssetManager.Instance.Bridge = new AssetManagerBridge();
+		_audioController = audioController;
 	}
 
 	public void Initialize()
@@ -121,8 +130,8 @@ public class ScenarioController : ICommandAction
 
 	private void LoadScenarios()
 	{
-		_allScenarioPaths = Directory.GetFiles(Application.streamingAssetsPath + "\\Scenarios", "*.iat");
-		var streamingAssetsPath = Application.streamingAssetsPath + "/levelconfig.json";
+		_allScenarioPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat");
+		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
 		var streamReader = new StreamReader(streamingAssetsPath);
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
@@ -134,6 +143,7 @@ public class ScenarioController : ICommandAction
 			data.Add(CreateScenario(level.Id, level.Prefix, level.Character));
 		}
 		_scenarios = data.ToArray();
+		LevelMax = _scenarios.Length;
 	}
 
 	private ScenarioData CreateScenario(int level, string prefix, string character)
@@ -144,20 +154,19 @@ public class ScenarioController : ICommandAction
 
 	public void NextLevel()
 	{
-		_currentLevel++;
-		var scenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(_currentLevel));
+		CurrentLevel++;
+		_scores = new Dictionary<string, int>();
+		var scenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (scenario != null)
 		{
 			_integratedAuthoringTool = scenario.GetRandomVariation();
 			CurrentCharacter = _integratedAuthoringTool.GetCharacterProfile(scenario.Character);
 			CurrentCharacter.Initialize();
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
-			//var enterEventRpcOne = string.Format("Event(Property-Change,{0},Front(Self),Computer)", CurrentCharacter.CharacterName);
-			//_events.Add((Name)enterEventRpcOne);
-			//GetCharacterResponse();
 		}
 	}
 
+	#region Level Select
 
 	public void SetCharacter(string name)
 	{
@@ -186,10 +195,13 @@ public class ScenarioController : ICommandAction
 		//if (RefreshSuccessEvent != null) RefreshSuccessEvent(levelList.Values.ToArray());
 	}
 
+	#endregion
+
 	public void GetPlayerDialogueOptions()
 	{
 		UpdateCurrentState();
-		_currentPlayerDialogue = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
+		_currentPlayerDialogue =
+			_integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
 		if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
 	}
 
@@ -201,8 +213,8 @@ public class ScenarioController : ICommandAction
 		{
 			emotionType = emotion.EmotionType;
 		}
-		if (GetCharacterStrongestEmotionSuccessEvent != null) GetCharacterStrongestEmotionSuccessEvent(emotionType, CurrentCharacter.Mood);
-
+		if (GetCharacterStrongestEmotionSuccessEvent != null)
+			GetCharacterStrongestEmotionSuccessEvent(emotionType, CurrentCharacter.Mood);
 	}
 
 	public void GetReviewData()
@@ -211,18 +223,121 @@ public class ScenarioController : ICommandAction
 		Reset();
 	}
 
+
+	public void SetPlayerAction(Guid actionId)
+	{
+		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
+		UpdateScore(reply);
+
+		var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
+			reply.GetStylesName());
+
+		_events.Add((Name) string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+		// Wait?
+		_events.Add(
+			(Name) string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+		_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
+
+		//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), reply.NextState);
+		//_events.Add((Name)string.Format("Event(Property-change,self,DialogueState({0}),{1})", CurrentCharacter.CharacterName, reply.NextState));
+		_chatHistory.Add(reply.Utterance, "Player");
+
+		// Update EmotionExpression
+		GetCharacterResponse();
+		//GetPlayerDialogueOptions();
+	}
+
+	public void GetCharacterResponse()
+	{
+		var action = CurrentCharacter.PerceptionActionLoop(_events);
+		_events.Clear();
+		//CurrentCharacter.Update(); // Updates mood over time
+		if (action == null)
+		{
+			return;
+		}
+		var actionKey = action.ActionName.ToString();
+		if (actionKey == "Speak")
+		{
+			var nextState = action.Parameters[1];
+			var dialogues = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.AGENT, action.Parameters[0]);
+			var characterDialogue =
+				dialogues.FirstOrDefault(
+					dto =>
+						string.Equals(dto.GetMeaningName().ToString(), action.Parameters[2].ToString(),
+							StringComparison.CurrentCultureIgnoreCase) &&
+						string.Equals(dto.GetStylesName().ToString(), action.Parameters[3].ToString(),
+							StringComparison.CurrentCultureIgnoreCase));
+			PlayDialogueAudio(characterDialogue.FileName);
+			var characterDialogueText = characterDialogue.Utterance;
+			//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
+			_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
+			_chatHistory.Add(characterDialogueText, "Client");
+			//UpdateCurrentState();
+
+			if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
+		}
+		CurrentCharacter.ActionFinished(action);
+		GetCharacterStrongestEmotion();
+	}
+
+	private void PlayDialogueAudio(string audioName)
+	{
+		var filePath = Path.Combine(Application.streamingAssetsPath, "Scenarios/Audio/F/" + audioName + ".wav");
+		Debug.Log(File.Exists(filePath));
+
+		if (_audioClip != null)
+		{
+			_audioController.Stop(_audioClip);
+		}
+
+		_audioClip = new AudioClipModel()
+		{
+			Name = filePath
+		};
+
+		_audioController.Play(_audioClip, 
+			onComplete: () =>
+			{
+				if (_currentStateName == Name.BuildName("End"))
+				{
+					if (FinalStateEvent != null) FinalStateEvent();
+				}
+			});
+	}
+
+	//private IEnumerator AudioLoop(AudioClip clip)
+	//{
+	//	//	if (clip != null )
+	//	//	{
+	//	//		yield return _body.PlaySpeech(clip, xml);
+	//	//		clip.UnloadAudioData();
+	//	//		//Resources.UnloadAsset(clip);
+	//	//		//Resources.UnloadAsset(text);
+	//	//	}
+	//}
+
+	private void UpdateCurrentState()
+	{
+		CurrentCharacter.PerceptionActionLoop(_events);
+		_events.Clear();
+		_currentStateName = (Name) CurrentCharacter.GetBeliefValue("DialogueState(Player)");
+	}
+
+	#region Scoring
+
 	public void GetScoreData()
 	{
 		//var mood = (CurrentCharacter.Mood + 10) / 20;
-		//var stars = Mathf.CeilToInt(mood*3);
+		//var stars = Mathf.CeilToInt(mood * 3);
 		//var scoreObj = new ScoreObject()
 		//{
-		//    Stars = stars,
-		//    Score = Mathf.CeilToInt(mood*99999),
-		//    ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
-		//    MoodImage = (mood >= 0.5),
-		//    EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
-		//    Bonus = Mathf.CeilToInt(mood*999)
+		//	Stars = stars,
+		//	Score = Mathf.CeilToInt(mood * 99999),
+		//	ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
+		//	MoodImage = (mood >= 0.5),
+		//	EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
+		//	Bonus = Mathf.CeilToInt(mood * 999)
 		//};
 
 
@@ -232,7 +347,46 @@ public class ScenarioController : ICommandAction
 		//SUGARManager.GameData.Send("score", score);
 		//SUGARManager.GameData.Send("plays", 1);
 		//SUGARManager.GameData.Send("stars", stars);
-		//SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToLower() + "_stars", stars);
+		//SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
+	}
+
+	private void UpdateScore(DialogueStateActionDTO reply)
+	{
+		foreach (var meaning in reply.Meaning)
+		{
+			HandleKeywords(meaning);
+		}
+
+		foreach (var style in reply.Style)
+		{
+			HandleKeywords(style);
+		}
+	}
+
+	private void HandleKeywords(string s)
+	{
+		char[] delimitedChars = {'(', ')'};
+
+		string[] result = s.Split(delimitedChars);
+
+		if (result.Length > 1)
+			switch (result[0])
+			{
+				case "Inquire":
+					break;
+
+				case "FAQ":
+					break;
+
+				case "Closure":
+					break;
+
+				case "Empathy":
+					break;
+
+				case "Polite":
+					break;
+			}
 	}
 
 	// TODO: Code for tracking individual score categories.
@@ -284,65 +438,7 @@ public class ScenarioController : ICommandAction
 	//        }
 	//}
 
-
-	public void SetPlayerAction(Guid actionId)
-	{
-		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-		var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(), reply.GetStylesName());
-
-		_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		// Wait?
-		_events.Add((Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
-
-		//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), reply.NextState);
-		//_events.Add((Name)string.Format("Event(Property-change,self,DialogueState({0}),{1})", CurrentCharacter.CharacterName, reply.NextState));
-		_chatHistory.Add(reply.Utterance, "Player");
-
-		// Update EmotionExpression
-		GetCharacterResponse();
-		//GetPlayerDialogueOptions();
-	}
-
-	public void GetCharacterResponse()
-	{
-		var action = CurrentCharacter.PerceptionActionLoop(_events);
-		_events.Clear();
-		//CurrentCharacter.Update();
-		if (action == null)
-		{
-			return;
-		}
-		var actionKey = action.ActionName.ToString();
-		if (actionKey == "Speak")
-		{
-			var nextState = action.Parameters[1];
-			var dialogues = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.AGENT, action.Parameters[0]);
-			var characterDialogue = dialogues.FirstOrDefault(dto => string.Equals(dto.GetMeaningName().ToString(), action.Parameters[2].ToString(), StringComparison.CurrentCultureIgnoreCase) && string.Equals(dto.GetStylesName().ToString(), action.Parameters[3].ToString(), StringComparison.CurrentCultureIgnoreCase));
-
-			var characterDialogueText = characterDialogue.Utterance;
-			//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
-			_chatHistory.Add(characterDialogueText, "Client");
-			//UpdateCurrentState();
-
-			if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
-		}
-		CurrentCharacter.ActionFinished(action);
-		GetCharacterStrongestEmotion();
-		
-	}
-
-	private void UpdateCurrentState()
-	{
-		CurrentCharacter.PerceptionActionLoop(_events);
-		_events.Clear();
-		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
-		if (_currentStateName == Name.BuildName("End"))
-		{
-			if (FinalStateEvent != null) FinalStateEvent();
-		}
-	}
+	#endregion
 
 	private void Reset()
 	{

@@ -1,0 +1,105 @@
+{
+  "Rounds":
+  [
+    {
+      "PostQuestions": false,
+      "Levels": [
+        {
+          "ID": 0,
+          "Prefix": "TestScen",
+          "Character": "Positive"
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Positive"
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive"
+        },
+        {
+          "ID": 3,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Neutral"
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral"
+        },
+        {
+          "ID": 5,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Negative"
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 6,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive"
+        },
+        {
+          "ID": 7,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral"
+        },
+        {
+          "ID": 8,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Negative"
+        },
+        {
+          "ID": 9,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative"
+        },
+        {
+          "ID": 10,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral"
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 11,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral"
+        },
+        {
+          "ID": 12,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative"
+        },
+        {
+          "ID": 13,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral"
+        },
+        {
+          "ID": 14,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Negative"
+        },
+        {
+          "ID": 15,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative"
+        }
+      ]
+    }
+  ]
+}

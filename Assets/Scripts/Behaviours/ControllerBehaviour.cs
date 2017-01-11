@@ -1,6 +1,8 @@
-﻿using UnityEngine;
+﻿using GameWork.Core.Audio;
+using UnityEngine;
 using GameWork.Core.States;
 using GameWork.Core.States.Controllers;
+using GameWork.Unity.Audio;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.SocialPlatforms.GameCenter;
 
@@ -8,6 +10,7 @@ public class ControllerBehaviour : MonoBehaviour
 {
 
 	private TickableStateController<TickableSequenceState> _stateController;
+	private AudioController _audioController;
 
 	void Awake ()
 	{
@@ -17,7 +20,8 @@ public class ControllerBehaviour : MonoBehaviour
 
 		FixScreenRatio();
 
-		var scenarioController = new ScenarioController();
+		_audioController = new AudioController(new StreamingAssetsAudioChannelFactory());
+		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
 
 		_stateController = new TickableStateController<TickableSequenceState>(
@@ -61,6 +65,8 @@ public class ControllerBehaviour : MonoBehaviour
 	    {
 	        SUGARManager.Achievement.DisplayList();
 	    }
+		_audioController.Tick(Time.deltaTime);
 		_stateController.Tick(Time.deltaTime);
+		
 	}
 }

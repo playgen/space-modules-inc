@@ -7,15 +7,15 @@
     "Characters": [
       {
         "Name": "Positive",
-        "Source": "RPCPositive.rpc"
+        "Source": "Positive.rpc"
       },
       {
         "Name": "Neutral",
-        "Source": "RPCNeutral.rpc"
+        "Source": "Neutral.rpc"
       },
       {
         "Name": "Negative",
-        "Source": "RPCNegative.rpc"
+        "Source": "Negative.rpc"
       }
     ],
     "PlayerDialogues": [
@@ -24,238 +24,238 @@
         "NextState": "Opening1",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "Hi, Space Modules Inc. Go ahead."
+        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening1",
         "Meaning": [],
         "Style": [],
-        "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?"
+        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening2",
         "Meaning": [],
         "Style": ["Polite(-1)"],
-        "Utterance": "Hi, what's up?"
+        "Utterance": "Hallo daar, wat is er aan de hand?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "I am sorry to hear that. Can you tell me what the problem is?"
+        "Utterance": "Het spijt me dat te horen. Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(-1)"],
-        "Utterance": "What is the problem then?"
+        "Utterance": "Wat is het probleem dan?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
-        "Utterance": "Can you tell me the type number?"
+        "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(-1)"],
-        "Utterance": "Type number?"
+        "Utterance": "Typenummer?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "I can hear you are angry, which I can totally understand. I would like to help you to solve this problem as quickly as possible"
+        "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "DealAnger2",
         "Meaning": [],
         "Style": ["Polite(-1)"],
-        "Utterance": "I can't help you when you are angry. It is best if you calm down first."
+        "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "I can hear you are angry, which I can totally understand. I would like to help you to solve this problem as quickly as possible"
+        "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "DealAnger2",
         "Meaning": [],
         "Style": ["Polite(-1)"],
-        "Utterance": "I can't help you when you are angry. It is best if you calm down first."
+        "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "BadFinish",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Polite(-1)"],
-        "Utterance": "Well, if you don’t answer my questions I can't help you!"
+        "Utterance": "Ja hallo, als U niet antwoord dan kan ik U niet helpen!"
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "Reroute",
         "Meaning": ["Empathy(-1)", "Faq(-1)"],
         "Style": ["Polite(1)"],
-        "Utterance": "Unfortunately I have to redirect you to our specialist. The phonenumber is 999-452345"
+        "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "Can you tell me what the problem is?"
+        "Utterance": "Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(-1)"],
-        "Utterance": "What is the problem then?"
+        "Utterance": "Wat is het probleem dan?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
-        "Utterance": "Can you tell me the type number?"
+        "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(-1)"],
-        "Utterance": "Type number?"
+        "Utterance": "Typenummer?"
       },
       {
         "CurrentState": "DataCollected",
         "NextState": "WaitForAnswer",
         "Meaning": [],
         "Style": [],
-        "Utterance": "I will look it up for you…"
+        "Utterance": "Ik ga het voor U even opzoeken..."
       },
       {
         "CurrentState": "DataCollected",
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "Unfortunately I have to redirect you to our specialist. The phonenumber is 999-452345"
+        "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
         "CurrentState": "DataCollected",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": [],
-        "Utterance": "What was the type number again?"
+        "Utterance": "Wat was het typenummer ook al weer?"
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "You have to many devices for that particular power cell.  Turn off devices for now. You should upgrade to a higher power type when possible."
+        "Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "A nearby star is emitting solar flares, navigating away will solve this problem."
+        "Utterance": "Dit komt vaak door zonnevlammen van een nabije ster. Hier vandaan vliegen zou het probleem moeten oplossen."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "The power cell housing is loose, undo the clamps, wipe the housing with a cloth and retighten."
+        "Utterance": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "Let it charge for a full twelve hours before the next use."
+        "Utterance": "Laadt de cel een volle 12 uur op voordat je hem weer gebruikt."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "The humidity on the ship is too high. Humidity should range from 5% to 40%"
+        "Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "This happens when the contacts get corroded. Clean the cell contact strip first."
+        "Utterance": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "The power cell housing is broken, and must be replaced."
+        "Utterance": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "The power cell housing is loose. Open and close the lid, making sure it snaps shut."
+        "Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "The power cell housing is loose, tighten the screws."
+        "Utterance": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
-        "Utterance": "You need to replace your power cell."
+        "Utterance": "De krachtcel is versleten en moet worden vervangen."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "Utterance": "Unfortunately I couldn't find a solution. I will give you the number of our specialist: 999-452345. He can help you further."
+        "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
       },
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye1",
         "Meaning": ["Closure(1)"],
         "Style": ["Polite(1)"],
-        "Utterance": "Fine. Is there anything else I can do for you?"
+        "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
       },
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
         "Style": ["Polite(1)"],
-        "Utterance": "Fine. Have a nice day."
+        "Utterance": "Prima, fijne dag verder."
       },
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
         "Style": ["Polite(-1)"],
-        "Utterance": "Bye now."
+        "Utterance": "Doei."
       }
     ],
     "AgentDialogues": [
@@ -264,238 +264,272 @@
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Hi there, I'm having trouble with the power cell. It's type HC34HA"
+        "FileName": "A-OPE-P-P3",
+        "Utterance": "Hoi hoi, ik heb problemen met de krachtcel, type HC34HA"
       },
       {
         "CurrentState": "Opening1",
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "Hi, I'm having trouble with the power cell again. It's type HC34HA"
+        "FileName": "A-OPE-N-P3",
+        "Utterance": "Hee, ik heb weer eens problemen met de krachtcel, type HC34HA"
       },
       {
         "CurrentState": "Opening1",
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "the power cell, type HC34HA has failed again, it's worthless! What kind of junk do you guys sell anyway?"
+        "FileName": "A-OP1E-A-P3",
+        "Utterance": "de krachtcel type HC34HA doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?"
       },
       {
         "CurrentState": "Opening2",
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Hi there, I'm having trouble with the power cell. It's type HC34HA"
+        "FileName": "A-OPE-P-P3",
+        "Utterance": "Hoi hoi, ik heb problemen met de krachtcel, type HC34HA"
       },
       {
         "CurrentState": "Opening2",
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "Hi, I'm having trouble with the power cell again. It's type HC34HA"
+        "FileName": "A-OPE-N-P3",
+        "Utterance": "Hee, ik heb weer eens problemen met de krachtcel, type HC34HA"
       },
       {
         "CurrentState": "Opening2",
         "NextState": "FirstResponse",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "What's up? What's up?! the power cell, type HC34HA, has failed once again!! It's worthless!"
+        "FileName": "A-OP2E-A-P3",
+        "Utterance": "Wat is er aan de hand? Wat is er aan de hand?! de krachtcel type HC34HA is weer eens kapot, waardeloos is het!!"
       },
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
-        "Utterance": "Good to hear, but I'm not angry, you know"
+        "FileName": "A-RSPANG-P",
+        "Utterance": "Fijn dat je het wilt oplossen, maar boos ben ik niet hoor!"
       },
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
-        "Utterance": "Good to hear…"
+        "FileName": "A-RSPANG-N",
+        "Utterance": "Goed om te horen..."
       },
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
         "Meaning": ["Empathy(1)"],
         "Style": ["Negative"],
-        "Utterance": "I hope so too, because it's quite annoying"
+        "FileName": "A-RSPANG-A",
+        "Utterance": "Dat hoop ik ook, want het is knap vervelend."
       },
       {
         "CurrentState": "DealAnger2",
         "NextState": "AskProblem1",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
-        "Utterance": "What kind of remark is that? I'm not angry at all, but ok…"
+        "FileName": "A-RSPCLM-P",
+        "Utterance": "Wat is dat voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
       },
       {
         "CurrentState": "DealAnger2",
         "NextState": "AskProblem1",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
-        "Utterance": "This is a good way to make me angry, yeah…Can you help me or not?"
+        "FileName": "A-RSPCLM-N",
+        "Utterance": "Zo wordt ik wel boos, ja...kun je me helpen of niet?"
       },
       {
         "CurrentState": "DealAnger2",
         "NextState": "End",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Negative"],
-        "Utterance": "Well, that's up to me isn't it? I will call your boss instead!"
+        "FileName": "A-RSPCLM-A",
+        "Utterance": "Ja hallo, dat maak ik zelf wel uit! Ik bel wel met je baas!"
       },
       {
         "CurrentState": "WaitForAnswer",
         "NextState": "FaqResponse",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Ok, I'll wait patiently"
+        "FileName": "A-RSPWT-P",
+        "Utterance": "Ok. Ik wacht geduldig af"
       },
       {
         "CurrentState": "WaitForAnswer",
         "NextState": "FaqResponse",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "If it doesn’t take too long…"
+        "FileName": "A-RSPWT-N",
+        "Utterance": "Als het maar niet te lang duurt..."
       },
       {
         "CurrentState": "WaitForAnswer",
         "NextState": "FaqResponse",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "Pffff...So be it…"
+        "FileName": "A-RSPWT-A",
+        "Utterance": "Pfff...het zij zo..."
       },
       {
         "CurrentState": "Reroute",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Too bad, but ok. I will call that specialist. Thanks"
+        "FileName": "A-RSPRR-P",
+        "Utterance": "Jammer, maar goed. Ik zal de specialist bellen. Bedankt tot zover"
       },
       {
         "CurrentState": "Reroute",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "Oh, right. Bye then and I'll call that specialist."
+        "FileName": "A-RSPRR-N",
+        "Utterance": "Oh...ok. Tot ziens dan, ik ga die specialist bellen."
       },
       {
         "CurrentState": "Reroute",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "Pfff, this really helps! Thanks a lot…"
+        "FileName": "A-RSPRR-A",
+        "Utterance": "Pfff, dat schiet lekker op. Bedankt he..."
       },
       {
         "CurrentState": "AnswerDetails",
         "NextState": "DataCollected",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "There is a high pitched noise coming from the power cell when the engine is running. It gets higher the longer the engine runs."
+        "FileName": "A-DDP-NSSW",
+        "Utterance": "Er komt een hoog zoemend geluid uit de krachtcel als de motor aan staat. Het geluid wordt na verloop van tijd ook hoger."
       },
       {
         "CurrentState": "AnswerDetails",
         "NextState": "DataCollected",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "There is a high pitched noise coming from the power cell when the engine is running. It gets higher the longer the engine runs."
+        "FileName": "A-DDP-NSSW",
+        "Utterance": "Er komt een hoog zoemend geluid uit de krachtcel als de motor aan staat. Het geluid wordt na verloop van tijd ook hoger."
       },
       {
         "CurrentState": "AnswerDetails",
         "NextState": "SecondChance",
         "Meaning": ["Empathy(-1)"],
         "Style": ["Negative"],
-        "Utterance": "Like I said…it's broken!!"
+        "FileName": "A-RSPPR-A",
+        "Utterance": "Dat zei ik al: hij is kapot!"
       },
       {
         "CurrentState": "AnswerType3",
         "NextState": "DataCollected",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "O, bad memory? It's HC34HA"
+        "FileName": "A-RSPTP2-P-P3",
+        "Utterance": "Oh, vergeetachtig? Het is HC34HA"
       },
       {
         "CurrentState": "AnswerType3",
         "NextState": "DataCollected",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "I already told you that…it's HC34HA"
+        "FileName": "A-RSPTP2-N-P3",
+        "Utterance": "Oh, had ik al gezegd he. Het is HC34HA"
       },
       {
         "CurrentState": "AnswerType3",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "Well, I'm sorry but I already gave you that! I will try another of your employees!"
+        "FileName": "A-RSPTP2-A",
+        "Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!"
       },
       {
         "CurrentState": "RespSolution",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Ok, thanks for the answer. Thta's what I'll do then."
+        "FileName": "A-RSPSOL-P",
+        "Utterance": "Ok, bedankt voor dat antwoord. Dat ga ik doen."
       },
       {
         "CurrentState": "RespSolution",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "Ok, that's what I'll do then."
+        "FileName": "A-RSPSOL-N",
+        "Utterance": "Ok, dat zal ik doen."
       },
       {
         "CurrentState": "RespSolution",
         "NextState": "Closure",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "Ok, I hope that will work then..."
+        "FileName": "A-RSPSOL-A",
+        "Utterance": "Ok, dan hoop ik maar dat dat werkt..."
       },
       {
         "CurrentState": "Goodbye1",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "No, thanks for asking. Have a good day"
+        "FileName": "A-END-P",
+        "Utterance": "Nee, bedankt voor het vragen. Prettige dag verder."
       },
       {
         "CurrentState": "Goodbye1",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "No, thanks. It's fine. Bye."
+        "FileName": "A-END-N",
+        "Utterance": "Nee hoor, het is goed zo."
       },
       {
         "CurrentState": "Goodbye1",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "No, this has taken enough time already! Bye."
+        "FileName": "A-END-A",
+        "Utterance": "Nee, het heeft me al genoeg tijd gekost. Tot ziens"
       },
       {
         "CurrentState": "Goodbye2",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Positive"],
-        "Utterance": "Thanks and good bye"
+        "FileName": "A-ENDGB-P",
+        "Utterance": "Tot ziens en bedankt."
       },
       {
         "CurrentState": "Goodbye2",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Neutral"],
-        "Utterance": "Bye."
+        "FileName": "A-ENDGB-N",
+        "Utterance": "Tot ziens."
       },
       {
         "CurrentState": "Goodbye2",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "Yeah…bye…"
+        "FileName": "A-ENDGB-A",
+        "Utterance": "Ja, daaagggg"
       },
       {
         "CurrentState": "BadFinish",
         "NextState": "End",
         "Meaning": [],
         "Style": ["Negative"],
-        "Utterance": "It's clear you can't help me indeed. I will try a collegue of yours."
+        "FileName": "A-NOHELP-A",
+        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen! Ik probeer wel een collega van je."
       }
     ]
   },

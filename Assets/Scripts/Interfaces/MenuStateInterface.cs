@@ -2,16 +2,19 @@
 using GameWork.Core.Interfacing;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Unity;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuStateInterface : StateInterface
 {
 	private ButtonList _buttons;
+	private Button _playButton;
 
 	public override void Initialize()
     {
         _buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
-        var playButton = _buttons.GetButton("PlayButton");
-        playButton.onClick.AddListener(OnPlayClick);
+        _playButton = _buttons.GetButton("PlayButton");
+        _playButton.onClick.AddListener(OnPlayClick);
         var settingsButton = _buttons.GetButton("SettingsButton");
         settingsButton.onClick.AddListener(OnSettingsClick);
         var leaderboardButton = _buttons.GetButton("LeaderboardButton");

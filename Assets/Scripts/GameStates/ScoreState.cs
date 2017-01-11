@@ -1,4 +1,5 @@
 ﻿using GameWork.Core.States;
+using UnityEngine;
 
 public class ScoreState : TickableSequenceState
 {
@@ -42,7 +43,24 @@ public class ScoreState : TickableSequenceState
 	public override void NextState()
 	{
 		//ChangeState(LevelState.StateName);
-		ChangeState(MenuState.StateName);
+		if (_scenarioController.CurrentLevel != _scenarioController.LevelMax)
+		{
+			ChangeState(MenuState.StateName);
+		}
+		else
+		{
+			// The following string contains the key for the google form is used for the cognitive load questionnaire
+			string formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";
+
+			// Google form ID
+			string googleFormsURL = "https://docs.google.com/forms/d/e/"
+				+ formsKey
+				+ "/viewform?";
+
+			// Open the default browser and show the form
+			Application.OpenURL(googleFormsURL);
+			Application.Quit();
+		}
 	}
 
 	public override void PreviousState()

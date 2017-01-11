@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameWork.Core.Controllers;
 using GameWork.Core.Audio.Clip;
@@ -29,7 +30,7 @@ namespace GameWork.Core.Audio
 	    public override void Tick(float deltaTime)
 		{
 			ProcessFades(deltaTime);
-			SyncSlaves();
+			TickChannels();
 		}
 
 		public bool IsPlaying(AudioClipModel clip)
@@ -89,9 +90,9 @@ namespace GameWork.Core.Audio
 			return playbackTime;
 		}
 
-		public void Play(AudioClipModel clip, AudioClipModel master = null)
+		public void Play(AudioClipModel clip, AudioClipModel master = null, Action onComplete = null)
 		{
-			PlayInternal(clip, master);
+			PlayInternal(clip, master, onComplete);
 		}
 
 		public void Stop(AudioClipModel clip)
@@ -182,7 +183,7 @@ namespace GameWork.Core.Audio
 			return didFindChannel;
 		}
 
-		private IAudioChannel PlayInternal(AudioClipModel clip, AudioClipModel master = null)
+		private IAudioChannel PlayInternal(AudioClipModel clip, AudioClipModel master = null, Action onComplete = null)
 		{
 			IAudioChannel channel;
 
@@ -202,11 +203,11 @@ namespace GameWork.Core.Audio
 				{
 					IAudioChannel masterChannel;
 					TryGetChannel(master, out masterChannel);
-					channel.Play(clip, masterChannel);
+					channel.Play(clip, masterChannel, onComplete);
 				}
 				else
 				{
-					channel.Play(clip);
+					channel.Play(clip, onComplete: onComplete);
 				}
 			}
 
@@ -236,14 +237,11 @@ namespace GameWork.Core.Audio
 			channel.Volume = _volumeUpperLimit;
 		}
 
-		private void SyncSlaves()
+		private void TickChannels()
 		{
 		    foreach (var channel in _channels)
 		    {
-		        if(channel.IsPlaying)
-		        {
-		            channel.Sync();
-		        }
+		        channel.Tick();
 		    }
 		}
 
