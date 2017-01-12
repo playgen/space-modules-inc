@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -131,8 +132,8 @@ public class ModulesController : ICommandAction
         foreach (var description in module.Faq)
         {
             var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-			problemItem.transform.FindChild("Title").GetComponent<Text>().text = "PROBLEM"; // TODO: Localization
-	        var problemText = description.Problem + "\n\n<color=#5BEAFFFF><b>Solution</b>:</color>\n" + description.Solution + "\n";
+			problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
+	        var problemText = description.Problem + String.Format("\n\n<color=#5BEAFFFF><b>{0}</b>:</color>\n{1}\n", Localization.Get("SOLUTION"), description.Solution);
 			problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = problemText;
 		}
 		_backButton.onClick.AddListener(delegate

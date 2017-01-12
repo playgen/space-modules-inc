@@ -140,6 +140,16 @@
     "nl": "Terug"
   },
   {
+    "key": "PROBLEM",
+    "en-gb": "PROBLEM",
+    "nl": "PROBLEEM"
+  },
+  {
+    "key": "SOLUTION",
+    "en-gb": "Solution",
+    "nl": "Oplossing"
+  },
+  {
     "key": "ENGLISH",
     "en-gb": "English",
     "nl": "Engels"

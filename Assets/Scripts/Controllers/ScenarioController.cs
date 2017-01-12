@@ -115,6 +115,8 @@ public class ScenarioController : ICommandAction
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
 	public event Action FinalStateEvent;
 
+	#region Initialization
+
 	public ScenarioController(AudioController audioController)
 	{
 		AssetManager.Instance.Bridge = new AssetManagerBridge();
@@ -165,6 +167,8 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
+	#endregion
+
 	#region Level Select
 
 	public void SetCharacter(string name)
@@ -196,6 +200,8 @@ public class ScenarioController : ICommandAction
 
 	#endregion
 
+	#region Character Interaction
+
 	public void GetPlayerDialogueOptions()
 	{
 		UpdateCurrentState();
@@ -216,13 +222,6 @@ public class ScenarioController : ICommandAction
 			GetCharacterStrongestEmotionSuccessEvent(emotionType, CurrentCharacter.Mood);
 	}
 
-	public void GetReviewData()
-	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
-		Reset();
-	}
-
-
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
@@ -231,19 +230,15 @@ public class ScenarioController : ICommandAction
 		var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
 			reply.GetStylesName());
 
-		_events.Add((Name) string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+		_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
 		// Wait?
 		_events.Add(
-			(Name) string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
-
-		//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), reply.NextState);
-		//_events.Add((Name)string.Format("Event(Property-change,self,DialogueState({0}),{1})", CurrentCharacter.CharacterName, reply.NextState));
+			(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 		_chatHistory.Add(reply.Utterance, "Player");
 
 		// Update EmotionExpression
 		GetCharacterResponse();
-		//GetPlayerDialogueOptions();
 	}
 
 	public void GetCharacterResponse()
@@ -270,7 +265,7 @@ public class ScenarioController : ICommandAction
 			PlayDialogueAudio(characterDialogue.FileName);
 			var characterDialogueText = characterDialogue.Utterance;
 			//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-			_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
+			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
 			_chatHistory.Add(characterDialogueText, "Client");
 			//UpdateCurrentState();
 
@@ -295,7 +290,7 @@ public class ScenarioController : ICommandAction
 			Name = filePath
 		};
 
-		_audioController.Play(_audioClip, 
+		_audioController.Play(_audioClip,
 			onComplete: () =>
 			{
 				if (_currentStateName == Name.BuildName("End"))
@@ -305,22 +300,20 @@ public class ScenarioController : ICommandAction
 			});
 	}
 
-	//private IEnumerator AudioLoop(AudioClip clip)
-	//{
-	//	//	if (clip != null )
-	//	//	{
-	//	//		yield return _body.PlaySpeech(clip, xml);
-	//	//		clip.UnloadAudioData();
-	//	//		//Resources.UnloadAsset(clip);
-	//	//		//Resources.UnloadAsset(text);
-	//	//	}
-	//}
-
 	private void UpdateCurrentState()
 	{
 		CurrentCharacter.PerceptionActionLoop(_events);
 		_events.Clear();
-		_currentStateName = (Name) CurrentCharacter.GetBeliefValue("DialogueState(Player)");
+		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
+	}
+
+
+	#endregion
+
+	public void GetReviewData()
+	{
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
+		Reset();
 	}
 
 	#region Scoring

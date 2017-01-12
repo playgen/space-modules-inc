@@ -155,7 +155,6 @@ public class GameStateInterface : StateInterface
 
     public void HandleFinalState()
     {
-        // put in a delay here (e.g. delayLastState command)
         EnqueueCommand(new NextStateCommand());
     }
 }
