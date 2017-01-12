@@ -295,10 +295,14 @@ public class ScenarioController : ICommandAction
 			{
 				if (_currentStateName == Name.BuildName("End"))
 				{
+					TraceScore();
 					if (FinalStateEvent != null) FinalStateEvent();
 				}
 			});
 	}
+
+	
+	#endregion
 
 	private void UpdateCurrentState()
 	{
@@ -306,9 +310,6 @@ public class ScenarioController : ICommandAction
 		_events.Clear();
 		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
 	}
-
-
-	#endregion
 
 	public void GetReviewData()
 	{
@@ -362,73 +363,47 @@ public class ScenarioController : ICommandAction
 		string[] result = s.Split(delimitedChars);
 
 		if (result.Length > 1)
-			switch (result[0])
+		{
+			int value;
+			if (_scores.TryGetValue(result[0], out value))
 			{
-				case "Inquire":
-					break;
-
-				case "FAQ":
-					break;
-
-				case "Closure":
-					break;
-
-				case "Empathy":
-					break;
-
-				case "Polite":
-					break;
+				_scores[result[0]] = value + Int32.Parse(result[1]);
 			}
+			else
+			{
+				_scores.Add(result[0], Int32.Parse(result[1]));
+			}
+		}
 	}
 
-	// TODO: Code for tracking individual score categories.
-	//public void UpdateScore(DialogueStateActionDTO reply)
-	//{
-	//    // var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(), reply.GetStylesName());
-	//    // Debug.Log("Dialogue" + reply.Utterance);
-	//    // Debug.Log("Dialogue" + reply.Style[0]);
-	//    // Debug.Log("Dialogue" + reply.Meaning[0]);
-	//    // Debug.Log(reply.Meaning.Length + reply.Utterance);
+	private void TraceScore()
+	{
+		// The following string contains the key for the google form that will be used to write trace data
+		string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
 
-	//    foreach (var meaning in reply.Meaning)
-	//    {
-	//        HandleKeywords(meaning);
-	//    }
+		// Here the proper string is constructed to fill and directly post the trace to a google form
+		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
+			+ sheetsKey
+			+ "/formResponse?entry.1676366924="
+			+ SUGARManager.CurrentUser.Id
+			//+ "&entry.858779356="
+			//+ GroupID
+			+ "&entry.1962055523="
+			+ _scores["Closure"]
+			+ "&entry.976064318="
+			+ _scores["Empathy"]
+			+ "&entry.408530093="
+			+ _scores["Faq"]
+			+ "&entry.2140003828="
+			+ _scores["Inquire"]
+			+ "&entry.695568148="
+			+ _scores["Polite"]
+			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
 
-	//    foreach (var style in reply.Style)
-	//    {
-	//        HandleKeywords(style);
-	//    }
-	//}
+		// The actual write to google
+		WWW www = new WWW(directSubmitUrl);
+	}
 
-	//private void HandleKeywords(string s)
-	//{
-	//    char[] delimitedChars = { '(', ')' };
-	//    string[] result = s.Split(delimitedChars);
-	//    if (result.Length > 1)
-	//        switch (result[0])
-	//        {
-	//            case "Inquire":
-	//                score.GetComponent<ScoreManager>().AddI(Int32.Parse(result[1]));
-	//                break;
-
-	//            case "FAQ":
-	//                score.GetComponent<ScoreManager>().AddF(Int32.Parse(result[1]));
-	//                break;
-
-	//            case "Closure":
-	//                score.GetComponent<ScoreManager>().AddC(Int32.Parse(result[1]));
-	//                break;
-
-	//            case "Empathy":
-	//                score.GetComponent<ScoreManager>().AddE(Int32.Parse(result[1]));
-	//                break;
-
-	//            case "Polite":
-	//                score.GetComponent<ScoreManager>().AddP(Int32.Parse(result[1]));
-	//                break;
-	//        }
-	//}
 
 	#endregion
 
