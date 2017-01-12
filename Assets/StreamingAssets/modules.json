@@ -5,6 +5,7 @@
       "Name": "Warp Drive 500 WideAngle 3",
       "Id": "WD500PX43W",
       "Type": "de sterremotor",
+      "Icon": "Engines",
       "Description": "Zeer betrouwbare sterremotor van Fang Xenotech. Door zijn brede straalvanger van 300 graden zijn hoge snelheden mogelijk.",
       "Faq": [
         {
@@ -53,6 +54,7 @@
       "Name": "Warp Drive 500 WideAngle 2",
       "Id": "WD500PS42D",
       "Type": "de sterremotor",
+      "Icon": "Engines",
       "Description": "Betrouwbare sterremotor van Fang Xenotech. Een goede straalvanger van 200 graden zorgt voor een rustige en snelle reis door de ruimte.",
       "Faq": [
         {
@@ -97,6 +99,7 @@
       "Name": "Flash Drive 5.1 2D",
       "Id": "FD501PY42D",
       "Type": "de sterremotor",
+      "Icon": "Engines",
       "Description": "Sterremotor van Newfarer-Terragraphics. Kleine gecontroleerde kernexplosies liggen in het hart van deze krachtige motor. Zeer geschikt voor kleinere schepen omdat er slechts weinig brandstof hoeft te worden opgeslagen.",
       "Faq": [
         {
@@ -141,6 +144,7 @@
       "Name": "Continuum 50/32W",
       "Id": "CD50PY32W",
       "Type": "de sterremotor",
+      "Icon": "Engines",
       "Description": "Motor van StellarLabs Inc, die voortgedreven wordt door opgevangen sterrelicht. Zeer geschikt voor langere reizen, minder geschikt voor korte tripjes.",
       "Faq": [
         {
@@ -185,6 +189,7 @@
       "Name": "Interstellar Drive Y-Band",
       "Id": "ID502YZ20",
       "Type": "de sterremotor",
+      "Icon": "Engines",
       "Description": "Deze bijna mystieke motor van Tang-Turner Technologies is omgeven door allerlei vreemde geruchten. De werking van deze motor wordt nog steeds goed geheim gehouden, maar hij blijkt zeer goed en betrouwbaar te werken! Er zijn slechts een handvol (fatale) ongelukken gebeurd sinds hij 2 jaar geleden op de markt is gekomen.",
       "Faq": [
         {
@@ -233,6 +238,7 @@
       "Name": "NuclearCell 1000PK X1",
       "Id": "NC1KPKX1",
       "Type": "de krachtcel",
+      "Icon": "Power_Cells",
       "Description": "Goede krachtcel met een nucleaire kern van StellarLabs Inc. Bij een juiste afscherming komt er nauwelijks straling vrij. Goedkoop in gebruik.",
       "Faq": [
         {
@@ -280,7 +286,8 @@
     {
       "Name": "NuclearCell 1500PK X",
       "Id": "NC1K5PKX",
-      "Type": "de krachtcel",
+"Type": "de krachtcel",
+      "Icon": "Power_Cells",
       "Description": "Krachtcel voor groot vermogen met een nucleaire kern van StellarLabs Inc. Goede afscherming is wel noodzakelijk om stralingsbproblemen te voorkomen. Goede prijs/prestatie verhouding.",
       "Faq": [
         {
@@ -320,7 +327,8 @@
     {
       "Name": "HydroCell 3400A",
       "Id": "HC34HA",
-      "Type": "de krachtcel",
+"Type": "de krachtcel",
+      "Icon": "Power_Cells",
       "Description": "Waterstof krachtcel voor schone energie van Tang-Turner Technologies. Nadeel is de grootte van deze cel in verhouding met andere types.",
       "Faq": [
         {
@@ -368,7 +376,8 @@
     {
       "Name": "PowerCell Z-Tech 1215",
       "Id": "PC1215Z",
-      "Type": "de krachtcel",
+"Type": "de krachtcel",
+      "Icon": "Power_Cells",
       "Description": "Krachtcel gebaseerd op de Z-brandstof van Fang Xenotech. Staat vooral bekend om zijn lange levensduur.",
       "Faq": [
         {
@@ -412,7 +421,8 @@
     {
       "Name": "PowerCell Z-Tech 1417",
       "Id": "PC1417Z",
-      "Type": "de krachtcel",
+"Type": "de krachtcel",
+      "Icon": "Power_Cells",
       "Description": "Deze krachtcel lopend op Z-brandstof is het paradepaardje van Fang Xenotech. Geschikt voor hoog vermogen en langdurige reizen.",
       "Faq": [
         {
@@ -461,6 +471,7 @@
       "Name": "SensArr Y-Band 3",
       "Id": "SA67YY3",
       "Type": "het sensornet",
+      "Icon": "Sensors",
       "Description": "Standaard sensornet van Fang Xenotech. Actieve en passieve sensors op Y-band zorgen voor 360 graden zicht rondom het schip.",
       "Faq": [
         {
@@ -501,6 +512,7 @@
       "Name": "SensArr YZ-Band 2",
       "Id": "SA90YZ2",
       "Type": "het sensornet",
+      "Icon": "Sensors",
       "Description": "Sensornet van Fang Xenotech die zowel de Y- als Z-band gebruikt, en daardoor betrouwbaarder is dan de meeste andere modellen.",
       "Faq": [
         {
@@ -545,6 +557,7 @@
       "Name": "SeGrid 3.2 Beta",
       "Id": "SG3200B",
       "Type": "het sensornet",
+      "Icon": "Sensors",
       "Description": "Instapmodel voor de belangrijkste waarnemingen van StellarLabs Inc. Gebruikt zowel passieve als active sensoren.",
       "Faq": [
         {
@@ -589,6 +602,7 @@
       "Name": "TotalVision 1000 X1",
       "Id": "TV1KX1",
       "Type": "het sensornet",
+      "Icon": "Sensors",
       "Description": "Sensor net voor waarneming in alle bekende spectra. Geproduceerd door Alpha VisionTech en bedoeld voor de hogere prijsklasse van schepen.",
       "Faq": [
         {
@@ -633,6 +647,7 @@
       "Name": "TotalVision 2000 ZeroBack",
       "Id": "TV2KZB",
       "Type": "het sensornet",
+      "Icon": "Sensors",
       "Description": "Het sensornet als je echt geen enkele waarneming wilt missen. Beste model van Alpha VisionTech die door de ZeroBack technologie ook geschikt is voor militaire doeleinden.",
       "Faq": [
         {

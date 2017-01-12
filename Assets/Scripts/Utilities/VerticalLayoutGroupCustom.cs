@@ -40,9 +40,11 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
 
     public float Spacing;
 
-    //public Orientation ChildAlignment;
+	public bool UpdateContentHeight = false;
 
-    public ChildExpand ChildForceExpand;
+	//public Orientation ChildAlignment;
+
+	public ChildExpand ChildForceExpand;
 
     private RectTransform _myRectTransform;
 
@@ -70,7 +72,6 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
         }
 
         var offset = 0f;
-
         foreach (var child in children)
         {
             var height = 0.0f;
@@ -109,11 +110,13 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
             // Move the child into position
             child.localPosition = new Vector3(0, offset, 0f);
 
-
-
             // increment the offset and include the spacing
            offset -= (height + Spacing);
-
         }
-    }
+	    if (UpdateContentHeight)
+	    {
+			gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(0, -offset);
+		}
+	}
+
 }

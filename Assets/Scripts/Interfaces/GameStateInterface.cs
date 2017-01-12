@@ -108,13 +108,16 @@ public class GameStateInterface : StateInterface
                     OnDialogueOptionClick(dialogueAction);
                 });
             }
-        }
-        else
+			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
+		}
+		else
         {
             dialogueObject = GameObject.Instantiate(_listChoicePrefab);
+	        var scrollRect = dialogueObject.GetComponent<ScrollRect>();
             var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
-
-            for (var i = 0; i < dialogueActions.Length; i++)
+	        var contentTotalHeight = 0f;
+			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
+			for (var i = 0; i < dialogueActions.Length; i++)
             {
                 var dialogueAction = dialogueActions[i];
                 var optionText = dialogueAction.Utterance;
@@ -122,16 +125,17 @@ public class GameStateInterface : StateInterface
                 choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
                 //choiceItem.GetComponent<RectTransform>().rect = dialogueObject.GetComponent<Rect>().height;
                 var offset = i*choiceItem.GetComponent<RectTransform>().rect.height;
+	            contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
                 choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
                 choiceItem.GetComponent<Button>().onClick.AddListener(delegate
                 {
                     OnDialogueOptionClick(dialogueAction);
                 });
-                choiceItem.transform.SetParent(dialogueObject.GetComponent<ScrollRect>().content, false);
+                choiceItem.transform.SetParent(scrollRect.content, false);
             }
-
+	        var rectContent = scrollRect.content;
+			rectContent.sizeDelta = new Vector2(0, contentTotalHeight);
         }
-        dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
     }
 
     private void OnDialogueOptionClick(DialogueStateActionDTO dialogueAction)

@@ -163,10 +163,10 @@ RectTransform:
   m_Father: {fileID: 1617098130}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 960.3921}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &7782070
 MonoBehaviour:
@@ -185,6 +185,7 @@ MonoBehaviour:
     bottom: 0
     top: 0
   Spacing: 4.53
+  UpdateContentHeight: 1
   ChildForceExpand:
     Width: 0
     Height: 0
@@ -4356,7 +4357,7 @@ MonoBehaviour:
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 650969680}
   m_HorizontalScrollbarVisibility: 2
-  m_VerticalScrollbarVisibility: 2
+  m_VerticalScrollbarVisibility: 1
   m_HorizontalScrollbarSpacing: -3
   m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
@@ -6345,6 +6346,21 @@ Prefab:
         type: 2}
       propertyPath: m_AnchoredPosition.y
       value: 0.0039978027
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000010936267740, guid: c0f5dbae2f210804baef424998b55c6e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.099975586
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000013327550160, guid: c0f5dbae2f210804baef424998b55c6e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.099975586
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012305857174, guid: c0f5dbae2f210804baef424998b55c6e,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.0000019073486
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c0f5dbae2f210804baef424998b55c6e, type: 2}
