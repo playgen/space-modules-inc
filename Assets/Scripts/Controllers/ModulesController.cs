@@ -37,7 +37,8 @@ public class ModulesController : ICommandAction
 
 	private readonly GameObject _modulesPopup;
     private readonly GameObject _popupContent;
-    private readonly GameObject _moduleItemPrefab;
+	private readonly GameObject _backgroundOverlay;
+	private readonly GameObject _moduleItemPrefab;
     private readonly GameObject _moduleIndexItemPrefab;
     private readonly GameObject _moduleDescriptionItemPrefab;
     private readonly RectTransform _modulesContent;
@@ -47,9 +48,10 @@ public class ModulesController : ICommandAction
     private ModuleEntry[] _modulesDatabase;
     private Button _backButton;
 
-    public ModulesController()
+	public ModulesController()
     {
         _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
+        _backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
         _modulesContent = _popupContent.GetComponent<ScrollRect>().content;
         
@@ -60,6 +62,8 @@ public class ModulesController : ICommandAction
 
         var backButtonObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton");
         _backButton = backButtonObject.GetComponent<Button>();
+
+		_backgroundOverlay.GetComponent<Button>().onClick.AddListener(TogglePopup);
 
 		LoadJSONModules();
 	}
@@ -81,7 +85,6 @@ public class ModulesController : ICommandAction
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
             listItem.GetComponent<Button>().onClick.AddListener(delegate
             {
-				_modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
 				LoadModules(moduleType);
 			});
         }
@@ -110,7 +113,6 @@ public class ModulesController : ICommandAction
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
             listItem.GetComponent<Button>().onClick.AddListener(delegate
             {
-				_modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
 				LoadModule(module, listItem);
             });
         }
@@ -136,7 +138,6 @@ public class ModulesController : ICommandAction
 		_backButton.onClick.AddListener(delegate
         {
 			LoadModules(module.Type);
-			_modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
 		});
     }
 
@@ -170,14 +171,15 @@ public class ModulesController : ICommandAction
     {
 		if (_modulesPopup.activeInHierarchy)
         {
-            _modulesPopup.SetActive(false);
-        }
-        else
-        {
-            _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
-            _modulesPopup.SetActive(true);
-			_popupContent.GetComponent<ScrollRect>().verticalScrollbar.enabled = true;
+			_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
+			_modulesPopup.SetActive(false);
 
+		}
+		else
+        {
+            _modulesPopup.SetActive(true);
+			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
+			_popupContent.GetComponent<ScrollRect>().verticalScrollbar.enabled = true;
 			LoadIndex();
         }
     }

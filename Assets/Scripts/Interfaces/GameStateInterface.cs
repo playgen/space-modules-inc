@@ -1,4 +1,5 @@
-﻿using GameWork.Core.Commands.States;
+﻿using System.Linq;
+using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
 using IntegratedAuthoringTool.DTOs;
 using RolePlayCharacter;
@@ -94,12 +95,15 @@ public class GameStateInterface : StateInterface
 
         // TODO: Refactor
         GameObject dialogueObject;
-        if (dialogueActions.Length == 4)
+		var rnd = new System.Random();
+	    var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray(); 
+
+        if (randomDialogueActions.Length == 4)
         {
             dialogueObject = GameObject.Instantiate(_multipleChoicePrefab);
-            for (var i = 0; i < dialogueActions.Length; i++)
+            for (var i = 0; i < randomDialogueActions.Length; i++)
             {
-                var dialogueAction = dialogueActions[i];
+                var dialogueAction = randomDialogueActions[i];
                 var optionText = dialogueAction.Utterance;
                 var optionObject = dialogueObject.transform.GetChild(i);
                 optionObject.GetChild(0).GetComponent<Text>().text = optionText;//
@@ -117,9 +121,9 @@ public class GameStateInterface : StateInterface
             var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
 	        var contentTotalHeight = 0f;
 			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
-			for (var i = 0; i < dialogueActions.Length; i++)
+			for (var i = 0; i < randomDialogueActions.Length; i++)
             {
-                var dialogueAction = dialogueActions[i];
+                var dialogueAction = randomDialogueActions[i];
                 var optionText = dialogueAction.Utterance;
                 var choiceItem = GameObject.Instantiate(choiceItemPrefab);
                 choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
