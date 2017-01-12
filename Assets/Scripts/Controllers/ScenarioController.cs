@@ -88,10 +88,7 @@ public class ScenarioController : ICommandAction
 
 	#endregion
 
-	[SerializeField] private string _scenarioFile = "/Scenarios/SpaceModules/SpaceModulesScenarioA.iat";
-
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
-	private RolePlayCharacterAsset[] _characters;
 	private ScenarioData[] _scenarios;
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
@@ -295,7 +292,10 @@ public class ScenarioController : ICommandAction
 			{
 				if (_currentStateName == Name.BuildName("End"))
 				{
-					TraceScore();
+					if (SUGARManager.CurrentUser != null)
+					{
+						TraceScore();
+					}
 					if (FinalStateEvent != null) FinalStateEvent();
 				}
 			});
@@ -321,26 +321,29 @@ public class ScenarioController : ICommandAction
 
 	public void GetScoreData()
 	{
-		//var mood = (CurrentCharacter.Mood + 10) / 20;
-		//var stars = Mathf.CeilToInt(mood * 3);
-		//var scoreObj = new ScoreObject()
-		//{
-		//	Stars = stars,
-		//	Score = Mathf.CeilToInt(mood * 99999),
-		//	ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
-		//	MoodImage = (mood >= 0.5),
-		//	EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
-		//	Bonus = Mathf.CeilToInt(mood * 999)
-		//};
+		var mood = (CurrentCharacter.Mood + 10) / 20;
+		var stars = Mathf.CeilToInt(mood * 3);
+		var scoreObj = new ScoreObject()
+		{
+			Stars = stars,
+			Score = Mathf.CeilToInt(mood * 99999),
+			ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
+			MoodImage = (mood >= 0.5),
+			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
+			Bonus = Mathf.CeilToInt(mood * 999)
+		};
 
 
-		//if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
+		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
 
-		//long score = scoreObj.Score;
-		//SUGARManager.GameData.Send("score", score);
-		//SUGARManager.GameData.Send("plays", 1);
-		//SUGARManager.GameData.Send("stars", stars);
-		//SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
+		long score = scoreObj.Score;
+		if (SUGARManager.CurrentUser != null)
+		{
+			SUGARManager.GameData.Send("score", score);
+			SUGARManager.GameData.Send("plays", 1);
+			SUGARManager.GameData.Send("stars", stars);
+			SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
+		}
 	}
 
 	private void UpdateScore(DialogueStateActionDTO reply)
