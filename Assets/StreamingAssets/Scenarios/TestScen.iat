@@ -72,6 +72,22 @@
         "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
       },
       {
+        "CurrentState": "Opening",
+        "NextState": "Response",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "FileName": "A-OP-DEMO",
+        "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
+      },
+      {
+        "CurrentState": "Opening",
+        "NextState": "Response",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "FileName": "A-OP-DEMO",
+        "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
+      },
+      {
         "CurrentState": "Goodbye",
         "NextState": "End",
         "Meaning": [],
