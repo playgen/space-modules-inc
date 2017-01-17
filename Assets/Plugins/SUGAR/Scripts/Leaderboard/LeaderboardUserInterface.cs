@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Unity
 			_nearButton.onClick.AddListener(delegate { UpdateFilter(1); });
 			_friendsButton.onClick.AddListener(delegate { UpdateFilter(2); });
 			_closeButton.onClick.AddListener(delegate { SUGARManager.Unity.DisableObject(gameObject); });
-			_signinButton.onClick.AddListener(delegate { AttemptSignIn(); });
+			_signinButton.onClick.AddListener(AttemptSignIn);
 		}
 
 		private void OnEnable()
@@ -56,7 +56,6 @@ namespace PlayGen.SUGAR.Unity
 
 		internal void Display(LeaderboardFilterType filter, IEnumerable<LeaderboardStandingsResponse> standings, bool loadingSuccess = true)
 		{
-			
 			_pageNumber = 0;
 			_filter = filter;
 			ShowLeaderboard(standings, loadingSuccess);

@@ -6,25 +6,27 @@ namespace PlayGen.SUGAR.Unity
 {
 	public static class SUGARManager
 	{
-		internal static SUGARUnityManager Unity { get; set; }
+		internal static SUGARUnityManager unity { get; set; }
 
 		internal static SUGARClient Client { get; set; }
+
+		internal static AccountUnityClient account { get; set; }
+
+		internal static AchievementUnityClient achievement { get; set; }
+
+		internal static GameDataUnityClient gameData = new GameDataUnityClient();
+
+		internal static LeaderboardListUnityClient gameLeaderboard { get; set; }
+
+		internal static LeaderboardUnityClient leaderboard { get; set; }
+
+		internal static Config config { get; set; }
 
 		public static int GameId { get; internal set; }
 
 		public static ActorResponse CurrentUser { get; internal set; }
 
-	    internal static AccountUnityClient account { get; set; }
-
-	    internal static AchievementUnityClient achievement { get; set; }
-
-		internal static GameDataUnityClient gameData = new GameDataUnityClient();
-
-        internal static LeaderboardListUnityClient gameLeaderboard { get; set; }
-
-		internal static LeaderboardUnityClient leaderboard { get; set; }
-
-        internal static Config config { get; set; }
+		public static string GroupId { get; set; }
 
 		public static AccountUnityClient Account
 		{
@@ -86,7 +88,20 @@ namespace PlayGen.SUGAR.Unity
 			}
 		}
 
-        internal static bool Register(SUGARUnityManager unityManager)
+		public static SUGARUnityManager Unity
+		{
+			get
+			{
+				if (unity != null)
+				{
+					return unity;
+				}
+				throw new Exception("No SUGARUnityManager found.");
+			}
+		}
+
+
+		internal static bool Register(SUGARUnityManager unityManager)
 		{
 			return Client == null;
 		}

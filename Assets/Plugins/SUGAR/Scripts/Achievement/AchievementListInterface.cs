@@ -14,7 +14,6 @@ namespace PlayGen.SUGAR.Unity
 		private Button _nextButton;
 		[SerializeField]
 		private Text _pageNumberText;
-		private int _pageNumber;
 		[SerializeField]
 		private Text _errorText;
 		[SerializeField]
@@ -22,12 +21,14 @@ namespace PlayGen.SUGAR.Unity
 		[SerializeField]
 		private Button _signinButton;
 
+		private int _pageNumber;
+
 		private void Awake()
 		{
 			_previousButton.onClick.AddListener(delegate { UpdatePageNumber(-1); });
 			_nextButton.onClick.AddListener(delegate { UpdatePageNumber(1); });
 			_closeButton.onClick.AddListener(delegate { SUGARManager.Unity.DisableObject(gameObject); });
-			_signinButton.onClick.AddListener(delegate { AttemptSignIn(); });
+			_signinButton.onClick.AddListener(AttemptSignIn);
 		}
 
 		private void OnEnable()
@@ -39,10 +40,10 @@ namespace PlayGen.SUGAR.Unity
 		{
 			
 			_pageNumber = 0;
-			SetAchievementData(loadingSuccess);
+			ShowAchievements(loadingSuccess);
 		}
 
-		private void SetAchievementData(bool loadingSuccess)
+		private void ShowAchievements(bool loadingSuccess)
 		{
 			SUGARManager.Account.Hide();
 			SUGARManager.GameLeaderboard.Hide();
@@ -110,7 +111,7 @@ namespace PlayGen.SUGAR.Unity
 		private void UpdatePageNumber(int changeAmount)
 		{
 			_pageNumber += changeAmount;
-			SetAchievementData(true);
+			ShowAchievements(true);
 		}
 	}
 }

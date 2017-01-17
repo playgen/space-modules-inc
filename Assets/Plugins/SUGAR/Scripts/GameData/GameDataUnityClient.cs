@@ -1,5 +1,7 @@
 ﻿using System.Globalization;
 using System.Collections.Generic;
+using System.Linq;
+
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Contracts.Shared;
 using UnityEngine;
@@ -10,9 +12,14 @@ namespace PlayGen.SUGAR.Unity
 	{
         public IEnumerable<EvaluationDataResponse> GetHighest(string[] keys, EvaluationDataType dataType)
         {
-            var response = SUGARManager.Client.GameData.GetHighest(SUGARManager.CurrentUser.Id, SUGARManager.GameId, keys, dataType);
-            return response;
-        }
+			if (SUGARManager.CurrentUser != null)
+			{
+				var response = SUGARManager.Client.GameData.GetHighest(SUGARManager.CurrentUser.Id, SUGARManager.GameId, keys, dataType);
+				return response;
+			}
+			return Enumerable.Empty<EvaluationDataResponse>();
+
+		}
 
         public void Send(string key, string value)
 		{

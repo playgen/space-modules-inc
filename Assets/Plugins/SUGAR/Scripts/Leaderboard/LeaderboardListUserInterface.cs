@@ -40,7 +40,7 @@ namespace PlayGen.SUGAR.Unity
 			_groupButton.onClick.AddListener(delegate { UpdateFilter(2); });
 			_combinedButton.onClick.AddListener(delegate { UpdateFilter(0); });
 			_closeButton.onClick.AddListener(delegate { SUGARManager.Unity.DisableObject(gameObject); });
-			_signinButton.onClick.AddListener(delegate { AttemptSignIn(); });
+			_signinButton.onClick.AddListener(AttemptSignIn);
 		}
 
 		private void OnEnable()

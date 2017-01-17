@@ -14,6 +14,9 @@ namespace PlayGen.SUGAR.Unity
 	[DisallowMultipleComponent]
 	public class LeaderboardListUnityClient : MonoBehaviour
 	{
+		[SerializeField]
+		private LeaderboardListUserInterface _leaderboardListInterface;
+
 		private readonly List<List<LeaderboardResponse>> _leaderboards = new List<List<LeaderboardResponse>>();
 
 		internal List<List<LeaderboardResponse>> Leaderboards
@@ -21,8 +24,10 @@ namespace PlayGen.SUGAR.Unity
 			get { return _leaderboards; }
 		}
 
-		[SerializeField]
-		private LeaderboardListUserInterface _leaderboardListInterface;
+		public bool IsActive
+		{
+			get { return _leaderboardListInterface && _leaderboardListInterface.gameObject.activeInHierarchy; }
+		}
 
 		internal void CreateInterface(Canvas canvas)
 		{
@@ -52,7 +57,10 @@ namespace PlayGen.SUGAR.Unity
 
 		public void Hide()
 		{
-			SUGARManager.Unity.DisableObject(_leaderboardListInterface.gameObject);
+			if (IsActive)
+			{
+				SUGARManager.Unity.DisableObject(_leaderboardListInterface.gameObject);
+			}
 		}
 
 		private void GetLeaderboards(Action<bool> success)

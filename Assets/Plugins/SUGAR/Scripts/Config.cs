@@ -1,4 +1,7 @@
-﻿public class Config
+﻿namespace PlayGen.SUGAR.Unity
 {
-    public string BaseUri { get; set; }
+	public class Config
+	{
+		public string BaseUri { get; set; }
+	}
 }

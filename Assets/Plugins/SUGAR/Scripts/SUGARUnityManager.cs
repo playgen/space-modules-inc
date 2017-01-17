@@ -24,6 +24,14 @@ namespace PlayGen.SUGAR.Unity
 		private string _gameToken;
 		[SerializeField]
 		private int _gameId;
+		[SerializeField]
+		private bool _useAchievements = true;
+		[SerializeField]
+		private bool _useLeaderboards = true;
+		[SerializeField]
+		private GameObject _uiBlocker;
+		private Canvas _canvas;
+		private readonly List<GameObject> _blockQueue = new List<GameObject>();
 
 		internal string baseAddress
 		{
@@ -37,14 +45,17 @@ namespace PlayGen.SUGAR.Unity
 		{
 			set { _gameId = value; }
 		}
-		private Canvas _canvas;
-		[SerializeField]
-		private bool _useAchievements = true;
-		[SerializeField]
-		private bool _useLeaderboards = true;
-		[SerializeField]
-		private GameObject _uiBlocker;
-		private List<GameObject> _blockQueue = new List<GameObject>();
+
+		public bool AnyActiveUI
+		{
+			get
+			{
+				return (SUGARManager.account && SUGARManager.account.IsActive) ||
+						(SUGARManager.achievement && SUGARManager.achievement.IsActive) ||
+						(SUGARManager.gameLeaderboard && SUGARManager.gameLeaderboard.IsActive) ||
+						(SUGARManager.leaderboard && SUGARManager.leaderboard.IsActive);
+			}
+		}
 
 		private void Awake()
 		{
@@ -58,7 +69,7 @@ namespace PlayGen.SUGAR.Unity
 				return;
 			}
 
-			SUGARManager.Unity = this;
+			SUGARManager.unity = this;
 			SUGARManager.GameId = _gameId;
 			SUGARManager.account = GetComponent<AccountUnityClient>();
 			SUGARManager.achievement = _useAchievements ? GetComponent<AchievementUnityClient>() : null;
@@ -73,7 +84,7 @@ namespace PlayGen.SUGAR.Unity
 			}
 		}
 
-		public bool LoadConfig()
+		private bool LoadConfig()
 		{
 			var path = ConfigPath;
 			if (File.Exists(ConfigPath))
@@ -97,7 +108,7 @@ namespace PlayGen.SUGAR.Unity
 			SetUpClient();
 		}
 
-		public void SetUpClient()
+		private void SetUpClient()
 		{
 			SUGARManager.Client = new SUGARClient(_baseAddress);
 			if (_useLeaderboards)
@@ -143,8 +154,11 @@ namespace PlayGen.SUGAR.Unity
 				_uiBlocker.GetComponent<Button>().onClick.AddListener(delegate { DisableObject(objectToDisable); });
 				foreach (Transform child in _uiBlocker.transform)
 				{
-					child.SetParent(_canvas.transform, false);
-					_blockQueue.Add(child.gameObject);
+					if (activeObject != child.gameObject)
+					{
+						child.SetParent(_canvas.transform, false);
+						_blockQueue.Add(child.gameObject);
+					}
 				}
 				activeObject.transform.SetParent(_uiBlocker.transform, false);
 				_uiBlocker.transform.SetAsLastSibling();
@@ -162,6 +176,7 @@ namespace PlayGen.SUGAR.Unity
 				{
 					child.SetParent(_canvas.transform, false);
 				}
+				activeObject.SetActive(false);
 				if (_blockQueue.Count > 0)
 				{
 					EnableObject(_blockQueue[_blockQueue.Count - 1]);
@@ -169,6 +184,7 @@ namespace PlayGen.SUGAR.Unity
 					return;
 				}
 				_uiBlocker.SetActive(false);
+				return;
 			}
 			activeObject.SetActive(false);
 		}
