@@ -94,6 +94,22 @@
         "Style": ["Positive"],
         "FileName": "A-GB-DEMO",
         "Utterance": "Nee, dat was alles. Tot ziens maar weer."
+      },
+      {
+        "CurrentState": "Goodbye",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "FileName": "A-GB-DEMO",
+        "Utterance": "Nee, dat was alles. Tot ziens maar weer."
+      },
+      {
+        "CurrentState": "Goodbye",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "FileName": "A-GB-DEMO",
+        "Utterance": "Nee, dat was alles. Tot ziens maar weer."
       }
     ]
   },

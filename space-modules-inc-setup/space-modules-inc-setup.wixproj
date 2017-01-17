@@ -14,7 +14,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug;SourcePath=$(SolutionDir)\SMI_Data</DefineConstants>
+    <DefineConstants>Debug;SourcePath=$(SolutionDir)Build\WindowsSMI\SMI_Data</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
@@ -42,7 +42,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"%25WIX%25\bin\heat.exe" dir "$(SolutionDir)\SMI_Data" -dr smiDIR -cg SourceComponentGroup -var var.SourcePath -gg -out "$(ProjectDir).\source.wxs"</PreBuildEvent>
+    <PreBuildEvent>"%25WIX%25\bin\heat.exe" dir "$(SolutionDir)Build\WindowsSMI\SMI_Data" -dr smiDIR -cg SourceComponentGroup -var var.SourcePath -gg -out "$(ProjectDir).\source.wxs"</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

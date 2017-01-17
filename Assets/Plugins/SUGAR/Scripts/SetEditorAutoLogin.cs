@@ -42,7 +42,7 @@ namespace PlayGen.SUGAR.Unity
 			if (_passRequired) {
 				_password = EditorGUILayout.PasswordField("Password", _password, EditorStyles.textField);
 			}
-			_source = EditorGUILayout.TextField("Group Id", _group, EditorStyles.textField);
+			_group = EditorGUILayout.TextField("Group Id", _group, EditorStyles.textField);
 			_source = EditorGUILayout.TextField("Account Source", _source, EditorStyles.textField);
 			_auto = EditorGUILayout.Toggle("Auto Log-in", _auto, EditorStyles.toggle);
 			_customArgs = EditorGUILayout.TextField("Custom Args. key=value key=value etc.", _customArgs, EditorStyles.textField);

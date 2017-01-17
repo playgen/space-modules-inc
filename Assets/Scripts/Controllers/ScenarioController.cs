@@ -52,25 +52,25 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
-	public struct RoundConfig
+	public class RoundConfig
 	{
 		public Round[] Rounds { get; set; }
 	}
 
-	public struct Round
+	public class Round
 	{
 		public Level[] Levels { get; set; }
 		public bool PostQuestions { get; set; }
 	}
 
-	public struct Level
+	public class Level
 	{
 		public int Id { get; set; }
 		public string Prefix { get; set; }
 		public string Character { get; set; }
 	}
 
-	public struct ScoreObject
+	public class ScoreObject
 	{
 		public int Stars;
 		public int Score;
@@ -80,10 +80,16 @@ public class ScenarioController : ICommandAction
 		public int Bonus;
 	}
 
-	public struct LevelObject
+	public class LevelObject
 	{
 		public string Name;
 		public int Stars;
+	}
+
+	public class ChatObject
+	{
+		public string Utterence;
+		public string Agent;
 	}
 
 	#endregion
@@ -93,7 +99,7 @@ public class ScenarioController : ICommandAction
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
 	private readonly List<Name> _events = new List<Name>();
-	private readonly OrderedDictionary _chatHistory = new OrderedDictionary();
+	private readonly List<ChatObject> _chatHistory = new List<ChatObject>();
 	private string[] _allScenarioPaths;
 	private Dictionary<string, int> _scores;
 
@@ -106,7 +112,7 @@ public class ScenarioController : ICommandAction
 	private AudioClipModel _audioClip;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<OrderedDictionary, float> GetReviewDataSuccessEvent;
+	public event Action<List<ChatObject>, float> GetReviewDataSuccessEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -133,6 +139,7 @@ public class ScenarioController : ICommandAction
 		var streamReader = new StreamReader(streamingAssetsPath);
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
+		//var round = obj.Rounds[1].Levels;
 		var roundNumber = CommandLineUtility.CustomArgs["round"];
 		var round = obj.Rounds[Int32.Parse(roundNumber)].Levels;
 		List<ScenarioData> data = new List<ScenarioData>();
@@ -232,7 +239,9 @@ public class ScenarioController : ICommandAction
 		_events.Add(
 			(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
 		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
-		_chatHistory.Add(reply.Utterance, "Player");
+
+
+		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player"});
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -259,12 +268,14 @@ public class ScenarioController : ICommandAction
 							StringComparison.CurrentCultureIgnoreCase) &&
 						string.Equals(dto.GetStylesName().ToString(), action.Parameters[3].ToString(),
 							StringComparison.CurrentCultureIgnoreCase));
-			PlayDialogueAudio(characterDialogue.FileName);
 			var characterDialogueText = characterDialogue.Utterance;
 			//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
-			_chatHistory.Add(characterDialogueText, "Client");
-			//UpdateCurrentState();
+			_chatHistory.Add(new ChatObject() { Utterence = characterDialogueText, Agent = "Client" });
+			UpdateCurrentState();
+			PlayDialogueAudio(characterDialogue.FileName);
+
+
 
 			if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
 		}
@@ -276,33 +287,41 @@ public class ScenarioController : ICommandAction
 	{
 		var filePath = Path.Combine(Application.streamingAssetsPath, "Scenarios/Audio/F/" + audioName + ".wav");
 		Debug.Log(File.Exists(filePath));
-
-		if (_audioClip != null)
+		if (File.Exists(filePath))
 		{
-			_audioController.Stop(_audioClip);
-		}
-
-		_audioClip = new AudioClipModel()
-		{
-			Name = filePath
-		};
-
-		_audioController.Play(_audioClip,
-			onComplete: () =>
+			if (_audioClip != null)
 			{
-				if (_currentStateName == Name.BuildName("End"))
-				{
-					if (SUGARManager.CurrentUser != null)
-					{
-						TraceScore();
-					}
-					if (FinalStateEvent != null) FinalStateEvent();
-				}
-			});
+				_audioController.Stop(_audioClip);
+			}
+
+			_audioClip = new AudioClipModel()
+			{
+				Name = filePath
+			};
+
+			_audioController.Play(_audioClip,
+				onComplete: HandleEndState);
+		}
+		else
+		{
+			HandleEndState();
+		}
 	}
 
 	
 	#endregion
+
+	private void HandleEndState()
+	{
+		if (_currentStateName == Name.BuildName("End"))
+		{
+			if (SUGARManager.CurrentUser != null)
+			{
+				TraceScore();
+			}
+			if (FinalStateEvent != null) FinalStateEvent();
+		}
+	}
 
 	private void UpdateCurrentState()
 	{
@@ -322,7 +341,8 @@ public class ScenarioController : ICommandAction
 	public void GetScoreData()
 	{
 		var mood = (CurrentCharacter.Mood + 10) / 20;
-		var stars = Mathf.CeilToInt(mood * 3);
+		var calcStars = Mathf.CeilToInt(mood * 3);
+		var stars = calcStars < 1 ? 1 : calcStars;
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
@@ -384,13 +404,15 @@ public class ScenarioController : ICommandAction
 		// The following string contains the key for the google form that will be used to write trace data
 		string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
 
-		// Here the proper string is constructed to fill and directly post the trace to a google form
+		/// check for scores before referencing key
+
+		// Here the proper string is conclassed to fill and directly post the trace to a google form
 		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
 			+ sheetsKey
 			+ "/formResponse?entry.1676366924="
 			+ SUGARManager.CurrentUser.Id
-			//+ "&entry.858779356="
-			//+ GroupID
+			+ "&entry.858779356="
+			+ SUGARManager.GroupId
 			+ "&entry.1962055523="
 			+ _scores["Closure"]
 			+ "&entry.976064318="

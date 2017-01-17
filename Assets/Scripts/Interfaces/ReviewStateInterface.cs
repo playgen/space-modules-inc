@@ -1,4 +1,5 @@
-﻿using System.Collections.Specialized;
+﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using GameWork.Core.Commands.States;
 using GameWork.Core.Interfacing;
 using UnityEngine;
@@ -39,18 +40,19 @@ public class ReviewStateInterface : StateInterface
         GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
     }
 
-    public void BuildReviewData(OrderedDictionary history, float mood)
+    public void BuildReviewData(List<ScenarioController.ChatObject> history, float mood)
     {
         _characterMood.fillAmount = (mood + 10) / 20;
         ClearList();
 
-        string[] dialogues = new string[history.Count];
-        history.Keys.CopyTo(dialogues,0);
-        for (var i = 0; i < dialogues.Length; i++)
+        //string[] dialogues = new string[history.Count];
+        //history.Keys.CopyTo(dialogues,0);
+
+        for (var i = 0; i < history.Count; i++)
         {
             Transform chatObject = null;
 
-            var entryKey = history[i];
+            var entryKey = history[i].Agent;
             if (entryKey == "Client")
             {
                 chatObject = GameObject.Instantiate(_clientChatPrefab).transform;
@@ -62,7 +64,7 @@ public class ReviewStateInterface : StateInterface
 
             if (chatObject != null)
             {
-                chatObject.FindChild("Panel").GetChild(0).GetComponent<Text>().text = dialogues[i];
+                chatObject.FindChild("Panel").GetChild(0).GetComponent<Text>().text = history[i].Utterence;
                 chatObject.transform.SetParent(_reviewContent.GetComponent<ScrollRect>().content, false);
             }
         }

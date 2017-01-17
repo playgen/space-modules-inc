@@ -28,7 +28,7 @@
       <Directory Id="INSTALLDIR">
         <Directory Id="smiDIR" Name="SpaceModulesInc">
           <Component Id="MainExecutable" Guid="73b1531f-f68b-4f9b-a0f4-fc271c4d6aec">
-            <File Id="smiEXE" Source="$(var.space-modules-inc.ProjectDir)/SMI.exe" KeyPath="yes" />
+            <File Id="smiEXE" Source="$(var.space-modules-inc.ProjectDir)/Build/WindowsSMI/SMI.exe" KeyPath="yes" />
           </Component>
           <Component Id="ChangeConfig" Guid="59fa452a-cf8d-4ee3-ac75-287ec94fb929" KeyPath="yes">
             <util:XmlConfig Id="elem1"
