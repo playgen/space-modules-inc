@@ -1,9 +1,6 @@
 [submodule "Assets/Plugins/unity-tracker"]
 	path = Assets/Plugins/unity-tracker
 url=git@github.com:playgen/unity-tracker.git
-[submodule "GameWork.Unity"]
-	path = GameWork.Unity
-	url = git@github.com:Game-Work/GameWork.Unity.git
 [submodule "sugar-unity"]
 	path = sugar-unity
 	url = git@codebasehq.com:playgen/rage/sugar-unity.git

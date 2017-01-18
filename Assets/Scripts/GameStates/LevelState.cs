@@ -1,67 +1,49 @@
-﻿using GameWork.Core.States;
+﻿using Assets.Scripts.Inputs;
+using GameWork.Core.Commands.Interfaces;
+using GameWork.Core.States.Tick.Input;
 
-public class LevelState : TickableSequenceState
+public class LevelState : InputTickState
 {
-	private LevelStateInterface _interface;
-	private ScenarioController _scenarioController;
+	private readonly ScenarioController _scenarioController;
 
 	public const string StateName = "LevelState";
 
-	public LevelState(ScenarioController scenarioController, LevelStateInterface @interface)
+	public LevelState(LevelStateInput input, ScenarioController scenarioController) : base(input)
 	{
 		_scenarioController = scenarioController;
-		_interface = @interface;
 	}
 
-	public override void Initialize()
-	{
-		_interface.Initialize();
-
-	}
-
-	public override void Terminate()
-	{
-		_interface.Terminate();
-	}
-
-	public override void Enter()
+	protected override void OnEnter()
 	{
 		Tracker.T.accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
-		//_scenarioController.RefreshSuccessEvent += _interface.UpdateLevelList;
-		//_interface.Enter();
 
 		// Round based
 		_scenarioController.NextLevel();
-		NextState();
+
+
+		//NextState();
 	}
 
-	public override void Exit()
-	{
-		//_scenarioController.RefreshSuccessEvent -= _interface.UpdateLevelList;
-		//_interface.Exit();
-	}
+	//public override void NextState()
+	//{
+	//	ChangeState(CallState.StateName);
+	//}
 
-	public override void NextState()
-	{
-		ChangeState(CallState.StateName);
-	}
-
-	public override void PreviousState()
-	{
-		ChangeState(MenuState.StateName);
-	}
+	//public override void PreviousState()
+	//{
+	//	ChangeState(MenuState.StateName);
+	//}
 
 	public override string Name
 	{
 		get { return StateName; }
 	}
 
-	public override void Tick(float deltaTime)
+	protected override void OnTick(float deltaTime)
 	{
-		if (_interface.HasCommands)
+		ICommand command;
+		if(CommandQueue.TryTakeFirstCommand(out command))
 		{
-			var command = _interface.TakeFirstCommand();
-
 			var refreshLevelDataCommand = command as RefreshLevelDataCommand;
 			if (refreshLevelDataCommand != null)
 			{
@@ -73,8 +55,6 @@ public class LevelState : TickableSequenceState
 			{
 				setLevelCommand.Execute(_scenarioController);
 			}
-			var commandResolver = new StateCommandResolver();
-			commandResolver.HandleSequenceStates(command, this);
 		}
 	}
 }

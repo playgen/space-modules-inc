@@ -1,70 +1,47 @@
-﻿using System.Diagnostics;
-using GameWork.Core.States;
+﻿using Assets.Scripts.Inputs;
+using GameWork.Core.Commands.Interfaces;
+using GameWork.Core.States.Tick.Input;
 
-public class GameState : TickableSequenceState
+public class GameState : InputTickState
 {
-    private readonly GameStateInterface _interface;
     private readonly ScenarioController _scenarioController;
     private readonly ModulesController _modulesController;
+	private readonly GameStateInput _input;
 
-    public const string StateName = "GameState";
+	public const string StateName = "GameState";
 
-    public GameState(ScenarioController scenarioController, ModulesController modulesController, GameStateInterface @interface)
+    public GameState(GameStateInput input, ScenarioController scenarioController, ModulesController modulesController) : base(input)
     {
-        _interface = @interface;
+	    _input = input;
         _scenarioController = scenarioController;
         _modulesController = modulesController;
     }
-
-    public override void Initialize()
-    {
-        _interface.Initialize();
-    }
-
-    public override void Terminate()
-    {
-        _interface.Terminate();
-    }
-
-    public override void Enter()
-    {
-        _interface.ShowCharacter(_scenarioController.CurrentCharacter);
-        _scenarioController.GetPlayerDialogueSuccessEvent += _interface.UpdatePlayerDialogue;
-        _scenarioController.GetCharacterDialogueSuccessEvent += _interface.UpdateCharacterDialogue;
-        _scenarioController.GetCharacterStrongestEmotionSuccessEvent += _interface.UpdateCharacterExpression;
-        _scenarioController.FinalStateEvent += _interface.HandleFinalState;
-        _interface.Enter();
-    }
-
-    public override void Exit()
-    {
-        _scenarioController.GetCharacterStrongestEmotionSuccessEvent -= _interface.UpdateCharacterExpression;
-        _scenarioController.GetCharacterDialogueSuccessEvent -= _interface.UpdateCharacterDialogue;
-        _scenarioController.GetPlayerDialogueSuccessEvent -= _interface.UpdatePlayerDialogue;
-        _scenarioController.FinalStateEvent -= _interface.HandleFinalState;
-        _interface.Exit();
-    }
-
+	
     public override string Name
     {
         get { return StateName; }
     }
 
-    public override void NextState()
-    {
-        ChangeState(ReviewState.StateName);
-    }
+    //public override void NextState()
+    //{
+    //    ChangeState(ReviewState.StateName);
+    //}
 
-    public override void PreviousState()
-    {
-        ChangeState(LevelState.StateName);
-    }
+    //public override void PreviousState()
+    //{
+    //    ChangeState(LevelState.StateName);
+    //}
 
-    public override void Tick(float deltaTime)
+    protected override void OnTick(float deltaTime)
     {
-        if (_interface.HasCommands)
+	    ICommand command;
+        if (CommandQueue.TryTakeFirstCommand(out command))
         {
-            var command = _interface.TakeFirstCommand();
+	        var updateDialogueFontSizeCommand = command as UpdateDialogueFontSizeCommand;
+	        if (updateDialogueFontSizeCommand != null)
+	        {
+		        updateDialogueFontSizeCommand.Execute(_input);
+	        }
 
             var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
             if (refreshPlayerDialogueCommand != null)
@@ -89,9 +66,6 @@ public class GameState : TickableSequenceState
             {
                 toggleModulesCommand.Execute(_modulesController);
             }
-
-            var commandResolver = new StateCommandResolver();
-            commandResolver.HandleSequenceStates(command, this);
         }
     }
 }

@@ -1,68 +1,35 @@
-﻿using GameWork.Core.States;
+﻿using Assets.Scripts.Inputs;
+using GameWork.Core.States.Tick.Input;
 
-public class LoadingState : TickableSequenceState
+public class LoadingState : InputTickState
 {
-    private LoadingStateInterface _interface;
-    private ScenarioController _scenarioController;
+	private readonly ScenarioController _scenarioController;
 
-    public const string StateName = "LoadingState";
+	public const string StateName = "LoadingState";
 
-    public LoadingState(ScenarioController scenarioController, LoadingStateInterface @interface)
-    {
-        _scenarioController = scenarioController;
-        _interface = @interface;
-    }
+	public LoadingState(LoadingStateInput input, ScenarioController scenarioController) : base(input)
+	{
+		_scenarioController = scenarioController;
+	}
 
-    public override string Name
-    {
-        get { return StateName; }
-    }
+	public override string Name
+	{
+		get { return StateName; }
+	}
+	
 
-    public override void Initialize()
-    {
-        _interface.Initialize();
-    }
+	protected override void OnEnter()
+	{
+		_scenarioController.Initialize();
+	}
 
-    public override void Terminate()
-    {
-        _interface.Terminate();
-    }
+	//public override void NextState()
+	//{
+	//    ChangeState(MenuState.StateName);
+	//}
 
-    public override void Enter()
-    {
-        _interface.Enter();
-        _scenarioController.Initialize();
-    }
-
-    public override void Exit()
-    {
-        _interface.Exit();
-    }
-
-    public override void NextState()
-    {
-        ChangeState(MenuState.StateName);
-    }
-
-    public override void PreviousState()
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void Tick(float deltaTime)
-    {
-        if (_interface.HasCommands)
-        {
-            var command = _interface.TakeFirstCommand();
-
-            //var quickGameCommand = command as QuickGameCommand;
-            //if (quickGameCommand != null)
-            //{
-            //    quickGameCommand.Execute(_controller);
-            //}
-
-            var commandResolver = new StateCommandResolver();
-            commandResolver.HandleSequenceStates(command, this);
-        }
-    }
+	//public override void PreviousState()
+	//{
+	//    throw new System.NotImplementedException();
+	//}
 }

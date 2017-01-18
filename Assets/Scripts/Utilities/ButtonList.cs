@@ -33,8 +33,8 @@ public class ButtonList
     {
         if (_buttons != null && _buttons.Length > 0)
         {
-            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_buttons[0].transform.parent);
-        }
+			LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_buttons[0].transform.parent);
+		}
         int smallestFontSize = 0;
         foreach (var textObj in _buttons)
         {
@@ -46,11 +46,13 @@ public class ButtonList
             text.resizeTextForBestFit = true;
             text.resizeTextMinSize = 1;
             text.resizeTextMaxSize = 100;
-            text.cachedTextGenerator.Invalidate();
+			text.fontSize = text.resizeTextMaxSize;
+			text.cachedTextGenerator.Invalidate();
             text.cachedTextGenerator.Populate(text.text, text.GetGenerationSettings(text.rectTransform.rect.size));
-            text.resizeTextForBestFit = false;
-            var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
-            var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
+			text.resizeTextForBestFit = false;
+			var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
+
+			var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
             if (text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y < newSizeRescale)
             {
                 newSizeRescale = text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y;

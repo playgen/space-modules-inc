@@ -1,64 +1,16 @@
-﻿using GameWork.Core.States;
+﻿using Assets.Scripts.Inputs;
+using GameWork.Core.States.Tick.Input;
 
-public class CallState : TickableSequenceState
+public class CallState : InputTickState
 {
-    private CallStateInterface _interface;
-
     public const string StateName = "CallState";
 
-    public CallState(CallStateInterface @interface)
+    public CallState(CallStateInput input) : base(input)
     {
-        _interface = @interface;
     }
 
     public override string Name
     {
         get { return StateName; }
-    }
-
-    public override void Initialize()
-    {
-        _interface.Initialize();
-    }
-
-    public override void Terminate()
-    {
-        _interface.Terminate();
-    }
-
-    public override void Enter()
-    {
-        _interface.Enter();
-    }
-
-    public override void Exit()
-    {
-        _interface.Exit();
-    }
-    public override void NextState()
-    {
-        ChangeState(GameState.StateName);
-    }
-
-    public override void PreviousState()
-    {
-        ChangeState(LevelState.StateName);
-    }
-
-    public override void Tick(float deltaTime)
-    {
-        if (_interface.HasCommands)
-        {
-            var command = _interface.TakeFirstCommand();
-
-            //var quickGameCommand = command as QuickGameCommand;
-            //if (quickGameCommand != null)
-            //{
-            //    quickGameCommand.Execute(_controller);
-            //}
-
-            var commandResolver = new StateCommandResolver();
-            commandResolver.HandleSequenceStates(command, this);
-        }
     }
 }

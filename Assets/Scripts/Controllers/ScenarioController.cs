@@ -1,20 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
-using System.Runtime.InteropServices;
 using AssetManagerPackage;
 using GameWork.Core.Commands.Interfaces;
 using IntegratedAuthoringTool;
 using IntegratedAuthoringTool.DTOs;
-using PlayGen.SUGAR.Common.Shared;
 using RolePlayCharacter;
 using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
-using System.Collections;
 using System.IO;
-using System.Text;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
@@ -116,6 +111,7 @@ public class ScenarioController : ICommandAction
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
+	public event Action StopTalkAnimationEvent;
 	public event Action FinalStateEvent;
 
 	#region Initialization
@@ -300,19 +296,21 @@ public class ScenarioController : ICommandAction
 			};
 
 			_audioController.Play(_audioClip,
-				onComplete: HandleEndState);
+				onComplete: HandleEndAudio);
 		}
 		else
 		{
-			HandleEndState();
+			HandleEndAudio();
 		}
 	}
 
 	
 	#endregion
 
-	private void HandleEndState()
+	private void HandleEndAudio()
 	{
+		if (StopTalkAnimationEvent != null) StopTalkAnimationEvent();
+
 		if (_currentStateName == Name.BuildName("End"))
 		{
 			if (SUGARManager.CurrentUser != null)

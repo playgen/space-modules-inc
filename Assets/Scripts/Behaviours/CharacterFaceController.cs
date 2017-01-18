@@ -37,7 +37,11 @@ public class CharacterFaceController : MonoBehaviour
     [SerializeField]
     private FacialExpression[] _facialExpressions;
 
-    void Start()
+	private FacialExpression _currentExpression;
+	private Coroutine _talkingAnimation;
+	private Coroutine _idleAnimation;
+
+	void Start()
     {
         LoadSprites();
         _eyebrowRenderer.enabled = true;
@@ -46,34 +50,71 @@ public class CharacterFaceController : MonoBehaviour
         SetEmotion("Idle");
     }
 
-
-
     public void SetEmotion(string emotion)
     {
-        StopAllCoroutines();
-        var expression = _facialExpressions.FirstOrDefault(facialExpression => facialExpression.Name.Equals(emotion));
-        if (expression != null)
+        StopCoroutines();
+        _currentExpression = _facialExpressions.FirstOrDefault(facialExpression => facialExpression.Name.Equals(emotion));
+        if (_currentExpression != null)
         {
-            _eyebrowRenderer.sprite = expression.Eyebrows;
-            _eyeRenderer.sprite = expression.Eyes;
+            _eyebrowRenderer.sprite = _currentExpression.Eyebrows;
+            _eyeRenderer.sprite = _currentExpression.Eyes;
 
-            _mouthRenderer.sprite = expression.Mouth;
-            StartCoroutine(IdleAnimation(expression));
+            _mouthRenderer.sprite = _currentExpression.Mouth;
+            _idleAnimation = StartCoroutine(IdleAnimation());
         }
     }
 
-    private IEnumerator IdleAnimation(FacialExpression expression)
+	private void StopCoroutines()
+	{
+		if (_idleAnimation != null)
+		{
+			StopCoroutine(_idleAnimation);
+		}
+		StopTalkAnimation();
+	}
+
+	private IEnumerator IdleAnimation()
     {
-        while (true)
+	    while (true)
         {
-            _eyeRenderer.sprite = expression.Eyes;
+            _eyeRenderer.sprite = _currentExpression.Eyes;
 
             yield return new WaitForSeconds(_blinkDelay);
 
-            foreach (var sprite in expression.BlinkFrames)
+            foreach (var sprite in _currentExpression.BlinkFrames)
             {
                 _eyeRenderer.sprite = sprite;
                 yield return new WaitForFixedUpdate();
+            }
+        }
+    }
+
+	public void StopTalkAnimation()
+	{
+		if (_talkingAnimation != null)
+		{
+			StopCoroutine(_talkingAnimation);
+			_mouthRenderer.sprite = _currentExpression.Mouth;
+		}
+	}
+
+	public void StartTalkAnimation()
+	{
+		_talkingAnimation = StartCoroutine(TalkAnimation());
+	}
+
+	private IEnumerator TalkAnimation()
+    {
+        while (true)
+        {
+            _mouthRenderer.sprite = _currentExpression.Mouth;
+
+			yield return new WaitForSeconds(0.2f);
+
+			foreach (var sprite in _currentExpression.MouthFrames)
+            {
+				_mouthRenderer.sprite = sprite;
+                yield return new WaitForSeconds(0.01f);
             }
         }
     }
@@ -118,4 +159,5 @@ public class CharacterFaceController : MonoBehaviour
             _facialExpressions[i] = expression;
         }
     }
+
 }
