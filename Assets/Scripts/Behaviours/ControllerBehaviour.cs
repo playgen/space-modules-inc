@@ -12,7 +12,7 @@ public class ControllerBehaviour : MonoBehaviour
 	private TickStateController _stateController;
 	private AudioController _audioController;
 
-	void Awake ()
+	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject);
 
@@ -24,91 +24,10 @@ public class ControllerBehaviour : MonoBehaviour
 		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
 
-		var loadingState = CreateLoadingState(scenarioController);
-		var menuState = CreateMenuState();
-		var settingsState = CreateSettingsState();
-		var levelState = CreateLevelState(scenarioController);
-		var callState = CreateCallState();
-		var gameState = CreateGameState(scenarioController, modulesController);
-		var reviewState = CreateReviewState(scenarioController);
-		var ScoreState = CreateScoreState(scenarioController);
-
-
-		_stateController = new TickStateController(
-			loadingState,
-			menuState,
-			settingsState,
-			levelState,
-			callState,
-			gameState,
-			reviewState,
-			ScoreState
-			);
-		_stateController.Initialize();
+		var gameStateControllerFactory = new GameStateControllerFactory(scenarioController, modulesController);
+		_stateController = gameStateControllerFactory.Create();
 	}
 
-	private LoadingState CreateLoadingState(ScenarioController scenarioController)
-	{
-		var input = new LoadingStateInput();
-		var state = new LoadingState(input, scenarioController);
-
-		return state;
-	}
-
-	private MenuState CreateMenuState()
-	{
-		var input = new MenuStateInput();
-		var state = new MenuState(input);
-
-		return state;
-	}
-
-	private SettingsState CreateSettingsState()
-	{
-		var input = new SettingsStateInput();
-		var state = new SettingsState(input);
-
-		return state;
-	}
-
-	private LevelState CreateLevelState(ScenarioController scenarioController)
-	{
-		var input = new LevelStateInput();
-		var state = new LevelState(input, scenarioController);
-
-		return state;
-	}
-
-	private CallState CreateCallState()
-	{
-		var input = new CallStateInput();
-		var state = new CallState(input);
-
-		return state;
-	}
-
-	private GameState CreateGameState(ScenarioController scenarioController, ModulesController modulesController)
-	{
-		var input = new GameStateInput(scenarioController);
-		var state = new GameState(input, scenarioController, modulesController);
-
-		return state;
-	}
-
-	private ReviewState CreateReviewState(ScenarioController scenarioController)
-	{
-		var input = new ReviewStateInput(scenarioController);
-		var state = new ReviewState(input, scenarioController);
-
-		return state;
-	}
-	
-	private ScoreState CreateScoreState(ScenarioController scenarioController)
-	{
-		var input = new ScoreStateInput(scenarioController);
-		var state = new ScoreState(input, scenarioController);
-		return state;
-	}
 
 	private void FixScreenRatio()
 	{

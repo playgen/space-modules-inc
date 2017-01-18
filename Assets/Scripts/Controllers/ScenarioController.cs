@@ -282,7 +282,6 @@ public class ScenarioController : ICommandAction
 	private void PlayDialogueAudio(string audioName)
 	{
 		var filePath = Path.Combine(Application.streamingAssetsPath, "Scenarios/Audio/F/" + audioName + ".wav");
-		Debug.Log(File.Exists(filePath));
 		if (File.Exists(filePath))
 		{
 			if (_audioClip != null)
@@ -309,15 +308,16 @@ public class ScenarioController : ICommandAction
 
 	private void HandleEndAudio()
 	{
-		if (StopTalkAnimationEvent != null) StopTalkAnimationEvent();
+		Debug.Log("AUDIO END");
+		StopTalkAnimationEvent();
 
 		if (_currentStateName == Name.BuildName("End"))
 		{
 			if (SUGARManager.CurrentUser != null)
 			{
-				TraceScore();
+				//TraceScore();
 			}
-			if (FinalStateEvent != null) FinalStateEvent();
+			FinalStateEvent();
 		}
 	}
 

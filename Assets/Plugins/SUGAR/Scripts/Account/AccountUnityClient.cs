@@ -108,8 +108,10 @@ namespace PlayGen.SUGAR.Unity
 
 		private void SignIn()
 		{
+			Debug.Log("SignIn");
 			if (_allowAutoLogin)
 			{
+				
 				#if UNITY_EDITOR
 				_autoLoginSourcePassRequired = !EditorPrefs.HasKey("AutoLoginSourcePassRequired") || EditorPrefs.GetBool("AutoLoginSourcePassRequired");
 				_autoLoginAuto = !EditorPrefs.HasKey("AutoLoginAuto") || EditorPrefs.GetBool("AutoLoginAuto");
