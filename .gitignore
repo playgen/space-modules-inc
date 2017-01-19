@@ -48,3 +48,11 @@ space-modules-inc-setup/bin/
 
 !/Assets/GameWork/*
 !/Assets/GameWork.meta
+Assets/Resources/Sprites/Characters/Female_Base/Body/Base_no_mask.png
+Assets/Resources/Sprites/Characters/Female_Base/Body/Base_no_mask.png.meta
+Assets/Resources/Sprites/Characters/Female_Character_01/Outfit_Hair/Outfit_no_mask.png
+Assets/Resources/Sprites/Characters/Female_Character_01/Outfit_Hair/Outfit_no_mask.png.meta
+Assets/Sprites/Game/Panel_Bottom_Header_old.png
+Assets/Sprites/Game/Panel_Bottom_Header_old.png.meta
+Assets/Sprites/Game/Panel_Bottom_old.png
+Assets/Sprites/Game/Panel_Bottom_old.png.meta

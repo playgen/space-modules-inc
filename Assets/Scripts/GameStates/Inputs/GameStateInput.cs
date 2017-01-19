@@ -40,7 +40,7 @@ namespace Assets.Scripts.Inputs
 			_multipleChoicePrefab = Resources.Load("Prefabs/MultipleChoiceGroup") as GameObject;
 			_dialoguePanel =
 				GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
-			_npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCText");
+			_npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCTextHolder/NPCText");
 			var modulesButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton");
 			_characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
 
@@ -175,7 +175,7 @@ namespace Assets.Scripts.Inputs
 				//choiceItem.GetComponent<RectTransform>().rect = dialogueObject.GetComponent<Rect>().height;
 				var offset = i*choiceItem.GetComponent<RectTransform>().rect.height;
 				contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
-				choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
+				choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset * 0.85f);
 				choiceItem.GetComponent<Button>().onClick.AddListener(delegate
 				{
 					OnDialogueOptionClick(dialogueAction);

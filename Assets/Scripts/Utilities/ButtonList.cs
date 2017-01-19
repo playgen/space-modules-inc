@@ -66,7 +66,7 @@ public class ButtonList
         foreach (var textObj in _buttons)
         {
             var text = textObj.GetComponentInChildren<Text>();
-            if (!text)
+            if (!text || textObj.name == ignore)
             {
                 continue;
             }
