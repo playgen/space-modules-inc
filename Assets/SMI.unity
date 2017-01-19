@@ -11857,7 +11857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57bb6379ebe1f894d91f8e286feae45c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseAddress: http://localhost:62312/
+  _baseAddress: http://sugar.playgen.internal/
   _gameToken: SMI
   _gameId: 1
   _useAchievements: 1
