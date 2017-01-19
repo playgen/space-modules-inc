@@ -49,6 +49,7 @@ public class GameStateControllerFactory
 
 		var menuTransition = new EventTransition(MenuState.StateName);
 		input.LoggedInEvent += menuTransition.ChangeState;
+		input.OfflineClickedEvent += menuTransition.ChangeState;
 
 		state.AddTransitions(menuTransition);
 
