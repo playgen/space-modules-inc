@@ -46,7 +46,7 @@ namespace PlayGen.SUGAR.Unity
 			_nearButton.onClick.AddListener(delegate { UpdateFilter(1); });
 			_friendsButton.onClick.AddListener(delegate { UpdateFilter(2); });
 			_closeButton.onClick.AddListener(delegate { SUGARManager.Unity.DisableObject(gameObject); });
-			_signinButton.onClick.AddListener(AttemptSignIn);
+			//_signinButton.onClick.AddListener(AttemptSignIn);
 		}
 
 		private void OnEnable()
@@ -67,7 +67,7 @@ namespace PlayGen.SUGAR.Unity
 			SUGARManager.Achievement.Hide();
 			SUGARManager.Unity.EnableObject(gameObject);
 			_errorText.text = string.Empty;
-			_signinButton.gameObject.SetActive(false);
+			//_signinButton.gameObject.SetActive(false);
 			_topButton.interactable = true;
 			_nearButton.interactable = true;
 			_friendsButton.interactable = true;

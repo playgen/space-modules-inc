@@ -172,7 +172,6 @@ namespace Assets.Scripts.Inputs
 				var optionText = dialogueAction.Utterance;
 				var choiceItem = GameObject.Instantiate(choiceItemPrefab);
 				choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
-				//choiceItem.GetComponent<RectTransform>().rect = dialogueObject.GetComponent<Rect>().height;
 				var offset = i*choiceItem.GetComponent<RectTransform>().rect.height;
 				contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
 				choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset * 0.85f);
@@ -184,7 +183,6 @@ namespace Assets.Scripts.Inputs
 			}
 			var rectContent = scrollRect.content;
 			rectContent.sizeDelta = new Vector2(0, contentTotalHeight);
-
 			CommandQueue.AddCommand(new UpdateDialogueFontSizeCommand(dialogueObject));
 		}
 

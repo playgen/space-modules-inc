@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GameWork.Core.Commands.Interfaces;
@@ -45,6 +46,8 @@ public class ModulesController : ICommandAction
     private int _stateLevel;
     private ModuleEntry[] _modulesDatabase;
     private Button _backButton;
+	private Button _nextArrow;
+	private Button _backArrow;
 
 	public ModulesController()
     {
@@ -62,6 +65,13 @@ public class ModulesController : ICommandAction
         _backButton = backButtonObject.GetComponent<Button>();
 
 		_backgroundOverlay.GetComponent<Button>().onClick.AddListener(TogglePopup);
+
+		var nextArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow");
+	    _nextArrow = nextArrowObject.GetComponent<Button>();
+
+		var backArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackArrow");
+	    _backArrow = backArrowObject.GetComponent<Button>();
+
 
 		LoadJSONModules();
 	}
@@ -112,7 +122,9 @@ public class ModulesController : ICommandAction
             listItem.GetComponent<Button>().onClick.AddListener(delegate
             {
 				LoadModule(module, listItem);
-            });
+				_nextArrow.gameObject.SetActive(true);
+				_backArrow.gameObject.SetActive(true);
+			});
         }
         _backButton.onClick.AddListener(LoadIndex);
 
@@ -120,27 +132,80 @@ public class ModulesController : ICommandAction
 
     private void LoadModule(ModuleEntry module, GameObject listItem)
     {
+	    var currentModuleList = module.Faq;
+	    var index = 0;
+	    GameObject[] moduleProblem;
+
         _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
         var moduleItem = GameObject.Instantiate(listItem);
         ClearList();
         moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
         moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
-        foreach (var description in module.Faq)
-        {
-            var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-			problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
-	        var problemText = description.Problem + String.Format("\n\n<color=#5BEAFFFF><b>{0}</b>:</color>\n{1}\n", Localization.Get("SOLUTION"), description.Solution);
-			problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = problemText;
-		}
+
+		// TODO: Renable me for module descriptions
+	    //var descriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		//descriptionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("DESCRIPTION", true);
+		//descriptionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = module.Description;
+
+	    moduleProblem = ShowModuleProblem(currentModuleList[index]);
+
+		// TODO: Refactor this
+		_nextArrow.onClick.AddListener(() =>
+		{
+			ClearModuleProblem(moduleProblem);
+			index++;
+			if (index == currentModuleList.Length)
+			{
+				index = 0;
+			}
+			moduleProblem = ShowModuleProblem(currentModuleList[index]);
+		});
+
+		_backArrow.onClick.AddListener(() =>
+		{
+			ClearModuleProblem(moduleProblem);
+			index--;
+			if (index < 0)
+			{
+				index = currentModuleList.Length - 1;
+			}
+			moduleProblem = ShowModuleProblem(currentModuleList[index]);
+		});
+
 		_backButton.onClick.AddListener(delegate
-        {
+		{
+			_nextArrow.onClick.RemoveAllListeners();
+			_backArrow.onClick.RemoveAllListeners();
+			_nextArrow.gameObject.SetActive(false);
+			_backArrow.gameObject.SetActive(false);
 			LoadModules(module.Type);
 		});
-    }
+
+	}
+
+	private void ClearModuleProblem(GameObject[] moduleProblem)
+	{
+		foreach (var gameObject in moduleProblem)
+		{
+			GameObject.Destroy(gameObject);
+		}
+	}
+
+	private GameObject[] ShowModuleProblem(FaqEntry currentModule)
+	{
+		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
+		problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = currentModule.Problem;
+		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		solutionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
+		solutionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = currentModule.Solution;
+
+		return new[] {problemItem, solutionItem};
+	}
 
 
-    private void ClearList()
+	private void ClearList()
     {
         _backButton.onClick.RemoveAllListeners();
         foreach (RectTransform child in _popupContent.GetComponent<ScrollRect>().content)
@@ -169,6 +234,10 @@ public class ModulesController : ICommandAction
     {
 		if (_modulesPopup.activeInHierarchy)
         {
+			_nextArrow.onClick.RemoveAllListeners();
+			_backArrow.onClick.RemoveAllListeners();
+			_nextArrow.gameObject.SetActive(false);
+			_backArrow.gameObject.SetActive(false);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
 			_modulesPopup.SetActive(false);
 

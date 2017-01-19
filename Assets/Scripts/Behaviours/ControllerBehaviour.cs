@@ -57,7 +57,10 @@ public class ControllerBehaviour : MonoBehaviour
 		{
 			SUGARManager.Achievement.DisplayList();
 		}
-		_audioController.Tick(Time.deltaTime);
+		if (_audioController != null)
+		{
+			_audioController.Tick(Time.deltaTime);
+		}
 		_stateController.Tick(Time.deltaTime);
 		
 	}

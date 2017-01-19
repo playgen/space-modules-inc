@@ -425,6 +425,32 @@ public class ScenarioController : ICommandAction
 
 		// The actual write to google
 		WWW www = new WWW(directSubmitUrl);
+
+
+
+		// The following string contains the key for the google form that will be used to write trace data
+		string sheetsKey2 = "1FAIpQLSfbC1bSoKJ_b4necVBYnEVq83dA8X0jWRANRNkTNeE_FqXDkw";
+
+		// Here the proper string is constructed to fill and directly post the trace to a google form
+		string directSubmitUrl2 = "https://docs.google.com/forms/d/e/"
+		 + sheetsKey
+		 + "/formResponse?entry.1676366924="
+		 + SUGARManager.CurrentUser.Id
+		 + "&entry.1418356935="
+		 + _scores["DifficultyLevel"]
+		 + "&entry.2094551490="
+		 + _scores["Session"]
+		 + "&entry.1343146404="
+		 + _scores["Code"]
+		 + "&entry.1206698998="
+		 + _scores["UserID"]
+		 + "&entry.500865333="
+		 + _scores["ResponseTime"]
+		 + "&submit=Submit"; // This part ensures direct writing instead of first opening the form
+
+		// The actual write to google
+		WWW www2 = new WWW(directSubmitUrl2);
+
 	}
 
 
