@@ -24,15 +24,14 @@ public class ScenarioController : ICommandAction
 		private readonly string[] _scenarioPaths;
 		public readonly string Character;
 		public int LevelId;
+		public int MaxPoints;
 
-		//public IntegratedAuthoringToolAsset IAT {  get { return _iat; } }
-		//private IntegratedAuthoringToolAsset _iat;
-
-		public ScenarioData(int levelId, string[] scenarioPaths, string character)
+		public ScenarioData(int levelId, string[] scenarioPaths, string character, int maxPoints)
 		{
 			LevelId = levelId;
 			_scenarioPaths = scenarioPaths;
 			Character = character;
+			MaxPoints = maxPoints;
 		}
 
 		public IntegratedAuthoringToolAsset GetRandomVariation()
@@ -63,6 +62,7 @@ public class ScenarioController : ICommandAction
 		public int Id { get; set; }
 		public string Prefix { get; set; }
 		public string Character { get; set; }
+		public int MaxPoints { get; set; }
 	}
 
 	public class ScoreObject
@@ -105,6 +105,8 @@ public class ScenarioController : ICommandAction
 	public RolePlayCharacterAsset CurrentCharacter;
 	private AudioController _audioController;
 	private AudioClipModel _audioClip;
+	private ScenarioData _currentScenario;
+	private string _roundNumber;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<List<ChatObject>, float> GetReviewDataSuccessEvent;
@@ -136,32 +138,32 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
 		//var round = obj.Rounds[1].Levels;
-		var roundNumber = CommandLineUtility.CustomArgs["round"];
-		var round = obj.Rounds[Int32.Parse(roundNumber)].Levels;
+		_roundNumber = CommandLineUtility.CustomArgs["round"];
+		var round = obj.Rounds[Int32.Parse(_roundNumber)].Levels;
 		List<ScenarioData> data = new List<ScenarioData>();
 		foreach (var level in round)
 		{
-			data.Add(CreateScenario(level.Id, level.Prefix, level.Character));
+			data.Add(CreateScenario(level.Id, level.Prefix, level.Character, level.MaxPoints));
 		}
 		_scenarios = data.ToArray();
 		LevelMax = _scenarios.Length;
 	}
 
-	private ScenarioData CreateScenario(int level, string prefix, string character)
+	private ScenarioData CreateScenario(int level, string prefix, string character, int maxPoints)
 	{
 		var result = _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray();
-		return new ScenarioData(level, result, character);
+		return new ScenarioData(level, result, character, maxPoints);
 	}
 
 	public void NextLevel()
 	{
 		CurrentLevel++;
 		_scores = new Dictionary<string, int>();
-		var scenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
-		if (scenario != null)
+		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
+		if (_currentScenario != null)
 		{
-			_integratedAuthoringTool = scenario.GetRandomVariation();
-			CurrentCharacter = _integratedAuthoringTool.GetCharacterProfile(scenario.Character);
+			_integratedAuthoringTool = _currentScenario.GetRandomVariation();
+			CurrentCharacter = _integratedAuthoringTool.GetCharacterProfile(_currentScenario.Character);
 			CurrentCharacter.Initialize();
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
 		}
@@ -315,7 +317,7 @@ public class ScenarioController : ICommandAction
 		{
 			if (SUGARManager.CurrentUser != null)
 			{
-				//TraceScore();
+				TraceScore();
 			}
 			FinalStateEvent();
 		}
@@ -339,20 +341,46 @@ public class ScenarioController : ICommandAction
 	public void GetScoreData()
 	{
 		var mood = (CurrentCharacter.Mood + 10) / 20;
-		var calcStars = Mathf.CeilToInt(mood * 3);
-		var stars = calcStars < 1 ? 1 : calcStars;
+		var scoreTotal = 0;
+		foreach (var scoreVal in _scores.Values)
+		{
+			scoreTotal += scoreVal;
+		}
+		var lowerScoreBracket = _currentScenario.MaxPoints*0.4f;
+		var upperScoreBracket = _currentScenario.MaxPoints*0.8f;
+		int stars;
+		if (scoreTotal < lowerScoreBracket)
+		{
+			stars = 1;
+		}
+		else if (scoreTotal <= upperScoreBracket)
+		{
+			stars = 2;
+		}
+		else
+		{
+			stars = 3;
+		}
+
+		// Minimum score
+		if (scoreTotal < 1)
+		{
+			scoreTotal = 1;
+		}
+
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
-			Score = Mathf.CeilToInt(mood * 99999),
+			Score = Mathf.CeilToInt(scoreTotal * 999),
 			ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
 			Bonus = Mathf.CeilToInt(mood * 999)
 		};
 
-
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
+
+		Tracker.T.Trace();
 
 		long score = scoreObj.Score;
 		if (SUGARManager.CurrentUser != null)
@@ -403,6 +431,17 @@ public class ScenarioController : ICommandAction
 		string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
 
 		/// check for scores before referencing key
+		int closure;
+		_scores.TryGetValue("Closure", out closure);
+		int empathy;
+		_scores.TryGetValue("Empathy", out empathy);
+		int faq;
+		_scores.TryGetValue("Faq", out faq);
+		int inquire;
+		_scores.TryGetValue("Inquire", out inquire);
+		int polite;
+		_scores.TryGetValue("Polite", out polite);
+
 
 		// Here the proper string is conclassed to fill and directly post the trace to a google form
 		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
@@ -412,15 +451,15 @@ public class ScenarioController : ICommandAction
 			+ "&entry.858779356="
 			+ SUGARManager.GroupId
 			+ "&entry.1962055523="
-			+ _scores["Closure"]
+			+ closure
 			+ "&entry.976064318="
-			+ _scores["Empathy"]
+			+ empathy
 			+ "&entry.408530093="
-			+ _scores["Faq"]
+			+ faq
 			+ "&entry.2140003828="
-			+ _scores["Inquire"]
+			+ inquire
 			+ "&entry.695568148="
-			+ _scores["Polite"]
+			+ polite
 			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
 
 		// The actual write to google

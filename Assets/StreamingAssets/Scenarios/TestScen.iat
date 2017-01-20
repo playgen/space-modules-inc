@@ -24,13 +24,7 @@
         "NextState": "Opening",
         "Meaning": [],
         "Style": [],
-        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
-      },
-      {
-        "CurrentState": "Start",
-        "NextState": "Opening",
-        "Meaning": [],
-        "Style": [],
+        "FileName": "S-OP-P",
         "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
       },
       {
@@ -38,6 +32,15 @@
         "NextState": "Opening",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-OP-N",
+        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-OP-R",
         "Utterance": "Hallo daar, wat is er aan de hand?"
       },
       {
@@ -45,6 +48,7 @@
         "NextState": "Goodbye",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-RSPDM-P",
         "Utterance": "O, dat is fijn om te horen. We zijn blij met tevreden klanten. Kan ik verder nog iets voor U doen?"
       },
       {
@@ -52,6 +56,7 @@
         "NextState": "Goodbye",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-RSPDM-N",
         "Utterance": "Leuk hoor. Nog iets anders te melden?"
       },
       {
@@ -59,6 +64,7 @@
         "NextState": "Goodbye",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-RSPDM-R",
         "Utterance": "Ok. Verder?"
       }
     ],

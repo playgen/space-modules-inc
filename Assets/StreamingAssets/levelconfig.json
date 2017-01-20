@@ -1,34 +1,121 @@
 {
-	"Rounds": [
-		{
-			"Levels": [
-				{
-					"Id": 1,
-					"Prefix": "TestScen",
-					"Character": "Positive",
-				}
-			],
-			"PostQuestions": "False"
-		},
-		{
-			"Levels": [
-				{
-					"Id": 1,
-					"Prefix": "KnownCheck-Expert-",
-					"Character": "Positive",
-				},
-				{
-					"Id": 2,
-					"Prefix": "KnownOK-Novice-",
-					"Character": "Positive",
-				},
-				{
-					"Id": 3,
-					"Prefix": "KnownOK-Expert-",
-					"Character": "Positive",
-				}
-			],
-			"PostQuestions": "True"
-		}
-	]	
+  "Rounds":
+  [
+    {
+      "PostQuestions": false,
+      "Levels": [
+        {
+          "ID": 0,
+          "Prefix": "TestScen",
+          "Character": "Positive",
+          "MaxPoints": 0
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Positive",
+          "MaxPoints": 5
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 3,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Neutral",
+          "MaxPoints": 5
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 5,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 8
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 6,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 7,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 8,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 9,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 10,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 10
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 11,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 12,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 13,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 8
+        },
+        {
+          "ID": 14,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 10
+        },
+        {
+          "ID": 15,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 10
+        }
+      ]
+    }
+  ]
 }

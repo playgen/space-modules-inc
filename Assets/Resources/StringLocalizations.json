@@ -1,162 +1,162 @@
 [
-  {
-    "key": "EXAMPLE_TEXT_1",
-    "en-gb": "English",
-    "nl": "Nederlands"
-  },
-  {
-    "key": "LOADING",
-    "en-gb": "Loading",
-    "nl": "Laden"
-  },
-  {
-    "key": "LOADING_FORMAT",
-    "en-gb": "Loading {0}%",
-    "nl": "Laden {0}%"
-  },
-  {
-    "key": "PLAY",
-    "en-gb": "Play",
-    "nl": "Speel"
-  },
-  {
-    "key": "SETTINGS",
-    "en-gb": "Settings",
-    "nl": "Instellingen"
-  },
-  {
-    "key": "LEADERBOARD",
-    "en-gb": "Leaderboard",
-    "nl": "Leaderboard"
-  },
-  {
-    "key": "LEVEL_TITLE",
-    "en-gb": "Customer Line",
-    "nl": "Klant Gesprek"
-  },
-  {
-    "key": "LEVEL_SUBTITLE",
-    "en-gb": "Choose a call line below",
-    "nl": "Kies hieronder een gesprek"
-  },
-  {
-    "key": "BACK",
-    "en-gb": "Back",
-    "nl": "Terug"
-  },
-  {
-    "key": "LINE",
-    "en-gb": "LINE {0}",
-    "nl": "GESPREK {0}"
-  },
-  {
-    "key": "INCOMING_CALL",
-    "en-gb": "INCOMING \nINTERCOM CALL",
-    "nl": "INKOMEND \nINTERCOM GESPREK"
-  },
-  {
-    "key": "ANSWER",
-    "en-gb": "Answer",
-    "nl": "Antwoord"
-  },
-  {
-    "key": "MODULES",
-    "en-gb": "Modules",
-    "nl": "Modules"
-  },
-  {
-    "key": "REVIEW_TITLE",
-    "en-gb": "Review",
-    "nl": "Overzicht"
-  },
-  {
-    "key": "NEXT",
-    "en-gb": "Next",
-    "nl": "Volgende"
-  },
-  {
-    "key": "CUSTOMER_SATISFACTION",
-    "en-gb": "Customer Satisfaction",
-    "nl": "Tevredenheid Klant"
-  },
-  {
-    "key": "RESULT_TITLE",
-    "en-gb": "Overall Result",
-    "nl": "Eindresultaat"
-  },
-  {
-    "key": "SCORE",
-    "en-gb": "Score",
-    "nl": "Score"
-  },
-  {
-    "key": "AVERAGE_CUSTOMER_EMOTION",
-    "en-gb": "Average Customer Emotion",
-    "nl": "Gemiddelde Emotie Klant"
-  },
-  {
-    "key": "FEEDBACK_1",
-    "en-gb": "Try a bit harder next time",
-    "nl": "Volgende keer beter proberen"
-  },
-  {
-    "key": "FEEDBACK_2",
-    "en-gb": "Not Bad Keep it Up!",
-    "nl": "Niet Slecht, Ga Zo Door!"
-  },
-  {
-    "key": "FEEDBACK_3",
-    "en-gb": "Excellent!",
-    "nl": "Perfect!"
-  },
-  {
-    "key": "COMMENT_POSITIVE",
-    "en-gb": "Great!",
-    "nl": "Geweldig!"
-  },
-  {
-    "key": "COMMENT_NEGATIVE",
-    "en-gb": "Poor",
-    "nl": "Kan Beter"
-  },
-  {
-    "key": "BONUS",
-    "en-gb": "Bonus",
-    "nl": "Bonus"
-  },
-  {
-    "key": "LANGUAGE",
-    "en-gb": "Language",
-    "nl": "Taal"
-  },
-  {
-    "key": "APPLY",
-    "en-gb": "Apply",
-    "nl": "Toepassen"
-  },
-  {
-    "key": "CANCEL",
-    "en-gb": "Back",
-    "nl": "Terug"
-  },
-  {
-    "key": "PROBLEM",
-    "en-gb": "PROBLEM",
-    "nl": "PROBLEEM"
-  },
-  {
-    "key": "SOLUTION",
-    "en-gb": "Solution",
-    "nl": "Oplossing"
-  },
-  {
-    "key": "ENGLISH",
-    "en-gb": "English",
-    "nl": "Engels"
-  },
-  {
-    "key": "DUTCH",
-    "en-gb": "Dutch",
-    "nl": "Nederlands"
-  }
+	{
+		"key": "EXAMPLE_TEXT_1",
+		"en-gb": "English",
+		"nl": "Nederlands"
+	},
+	{
+		"key": "LOADING",
+		"en-gb": "Loading",
+		"nl": "Laden"
+	},
+	{
+		"key": "LOADING_FORMAT",
+		"en-gb": "Loading {0}%",
+		"nl": "Laden {0}%"
+	},
+	{
+		"key": "PLAY",
+		"en-gb": "Play",
+		"nl": "Speel"
+	},
+	{
+		"key": "SETTINGS",
+		"en-gb": "Settings",
+		"nl": "Instellingen"
+	},
+	{
+		"key": "LEADERBOARD",
+		"en-gb": "Leaderboard",
+		"nl": "Leaderboard"
+	},
+	{
+		"key": "LEVEL_TITLE",
+		"en-gb": "Customer Line",
+		"nl": "Klant Gesprek"
+	},
+	{
+		"key": "LEVEL_SUBTITLE",
+		"en-gb": "Choose a call line below",
+		"nl": "Kies hieronder een gesprek"
+	},
+	{
+		"key": "BACK",
+		"en-gb": "Back",
+		"nl": "Terug"
+	},
+	{
+		"key": "LINE",
+		"en-gb": "LINE {0}",
+		"nl": "GESPREK {0}"
+	},
+	{
+		"key": "INCOMING_CALL",
+		"en-gb": "INCOMING \nINTERCOM CALL",
+		"nl": "INKOMEND \nINTERCOM GESPREK"
+	},
+	{
+		"key": "ANSWER",
+		"en-gb": "Answer",
+		"nl": "Antwoord"
+	},
+	{
+		"key": "MODULES",
+		"en-gb": "Modules",
+		"nl": "Modules"
+	},
+	{
+		"key": "REVIEW_TITLE",
+		"en-gb": "Review",
+		"nl": "Overzicht"
+	},
+	{
+		"key": "NEXT",
+		"en-gb": "Next",
+		"nl": "Volgende"
+	},
+	{
+		"key": "CUSTOMER_SATISFACTION",
+		"en-gb": "Customer Satisfaction",
+		"nl": "Tevredenheid Klant"
+	},
+	{
+		"key": "RESULT_TITLE",
+		"en-gb": "Overall Result",
+		"nl": "Eindresultaat"
+	},
+	{
+		"key": "SCORE",
+		"en-gb": "Score",
+		"nl": "Score"
+	},
+	{
+		"key": "AVERAGE_CUSTOMER_EMOTION",
+		"en-gb": "Average Customer Emotion",
+		"nl": "Gemiddelde Emotie Klant"
+	},
+	{
+		"key": "FEEDBACK_1",
+		"en-gb": "Try a bit harder next time",
+		"nl": "Volgende keer beter proberen"
+	},
+	{
+		"key": "FEEDBACK_2",
+		"en-gb": "Not Bad Keep it Up!",
+		"nl": "Niet Slecht, Ga Zo Door!"
+	},
+	{
+		"key": "FEEDBACK_3",
+		"en-gb": "Excellent!",
+		"nl": "Perfect!"
+	},
+	{
+		"key": "COMMENT_POSITIVE",
+		"en-gb": "Great!",
+		"nl": "Geweldig!"
+	},
+	{
+		"key": "COMMENT_NEGATIVE",
+		"en-gb": "Poor",
+		"nl": "Kan Beter"
+	},
+	{
+		"key": "BONUS",
+		"en-gb": "Bonus",
+		"nl": "Bonus"
+	},
+	{
+		"key": "LANGUAGE",
+		"en-gb": "Language",
+		"nl": "Taal"
+	},
+	{
+		"key": "APPLY",
+		"en-gb": "Apply",
+		"nl": "Toepassen"
+	},
+	{
+		"key": "CANCEL",
+		"en-gb": "Back",
+		"nl": "Terug"
+	},
+	{
+		"key": "PROBLEM",
+		"en-gb": "PROBLEM",
+		"nl": "PROBLEEM"
+	},
+	{
+		"key": "SOLUTION",
+		"en-gb": "Solution",
+		"nl": "Oplossing"
+	},
+	{
+		"key": "ENGLISH",
+		"en-gb": "English",
+		"nl": "English"
+	},
+	{
+		"key": "DUTCH",
+		"en-gb": "Nederlands",
+		"nl": "Nederlands"
+	}
 ]

@@ -24,6 +24,7 @@ namespace Assets.Scripts.Inputs
 			var language = _creator.Language(false);
 			applyButton.onClick.AddListener(delegate { OnApplyClick(language); });
 			backButton.onClick.AddListener(OnBackClick);
+			_creator.RebuildLayout();
 		}
 
 		private void OnApplyClick(Dropdown language)

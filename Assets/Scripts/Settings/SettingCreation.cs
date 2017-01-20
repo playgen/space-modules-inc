@@ -99,6 +99,7 @@ public class SettingCreation : MonoBehaviour
 		var languages = Localization.AvailableLanguages();
 		newObj.GetComponent<DropdownLocalization>().SetOptions(languages);
 		newObj.value = (int)Localization.SelectedLanguage - 1;
+		newObj.captionText.text = newObj.options[newObj.value].text;
 		return newObj;
 	}
 

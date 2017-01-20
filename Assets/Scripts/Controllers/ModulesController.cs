@@ -144,33 +144,42 @@ public class ModulesController : ICommandAction
 
 
 		// TODO: Renable me for module descriptions
-	    //var descriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		//var descriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
 		//descriptionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("DESCRIPTION", true);
 		//descriptionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = module.Description;
 
-	    moduleProblem = ShowModuleProblem(currentModuleList[index]);
 
-		// TODO: Refactor this
+		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+	    problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
+		var problemItemText = problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>();
+		problemItemText.text = currentModuleList[0].Problem;
+
+		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		solutionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
+		var solutionItemText = solutionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>();
+		solutionItemText.text = currentModuleList[0].Solution;
+
+
 		_nextArrow.onClick.AddListener(() =>
 		{
-			ClearModuleProblem(moduleProblem);
 			index++;
 			if (index == currentModuleList.Length)
 			{
 				index = 0;
 			}
-			moduleProblem = ShowModuleProblem(currentModuleList[index]);
+			problemItemText.text = currentModuleList[index].Problem;
+			solutionItemText.text = currentModuleList[index].Solution;
 		});
 
 		_backArrow.onClick.AddListener(() =>
 		{
-			ClearModuleProblem(moduleProblem);
 			index--;
 			if (index < 0)
 			{
 				index = currentModuleList.Length - 1;
 			}
-			moduleProblem = ShowModuleProblem(currentModuleList[index]);
+			problemItemText.text = currentModuleList[index].Problem;
+			solutionItemText.text = currentModuleList[index].Solution;
 		});
 
 		_backButton.onClick.AddListener(delegate
@@ -183,27 +192,6 @@ public class ModulesController : ICommandAction
 		});
 
 	}
-
-	private void ClearModuleProblem(GameObject[] moduleProblem)
-	{
-		foreach (var gameObject in moduleProblem)
-		{
-			GameObject.Destroy(gameObject);
-		}
-	}
-
-	private GameObject[] ShowModuleProblem(FaqEntry currentModule)
-	{
-		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
-		problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = currentModule.Problem;
-		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		solutionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
-		solutionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = currentModule.Solution;
-
-		return new[] {problemItem, solutionItem};
-	}
-
 
 	private void ClearList()
     {

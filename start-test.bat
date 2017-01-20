@@ -1,1 +1,0 @@
-start SMI.exe -u jim -s SPL -a

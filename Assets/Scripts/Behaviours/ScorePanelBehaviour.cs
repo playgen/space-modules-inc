@@ -58,7 +58,7 @@ public class ScorePanelBehaviour : MonoBehaviour
 
         _emotionComment.text = Localization.Get(emotionCommentToken);
 
-        _bonusText.text = "+ " + bonus.ToString("N0");
+        _bonusText.text = "+" + bonus.ToString("N0");
     }
 
 }

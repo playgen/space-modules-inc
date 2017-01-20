@@ -61,7 +61,10 @@ public class ControllerBehaviour : MonoBehaviour
 		{
 			_audioController.Tick(Time.deltaTime);
 		}
-		_stateController.Tick(Time.deltaTime);
-		
+		if (_stateController != null)
+		{
+			_stateController.Tick(Time.deltaTime);
+		}
+
 	}
 }

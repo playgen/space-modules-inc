@@ -112,7 +112,7 @@ namespace PlayGen.SUGAR.Unity
 			if (_allowAutoLogin)
 			{
 				
-				#if UNITY_EDITOR
+				#if UNITY_EDITOR 
 				_autoLoginSourcePassRequired = !EditorPrefs.HasKey("AutoLoginSourcePassRequired") || EditorPrefs.GetBool("AutoLoginSourcePassRequired");
 				_autoLoginAuto = !EditorPrefs.HasKey("AutoLoginAuto") || EditorPrefs.GetBool("AutoLoginAuto");
 				_autoLoginUsername = EditorPrefs.HasKey("AutoLoginUsername") ? EditorPrefs.GetString("AutoLoginUsername") : string.Empty;

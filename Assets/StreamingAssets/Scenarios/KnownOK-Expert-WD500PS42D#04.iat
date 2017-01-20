@@ -24,20 +24,23 @@
         "NextState": "Opening1",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
+        "FileName": "S-OP-P",
+        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening1",
         "Meaning": [],
         "Style": [],
-        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
+        "FileName": "S-OP-N",
+        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-OP-R",
         "Utterance": "Hallo daar, wat is er aan de hand?"
       },
       {
@@ -45,13 +48,15 @@
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKPR-P",
         "Utterance": "Het spijt me dat te horen. Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerDetails",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKPR-R",
         "Utterance": "Wat is het probleem dan?"
       },
       {
@@ -59,13 +64,15 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKTP1-P",
         "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKTP1-R",
         "Utterance": "Typenummer?"
       },
       {
@@ -73,13 +80,15 @@
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-DLANG-P",
         "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "DealAnger2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-DLANG-R",
         "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
@@ -87,20 +96,23 @@
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-DLANG-P",
         "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "DealAnger2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-DLANG-R",
         "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "BadFinish",
         "Meaning": ["Empathy(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-CALM-R",
         "Utterance": "Ja hallo, als U niet antwoord dan kan ik U niet helpen!"
       },
       {
@@ -108,6 +120,7 @@
         "NextState": "Reroute",
         "Meaning": ["Empathy(-1)", "Faq(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-REROUTE",
         "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
@@ -115,13 +128,15 @@
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKPR2-P",
         "Utterance": "Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerDetails",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKPR-R",
         "Utterance": "Wat is het probleem dan?"
       },
       {
@@ -129,13 +144,15 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKTP1-P",
         "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKTP1-R",
         "Utterance": "Typenummer?"
       },
       {
@@ -143,6 +160,7 @@
         "NextState": "WaitForAnswer",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-LKUP",
         "Utterance": "Ik ga het voor U even opzoeken..."
       },
       {
@@ -150,6 +168,7 @@
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-REROUTE",
         "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
@@ -157,6 +176,7 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": [],
+        "FileName": "S-ASKTP2",
         "Utterance": "Wat was het typenummer ook al weer?"
       },
       {
@@ -164,6 +184,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-RECAL",
         "Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
       },
       {
@@ -171,6 +192,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-HOTWAIT",
         "Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten"
       },
       {
@@ -178,6 +200,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-PROXFLY",
         "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen"
       },
       {
@@ -185,6 +208,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-PROXST2",
         "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden."
       },
       {
@@ -192,6 +216,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-PWRCAP",
         "Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien."
       },
       {
@@ -199,6 +224,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-UPGRADE",
         "Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
       },
       {
@@ -206,6 +232,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-LOW-RSST",
         "Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten."
       },
       {
@@ -213,6 +240,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-HOTLIQ",
         "Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen."
       },
       {
@@ -220,6 +248,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-DSE-PROXST5",
         "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden."
       },
       {
@@ -227,6 +256,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSE-MAINT",
         "Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig."
       },
       {
@@ -234,6 +264,7 @@
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-NOTFND",
         "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
       },
       {
@@ -241,6 +272,7 @@
         "NextState": "Goodbye1",
         "Meaning": ["Closure(1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
       },
       {
@@ -248,13 +280,15 @@
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ENDGB-P",
         "Utterance": "Prima, fijne dag verder."
       },
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ENDGB-R",
         "Utterance": "Doei."
       }
     ],
@@ -326,7 +360,7 @@
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
-        "Meaning": ["Empathy(1)"],
+        "Meaning": ["Empathy(2)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
         "Utterance": "Dat hoop ik ook, want het is knap vervelend."

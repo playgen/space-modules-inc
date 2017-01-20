@@ -25,16 +25,6 @@ public class LevelState : InputTickState
 		//NextState();
 	}
 
-	//public override void NextState()
-	//{
-	//	ChangeState(CallState.StateName);
-	//}
-
-	//public override void PreviousState()
-	//{
-	//	ChangeState(MenuState.StateName);
-	//}
-
 	public override string Name
 	{
 		get { return StateName; }

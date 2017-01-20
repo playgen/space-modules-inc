@@ -24,20 +24,23 @@
         "NextState": "Opening1",
         "Meaning": [],
         "Style": ["Polite(1)"],
-        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
+        "FileName": "S-OP-P",
+        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening1",
         "Meaning": [],
         "Style": [],
-        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
+        "FileName": "S-OP-N",
+        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
       },
       {
         "CurrentState": "Start",
         "NextState": "Opening2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-OP-R",
         "Utterance": "Hallo daar, wat is er aan de hand?"
       },
       {
@@ -45,13 +48,15 @@
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKPR-P",
         "Utterance": "Het spijt me dat te horen. Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerDetails",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKPR-R",
         "Utterance": "Wat is het probleem dan?"
       },
       {
@@ -59,13 +64,15 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKTP1-P",
         "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKTP1-R",
         "Utterance": "Typenummer?"
       },
       {
@@ -73,13 +80,15 @@
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-DLANG-P",
         "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "FirstResponse",
         "NextState": "DealAnger2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-DLANG-R",
         "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
@@ -87,20 +96,23 @@
         "NextState": "DealAnger1",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-DLANG-P",
         "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "DealAnger2",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-DLANG-R",
         "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
       },
       {
         "CurrentState": "SecondChance",
         "NextState": "BadFinish",
         "Meaning": ["Empathy(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-CALM-R",
         "Utterance": "Ja hallo, als U niet antwoord dan kan ik U niet helpen!"
       },
       {
@@ -108,6 +120,7 @@
         "NextState": "Reroute",
         "Meaning": ["Empathy(-1)", "Faq(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-REROUTE",
         "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
@@ -115,13 +128,15 @@
         "NextState": "AnswerDetails",
         "Meaning": [],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKPR2-P",
         "Utterance": "Kunt U aangeven wat het probleem is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerDetails",
         "Meaning": [],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKPR-R",
         "Utterance": "Wat is het probleem dan?"
       },
       {
@@ -129,13 +144,15 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ASKTP1-P",
         "Utterance": "Kunt U mij vertellen wat het typenummer is?"
       },
       {
         "CurrentState": "AskProblem1",
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ASKTP1-R",
         "Utterance": "Typenummer?"
       },
       {
@@ -143,6 +160,7 @@
         "NextState": "WaitForAnswer",
         "Meaning": [],
         "Style": [],
+        "FileName": "S-LKUP",
         "Utterance": "Ik ga het voor U even opzoeken..."
       },
       {
@@ -150,6 +168,7 @@
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-REROUTE",
         "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
       },
       {
@@ -157,6 +176,7 @@
         "NextState": "AnswerType3",
         "Meaning": ["Inquire(-1)"],
         "Style": [],
+        "FileName": "S-ASKTP2",
         "Utterance": "Wat was het typenummer ook al weer?"
       },
       {
@@ -164,6 +184,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-CLEAN",
         "Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
       },
       {
@@ -171,6 +192,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-BROKEN",
         "Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt."
       },
       {
@@ -178,6 +200,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-HEAT",
         "Utterance": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
       },
       {
@@ -185,6 +208,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-BOOT",
         "Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
       },
       {
@@ -192,6 +216,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-RECAL",
         "Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
       },
       {
@@ -199,6 +224,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-POWR",
         "Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
       },
       {
@@ -206,6 +232,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-MAGF",
         "Utterance": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type."
       },
       {
@@ -213,6 +240,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-REPL",
         "Utterance": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
       },
       {
@@ -220,6 +248,7 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(1)"],
         "Style": [],
+        "FileName": "S-DSS-COLD",
         "Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
       },
       {
@@ -227,6 +256,7 @@
         "NextState": "Reroute",
         "Meaning": ["Faq(-1)"],
         "Style": [],
+        "FileName": "S-NOTFND",
         "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
       },
       {
@@ -234,6 +264,7 @@
         "NextState": "Goodbye1",
         "Meaning": ["Closure(1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
       },
       {
@@ -241,13 +272,15 @@
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
         "Style": ["Polite(1)"],
+        "FileName": "S-ENDGB-P",
         "Utterance": "Prima, fijne dag verder."
       },
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye2",
         "Meaning": ["Closure(-1)"],
-        "Style": ["Polite(-1)"],
+        "Style": ["Polite(-3)"],
+        "FileName": "S-ENDGB-R",
         "Utterance": "Doei."
       }
     ],
@@ -319,7 +352,7 @@
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
-        "Meaning": ["Empathy(1)"],
+        "Meaning": ["Empathy(2)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
         "Utterance": "Dat hoop ik ook, want het is knap vervelend."
