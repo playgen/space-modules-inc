@@ -20,7 +20,7 @@ public class ScoreState : InputTickState
 	{
 		var isGameOver = _scenarioController.CurrentLevel == _scenarioController.LevelMax;
 
-		if (isGameOver)
+		if (isGameOver && _scenarioController.PostQuestions)
 		{
 			// The following string contains the key for the google form is used for the cognitive load questionnaire
 			string formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";

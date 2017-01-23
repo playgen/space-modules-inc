@@ -29,9 +29,6 @@ namespace Assets.Scripts.Inputs
 			_scenarioController = scenarioController;
 		}
 
-		/// <summary>
-		/// 
-		/// </summary>
 		protected override void OnInitialize()
 		{
 			_characterPrefab = Resources.Load("Prefabs/Characters/Female") as GameObject;
@@ -67,7 +64,7 @@ namespace Assets.Scripts.Inputs
 		protected override void OnEnter()
 		{
 			RefreshPlayerDialogueOptions();
-			//RefreshCharacterDialogueText();
+			RefreshCharacterDialogueText();
 			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
 			GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 			_npcDialoguePanel.GetComponent<Text>().text = "";
@@ -91,6 +88,11 @@ namespace Assets.Scripts.Inputs
 			characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
 		}
 
+		public void ResetGameStateUi()
+		{
+			
+		}
+
 		public void UpdateCharacterExpression(string emotion, float mood)
 		{
 			Debug.Log("EMOTION: " + emotion + ". MOOD: " + mood );
@@ -99,8 +101,14 @@ namespace Assets.Scripts.Inputs
 			{
 				_characterController.SetEmotion(emotion);
 			}
-			_characterController.StartTalkAnimation();
-
+			else
+			{
+				_characterController.SetEmotion("Idle");
+			}
+			if (_scenarioController.IsTalking) 
+			{
+				_characterController.StartTalkAnimation();
+			}
 		}
 
 		public void StopCharacterTalkAnimation()

@@ -103,7 +103,6 @@ namespace PlayGen.SUGAR.Unity
 
 			SUGARManager.config = JsonConvert.DeserializeObject<Config>(www.text);
 			Debug.Log(SUGARManager.config.BaseUri);
-
 			_baseAddress = SUGARManager.config.BaseUri;
 			SetUpClient();
 		}
