@@ -14,7 +14,9 @@ namespace Assets.Scripts.Inputs
 
 		private readonly ScenarioController _scenarioController;
 
-		private GameObject _characterPrefab;
+		private GameObject _characterFemalePrefab;
+		private GameObject _characterMalePrefab;
+
 		private CharacterFaceController _characterController;
 		private GameObject _characterPanel;
 		private GameObject _dialoguePanel;
@@ -31,7 +33,8 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnInitialize()
 		{
-			_characterPrefab = Resources.Load("Prefabs/Characters/Female") as GameObject;
+			_characterFemalePrefab = Resources.Load("Prefabs/Characters/Female") as GameObject;
+			_characterMalePrefab = Resources.Load("Prefabs/Characters/Male") as GameObject;
 			_characterPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/CharacterPanel");
 			_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
 			_multipleChoicePrefab = Resources.Load("Prefabs/MultipleChoiceGroup") as GameObject;
@@ -44,7 +47,6 @@ namespace Assets.Scripts.Inputs
 			modulesButton.GetComponent<Button>().onClick.AddListener(delegate { CommandQueue.AddCommand(new ToggleModulesCommand()); });
 
 
-			ShowCharacter(_scenarioController.CurrentCharacter);
 			_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 			_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
 			_scenarioController.GetCharacterStrongestEmotionSuccessEvent += UpdateCharacterExpression;
@@ -63,6 +65,7 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
+			ShowCharacter(_scenarioController.CurrentCharacter);
 			RefreshPlayerDialogueOptions();
 			RefreshCharacterDialogueText();
 			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
@@ -78,10 +81,19 @@ namespace Assets.Scripts.Inputs
 
 		public void ShowCharacter(RolePlayCharacterAsset currentCharacter)
 		{
-			var characterObject = GameObject.Instantiate(_characterPrefab);
+			GameObject characterObject;
+			if (currentCharacter.BodyName == "Female")
+			{
+				characterObject = GameObject.Instantiate(_characterFemalePrefab);
+			}
+			else
+			{
+				characterObject = GameObject.Instantiate(_characterMalePrefab);
+
+			}
 			_characterController = characterObject.GetComponent<CharacterFaceController>();
 			_characterController.CharacterId = "01";//currentCharacter.BodyName; 
-			_characterController.Gender = "Female";//currentCharacter.GetBeliefValue("Gender");
+			_characterController.Gender = currentCharacter.BodyName; //currentCharacter.GetBeliefValue("Gender");
 
 			characterObject.transform.SetParent(_characterPanel.transform, false);
 			characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;

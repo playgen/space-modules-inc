@@ -184,7 +184,8 @@ public class ScenarioController : ICommandAction
 					CurrentCharacter.Mood = -3;
 					break;
 			}
-			Debug.Log(_currentScenario.Character);
+			// TODO: random switching and force male if tutorial round
+			CurrentCharacter.BodyName = "Male";
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
 		}
 	}
@@ -300,7 +301,7 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		var filePath = Path.Combine(Application.streamingAssetsPath, "Scenarios/Audio/F/" + audioName + ".wav");
+		var filePath = Path.Combine(Application.streamingAssetsPath, String.Format("Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".wav");
 		if (File.Exists(filePath))
 		{
 			IsTalking = true;
@@ -323,9 +324,6 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
-	
-	#endregion
-
 	private void HandleEndAudio()
 	{
 		IsTalking = false;
@@ -340,6 +338,10 @@ public class ScenarioController : ICommandAction
 			FinalStateEvent();
 		}
 	}
+
+	#endregion
+
+
 
 	private void UpdateCurrentState()
 	{

@@ -210,7 +210,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: a97c4b214c99c4d41b922b43c91d726d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a1ec1824fb7357445b696df513fed299, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -264,7 +264,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: c02c4117f8b4dbd408e3b80cbac5e5fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a989e46b3527e2d41bb5ef289b821ac5, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterId: 01
-  Gender: Female
+  Gender: Male
   _blinkDelay: 5.57
   _eyebrowRenderer: {fileID: 114803968404067230}
   _eyeRenderer: {fileID: 114210538778153404}
@@ -336,7 +336,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: acff418c14491c2459376ecf35423de8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 472f196938cb8584ebea6ccfa9c48530, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -390,7 +390,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: eadd6fa72b2da654f8e5a2fe390d2f20, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3d5d100a683d4e34ca5a2ccc7048170f, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
