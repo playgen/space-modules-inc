@@ -150,6 +150,11 @@
 		"nl": "Oplossing"
 	},
 	{
+		"key": "EXIT",
+		"en-gb": "EXIT",
+		"nl": "UITGANG"
+	},
+	{
 		"key": "ENGLISH",
 		"en-gb": "English",
 		"nl": "English"

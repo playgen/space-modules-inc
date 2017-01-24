@@ -1,5 +1,6 @@
 ﻿using System;
 using GameWork.Core.States.Tick.Input;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Inputs
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Inputs
 	
 		private ScorePanelBehaviour _scorePanelScript;
 		private readonly ScenarioController _scenarioController;
+		private GameObject _nextButton;
 
 		public ScoreStateInput(ScenarioController scenarioController)
 		{
@@ -20,16 +22,20 @@ namespace Assets.Scripts.Inputs
 		{
 			_scorePanelScript = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel").GetComponent<ScorePanelBehaviour>();
 
-			var nextButton =
-				GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
-			nextButton.GetComponent<Button>().onClick.AddListener(() => NextButtonClicked());
+			_nextButton = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
+			
+			_nextButton.GetComponent<Button>().onClick.AddListener(() => NextButtonClicked());
 		}
 	
 		protected override void OnEnter()
 		{
 			CommandQueue.AddCommand(new GetScoreDataCommand());
 			_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
-
+			if (_scenarioController.CurrentLevel == _scenarioController.LevelMax)
+			{
+				_nextButton.GetComponentInChildren<Localization>().Key = "EXIT";
+				_nextButton.GetComponentInChildren<Localization>().Set();
+			}
 			GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(true);
 			GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		}
