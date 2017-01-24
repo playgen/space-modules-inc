@@ -66,6 +66,8 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
+			Tracker.T.accessible.Accessed("GameState");
+
 			ShowCharacter(_scenarioController.CurrentCharacter);
 			RefreshPlayerDialogueOptions();
 			RefreshCharacterDialogueText();

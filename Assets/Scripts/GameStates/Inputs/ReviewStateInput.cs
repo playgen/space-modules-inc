@@ -35,6 +35,8 @@ namespace Assets.Scripts.Inputs
 	
 		protected override void OnEnter()
 		{
+			Tracker.T.accessible.Accessed("ReviewState");
+
 			_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 			CommandQueue.AddCommand(new GetReviewDataCommand());
 			GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
