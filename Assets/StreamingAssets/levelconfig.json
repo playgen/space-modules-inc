@@ -5,7 +5,7 @@
       "PostQuestions": false,
       "Levels": [
         {
-          "ID": 0,
+          "ID": 1,
           "Prefix": "TestScen",
           "Character": "Positive",
           "MaxPoints": 0
@@ -51,31 +51,31 @@
       "PostQuestions": true,
       "Levels": [
         {
-          "ID": 6,
+          "ID": 1,
           "Prefix": "KnownOK-Novice-",
           "Character": "Positive",
           "MaxPoints": 8
         },
         {
-          "ID": 7,
+          "ID": 2,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Neutral",
           "MaxPoints": 8
         },
         {
-          "ID": 8,
+          "ID": 3,
           "Prefix": "Unknown-Expert-",
           "Character": "Negative",
           "MaxPoints": 8
         },
         {
-          "ID": 9,
+          "ID": 4,
           "Prefix": "KnownOK-Expert-",
           "Character": "Negative",
           "MaxPoints": 8
         },
         {
-          "ID": 10,
+          "ID": 5,
           "Prefix": "Unknown-Novice-",
           "Character": "Negative",
           "MaxPoints": 10
@@ -86,31 +86,31 @@
       "PostQuestions": true,
       "Levels": [
         {
-          "ID": 11,
+          "ID": 1,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Neutral",
           "MaxPoints": 8
         },
         {
-          "ID": 12,
+          "ID": 2,
           "Prefix": "KnownOK-Expert-",
           "Character": "Negative",
           "MaxPoints": 8
         },
         {
-          "ID": 13,
+          "ID": 3,
           "Prefix": "Unknown-Novice-",
           "Character": "Neutral",
           "MaxPoints": 8
         },
         {
-          "ID": 14,
+          "ID": 4,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Negative",
           "MaxPoints": 10
         },
         {
-          "ID": 15,
+          "ID": 5,
           "Prefix": "Unknown-Novice-",
           "Character": "Negative",
           "MaxPoints": 10

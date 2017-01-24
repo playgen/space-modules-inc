@@ -22,16 +22,6 @@ public class GameState : InputTickState
         get { return StateName; }
     }
 
-    //public override void NextState()
-    //{
-    //    ChangeState(ReviewState.StateName);
-    //}
-
-    //public override void PreviousState()
-    //{
-    //    ChangeState(LevelState.StateName);
-    //}
-
     protected override void OnTick(float deltaTime)
     {
 	    ICommand command;

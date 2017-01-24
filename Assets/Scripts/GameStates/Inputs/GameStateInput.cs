@@ -24,6 +24,7 @@ namespace Assets.Scripts.Inputs
 		private GameObject _listChoicePrefab;
 		private GameObject _multipleChoicePrefab;
 		private GameObject _npcDialoguePanel;
+		private GameObject _characterObject;
 		private Image _characterMood;
 
 		public GameStateInput(ScenarioController scenarioController)
@@ -75,29 +76,29 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnExit()
 		{
+			GameObject.Destroy(_characterObject);
 			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(false);
 			GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
 		}
 
 		public void ShowCharacter(RolePlayCharacterAsset currentCharacter)
 		{
-			GameObject characterObject;
 			if (currentCharacter.BodyName == "Female")
 			{
-				characterObject = GameObject.Instantiate(_characterFemalePrefab);
+				_characterObject = GameObject.Instantiate(_characterFemalePrefab);
 			}
 			else
 			{
-				characterObject = GameObject.Instantiate(_characterMalePrefab);
+				_characterObject = GameObject.Instantiate(_characterMalePrefab);
 
 			}
-			_characterController = characterObject.GetComponent<CharacterFaceController>();
+			_characterController = _characterObject.GetComponent<CharacterFaceController>();
 			_characterController.CharacterId = "01";//currentCharacter.BodyName; 
 			_characterController.Gender = currentCharacter.BodyName; //currentCharacter.GetBeliefValue("Gender");
 
-			characterObject.transform.SetParent(_characterPanel.transform, false);
-			characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;
-			characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+			_characterObject.transform.SetParent(_characterPanel.transform, false);
+			_characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;
+			_characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
 		}
 
 		public void ResetGameStateUi()

@@ -10,6 +10,9 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
 using System.IO;
+using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
+using System.Text;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
@@ -23,16 +26,19 @@ public class ScenarioController : ICommandAction
 	{
 		private readonly string[] _scenarioPaths;
 		public readonly string Character;
+		public string Prefix;
 		public int LevelId;
 		public int MaxPoints;
 
-		public ScenarioData(int levelId, string[] scenarioPaths, string character, int maxPoints)
+		public ScenarioData(int levelId, string[] scenarioPaths, string character, int maxPoints, string prefix)
 		{
 			LevelId = levelId;
+			Prefix = prefix;
 			_scenarioPaths = scenarioPaths;
 			Character = character;
 			MaxPoints = maxPoints;
 		}
+
 
 		public IntegratedAuthoringToolAsset GetRandomVariation()
 		{
@@ -84,6 +90,7 @@ public class ScenarioController : ICommandAction
 	{
 		public string Utterence;
 		public string Agent;
+		public string Code;
 	}
 
 	#endregion
@@ -158,7 +165,7 @@ public class ScenarioController : ICommandAction
 	private ScenarioData CreateScenario(int level, string prefix, string character, int maxPoints)
 	{
 		var result = _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray();
-		return new ScenarioData(level, result, character, maxPoints);
+		return new ScenarioData(level, result, character, maxPoints, prefix);
 	}
 
 	public void NextLevel()
@@ -184,8 +191,16 @@ public class ScenarioController : ICommandAction
 					CurrentCharacter.Mood = -3;
 					break;
 			}
-			// TODO: random switching and force male if tutorial round
-			CurrentCharacter.BodyName = "Male";
+			//  TODO: random character switching and force male if tutorial round (take out for fixed characters)
+			if (_currentScenario.Prefix == "TestScen")
+			{
+				CurrentCharacter.BodyName = "Male";
+			}
+			else
+			{
+				Random rand = new Random();
+				CurrentCharacter.BodyName = (rand.NextDouble() >= 0.5) ? "Male" : "Female";
+			}
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
 		}
 	}
@@ -260,7 +275,7 @@ public class ScenarioController : ICommandAction
 		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
 
-		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player"});
+		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName});
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -288,7 +303,7 @@ public class ScenarioController : ICommandAction
 				var characterDialogueText = characterDialogue.Utterance;
 				//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 				_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
-				_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client"});
+				_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.FileName});
 				UpdateCurrentState();
 				PlayDialogueAudio(characterDialogue.FileName);
 
@@ -298,6 +313,15 @@ public class ScenarioController : ICommandAction
 		}
 		GetCharacterStrongestEmotion();
 	}
+
+
+	private void UpdateCurrentState()
+	{
+		CurrentCharacter.PerceptionActionLoop(_events);
+		_events.Clear();
+		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
+	}
+
 
 	private void PlayDialogueAudio(string audioName)
 	{
@@ -333,28 +357,15 @@ public class ScenarioController : ICommandAction
 		{
 			if (SUGARManager.CurrentUser != null)
 			{
-				//TraceScore();
+				TraceScore();
 			}
 			FinalStateEvent();
 		}
 	}
 
+
+
 	#endregion
-
-
-
-	private void UpdateCurrentState()
-	{
-		CurrentCharacter.PerceptionActionLoop(_events);
-		_events.Clear();
-		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
-	}
-
-	public void GetReviewData()
-	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
-		Reset();
-	}
 
 	#region Scoring
 
@@ -391,7 +402,7 @@ public class ScenarioController : ICommandAction
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
-			Score = Mathf.CeilToInt(scoreTotal * 999),
+			Score = (int)(Math.Pow(8, scoreTotal) + Math.Pow(7, scoreTotal) + Math.Pow(6, scoreTotal)),
 			ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
@@ -400,9 +411,9 @@ public class ScenarioController : ICommandAction
 
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
 
-		Tracker.T.Trace();
+		//Tracker.T.Trace();
 
-		long score = scoreObj.Score;
+		var score = (long)scoreObj.Score;
 		if (SUGARManager.CurrentUser != null)
 		{
 			SUGARManager.GameData.Send("score", score);
@@ -450,7 +461,7 @@ public class ScenarioController : ICommandAction
 		// The following string contains the key for the google form that will be used to write trace data
 		string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
 
-		/// check for scores before referencing key
+		// check for scores before referencing key
 		int closure;
 		_scores.TryGetValue("Closure", out closure);
 		int empathy;
@@ -462,6 +473,17 @@ public class ScenarioController : ICommandAction
 		int polite;
 		_scores.TryGetValue("Polite", out polite);
 
+		var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
+		var sb = new StringBuilder();
+		string prefix = "";
+		foreach (var s in codeArray)
+		{
+			sb.Append(prefix);
+			sb.Append(s);
+			prefix = ":";
+		}
+		var codeArrayPayload = sb.ToString();
+
 
 		// Here the proper string is conclassed to fill and directly post the trace to a google form
 		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
@@ -470,6 +492,12 @@ public class ScenarioController : ICommandAction
 			+ SUGARManager.CurrentUser.Id
 			+ "&entry.858779356="
 			+ SUGARManager.GroupId
+			+ "&entry.2050844213="
+			+ _currentScenario.Prefix
+			+ "&entry.2005028859="
+			+ _currentScenario.LevelId
+			+ "&entry.621099182="
+			+ _roundNumber
 			+ "&entry.1962055523="
 			+ closure
 			+ "&entry.976064318="
@@ -480,39 +508,25 @@ public class ScenarioController : ICommandAction
 			+ inquire
 			+ "&entry.695568148="
 			+ polite
+			+ "&entry.639080950="
+			+ _currentScenario.MaxPoints
+			+ "&entry.1253336920="
+			+ codeArrayPayload
 			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
 
 		// The actual write to google
 		WWW www = new WWW(directSubmitUrl);
 
-
-
-		// The following string contains the key for the google form that will be used to write trace data
-		string sheetsKey2 = "1FAIpQLSfbC1bSoKJ_b4necVBYnEVq83dA8X0jWRANRNkTNeE_FqXDkw";
-
-		// Here the proper string is constructed to fill and directly post the trace to a google form
-		string directSubmitUrl2 = "https://docs.google.com/forms/d/e/"
-		 + sheetsKey
-		 + "/formResponse?entry.1676366924="
-		 + SUGARManager.CurrentUser.Id
-		 + "&entry.1418356935="
-		 + _scores["DifficultyLevel"]
-		 + "&entry.2094551490="
-		 + _scores["Session"]
-		 + "&entry.1343146404="
-		 + _scores["Code"]
-		 + "&entry.1206698998="
-		 + _scores["UserID"]
-		 + "&entry.500865333="
-		 + _scores["ResponseTime"]
-		 + "&submit=Submit"; // This part ensures direct writing instead of first opening the form
-
-		// The actual write to google
-		WWW www2 = new WWW(directSubmitUrl2);
-
 	}
 
 	#endregion
+
+
+	public void GetReviewData()
+	{
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
+		Reset();
+	}
 
 	private void Reset()
 	{
