@@ -149,7 +149,7 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
 		//var round = obj.Rounds[1].Levels;
-		_roundNumber = CommandLineUtility.CustomArgs["round"];
+		_roundNumber = CommandLineUtility.CustomArgs["round"] ?? "0";
 		var round = obj.Rounds[Int32.Parse(_roundNumber)];
 		List<ScenarioData> data = new List<ScenarioData>();
 		foreach (var level in round.Levels)
