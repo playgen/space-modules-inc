@@ -29,6 +29,8 @@ namespace Assets.Scripts.Inputs
 	
 		protected override void OnEnter()
 		{
+			Tracker.T.accessible.Accessed("ScoreState");
+
 			CommandQueue.AddCommand(new GetScoreDataCommand());
 			_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
 			if (_scenarioController.CurrentLevel == _scenarioController.LevelMax)

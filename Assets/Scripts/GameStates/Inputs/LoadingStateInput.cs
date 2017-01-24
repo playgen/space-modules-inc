@@ -21,7 +21,6 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
-			Debug.Log("LoadingStateInput");
 			GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
 			// Load stuff
 			SUGARManager.Account.DisplayPanel(success =>

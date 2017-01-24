@@ -15,6 +15,8 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
+			//Tracker.T.accessible.Accessed("LevelState");
+
 			_gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
 			ConfigureGridSize(3, 3);
 			GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);

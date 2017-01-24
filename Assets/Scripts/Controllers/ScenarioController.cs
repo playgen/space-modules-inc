@@ -275,6 +275,8 @@ public class ScenarioController : ICommandAction
 		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
 
+		Tracker.T.Trace("PlayerDialogueChoice", reply.FileName);
+
 		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName});
 
 		// Update EmotionExpression
@@ -411,8 +413,6 @@ public class ScenarioController : ICommandAction
 
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
 
-		//Tracker.T.Trace();
-
 		var score = (long)scoreObj.Score;
 		if (SUGARManager.CurrentUser != null)
 		{
@@ -458,8 +458,7 @@ public class ScenarioController : ICommandAction
 
 	private void TraceScore()
 	{
-		// The following string contains the key for the google form that will be used to write trace data
-		string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
+		
 
 		// check for scores before referencing key
 		int closure;
@@ -473,49 +472,66 @@ public class ScenarioController : ICommandAction
 		int polite;
 		_scores.TryGetValue("Polite", out polite);
 
-		var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
-		var sb = new StringBuilder();
-		string prefix = "";
-		foreach (var s in codeArray)
-		{
-			sb.Append(prefix);
-			sb.Append(s);
-			prefix = ":";
-		}
-		var codeArrayPayload = sb.ToString();
+
+	
+		Tracker.T.Trace("UserId", SUGARManager.CurrentUser.Id.ToString());
+		Tracker.T.Trace("GroupId", SUGARManager.GroupId);
+		Tracker.T.Trace("DifficultyLevel", _currentScenario.Prefix);
+		Tracker.T.Trace("LevelId", _currentScenario.LevelId.ToString());
+		Tracker.T.Trace("SessionId", _roundNumber);
+		Tracker.T.Trace("Closure", closure.ToString());
+		Tracker.T.Trace("Empathy", empathy.ToString());
+		Tracker.T.Trace("Faq", faq.ToString());
+		Tracker.T.Trace("Inquire", inquire.ToString());
+		Tracker.T.Trace("Polite", polite.ToString());
+		Tracker.T.Trace("MaxPoints", _currentScenario.MaxPoints.ToString());
 
 
-		// Here the proper string is conclassed to fill and directly post the trace to a google form
-		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
-			+ sheetsKey
-			+ "/formResponse?entry.1676366924="
-			+ SUGARManager.CurrentUser.Id
-			+ "&entry.858779356="
-			+ SUGARManager.GroupId
-			+ "&entry.2050844213="
-			+ _currentScenario.Prefix
-			+ "&entry.2005028859="
-			+ _currentScenario.LevelId
-			+ "&entry.621099182="
-			+ _roundNumber
-			+ "&entry.1962055523="
-			+ closure
-			+ "&entry.976064318="
-			+ empathy
-			+ "&entry.408530093="
-			+ faq
-			+ "&entry.2140003828="
-			+ inquire
-			+ "&entry.695568148="
-			+ polite
-			+ "&entry.639080950="
-			+ _currentScenario.MaxPoints
-			+ "&entry.1253336920="
-			+ codeArrayPayload
-			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
+		Tracker.T.RequestFlush();
 
-		// The actual write to google
-		WWW www = new WWW(directSubmitUrl);
+		// The following string contains the key for the google form that will be used to write trace data
+		//string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
+		//var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
+		//var sb = new StringBuilder();
+		//string prefix = "";
+		//foreach (var s in codeArray)
+		//{
+		//	sb.Append(prefix);
+		//	sb.Append(s);
+		//	prefix = ":";
+		//}
+		//var codeArrayPayload = sb.ToString();
+		//// Here the proper string is conclassed to fill and directly post the trace to a google form
+		//string directSubmitUrl = "https://docs.google.com/forms/d/e/"
+		//	+ sheetsKey
+		//	+ "/formResponse?entry.1676366924="
+		//	+ SUGARManager.CurrentUser.Id
+		//	+ "&entry.858779356="
+		//	+ SUGARManager.GroupId
+		//	+ "&entry.2050844213="
+		//	+ _currentScenario.Prefix
+		//	+ "&entry.2005028859="
+		//	+ _currentScenario.LevelId
+		//	+ "&entry.621099182="
+		//	+ _roundNumber
+		//	+ "&entry.1962055523="
+		//	+ closure
+		//	+ "&entry.976064318="
+		//	+ empathy
+		//	+ "&entry.408530093="
+		//	+ faq
+		//	+ "&entry.2140003828="
+		//	+ inquire
+		//	+ "&entry.695568148="
+		//	+ polite
+		//	+ "&entry.639080950="
+		//	+ _currentScenario.MaxPoints
+		//	+ "&entry.1253336920="
+		//	+ codeArrayPayload
+		//	+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
+
+		//// The actual write to google
+		//WWW www = new WWW(directSubmitUrl);
 
 	}
 
