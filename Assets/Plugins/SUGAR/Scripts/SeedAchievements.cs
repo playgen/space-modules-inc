@@ -185,17 +185,17 @@ namespace PlayGen.SUGAR.Unity
 			var leaderboardClient = SUGARManager.Client.Leaderboard;
 			var gameId = SUGARManager.GameId;
 
-			/*leaderboardClient.Create(new LeaderboardRequest
+			leaderboardClient.Create(new LeaderboardRequest
 			{
-				Token = "",
+				Token = "smi_stars",
 				GameId = gameId,
-				Name = "",
-				EvaluationDataKey = "",
-				ActorType = ActorType.,
-				EvaluationDataType = EvaluationDataType.,
-				CriteriaScope = CriteriaScope.,
-				LeaderboardType = LeaderboardType.
-			});*/
+				Name = "Most Stars",
+				Key = "stars",
+				ActorType = ActorType.User,
+				EvaluationDataType = EvaluationDataType.Long,
+				CriteriaScope = CriteriaScope.Actor,
+				LeaderboardType = LeaderboardType.Cumulative
+			});
 		}
 
 		private static AccountResponse LoginAdmin(string username, string password)
