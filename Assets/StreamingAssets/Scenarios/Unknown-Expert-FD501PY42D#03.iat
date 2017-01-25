@@ -182,15 +182,15 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-LOW-RSST",
-        "Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten."
+        "FileName": "S-DSE-HRDRES5",
+        "Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
         "FileName": "S-DSE-HOTRES5",
         "Utterance": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden"
@@ -198,15 +198,7 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
-        "Style": [],
-        "FileName": "S-DSE-HOTRSST",
-        "Utterance": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
         "FileName": "S-DSE-PROXST2",
         "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden."
@@ -214,7 +206,15 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "FileName": "S-DSE-PWRCAP",
+        "Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
         "Style": [],
         "FileName": "S-DSE-HULL",
         "Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!"
@@ -222,15 +222,7 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
-        "Style": [],
-        "FileName": "S-DSE-SNWAIT",
-        "Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
         "FileName": "S-DSE-PROXFLY",
         "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen"
@@ -238,23 +230,31 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-HOTWAIT",
-        "Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten"
+        "FileName": "S-DSE-UPGRADE",
+        "Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-HOTLIQ",
-        "Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen."
+        "FileName": "S-DSE-MGMT",
+        "Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk."
+      },
+      {
+        "CurrentState": "FaqResponse",
+        "NextState": "RespSolution",
+        "Meaning": ["Faq(-1)"],
+        "Style": [],
+        "FileName": "S-DSE-LOWST5",
+        "Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "Reroute",
-        "Meaning": ["Faq(-1)"],
+        "Meaning": ["Faq(3)"],
         "Style": [],
         "FileName": "S-NOTFND",
         "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
@@ -262,7 +262,7 @@
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye1",
-        "Meaning": ["Closure(1)"],
+        "Meaning": ["Closure(3)"],
         "Style": ["Polite(1)"],
         "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
@@ -347,15 +347,15 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
         "FileName": "A-RSPANG-N",
-        "Utterance": "Goed om te horen..."
+        "Utterance": "Dat is goed om te horen..."
       },
       {
         "CurrentState": "DealAnger1",
         "NextState": "AskProblem1",
-        "Meaning": ["Empathy(2)"],
+        "Meaning": ["Empathy(3)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
-        "Utterance": "Dat hoop ik ook, want het is knap vervelend."
+        "Utterance": "Nou, dat hoop ik ook, want het is knap vervelend."
       },
       {
         "CurrentState": "DealAnger2",
@@ -363,7 +363,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
         "FileName": "A-RSPCLM-P",
-        "Utterance": "Wat is dat voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
+        "Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
       },
       {
         "CurrentState": "DealAnger2",
@@ -427,7 +427,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-RSPRR-A",
-        "Utterance": "Pfff, dat schiet lekker op. Bedankt he..."
+        "Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
       },
       {
         "CurrentState": "AnswerDetails",
@@ -459,7 +459,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-RSPTP2-P-E3",
-        "Utterance": "Oh, vergeetachtig? Het is FD501PY42D"
+        "Utterance": "Oh, vergeetachtig? Het is type FD501PY42D"
       },
       {
         "CurrentState": "AnswerType3",
@@ -467,7 +467,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-RSPTP2-N-E3",
-        "Utterance": "Oh, had ik al gezegd he. Het is FD501PY42D"
+        "Utterance": "Oh, had ik al gezegd he. Maar het is type FD501PY42D"
       },
       {
         "CurrentState": "AnswerType3",
@@ -555,7 +555,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-NOHELP-A",
-        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen! Ik probeer wel een collega van je."
+        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je."
       }
     ]
   },

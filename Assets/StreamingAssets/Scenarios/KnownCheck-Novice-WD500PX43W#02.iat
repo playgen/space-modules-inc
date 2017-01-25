@@ -157,7 +157,7 @@
       },
       {
         "CurrentState": "AskProblem1",
-        "NextState": "AnswerVague",
+        "NextState": "AnswerDetails",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(1)"],
         "FileName": "S-ASKPR2-P",
@@ -165,7 +165,7 @@
       },
       {
         "CurrentState": "AskProblem1",
-        "NextState": "AnswerVague",
+        "NextState": "AnswerDetails",
         "Meaning": ["Inquire(-1)"],
         "Style": ["Polite(-3)"],
         "FileName": "S-ASKPR-R",
@@ -280,8 +280,8 @@
         "NextState": "TrySolutionFail",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-FIX",
-        "Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren."
+        "FileName": "S-DSE-NOSL",
+        "Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken."
       },
       {
         "CurrentState": "FaqResponse",
@@ -328,13 +328,13 @@
         "NextState": "TrySolutionFail",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-SNSTRT",
-        "Utterance": "Druk op de start knop totdat hij weer start."
+        "FileName": "S-DSE-UPGRADE",
+        "Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "TrySolutionOK",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(3)"],
         "Style": [],
         "FileName": "S-DSE-LOWST2",
         "Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten."
@@ -374,7 +374,7 @@
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye1",
-        "Meaning": ["Closure(1)"],
+        "Meaning": ["Closure(3)"],
         "Style": ["Polite(1)"],
         "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
@@ -451,7 +451,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-DVE-NOSTRT",
-        "Utterance": "Hij start niet."
+        "Utterance": "De motor start niet."
       },
       {
         "CurrentState": "AnswerVague",
@@ -459,7 +459,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-DVE-NOSTRT",
-        "Utterance": "Hij start niet."
+        "Utterance": "De motor start niet."
       },
       {
         "CurrentState": "AnswerVague",
@@ -483,7 +483,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
         "FileName": "A-RSPANG-N",
-        "Utterance": "Goed om te horen..."
+        "Utterance": "Dat is goed om te horen..."
       },
       {
         "CurrentState": "DealAnger1",
@@ -491,7 +491,7 @@
         "Meaning": ["Empathy(2)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
-        "Utterance": "Dat hoop ik ook, want het is knap vervelend."
+        "Utterance": "Nou, dat hoop ik ook, want het is knap vervelend."
       },
       {
         "CurrentState": "DealAnger2",
@@ -499,7 +499,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
         "FileName": "A-RSPCLM-P",
-        "Utterance": "Wat is dat voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
+        "Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
       },
       {
         "CurrentState": "DealAnger2",
@@ -611,7 +611,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-RSPRR-A",
-        "Utterance": "Pfff, dat schiet lekker op. Bedankt he..."
+        "Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
       },
       {
         "CurrentState": "AnswerDetails",
@@ -643,7 +643,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-RSPTP2-P-E1",
-        "Utterance": "Oh, vergeetachtig? Het is WD500PX43W"
+        "Utterance": "Oh, vergeetachtig? Het is type WD500PX43W"
       },
       {
         "CurrentState": "AnswerType3",
@@ -651,7 +651,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-RSPTP2-N-E1",
-        "Utterance": "Oh, had ik al gezegd he. Het is WD500PX43W"
+        "Utterance": "Oh, had ik al gezegd he. Maar het is type WD500PX43W"
       },
       {
         "CurrentState": "AnswerType3",
@@ -691,7 +691,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-RSPSUC-P",
-        "Utterance": "Ok, ik probeer het even...Ja! Het werkt! Geweldig, je bent een ace!"
+        "Utterance": "Ok, ik probeer het even...Ja! Het werkt! Geweldig, je bent een kei!"
       },
       {
         "CurrentState": "TrySolutionOK",
@@ -699,7 +699,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-RSPSUC-N",
-        "Utterance": "Ogenblikje, doe dat nu....Ja, het werkt, prima."
+        "Utterance": "Ogenblikje, doe ik nu....Ja, het werkt, prima."
       },
       {
         "CurrentState": "TrySolutionOK",
@@ -763,7 +763,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-NOHELP-A",
-        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen! Ik probeer wel een collega van je."
+        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je."
       }
     ]
   },

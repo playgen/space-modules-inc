@@ -62,7 +62,7 @@
       {
         "CurrentState": "FirstResponse",
         "NextState": "AnswerType1",
-        "Meaning": ["Inquire(1)"],
+        "Meaning": ["Inquire(2)"],
         "Style": ["Polite(1)"],
         "FileName": "S-ASKTP1-P",
         "Utterance": "Kunt U mij vertellen wat het typenummer is?"
@@ -272,8 +272,8 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-RECAL",
-        "Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        "FileName": "S-DSE-UPGRADE",
+        "Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
       },
       {
         "CurrentState": "FaqResponse",
@@ -288,24 +288,24 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-UPGRADE",
-        "Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        "FileName": "S-DSE-PROXFLY",
+        "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen"
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-PROXST2",
-        "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden."
+        "FileName": "S-DSE-HOTRSST",
+        "Utterance": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop."
       },
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-SNINC",
-        "Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies."
+        "FileName": "S-DSE-PROXSTR",
+        "Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken."
       },
       {
         "CurrentState": "FaqResponse",
@@ -320,8 +320,8 @@
         "NextState": "RespSolution",
         "Meaning": ["Faq(-1)"],
         "Style": [],
-        "FileName": "S-DSE-MGMT",
-        "Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk."
+        "FileName": "S-DSE-RECAL",
+        "Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
       },
       {
         "CurrentState": "FaqResponse",
@@ -334,7 +334,7 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "Reroute",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(3)"],
         "Style": [],
         "FileName": "S-NOTFND",
         "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
@@ -342,7 +342,7 @@
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye1",
-        "Meaning": ["Closure(1)"],
+        "Meaning": ["Closure(3)"],
         "Style": ["Polite(1)"],
         "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
@@ -451,7 +451,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
         "FileName": "A-RSPANG-N",
-        "Utterance": "Goed om te horen..."
+        "Utterance": "Dat is goed om te horen..."
       },
       {
         "CurrentState": "DealAnger1",
@@ -459,7 +459,7 @@
         "Meaning": ["Empathy(2)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
-        "Utterance": "Dat hoop ik ook, want het is knap vervelend."
+        "Utterance": "Nou, dat hoop ik ook, want het is knap vervelend."
       },
       {
         "CurrentState": "DealAnger2",
@@ -467,7 +467,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
         "FileName": "A-RSPCLM-P",
-        "Utterance": "Wat is dat voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
+        "Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
       },
       {
         "CurrentState": "DealAnger2",
@@ -579,7 +579,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-RSPRR-A",
-        "Utterance": "Pfff, dat schiet lekker op. Bedankt he..."
+        "Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
       },
       {
         "CurrentState": "AnswerDetails",
@@ -611,7 +611,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-RSPTP2-P-E2",
-        "Utterance": "Oh, vergeetachtig? Het is WD500PS42D"
+        "Utterance": "Oh, vergeetachtig? Het is type WD500PS42D"
       },
       {
         "CurrentState": "AnswerType3",
@@ -619,7 +619,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-RSPTP2-N-E2",
-        "Utterance": "Oh, had ik al gezegd he. Het is WD500PS42D"
+        "Utterance": "Oh, had ik al gezegd he. Maar het is type WD500PS42D"
       },
       {
         "CurrentState": "AnswerType3",
@@ -707,7 +707,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-NOHELP-A",
-        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen! Ik probeer wel een collega van je."
+        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je."
       }
     ]
   },

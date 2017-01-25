@@ -123,10 +123,6 @@
           "Solution": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
         },
         {
-          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
-          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
-        },
-        {
           "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
           "Solution": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies."
         },
@@ -221,6 +217,10 @@
           "Solution": "Druk op de start knop totdat hij weer start."
         },
         {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
           "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
           "Solution": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet."
         },
@@ -254,7 +254,7 @@
           "Solution": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
         },
         {
-          "Problem": "De krachtcel geeft een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
           "Solution": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan."
         },
         {
@@ -286,7 +286,7 @@
     {
       "Name": "NuclearCell 1500PK X",
       "Id": "NC1K5PKX",
-"Type": "de krachtcel",
+      "Type": "de krachtcel",
       "Icon": "Power_Cells",
       "Description": "Krachtcel voor groot vermogen met een nucleaire kern van StellarLabs Inc. Goede afscherming is wel noodzakelijk om stralingsbproblemen te voorkomen. Goede prijs/prestatie verhouding.",
       "Faq": [
@@ -327,7 +327,7 @@
     {
       "Name": "HydroCell 3400A",
       "Id": "HC34HA",
-"Type": "de krachtcel",
+      "Type": "de krachtcel",
       "Icon": "Power_Cells",
       "Description": "Waterstof krachtcel voor schone energie van Tang-Turner Technologies. Nadeel is de grootte van deze cel in verhouding met andere types.",
       "Faq": [
@@ -344,7 +344,7 @@
           "Solution": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
         },
         {
-          "Problem": "De krachtcel geeft een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
           "Solution": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
         },
         {
@@ -376,7 +376,7 @@
     {
       "Name": "PowerCell Z-Tech 1215",
       "Id": "PC1215Z",
-"Type": "de krachtcel",
+      "Type": "de krachtcel",
       "Icon": "Power_Cells",
       "Description": "Krachtcel gebaseerd op de Z-brandstof van Fang Xenotech. Staat vooral bekend om zijn lange levensduur.",
       "Faq": [
@@ -385,7 +385,7 @@
           "Solution": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel."
         },
         {
-          "Problem": "De krachtcel geeft een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
           "Solution": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
         },
         {
@@ -421,7 +421,7 @@
     {
       "Name": "PowerCell Z-Tech 1417",
       "Id": "PC1417Z",
-"Type": "de krachtcel",
+      "Type": "de krachtcel",
       "Icon": "Power_Cells",
       "Description": "Deze krachtcel lopend op Z-brandstof is het paradepaardje van Fang Xenotech. Geschikt voor hoog vermogen en langdurige reizen.",
       "Faq": [
@@ -438,7 +438,7 @@
           "Solution": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel."
         },
         {
-          "Problem": "De krachtcel geeft een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
           "Solution": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken."
         },
         {

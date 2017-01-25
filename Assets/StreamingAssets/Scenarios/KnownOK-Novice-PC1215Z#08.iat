@@ -334,7 +334,7 @@
       {
         "CurrentState": "FaqResponse",
         "NextState": "RespSolution",
-        "Meaning": ["Faq(1)"],
+        "Meaning": ["Faq(3)"],
         "Style": [],
         "FileName": "S-DSP-LOAD",
         "Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus."
@@ -350,7 +350,7 @@
       {
         "CurrentState": "Closure",
         "NextState": "Goodbye1",
-        "Meaning": ["Closure(1)"],
+        "Meaning": ["Closure(3)"],
         "Style": ["Polite(1)"],
         "FileName": "S-CLOSE-P",
         "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
@@ -459,7 +459,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Neutral"],
         "FileName": "A-RSPANG-N",
-        "Utterance": "Goed om te horen..."
+        "Utterance": "Dat is goed om te horen..."
       },
       {
         "CurrentState": "DealAnger1",
@@ -467,7 +467,7 @@
         "Meaning": ["Empathy(2)"],
         "Style": ["Negative"],
         "FileName": "A-RSPANG-A",
-        "Utterance": "Dat hoop ik ook, want het is knap vervelend."
+        "Utterance": "Nou, dat hoop ik ook, want het is knap vervelend."
       },
       {
         "CurrentState": "DealAnger2",
@@ -475,7 +475,7 @@
         "Meaning": ["Empathy(-1)"],
         "Style": ["Positive"],
         "FileName": "A-RSPCLM-P",
-        "Utterance": "Wat is dat voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
+        "Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
       },
       {
         "CurrentState": "DealAnger2",
@@ -587,7 +587,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-RSPRR-A",
-        "Utterance": "Pfff, dat schiet lekker op. Bedankt he..."
+        "Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
       },
       {
         "CurrentState": "AnswerDetails",
@@ -619,7 +619,7 @@
         "Meaning": [],
         "Style": ["Positive"],
         "FileName": "A-RSPTP2-P-P4",
-        "Utterance": "Oh, vergeetachtig? Het is PC1215Z"
+        "Utterance": "Oh, vergeetachtig? Het is type PC1215Z"
       },
       {
         "CurrentState": "AnswerType3",
@@ -627,7 +627,7 @@
         "Meaning": [],
         "Style": ["Neutral"],
         "FileName": "A-RSPTP2-N-P4",
-        "Utterance": "Oh, had ik al gezegd he. Het is PC1215Z"
+        "Utterance": "Oh, had ik al gezegd he. Maar het is type PC1215Z"
       },
       {
         "CurrentState": "AnswerType3",
@@ -715,7 +715,7 @@
         "Meaning": [],
         "Style": ["Negative"],
         "FileName": "A-NOHELP-A",
-        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen! Ik probeer wel een collega van je."
+        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je."
       }
     ]
   },
