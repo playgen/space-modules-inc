@@ -2581,8 +2581,8 @@ MonoBehaviour:
   storageType: net
   traceFormat: xapi
   host: http://tracker.playgen.com/api/proxy/gleaner/collector/
-  trackingCode: 5888f0edd13901006e985563mu546lzlob273nmi
-  debug: 1
+  trackingCode: 5888fc78924fa4006e96b11efou6h95urrafw29
+  debug: 0
 --- !u!1 &401965550
 GameObject:
   m_ObjectHideFlags: 0
