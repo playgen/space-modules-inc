@@ -115,7 +115,7 @@ public class ScenarioController : ICommandAction
 	private AudioController _audioController;
 	private AudioClipModel _audioClip;
 	private ScenarioData _currentScenario;
-	private string _roundNumber;
+	private int _roundNumber;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<List<ChatObject>, float> GetReviewDataSuccessEvent;
@@ -149,8 +149,8 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
 		//var round = obj.Rounds[1].Levels;
-		_roundNumber = CommandLineUtility.CustomArgs["round"] ?? "0";
-		var round = obj.Rounds[Int32.Parse(_roundNumber)];
+		_roundNumber = Int32.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
+		var round = obj.Rounds[_roundNumber];
 		List<ScenarioData> data = new List<ScenarioData>();
 		foreach (var level in round.Levels)
 		{
@@ -275,7 +275,10 @@ public class ScenarioController : ICommandAction
 		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
 
-		Tracker.T.Trace("PlayerDialogueChoice", reply.FileName);
+		Tracker.T.setExtension("PlayerDialogueChoice", reply.FileName);
+		Tracker.T.completable.Initialized("PlayerActionCompleted");
+
+		//Tracker.T.RequestFlush();
 
 		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName});
 
@@ -404,7 +407,7 @@ public class ScenarioController : ICommandAction
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
-			Score = (int)(Math.Pow(8, scoreTotal) + Math.Pow(7, scoreTotal) + Math.Pow(6, scoreTotal)),
+			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(_currentScenario.MaxPoints - 1))),
 			ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
@@ -474,18 +477,18 @@ public class ScenarioController : ICommandAction
 
 
 	
-		Tracker.T.Trace("UserId", SUGARManager.CurrentUser.Id.ToString());
-		Tracker.T.Trace("GroupId", SUGARManager.GroupId);
-		Tracker.T.Trace("DifficultyLevel", _currentScenario.Prefix);
-		Tracker.T.Trace("LevelId", _currentScenario.LevelId.ToString());
-		Tracker.T.Trace("SessionId", _roundNumber);
-		Tracker.T.Trace("Closure", closure.ToString());
-		Tracker.T.Trace("Empathy", empathy.ToString());
-		Tracker.T.Trace("Faq", faq.ToString());
-		Tracker.T.Trace("Inquire", inquire.ToString());
-		Tracker.T.Trace("Polite", polite.ToString());
-		Tracker.T.Trace("MaxPoints", _currentScenario.MaxPoints.ToString());
-
+		Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Id.ToString());
+		Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
+		Tracker.T.setExtension("DifficultyLevel", _currentScenario.Prefix);
+		Tracker.T.setExtension("LevelId", _currentScenario.LevelId.ToString());
+		Tracker.T.setExtension("SessionId", _roundNumber.ToString());
+		Tracker.T.setExtension("Closure", closure.ToString());
+		Tracker.T.setExtension("Empathy", empathy.ToString());
+		Tracker.T.setExtension("Faq", faq.ToString());
+		Tracker.T.setExtension("Inquire", inquire.ToString());
+		Tracker.T.setExtension("Polite", polite.ToString());
+		Tracker.T.setExtension("MaxPoints", _currentScenario.MaxPoints.ToString());
+		Tracker.T.completable.Initialized("LevelComplete");
 
 		Tracker.T.RequestFlush();
 

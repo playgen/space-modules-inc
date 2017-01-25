@@ -13,9 +13,4 @@ public class MenuState : InputTickState
 	public MenuState(MenuStateInput input) : base(input)
 	{
 	}
-
-	protected override void OnEnter()
-	{
-		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
-	}
 }

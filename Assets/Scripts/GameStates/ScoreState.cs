@@ -30,9 +30,15 @@ public class ScoreState : InputTickState
 									+ formsKey
 									+ "/viewform?";
 
+			Tracker.T.accessible.Accessed("Questionnaire");
+
+
 			// Open the default browser and show the form
 			Application.OpenURL(googleFormsURL);
+
 		}
+
+		Tracker.T.RequestFlush();
 
 		NextEvent(isGameOver);
 	}

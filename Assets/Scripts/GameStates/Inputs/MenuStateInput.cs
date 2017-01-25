@@ -35,6 +35,7 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
+			Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
 			_buttons.BestFit("PlayButton");
 			GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 			GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
