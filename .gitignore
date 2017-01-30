@@ -29,6 +29,11 @@ sysinfo.txt
 *.apk
 *.unitypackage
 *.dll
+!Assets/Plugins/IntegratedAuthoringTool/*.dll
+!Assets/Plugins/IntegratedAuthoringTool/*.dll.meta
+!Assets/Plugins/IntegratedAuthoringTool/*.mdb
+!Assets/Plugins/IntegratedAuthoringTool/*.mdb.meta
+!Assets/Plugins/IntegratedAuthoringTool/*.pdb
 *.pdb
 *.mdb
 !Assets/**/*.dll.meta
