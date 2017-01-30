@@ -133,8 +133,6 @@ public class ScenarioController : ICommandAction
 		_audioController = audioController;
 	}
 
-	
-
 	public void Initialize()
 	{
 		LoadScenarios();
@@ -149,6 +147,7 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
 
 		//var round = obj.Rounds[1].Levels;
+		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
 		_roundNumber = Int32.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
 		var round = obj.Rounds[_roundNumber];
 		List<ScenarioData> data = new List<ScenarioData>();
@@ -158,9 +157,9 @@ public class ScenarioController : ICommandAction
 		}
 		_scenarios = data.ToArray();
 		LevelMax = _scenarios.Length;
+		// Boolean for checking if the post game questionnaire is opened after the round
 		PostQuestions = round.PostQuestions;
 	}
-
 
 	private ScenarioData CreateScenario(int level, string prefix, string character, int maxPoints)
 	{
@@ -209,6 +208,7 @@ public class ScenarioController : ICommandAction
 
 	#region Level Select
 
+	// Called after selecting a level
 	public void SetCharacter(string name)
 	{
 		//CurrentCharacter = _characters.FirstOrDefault(asset => asset.CharacterName.Equals(name));
@@ -216,6 +216,7 @@ public class ScenarioController : ICommandAction
 		//_events.Add(enterEventRpcOne);
 	}
 
+	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshCharacterArray()
 	{
 		//_characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
@@ -268,13 +269,13 @@ public class ScenarioController : ICommandAction
 		var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
 			reply.GetStylesName());
 
+		// Submit dialogue choice to the IAT event list.
 		_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		// Wait?
 		_events.Add(
 			(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
 		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
-
+		// UCM tracker tracks the filename ID of each player dialogue choice made
 		Tracker.T.setExtension("PlayerDialogueChoice", reply.FileName);
 		Tracker.T.completable.Initialized("PlayerActionCompleted");
 
@@ -319,14 +320,12 @@ public class ScenarioController : ICommandAction
 		GetCharacterStrongestEmotion();
 	}
 
-
 	private void UpdateCurrentState()
 	{
 		CurrentCharacter.PerceptionActionLoop(_events);
 		_events.Clear();
 		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
 	}
-
 
 	private void PlayDialogueAudio(string audioName)
 	{
@@ -368,12 +367,11 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
-
-
 	#endregion
 
 	#region Scoring
 
+	// Score shown to the player (not the tracker)
 	public void GetScoreData()
 	{
 		var mood = (CurrentCharacter.Mood + 10) / 20;
@@ -408,7 +406,7 @@ public class ScenarioController : ICommandAction
 		{
 			Stars = stars,
 			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(_currentScenario.MaxPoints - 1))),
-			ScoreFeedbackToken = "FEEDBACK_" + stars,//(mood >= 0.5) ? "Not bad, keep it up!" : "Try a bit harder next time",
+			ScoreFeedbackToken = "FEEDBACK_" + stars,
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
 			Bonus = Mathf.CeilToInt(mood * 999)
@@ -417,6 +415,7 @@ public class ScenarioController : ICommandAction
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
 
 		var score = (long)scoreObj.Score;
+		// Player score traced by SUGAR
 		if (SUGARManager.CurrentUser != null)
 		{
 			SUGARManager.GameData.Send("score", score);
@@ -439,6 +438,7 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
+	// extract scores from Meanings and Styles
 	private void HandleKeywords(string s)
 	{
 		char[] delimitedChars = {'(', ')'};
@@ -461,8 +461,6 @@ public class ScenarioController : ICommandAction
 
 	private void TraceScore()
 	{
-		
-
 		// check for scores before referencing key
 		int closure;
 		_scores.TryGetValue("Closure", out closure);
@@ -476,7 +474,7 @@ public class ScenarioController : ICommandAction
 		_scores.TryGetValue("Polite", out polite);
 
 
-	
+		// Trace the scores and submit them via UCM tracker
 		Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Id.ToString());
 		Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
 		Tracker.T.setExtension("DifficultyLevel", _currentScenario.Prefix);
@@ -539,7 +537,6 @@ public class ScenarioController : ICommandAction
 	}
 
 	#endregion
-
 
 	public void GetReviewData()
 	{

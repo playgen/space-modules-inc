@@ -167,6 +167,7 @@ namespace Assets.Scripts.Inputs
 			var rnd = new System.Random();
 			var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray(); 
 
+			//	For Multiple Choice view
 			//      if (randomDialogueActions.Length == 4)
 			//      {
 			//          dialogueObject = GameObject.Instantiate(_multipleChoicePrefab);

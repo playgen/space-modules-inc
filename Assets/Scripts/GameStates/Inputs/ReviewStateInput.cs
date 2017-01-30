@@ -55,9 +55,6 @@ namespace Assets.Scripts.Inputs
 			_characterMood.fillAmount = (mood + 10) / 20;
 			ClearList();
 
-			//string[] dialogues = new string[history.Count];
-			//history.Keys.CopyTo(dialogues,0);
-
 			for (var i = 0; i < history.Count; i++)
 			{
 				Transform chatObject = null;

@@ -143,7 +143,7 @@ public class ModulesController : ICommandAction
         moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
 
-		// TODO: Renable me for module descriptions
+		// TODO: Renable me for module descriptions (GUI changes necessary)
 		//var descriptionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
 		//descriptionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("DESCRIPTION", true);
 		//descriptionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>().text = module.Description;
@@ -159,7 +159,7 @@ public class ModulesController : ICommandAction
 		var solutionItemText = solutionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>();
 		solutionItemText.text = currentModuleList[0].Solution;
 
-
+		// Step through arrow listeners
 		_nextArrow.onClick.AddListener(() =>
 		{
 			index++;
@@ -208,8 +208,6 @@ public class ModulesController : ICommandAction
 		var streamReader = new StreamReader(streamingAssetsPath);
 		_modulesDatabase = JsonConvert.DeserializeObject<ModulesDatabase>(streamReader.ReadToEnd()).Database;
 	}
-
-
 
 	private GameObject InstantiateListItem(GameObject prefab)
     {
