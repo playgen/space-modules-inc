@@ -128,7 +128,6 @@ namespace Assets.Scripts.Inputs
 
 		public void StopCharacterTalkAnimation()
 		{
-		
 			_characterController.StopTalkAnimation();
 		}
 

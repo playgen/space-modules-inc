@@ -22,7 +22,7 @@ namespace Assets.Scripts.Inputs
 		protected override void OnEnter()
 		{
 			GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
-			// Load stuff
+			// Check for SUGAR login
 			SUGARManager.Account.DisplayPanel(success =>
 			{
 				if (success)
