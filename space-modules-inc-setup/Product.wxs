@@ -49,6 +49,11 @@
 								Name="path"
 								Value="[smiDIR]SMI.exe"
 								File="[INSTALLDIR]PlayGen.SPL.Launcher.exe.config"/>
+				<util:XmlConfig Id="elem13"
+								ElementId="elem1"
+								Name="key"
+								Value="kYglGuirZwfC2qMi2i0YOtQzyYRoCS7AzGpJHHhSKMFCD26jYqEqK3iPehNQ"
+								File="[INSTALLDIR]PlayGen.SPL.Launcher.exe.config"/>
             </util:XmlConfig>
 			<util:XmlConfig Id="param"
 							Action="create"
@@ -101,7 +106,7 @@
 				<util:XmlConfig Id="param11"
 								ElementId="param1"
 								Name="urlParameter"
-								Value="userName"
+								Value="username"
 								File="[INSTALLDIR]PlayGen.SPL.Launcher.exe.config"/>
 				<util:XmlConfig Id="param12"
 								ElementId="param1"
