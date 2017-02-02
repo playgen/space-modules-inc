@@ -2,6 +2,9 @@
 using Assets.Scripts.Inputs;
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
+
+using PlayGen.SUGAR.Unity;
+
 using UnityEngine;
 
 public class ScoreState : InputTickState
@@ -28,7 +31,8 @@ public class ScoreState : InputTickState
 			// Google form ID
 			string googleFormsURL = "https://docs.google.com/forms/d/e/"
 									+ formsKey
-									+ "/viewform?";
+									+ "/viewform?entry.1596836094="
+									+ SUGARManager.CurrentUser.Name;
 
 			Tracker.T.accessible.Accessed("Questionnaire");
 

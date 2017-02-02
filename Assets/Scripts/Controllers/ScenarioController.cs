@@ -475,8 +475,14 @@ public class ScenarioController : ICommandAction
 
 
 		// Trace the scores and submit them via UCM tracker
-		Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Id.ToString());
-		Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
+		if (SUGARManager.CurrentUser != null)
+		{
+			Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Id.ToString());
+			if (!string.IsNullOrEmpty(SUGARManager.GroupId))
+			{
+				Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
+			}
+		}
 		Tracker.T.setExtension("DifficultyLevel", _currentScenario.Prefix);
 		Tracker.T.setExtension("LevelId", _currentScenario.LevelId.ToString());
 		Tracker.T.setExtension("SessionId", _roundNumber.ToString());
@@ -490,49 +496,50 @@ public class ScenarioController : ICommandAction
 
 		Tracker.T.RequestFlush();
 
-		// The following string contains the key for the google form that will be used to write trace data
-		//string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
-		//var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
-		//var sb = new StringBuilder();
-		//string prefix = "";
-		//foreach (var s in codeArray)
-		//{
-		//	sb.Append(prefix);
-		//	sb.Append(s);
-		//	prefix = ":";
-		//}
-		//var codeArrayPayload = sb.ToString();
-		//// Here the proper string is conclassed to fill and directly post the trace to a google form
-		//string directSubmitUrl = "https://docs.google.com/forms/d/e/"
-		//	+ sheetsKey
-		//	+ "/formResponse?entry.1676366924="
-		//	+ SUGARManager.CurrentUser.Id
-		//	+ "&entry.858779356="
-		//	+ SUGARManager.GroupId
-		//	+ "&entry.2050844213="
-		//	+ _currentScenario.Prefix
-		//	+ "&entry.2005028859="
-		//	+ _currentScenario.LevelId
-		//	+ "&entry.621099182="
-		//	+ _roundNumber
-		//	+ "&entry.1962055523="
-		//	+ closure
-		//	+ "&entry.976064318="
-		//	+ empathy
-		//	+ "&entry.408530093="
-		//	+ faq
-		//	+ "&entry.2140003828="
-		//	+ inquire
-		//	+ "&entry.695568148="
-		//	+ polite
-		//	+ "&entry.639080950="
-		//	+ _currentScenario.MaxPoints
-		//	+ "&entry.1253336920="
-		//	+ codeArrayPayload
-		//	+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
+		//The following string contains the key for the google form that will be used to write trace data
 
-		//// The actual write to google
-		//WWW www = new WWW(directSubmitUrl);
+	    string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
+		var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
+		var sb = new StringBuilder();
+		string prefix = "";
+		foreach (var s in codeArray)
+		{
+			sb.Append(prefix);
+			sb.Append(s);
+			prefix = ":";
+		}
+		var codeArrayPayload = sb.ToString();
+		// Here the proper string is conclassed to fill and directly post the trace to a google form
+		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
+			+ sheetsKey
+			+ "/formResponse?entry.1676366924="
+			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Id : 0)
+			+ "&entry.858779356="
+			+ (SUGARManager.GroupId ?? "0")
+			+ "&entry.2050844213="
+			+ _currentScenario.Prefix
+			+ "&entry.2005028859="
+			+ _currentScenario.LevelId
+			+ "&entry.621099182="
+			+ _roundNumber
+			+ "&entry.1962055523="
+			+ closure
+			+ "&entry.976064318="
+			+ empathy
+			+ "&entry.408530093="
+			+ faq
+			+ "&entry.2140003828="
+			+ inquire
+			+ "&entry.695568148="
+			+ polite
+			+ "&entry.639080950="
+			+ _currentScenario.MaxPoints
+			+ "&entry.1253336920="
+			+ codeArrayPayload
+			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
+
+		// The actual write to google
+		WWW www = new WWW(directSubmitUrl);
 
 	}
 
