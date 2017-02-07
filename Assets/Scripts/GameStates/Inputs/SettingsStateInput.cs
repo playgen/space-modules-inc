@@ -15,7 +15,7 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnInitialize()
 		{
-			_buttons = new ButtonList("SettingsContainer/SettingsPanelContainer/ButtonContainer");
+			_buttons = new ButtonList("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer");
 			var backButton = _buttons.GetButton("BackButton");
 			var applyButton = _buttons.GetButton("ApplyButton");
 			_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
