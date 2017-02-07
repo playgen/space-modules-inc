@@ -477,7 +477,7 @@ public class ScenarioController : ICommandAction
 		// Trace the scores and submit them via UCM tracker
 		if (SUGARManager.CurrentUser != null)
 		{
-			Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Id.ToString());
+			Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Name);
 			if (!string.IsNullOrEmpty(SUGARManager.GroupId))
 			{
 				Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
@@ -513,7 +513,7 @@ public class ScenarioController : ICommandAction
 		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
 			+ sheetsKey
 			+ "/formResponse?entry.1676366924="
-			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Id : 0)
+			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Name : "NoCurrentUser")
 			+ "&entry.858779356="
 			+ (SUGARManager.GroupId ?? "0")
 			+ "&entry.2050844213="
