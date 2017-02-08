@@ -76,7 +76,7 @@ public class ModulesController : ICommandAction
     private void LoadIndex()
     {
         ClearList();
-        var moduleTypes = _modulesDatabase.Select(entry => entry.Type).Distinct().ToArray();
+		var moduleTypes = _modulesDatabase.Select(entry => entry.Type).Distinct().ToArray();
 
         for (var i = 0; i < moduleTypes.Length; i++)
         {
@@ -100,10 +100,8 @@ public class ModulesController : ICommandAction
 
     private void LoadModules(string moduleTypeName)
     {
-		
 		ClearList();
-
-        var modules = _modulesDatabase.Where(entry => entry.Type.Equals(moduleTypeName)).ToArray();
+		var modules = _modulesDatabase.Where(entry => entry.Type.Equals(moduleTypeName)).ToArray();
 
         for (var i = 0; i < modules.Length; i++)
         {
@@ -132,10 +130,9 @@ public class ModulesController : ICommandAction
 	    var currentModuleList = module.Faq;
 	    var index = 0;
 
-        _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = true;
-        var moduleItem = Object.Instantiate(listItem);
+		var moduleItem = Object.Instantiate(listItem);
         ClearList();
-        moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
+		moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
         moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
 
 
@@ -187,6 +184,7 @@ public class ModulesController : ICommandAction
 			LoadModules(module.Type);
 		});
 
+		LayoutRebuilder.ForceRebuildLayoutImmediate(_modulesContent);
 	}
 
 	private void ClearList()

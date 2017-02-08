@@ -3,7 +3,6 @@ using GameWork.Core.States.Tick;
 
 using UnityEngine;
 using PlayGen.SUGAR.Unity;
-using UnityEngine.SocialPlatforms.GameCenter;
 
 public class ControllerBehaviour : MonoBehaviour
 {
@@ -14,8 +13,6 @@ public class ControllerBehaviour : MonoBehaviour
 	void Awake()
 	{
 		DontDestroyOnLoad(transform.gameObject);
-
-		Social.Active = new GameCenterPlatform();
 
 		FixScreenRatio();
 

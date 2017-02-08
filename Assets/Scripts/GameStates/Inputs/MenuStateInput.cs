@@ -24,6 +24,11 @@ public class MenuStateInput : TickStateInput
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
 		});
+		var achievementButton = _buttons.GetButton("AchievementButton");
+		achievementButton.onClick.AddListener(delegate
+		{
+			SUGARManager.Achievement.DisplayList();
+		});
 	}
 
 	private void OnSettingsClick()
@@ -35,6 +40,7 @@ public class MenuStateInput : TickStateInput
 	{
 		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
 		_buttons.GameObjects.BestFit();
+		_playButton.GetComponentInChildren<Text>().fontSize *= 2;
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 	}
