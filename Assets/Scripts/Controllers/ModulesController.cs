@@ -136,7 +136,7 @@ public class ModulesController : ICommandAction
 	    var index = 0;
 	    GameObject[] moduleProblem;
 
-        _modulesContent.GetComponentInChildren<VerticalLayoutGroupCustom>().enabled = true;
+        _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = true;
         var moduleItem = GameObject.Instantiate(listItem);
         ClearList();
         moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
