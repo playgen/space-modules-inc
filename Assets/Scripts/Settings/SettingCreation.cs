@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -44,12 +47,14 @@ public class SettingCreation : MonoBehaviour
 
 	private void OnEnable()
 	{
-		Localization.LanguageChange += OnLanguageChange;
+		Localization.LanguageChange += OnChange;
+		BestFit.ResolutionChange += OnChange;
 	}
 
 	private void OnDisable()
 	{
-		Localization.LanguageChange -= OnLanguageChange;
+		Localization.LanguageChange -= OnChange;
+		BestFit.ResolutionChange -= OnChange;
 	}
 
 	private void Update()
@@ -98,8 +103,19 @@ public class SettingCreation : MonoBehaviour
 		newObj.ClearOptions();
 		var languages = Localization.AvailableLanguages();
 		newObj.GetComponent<DropdownLocalization>().SetOptions(languages);
-		newObj.value = (int)Localization.SelectedLanguage - 1;
-		newObj.captionText.text = newObj.options[newObj.value].text;
+		var selectedIndex = languages.IndexOf(Localization.SelectedLanguage.ToString());
+		if (selectedIndex == -1)
+		{
+			var nullList = new List<string>{ string.Empty };
+			newObj.AddOptions(nullList);
+			newObj.value = languages.Count;
+			newObj.options.RemoveAt(languages.Count);
+		}
+		else
+		{
+			newObj.value = selectedIndex;
+		}
+		
 		return newObj;
 	}
 
@@ -250,91 +266,70 @@ public class SettingCreation : MonoBehaviour
 				AddToLayout(layout, toggle.GetComponent<Toggle>() ?? toggle.GetComponentInChildren<Toggle>());
 				toggle.name = setting.Title;
 				break;
-		}
+            case SettingObjectType.Label:
+                layout.GetComponent<LayoutElement>().preferredHeight *= 1.5f;
+                layout.GetComponent<AspectRatioFitter>().aspectRatio /= 1.5f;
+                break;
 
-		return layout.gameObject;
+        }
+
+        return layout.gameObject;
 	}
 
-	public void RebuildLayout()
-	{
-		LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
+    public void RebuildLayout()
+    {
+        LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform) transform);
 
-		foreach (LayoutGroup layout in GetComponentsInChildren<LayoutGroup>())
-		{
-			if (layout.gameObject != gameObject)
-			{
-				foreach (Transform trans in layout.transform)
-				{
-					var aspect = trans.GetComponent<AspectRatioFitter>() ?? trans.gameObject.AddComponent<AspectRatioFitter>();
-					var layoutElement = trans.GetComponent<LayoutElement>() ?? trans.gameObject.AddComponent<LayoutElement>();
-					aspect.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
-					var canvasSize = ((RectTransform)GetComponentInParent<Canvas>().transform).rect.size;
-					if (layout.GetComponent<RectTransform>().sizeDelta.x > canvasSize.x)
-					{
-						layout.GetComponent<LayoutElement>().preferredHeight = canvasSize.x / layout.GetComponent<AspectRatioFitter>().aspectRatio;
-					}
-					if (layout.GetType() == typeof(HorizontalLayoutGroup))
-					{
-						layoutElement.preferredHeight = layout.GetComponent<LayoutElement>().preferredHeight;
-						aspect.aspectRatio = layout.GetComponent<AspectRatioFitter>().aspectRatio / layout.transform.childCount;
-					}
-					else
-					{
-						layoutElement.preferredHeight = layout.GetComponent<LayoutElement>().preferredHeight / layout.transform.childCount;
-						aspect.aspectRatio = layout.GetComponent<AspectRatioFitter>().aspectRatio * layout.transform.childCount;
-					}
-				}
-			}
-		}
+        foreach (LayoutGroup layout in GetComponentsInChildren<LayoutGroup>())
+        {
+            if (layout.gameObject != gameObject)
+            {
+                foreach (Transform trans in layout.transform)
+                {
+                    var aspect = trans.GetComponent<AspectRatioFitter>() ??
+                                 trans.gameObject.AddComponent<AspectRatioFitter>();
+                    var layoutElement = trans.GetComponent<LayoutElement>() ??
+                                        trans.gameObject.AddComponent<LayoutElement>();
+                    aspect.aspectMode = AspectRatioFitter.AspectMode.HeightControlsWidth;
+                    var canvasSize = ((RectTransform) GetComponentInParent<Canvas>().transform).rect.size;
+                    if (layout.GetComponent<RectTransform>().sizeDelta.x > canvasSize.x)
+                    {
+                        layout.GetComponent<LayoutElement>().preferredHeight = canvasSize.x /
+                                                                               layout.GetComponent<AspectRatioFitter>()
+                                                                                   .aspectRatio;
+                    }
+                    if (layout.GetType() == typeof(HorizontalLayoutGroup))
+                    {
+                        layoutElement.preferredHeight = layout.GetComponent<LayoutElement>().preferredHeight;
+                        aspect.aspectRatio = layout.GetComponent<AspectRatioFitter>().aspectRatio /
+                                             layout.transform.childCount;
+                    }
+                    else
+                    {
+                        layoutElement.preferredHeight = layout.GetComponent<LayoutElement>().preferredHeight /
+                                                        layout.transform.childCount;
+                        aspect.aspectRatio = layout.GetComponent<AspectRatioFitter>().aspectRatio *
+                                             layout.transform.childCount;
+                    }
+                }
+            }
+        }
 
-		LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)transform);
+        gameObject.BestFit();
+        foreach (LayoutGroup layout in GetComponentsInChildren<LayoutGroup>())
+        {
+            if (layout.gameObject != gameObject)
+            {
+                if (layout.transform.childCount == 1 && layout.transform.GetChild(0).GetComponent<Text>())
+                {
+                    layout.transform.GetChild(0).GetComponent<Text>().fontSize =
+                        (int) (layout.transform.GetChild(0).GetComponent<Text>().fontSize * 1.5f);
+                }
+            }
+        }
+    }
 
-		var textObjs = GetComponentsInChildren<Text>();
-		int smallestFontSize = 0;
-		foreach (var text in textObjs)
-		{
-			var newSize = GetFontSizeAtBestFit(text);
-			if (text.GetComponentInParent<Dropdown>())
-			{
-				var currentValue = text.text;
-				foreach (var value in text.GetComponentInParent<Dropdown>().options)
-				{
-					text.text = value.text;
-					var newTextSize = GetFontSizeAtBestFit(text);
-					newSize = newTextSize < newSize ? newTextSize : newSize;
-				}
-				text.text = currentValue;
-			}
-			if (newSize < smallestFontSize || smallestFontSize == 0)
-			{
-				smallestFontSize = newSize;
-			}
-		}
-		foreach (var text in textObjs)
-		{
-			text.fontSize = smallestFontSize;
-		}
-	}
-
-	public int GetFontSizeAtBestFit(Text text)
-	{
-		text.resizeTextForBestFit = true;
-		text.resizeTextMinSize = 1;
-		text.resizeTextMaxSize = 100;
-		text.cachedTextGenerator.Invalidate();
-		text.cachedTextGenerator.Populate(text.text, text.GetGenerationSettings(text.rectTransform.rect.size));
-		text.resizeTextForBestFit = false;
-		var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
-		var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
-		if (text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y < newSizeRescale)
-		{
-			newSizeRescale = text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y;
-		}
-		newSize = Mathf.FloorToInt(newSize * newSizeRescale);
-		return newSize;
-	}
-
-	public void Wipe()
+    public void Wipe()
 	{
 		foreach (Transform child in transform)
 		{
@@ -342,8 +337,8 @@ public class SettingCreation : MonoBehaviour
 		}
 	}
 
-	private void OnLanguageChange()
+	private void OnChange()
 	{
-		Invoke("RebuildLayout", 0.02f);
+		RebuildLayout();
 	}
 }

@@ -30,7 +30,7 @@ namespace Assets.Scripts.Inputs
 		private void OnApplyClick(Dropdown language)
 		{
 			Localization.UpdateLanguage(language.value);
-			_buttons.BestFit();
+			_buttons.GameObjects.BestFit();
 		}
 
 		private void OnBackClick()
@@ -40,7 +40,7 @@ namespace Assets.Scripts.Inputs
 
 		protected override void OnEnter()
 		{
-			_buttons.BestFit();
+			_buttons.GameObjects.BestFit();
 
 			GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
 			GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
