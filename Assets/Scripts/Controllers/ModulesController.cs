@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using GameWork.Core.Commands.Interfaces;
 using Newtonsoft.Json;
@@ -36,23 +34,22 @@ public class ModulesController : ICommandAction
 
 	private readonly GameObject _modulesPopup;
     private readonly GameObject _popupContent;
-	private readonly GameObject _backgroundOverlay;
+
 	private readonly GameObject _moduleItemPrefab;
     private readonly GameObject _moduleIndexItemPrefab;
     private readonly GameObject _moduleDescriptionItemPrefab;
     private readonly RectTransform _modulesContent;
 
     private readonly Sprite[] _moduleIcons;
-    private int _stateLevel;
     private ModuleEntry[] _modulesDatabase;
-    private Button _backButton;
-	private Button _nextArrow;
-	private Button _backArrow;
+    private readonly Button _backButton;
+	private readonly Button _nextArrow;
+	private readonly Button _backArrow;
 
 	public ModulesController()
     {
-        _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
-        _backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
+	    _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
+        var backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
         _modulesContent = _popupContent.GetComponent<ScrollRect>().content;
         
@@ -64,7 +61,7 @@ public class ModulesController : ICommandAction
         var backButtonObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton");
         _backButton = backButtonObject.GetComponent<Button>();
 
-		_backgroundOverlay.GetComponent<Button>().onClick.AddListener(TogglePopup);
+		backgroundOverlay.GetComponent<Button>().onClick.AddListener(TogglePopup);
 
 		var nextArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow");
 	    _nextArrow = nextArrowObject.GetComponent<Button>();
@@ -134,10 +131,9 @@ public class ModulesController : ICommandAction
     {
 	    var currentModuleList = module.Faq;
 	    var index = 0;
-	    GameObject[] moduleProblem;
 
         _modulesContent.GetComponentInChildren<VerticalLayoutGroup>().enabled = true;
-        var moduleItem = GameObject.Instantiate(listItem);
+        var moduleItem = Object.Instantiate(listItem);
         ClearList();
         moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
         moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
@@ -198,7 +194,7 @@ public class ModulesController : ICommandAction
         _backButton.onClick.RemoveAllListeners();
         foreach (RectTransform child in _popupContent.GetComponent<ScrollRect>().content)
         {
-            GameObject.Destroy(child.gameObject);
+			Object.Destroy(child.gameObject);
         }
     }
 
@@ -211,7 +207,7 @@ public class ModulesController : ICommandAction
 
 	private GameObject InstantiateListItem(GameObject prefab)
     {
-        var listItem = GameObject.Instantiate(prefab);
+        var listItem = Object.Instantiate(prefab);
         listItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
 		return listItem;
     }

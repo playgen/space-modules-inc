@@ -39,7 +39,7 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
 
     public float Spacing;
 
-	public bool UpdateContentHeight = false;
+	public bool UpdateContentHeight;
 
 	//public Orientation ChildAlignment;
 
@@ -51,7 +51,7 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
 
     private void Setup()
     {
-        _myRectTransform = this.GetComponent<RectTransform>();
+        _myRectTransform = GetComponent<RectTransform>();
     }
 
     void LateUpdate()
@@ -75,33 +75,37 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
         {
             var height = 0.0f;
 
-            child.pivot = _myRectTransform.pivot;
+	        if (_myRectTransform != null)
+	        {
+		        child.pivot = _myRectTransform.pivot;
             
-            // Update to the new height of the object, updated last frame
-            if (child.GetComponent<ContentSizeFitter>() != null)
-            {
-                height = child.rect.height;
-            }
-            // Set the force width / height
+		        // Update to the new height of the object, updated last frame
+		        if (child.GetComponent<ContentSizeFitter>() != null)
+		        {
+			        height = child.rect.height;
+		        }
+		        // Set the force width / height
 
-            if (ChildForceExpand.Width)
-            {
-                child.sizeDelta = new Vector2(_myRectTransform.rect.width, child.sizeDelta.y);
-            }
-            if (ChildForceExpand.Height)
-            {
-                child.sizeDelta = new Vector2(child.sizeDelta.x, _myRectTransform.rect.height / children.Count);
+		        if (ChildForceExpand.Width)
+		        {
+			        child.sizeDelta = new Vector2(_myRectTransform.rect.width, child.sizeDelta.y);
+		        }
+		        if (ChildForceExpand.Height)
+		        {
+			        child.sizeDelta = new Vector2(child.sizeDelta.x, _myRectTransform.rect.height / children.Count);
                 
-                // update the height
-                height = child.rect.height;
-            }
-            // Set the padding
+			        // update the height
+			        height = child.rect.height;
+		        }
+	        }
+
+	        // Set the padding
             
             child.anchorMin = Vector2.zero;
             child.anchorMax = Vector2.one;
             child.offsetMin = new Vector2(Padding.left, Padding.bottom);
             child.offsetMax = new Vector2(Padding.right, Padding.top);
-            if (height == 0f)
+            if (Mathf.Approximately(height, 0f))
             {
                 height = child.rect.height;
             }

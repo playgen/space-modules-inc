@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Inputs;
-using GameWork.Core.Commands.Interfaces;
+﻿using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
 public class ReviewState : InputTickState

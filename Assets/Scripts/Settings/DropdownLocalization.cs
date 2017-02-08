@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,9 +29,9 @@ public class DropdownLocalization : MonoBehaviour {
 		var dropdown = GetComponent<Dropdown>();
 		dropdown.ClearOptions();
 		var translatedOptions = new List<string>();
-		for (int i = 0; i < _options.Count; i++)
+		foreach (string t in _options)
 		{
-			translatedOptions.Add(Localization.Get(_options[i]));
+			translatedOptions.Add(Localization.Get(t));
 		}
 		dropdown.AddOptions(translatedOptions);
 	}

@@ -53,16 +53,12 @@ public static class GameObjectUtilities
 
         if (results.Length != 1)
         {
-            if (results.Length == 0)
-            {
-                Debug.LogWarning(string.Format("Couldn't find any objects matching the path: \"{0}\"", absolutePath));
-            }
-            else
-            {
-                Debug.LogWarning(string.Format("Found {0} objects matching the path: \"{1}\"", results.Length, absolutePath));
-            }
+	        Debug.LogWarning(
+		        results.Length == 0
+			        ? string.Format("Couldn't find any objects matching the path: \"{0}\"", absolutePath)
+			        : string.Format("Found {0} objects matching the path: \"{1}\"", results.Length, absolutePath));
 
-            return null;
+	        return null;
         }
 
         return results[0];

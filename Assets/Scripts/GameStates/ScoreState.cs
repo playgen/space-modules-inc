@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.Scripts.Inputs;
+
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
@@ -44,7 +44,7 @@ public class ScoreState : InputTickState
 
 		Tracker.T.RequestFlush();
 
-		NextEvent(isGameOver);
+		if (NextEvent != null) NextEvent(isGameOver);
 	}
 
 	public override string Name
@@ -61,7 +61,6 @@ public class ScoreState : InputTickState
 			if (getScoreDataCommand != null)
 			{
 				getScoreDataCommand.Execute(_scenarioController);
-				return;
 			}
 		}
 	}

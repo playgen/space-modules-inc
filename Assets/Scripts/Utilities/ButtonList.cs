@@ -14,7 +14,7 @@ public class ButtonList
 		}
 	}
 
-	public ButtonList(string menuPath, bool standardBestFit = false)
+	public ButtonList(string menuPath)
 	{
 		_buttons = GameObjectUtilities.FindAllChildren(menuPath);
 	}
@@ -22,13 +22,6 @@ public class ButtonList
 	public Button GetButton(string buttonName, bool hasContainer = false)
 	{
 		var button = _buttons.First(o => o.name.Equals(buttonName));
-		if (!hasContainer)
-		{
-			return button.GetComponent<Button>();
-		}
-		else
-		{
-			return button.transform.GetChild(0).GetComponent<Button>();
-		}
+		return !hasContainer ? button.GetComponent<Button>() : button.GetComponentInChildren<Button>();
 	}
 }

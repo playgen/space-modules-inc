@@ -1,5 +1,5 @@
 ﻿using System;
-using Assets.Scripts.Inputs;
+
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
@@ -32,7 +32,7 @@ public class LevelState : InputTickState
 
 	protected override void OnTick(float deltaTime)
 	{
-		CompletedEvent();
+		if (CompletedEvent != null) CompletedEvent();
 		return;
 
 

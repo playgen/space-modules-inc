@@ -1,13 +1,13 @@
 ﻿using System;
 using System.IO;
 using AssetPackage;
-using Assets.Plugins;
+
 using UnityEngine;
 
 
 public class AssetManagerBridge : IBridge, ILog, IDataStorage
 {
-	private IStorageProvider _provider;
+	private readonly IStorageProvider _provider;
 
 	public AssetManagerBridge()
 	{

@@ -1,10 +1,9 @@
-﻿using Assets.Scripts.Inputs;
-using GameWork.Core.Commands.Interfaces;
+﻿using GameWork.Core.Commands.Interfaces;
 using UnityEngine;
 
 public class UpdateDialogueFontSizeCommand : ICommand
 {
-	private GameObject _dialogueObject;
+	private readonly GameObject _dialogueObject;
 
 	public UpdateDialogueFontSizeCommand(GameObject dialogueGameObject)
 	{

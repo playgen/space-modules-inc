@@ -3,7 +3,7 @@ using GameWork.Core.Commands.Interfaces;
 
 public class SetPlayerActionCommand : ICommand<ScenarioController>
 {
-    private Guid _actionId;
+    private readonly Guid _actionId;
 
     public SetPlayerActionCommand(Guid actionId)
     {

@@ -38,8 +38,8 @@ public class CharacterFaceController : MonoBehaviour
     private FacialExpression[] _facialExpressions;
 
 	private FacialExpression _currentExpression;
-	private Coroutine _talkingAnimation;
-	private Coroutine _idleAnimation;
+	private bool _talkingAnimation;
+	private bool _idleAnimation;
 
 	void Start()
     {
@@ -52,7 +52,6 @@ public class CharacterFaceController : MonoBehaviour
 
     public void SetEmotion(string emotion)
     {
-        StopCoroutines();
         _currentExpression = _facialExpressions.FirstOrDefault(facialExpression => facialExpression.Name.Equals(emotion));
         if (_currentExpression != null)
         {
@@ -60,22 +59,18 @@ public class CharacterFaceController : MonoBehaviour
             _eyeRenderer.sprite = _currentExpression.Eyes;
 
             _mouthRenderer.sprite = _currentExpression.Mouth;
-            _idleAnimation = StartCoroutine(IdleAnimation());
-        }
-    }
+			if (!_idleAnimation)
+			{
+				StartCoroutine(IdleAnimation());
+			}
 
-	private void StopCoroutines()
-	{
-		if (_idleAnimation != null)
-		{
-			StopCoroutine(_idleAnimation);
 		}
-		StopTalkAnimation();
-	}
+    }
 
 	private IEnumerator IdleAnimation()
     {
-	    while (true)
+		_idleAnimation = true;
+		while (_idleAnimation)
         {
             _eyeRenderer.sprite = _currentExpression.Eyes;
 
@@ -89,23 +84,23 @@ public class CharacterFaceController : MonoBehaviour
         }
     }
 
-	public void StopTalkAnimation()
+	public void StartTalkAnimation()
 	{
-		if (_talkingAnimation != null)
+		if (!_talkingAnimation)
 		{
-			StopCoroutine(_talkingAnimation);
-			_mouthRenderer.sprite = _currentExpression.Mouth;
+			StartCoroutine(TalkAnimation());
 		}
 	}
 
-	public void StartTalkAnimation()
+	public void StopTalkAnimation()
 	{
-		_talkingAnimation = StartCoroutine(TalkAnimation());
+		_talkingAnimation = false;
 	}
 
 	private IEnumerator TalkAnimation()
     {
-        while (true)
+		_talkingAnimation = true;
+		while (_talkingAnimation)
         {
             _mouthRenderer.sprite = _currentExpression.Mouth;
 
@@ -117,7 +112,8 @@ public class CharacterFaceController : MonoBehaviour
                 yield return new WaitForSeconds(0.01f);
             }
         }
-    }
+		_mouthRenderer.sprite = _currentExpression.Mouth;
+	}
 
     private void LoadSprites()
     {
@@ -126,7 +122,7 @@ public class CharacterFaceController : MonoBehaviour
         for (var i = 0; i < eyebrowSprites.Length; i++)
         {
             var substring = "Eyebrows_";
-            var index = eyebrowSprites[i].name.IndexOf(substring);
+            var index = eyebrowSprites[i].name.IndexOf(substring, StringComparison.Ordinal);
             var emotionName = eyebrowSprites[i].name.Substring(index + substring.Length);
             var mouthId = "02";
             switch (emotionName)

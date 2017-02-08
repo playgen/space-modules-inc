@@ -10,8 +10,6 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
 using System.IO;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
 using System.Text;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
@@ -112,7 +110,7 @@ public class ScenarioController : ICommandAction
 
 	public RolePlayCharacterAsset CurrentCharacter;
 	public bool IsTalking;
-	private AudioController _audioController;
+	private readonly AudioController _audioController;
 	private AudioClipModel _audioClip;
 	private ScenarioData _currentScenario;
 	private int _roundNumber;
@@ -266,22 +264,25 @@ public class ScenarioController : ICommandAction
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
 		UpdateScore(reply);
 
-		var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
-			reply.GetStylesName());
+		if (reply != null)
+		{
+			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
+				reply.GetStylesName());
 
-		// Submit dialogue choice to the IAT event list.
-		_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		_events.Add(
-			(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-		_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
+			// Submit dialogue choice to the IAT event list.
+			_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+			_events.Add(
+				(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
+			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
-		// UCM tracker tracks the filename ID of each player dialogue choice made
-		Tracker.T.setExtension("PlayerDialogueChoice", reply.FileName);
-		Tracker.T.completable.Initialized("PlayerActionCompleted");
+			// UCM tracker tracks the filename ID of each player dialogue choice made
+			Tracker.T.setExtension("PlayerDialogueChoice", reply.FileName);
+			Tracker.T.completable.Initialized("PlayerActionCompleted");
 
-		//Tracker.T.RequestFlush();
+			//Tracker.T.RequestFlush();
 
-		_chatHistory.Add(new ChatObject() {Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName});
+			_chatHistory.Add(new ChatObject() { Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName });
+		}
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -306,14 +307,17 @@ public class ScenarioController : ICommandAction
 								StringComparison.CurrentCultureIgnoreCase) &&
 							string.Equals(dto.GetStylesName().ToString(), action.Parameters[3].ToString(),
 								StringComparison.CurrentCultureIgnoreCase));
-				var characterDialogueText = characterDialogue.Utterance;
-				//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-				_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
-				_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.FileName});
-				UpdateCurrentState();
-				PlayDialogueAudio(characterDialogue.FileName);
+				if (characterDialogue != null)
+				{
+					var characterDialogueText = characterDialogue.Utterance;
+					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
+					_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
+					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.FileName});
+					UpdateCurrentState();
+					PlayDialogueAudio(characterDialogue.FileName);
 
-				if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
+					if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
+				}
 			}
 			CurrentCharacter.ActionFinished(action);
 		}
@@ -355,7 +359,7 @@ public class ScenarioController : ICommandAction
 	private void HandleEndAudio()
 	{
 		IsTalking = false;
-		StopTalkAnimationEvent();
+		if (StopTalkAnimationEvent != null) StopTalkAnimationEvent();
 
 		if (_currentStateName == Name.BuildName("End"))
 		{
@@ -363,7 +367,7 @@ public class ScenarioController : ICommandAction
 			{
 				TraceScore();
 			}
-			FinalStateEvent();
+			if (FinalStateEvent != null) FinalStateEvent();
 		}
 	}
 
@@ -539,8 +543,7 @@ public class ScenarioController : ICommandAction
 			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
 
 		// The actual write to google
-		WWW www = new WWW(directSubmitUrl);
-
+		var www = new WWW(directSubmitUrl);
 	}
 
 	#endregion

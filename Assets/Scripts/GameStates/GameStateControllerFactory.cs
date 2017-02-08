@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Assets.Scripts.Inputs;
-using GameWork.Core.States.Tick;
-using UnityEngine;
+﻿using GameWork.Core.States.Tick;
 
 public class GameStateControllerFactory
 {

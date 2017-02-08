@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Inputs;
-using GameWork.Core.States.Tick.Input;
+﻿using GameWork.Core.States.Tick.Input;
 
 public class CallState : InputTickState
 {

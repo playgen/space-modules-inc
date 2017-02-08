@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -140,11 +139,7 @@ public class SettingCreation : MonoBehaviour
 	public T Custom<T>(string label, SettingObjectType type, bool showOnMobile, bool layoutHorizontal = true) where T : UIBehaviour
 	{
 		var newObj = Create(new SettingType(label, type, showOnMobile), layoutHorizontal);
-		var returnSelectable = newObj.GetComponent<T>();
-		if (returnSelectable == null)
-		{
-			returnSelectable = newObj.GetComponentInChildren<T>();
-		}
+		var returnSelectable = newObj.GetComponent<T>() ?? newObj.GetComponentInChildren<T>();
 		return returnSelectable;
 	}
 
