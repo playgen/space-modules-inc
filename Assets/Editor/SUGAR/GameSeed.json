@@ -1,0 +1,79 @@
+{
+	"Achievements": [
+		{
+			"Name": "Get 5 stars!",
+			"Description": "Accumulate at least 5 stars",
+			"ActorType": "User",
+			"Token": "get_5_stars",
+			"EvaluationCriterias": [
+				{
+					"EvaluationDataKey": "stars",
+					"ComparisonType": "GreaterOrEqual",
+					"CriteriaQueryType": "Sum",
+					"EvaluationDataType": "Long",
+					"Scope": "Actor",
+					"Value": "5"
+				}
+			]
+		},
+		{
+			"Name": "Get 3 stars in one game!",
+			"Description": "Get 3 stars in a single game",
+			"ActorType": "User",
+			"Token": "get_3_stars_one_game",
+			"EvaluationCriterias": [
+				{
+					"EvaluationDataKey": "stars",
+					"ComparisonType": "GreaterOrEqual",
+					"CriteriaQueryType": "Any",
+					"EvaluationDataType": "Long",
+					"Scope": "Actor",
+					"Value": "3"
+				}
+			]
+		},
+		{
+			"Name": "Play 2 games!",
+			"Description": "Play at least 2 games",
+			"ActorType": "User",
+			"Token": "play_2_games",
+			"EvaluationCriterias": [
+				{
+					"EvaluationDataKey": "plays",
+					"ComparisonType": "GreaterOrEqual",
+					"CriteriaQueryType": "Sum",
+					"EvaluationDataType": "Long",
+					"Scope": "Actor",
+					"Value": "2"
+				}
+			]
+		},
+		{
+			"Name": "Accumulate 2 points!",
+			"Description": "Accumulate 2 points",
+			"ActorType": "User",
+			"Token": "score_2_point",
+			"EvaluationCriterias": [
+				{
+					"EvaluationDataKey": "score",
+					"ComparisonType": "GreaterOrEqual",
+					"CriteriaQueryType": "Sum",
+					"EvaluationDataType": "Long",
+					"Scope": "Actor",
+					"Value": "2"
+				}
+			]
+		}
+	],
+	"Leaderboards": [
+		{
+			"Token": "smi_stars",
+			"Name": "Most Stars",
+			"Key": "stars",
+			"ActorType": "User",
+			"EvaluationDataType": "Long",
+			"CriteriaScope": "Actor",
+			"LeaderboardType": "Cumulative"
+		}
+	]
+}
