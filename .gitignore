@@ -33,6 +33,8 @@ sysinfo.txt
 *.pdb.meta
 *.dll
 *.dll.meta
+*.xml
+*.xml.meta
 !lib/**/*.dll
 !lib/**/*.dll.meta
 *.sln
