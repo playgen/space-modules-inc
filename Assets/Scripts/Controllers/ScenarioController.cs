@@ -146,7 +146,14 @@ public class ScenarioController : ICommandAction
 
 		//var round = obj.Rounds[1].Levels;
 		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
-		_roundNumber = Int32.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
+		if (CommandLineUtility.CustomArgs.ContainsKey("round"))
+		{
+			_roundNumber = Int32.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
+		}
+		else
+		{
+			_roundNumber = 1;
+		}
 		var round = obj.Rounds[_roundNumber];
 		List<ScenarioData> data = new List<ScenarioData>();
 		foreach (var level in round.Levels)

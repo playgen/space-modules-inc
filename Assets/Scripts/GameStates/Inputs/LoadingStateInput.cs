@@ -16,7 +16,12 @@ public class LoadingStateInput : TickStateInput
 			.onClick.AddListener(() => {
 				if (OfflineClickedEvent != null) OfflineClickedEvent();
 			});
-
+		var backgrounds = GameObjectUtilities.FindGameObject("BackgroundContainer");
+		var aspect = Camera.main.aspect;
+		var backgroundSize = (3f / 4f) / aspect;
+		backgroundSize = backgroundSize < 1 ? 1 : backgroundSize;
+		((RectTransform)backgrounds.transform).anchorMin = new Vector2((1 - backgroundSize) * 0.5f, 0);
+		((RectTransform)backgrounds.transform).anchorMax = new Vector2(((backgroundSize - 1) * 0.5f) + 1, 1);
 	}
 
 	protected override void OnEnter()
