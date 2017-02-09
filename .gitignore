@@ -18,7 +18,6 @@ ExportedObj/
 *.booproj
 *.svd
 
-
 # Unity3D generated meta files
 *.pidb.meta
 
@@ -28,36 +27,13 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
-*.dll
-!Assets/Plugins/IntegratedAuthoringTool/*.dll
-!Assets/Plugins/IntegratedAuthoringTool/*.dll.meta
-!Assets/Plugins/IntegratedAuthoringTool/*.mdb
-!Assets/Plugins/IntegratedAuthoringTool/*.mdb.meta
-!Assets/Plugins/IntegratedAuthoringTool/*.pdb
 *.pdb
 *.mdb
-!Assets/**/*.dll.meta
-*.sln
-test_Data/
-test.exe
 *.mdb.meta
 *.pdb.meta
-SMI_Data/
-SMI.exe
-KAM-README.txt
-start-1.bat
-start-2.bat
-start-3.bat
-start-4.bat
+*.dll
+*.dll.meta
+!lib/**/*.dll
+!lib/**/*.dll.meta
+*.sln
 space-modules-inc-setup/bin/
-
-!/Assets/GameWork/*
-!/Assets/GameWork.meta
-Assets/Resources/Sprites/Characters/Female_Base/Body/Base_no_mask.png
-Assets/Resources/Sprites/Characters/Female_Base/Body/Base_no_mask.png.meta
-Assets/Resources/Sprites/Characters/Female_Character_01/Outfit_Hair/Outfit_no_mask.png
-Assets/Resources/Sprites/Characters/Female_Character_01/Outfit_Hair/Outfit_no_mask.png.meta
-Assets/Sprites/Game/Panel_Bottom_Header_old.png
-Assets/Sprites/Game/Panel_Bottom_Header_old.png.meta
-Assets/Sprites/Game/Panel_Bottom_old.png
-Assets/Sprites/Game/Panel_Bottom_old.png.meta
