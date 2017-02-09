@@ -36,7 +36,6 @@ public class ReviewStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		Tracker.T.accessible.Accessed("ReviewState");
-
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);

@@ -340,7 +340,7 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		var filePath = Path.Combine(Application.streamingAssetsPath, String.Format("Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".wav");
+		var filePath = Path.Combine(Application.streamingAssetsPath, String.Format("Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".ogg");
 		if (File.Exists(filePath))
 		{
 			IsTalking = true;

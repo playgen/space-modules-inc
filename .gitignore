@@ -35,6 +35,9 @@ sysinfo.txt
 *.dll.meta
 *.xml
 *.xml.meta
+*.ogg
+*.ogg.meta
+*.wav.meta
 !lib/**/*.dll
 !lib/**/*.dll.meta
 *.sln

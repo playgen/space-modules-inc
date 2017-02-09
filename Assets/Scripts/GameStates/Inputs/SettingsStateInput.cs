@@ -13,21 +13,27 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
+		AudioListener.volume = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1;
+		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
 		_buttons = new ButtonList("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer");
 		var backButton = _buttons.GetButton("BackButton");
 		var applyButton = _buttons.GetButton("ApplyButton");
 		_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
 		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
 		_creator.Wipe();
+		var volume = _creator.Volume(Localization.Get("Volume"), AudioListener.volume, false);
 		var language = _creator.Language(false);
-		applyButton.onClick.AddListener(delegate { OnApplyClick(language); });
+		applyButton.onClick.AddListener(delegate { OnApplyClick(language, volume); });
 		backButton.onClick.AddListener(OnBackClick);
 		_creator.RebuildLayout();
 	}
 
-	private void OnApplyClick(Dropdown language)
+	private void OnApplyClick(Dropdown language, Slider volume)
 	{
 		Localization.UpdateLanguage(language.value);
+		AudioListener.volume = volume.value;
+		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
+		_creator.RebuildLayout();
 		_buttons.GameObjects.BestFit();
 	}
 

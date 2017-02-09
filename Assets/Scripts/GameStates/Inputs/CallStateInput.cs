@@ -23,6 +23,7 @@ public class CallStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();
+		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").BestFit();
 	}
 
 	protected override void OnExit()

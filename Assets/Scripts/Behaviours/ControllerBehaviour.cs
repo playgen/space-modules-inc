@@ -2,21 +2,17 @@
 using GameWork.Core.States.Tick;
 
 using UnityEngine;
-using PlayGen.SUGAR.Unity;
 
 public class ControllerBehaviour : MonoBehaviour
 {
-
 	private TickStateController _stateController;
 	private AudioController _audioController;
 
 	void Awake()
 	{
-		DontDestroyOnLoad(transform.gameObject);
-
 		FixScreenRatio();
 
-		_audioController = new AudioController(new StreamingAssetsAudioChannelFactory());
+		_audioController = new AudioController(new StreamingAssetsAudioChannelFactory(), 1);
 		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
 
@@ -48,10 +44,6 @@ public class ControllerBehaviour : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
 			Application.Quit();
-		}
-		if (Input.GetKeyDown(KeyCode.A))
-		{
-			SUGARManager.Achievement.DisplayList();
 		}
 		if (_audioController != null)
 		{
