@@ -29,7 +29,7 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("ScoreState");
+		Tracker.T.accessible.Accessed("ScoreState", AccessibleTracker.Accessible.Screen);
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;

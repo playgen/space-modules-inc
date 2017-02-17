@@ -64,7 +64,7 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("GameState");
+		Tracker.T.accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
 
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		RefreshPlayerDialogueOptions();

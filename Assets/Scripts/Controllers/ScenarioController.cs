@@ -283,12 +283,12 @@ public class ScenarioController : ICommandAction
 			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
 
 			// UCM tracker tracks the filename ID of each player dialogue choice made
-			Tracker.T.setExtension("PlayerDialogueChoice", reply.FileName);
+			Tracker.T.setExtension("PlayerDialogueChoice", reply.CurrentState + "." + reply.FileName);
 			Tracker.T.completable.Initialized("PlayerActionCompleted");
 
 			//Tracker.T.RequestFlush();
 
-			_chatHistory.Add(new ChatObject() { Utterence = reply.Utterance, Agent = "Player", Code = reply.FileName });
+			_chatHistory.Add(new ChatObject() { Utterence = reply.Utterance, Agent = "Player", Code = reply.CurrentState + "." + reply.FileName });
 		}
 
 		// Update EmotionExpression
@@ -319,7 +319,7 @@ public class ScenarioController : ICommandAction
 					var characterDialogueText = characterDialogue.Utterance;
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 					_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
-					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.FileName});
+					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.CurrentState + "." + characterDialogue.FileName});
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
 

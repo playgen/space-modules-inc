@@ -39,6 +39,7 @@ public class ScoreState : InputTickState
 
 			// Open the default browser and show the form
 			Application.OpenURL(googleFormsURL);
+			Application.Quit();
 
 		}
 

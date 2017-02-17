@@ -24,10 +24,18 @@ public class MenuStateInput : TickStateInput
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
 		});
+		leaderboardButton.onClick.AddListener(delegate
+		{
+			Tracker.T.accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
+		});
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
 		{
 			SUGARManager.Achievement.DisplayList();
+		});
+		achievementButton.onClick.AddListener(delegate
+		{
+			Tracker.T.accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
 		});
 	}
 
