@@ -551,6 +551,10 @@ public class ScenarioController : ICommandAction
 
 		// The actual write to google
 		var www = new WWW(directSubmitUrl);
+		while (!www.isDone)
+		{
+			
+		}
 	}
 
 	#endregion
