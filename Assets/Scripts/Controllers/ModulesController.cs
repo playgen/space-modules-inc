@@ -4,6 +4,7 @@ using GameWork.Core.Commands.Interfaces;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using PlayGen.Unity.Utilities.Localization;
 
 public class ModulesController : ICommandAction
 {

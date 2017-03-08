@@ -2,6 +2,7 @@
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
+using PlayGen.Unity.Utilities.Localization;
 
 public class ScoreStateInput : TickStateInput
 {

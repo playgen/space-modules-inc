@@ -2,6 +2,9 @@
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
+using PlayGen.Unity.Settings;
+using PlayGen.Unity.Utilities.Localization;
+using PlayGen.Unity.Utilities.BestFit;
 
 public class SettingsStateInput : TickStateInput
 {
@@ -32,7 +35,7 @@ public class SettingsStateInput : TickStateInput
 	//private void OnApplyClick(Dropdown language, Slider volume)
 	private void OnApplyClick(Dropdown language)
 	{
-		Localization.UpdateLanguage(language.value);
+		Localization.UpdateLanguage(Localization.Languages[language.value]);
 		//AudioListener.volume = volume.value;
 		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
 		_creator.RebuildLayout();

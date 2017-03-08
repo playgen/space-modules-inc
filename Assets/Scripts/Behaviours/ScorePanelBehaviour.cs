@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PlayGen.Unity.Utilities.Localization;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class ScorePanelBehaviour : MonoBehaviour

@@ -70,11 +70,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1740486618715320}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: 
   ToUpper: 1
+  LanguageOverride: 
 --- !u!222 &222878193409263700
 CanvasRenderer:
   m_ObjectHideFlags: 1

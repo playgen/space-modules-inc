@@ -455,12 +455,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 60207143}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: BACK
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &60207146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1212,12 +1212,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 183259879}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: SETTINGS
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &183259882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1303,12 +1303,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 223704250}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: LEVEL_TITLE
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &223704253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,12 +1423,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 225311912}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: NEXT
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &225311915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1656,12 +1656,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 271792147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: CUSTOMER_SATISFACTION
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!224 &279458759 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224991992386991090, guid: 20c21b04988365c42bc33a79c2f47b12,
@@ -1748,12 +1748,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 302662482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: REVIEW_TITLE
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &302662485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2847,12 +2847,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 524641559}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: INCOMING_CALL
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!1 &558060940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,7 +2963,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 558060940}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d9db93761958ad4e9ac62165fe2da80, type: 3}
+  m_Script: {fileID: -1169801823, guid: de55026d5bfce66489bbd7b82430a450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MinFontSize: 1
@@ -3269,12 +3269,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 600072198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: BACK
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &600072201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3499,12 +3499,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 638675926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: LEVEL_SUBTITLE
   ToUpper: 0
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &638675929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4216,7 +4216,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ef26519a418a446f834e3f77d246219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rawCopy: 0
   flushInterval: 1
   checkInterval: 3
   storageType: net
@@ -4420,11 +4419,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 223000012450321626, guid: 991ef3e1f70851f458b55f5f7eae55a2,
-        type: 2}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 577450941}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 991ef3e1f70851f458b55f5f7eae55a2, type: 2}
   m_IsPrefabParent: 0
@@ -5196,12 +5190,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 957370862}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: APPLY
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &957370865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5568,12 +5562,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1132154216}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: PLAY
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1132154219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6230,12 +6224,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1276275174}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: SETTINGS
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1276275177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6561,12 +6555,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1359279041}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: AVERAGE_CUSTOMER_EMOTION
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!1 &1363280300
 GameObject:
   m_ObjectHideFlags: 0
@@ -7103,12 +7097,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1525287864}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: ANSWER
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1525287867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7245,12 +7239,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1585359408}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: LEADERBOARD
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1585359411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7812,12 +7806,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687104767}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: ACHIEVEMENTS
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1687104770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7901,12 +7895,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1689636275}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: NEXT
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1689636278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8874,12 +8868,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1864316317}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: BACK
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &1864316320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9127,12 +9121,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1897930979}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: BONUS
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!1 &1921380261
 GameObject:
   m_ObjectHideFlags: 0
@@ -9394,12 +9388,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1949024154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: SCORE
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!1 &1958368673
 GameObject:
   m_ObjectHideFlags: 0
@@ -9625,12 +9619,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2006095405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c579f2d6a4d5ad44f87cbeeede181fa2, type: 3}
+  m_Script: {fileID: -1952341525, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Key: RESULT_TITLE
   ToUpper: 1
-  LanguageOverride: 0
+  LanguageOverride: 
 --- !u!114 &2006095408
 MonoBehaviour:
   m_ObjectHideFlags: 0

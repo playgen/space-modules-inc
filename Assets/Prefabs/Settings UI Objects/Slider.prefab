@@ -246,9 +246,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1119435640247890}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bbefaca8ba3819f4f9cacf54a280b5d0, type: 3}
+  m_Script: {fileID: 2032459836, guid: b4b66c74c4b109f47a762a0ebf394647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _scale: 1.2
 --- !u!222 &222090780125332150
 CanvasRenderer:
   m_ObjectHideFlags: 1

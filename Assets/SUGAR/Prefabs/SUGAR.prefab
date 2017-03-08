@@ -40,8 +40,11 @@ GameObject:
   - component: {fileID: 114000011669735270}
   - component: {fileID: 114000013496830746}
   - component: {fileID: 114000010768160430}
+  - component: {fileID: 114021355374949024}
   - component: {fileID: 114000012611603444}
   - component: {fileID: 114000013249777644}
+  - component: {fileID: 114337849517216950}
+  - component: {fileID: 114955684198894200}
   - component: {fileID: 114259976721560528}
   m_Layer: 0
   m_Name: SUGAR
@@ -75,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 106238491, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _achievementListInterface: {fileID: 114000011335328718, guid: da1b3e420bd0de7438fc02f71340f4d4,
+  _interface: {fileID: 114000011335328718, guid: da1b3e420bd0de7438fc02f71340f4d4,
     type: 2}
   _achievementPopup: {fileID: 114000013413874684, guid: 30bf371ff31e0bc429751b3218cfa999,
     type: 2}
@@ -110,14 +113,12 @@ MonoBehaviour:
   _baseAddress: http://api.sugarengine.org/
   _gameToken: SMI
   _gameId: 1
-  _useAchievements: 1
-  _useLeaderboards: 1
-  _uiBlocker: {fileID: 1823420820520756, guid: 32aeda71493f8f843ac0595a41de113d, type: 2}
+  _uiBlocker: {fileID: 1823420820520756, guid: 3bf56a8582cd73945ac50320b9b466a7, type: 2}
   _useBlocker: 1
   _blockerClickClose: 1
-  _uiSpinner: {fileID: 1728504751892352, guid: a5606fa9ffb55ee42b050a58cc0e293e, type: 2}
-  _spinSpeed: 600
-  _spinClockwise: 0
+  _uiSpinner: {fileID: 114066451447811422, guid: 2184654e3f08b134791f86b429921805,
+    type: 2}
+  _customInterfaceList: []
 --- !u!114 &114000012611603444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,8 +130,10 @@ MonoBehaviour:
   m_Script: {fileID: 1493326051, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leaderboardInterface: {fileID: 114000010784463620, guid: 13a2f8f67577aa84289ed633d8ce1345,
+  _interface: {fileID: 114087798976199502, guid: eba715bbb0ee311459857f49f8a7bda8,
     type: 2}
+  _positionCount: 10
+  _currentFilter: 0
 --- !u!114 &114000012885612516
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: -1070070240, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _leaderboardListInterface: {fileID: 0}
+  _interface: {fileID: 0}
+  _currentActorType: 1
 --- !u!114 &114000013496830746
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,10 +179,22 @@ MonoBehaviour:
   m_Script: {fileID: -89677467, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loginUserInterface: {fileID: 0}
+  _accountInterface: {fileID: 0}
   _allowAutoLogin: 1
   _allowRegister: 0
   _defaultSourceToken: SPL
+--- !u!114 &114021355374949024
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012920798932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1776674429, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interface: {fileID: 0}
 --- !u!114 &114259976721560528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,6 +207,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _responseMillisecondBudgetPerFrame: 10
+--- !u!114 &114337849517216950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012920798932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1907648989, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interface: {fileID: 0}
+--- !u!114 &114955684198894200
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012920798932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1429074576, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interface: {fileID: 0}
 --- !u!223 &223000012450321626
 Canvas:
   m_ObjectHideFlags: 1

@@ -372,7 +372,7 @@ public class ScenarioController : ICommandAction
 		{
 			if (SUGARManager.CurrentUser != null)
 			{
-				TraceScore();
+				//TraceScore();
 			}
 			if (FinalStateEvent != null) FinalStateEvent();
 		}
