@@ -52,8 +52,9 @@ public class SettingsStateInput : TickStateInput
 		Tracker.T.accessible.Accessed("SettingsState", AccessibleTracker.Accessible.Screen);
 
 		_buttons.GameObjects.BestFit();
+        _creator.RebuildLayout();
 
-		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
+        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 	}
 
