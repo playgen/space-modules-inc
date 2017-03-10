@@ -100,7 +100,6 @@ public class GameStateInput : TickStateInput
 
 	public void UpdateCharacterExpression(string emotion, float mood)
 	{
-		Debug.Log("EMOTION: " + emotion + ". MOOD: " + mood);
 		_characterMood.fillAmount = (mood + 10) / 20;
 		_characterController.SetEmotion(emotion ?? "Idle");
 		if (_scenarioController.IsTalking)

@@ -53,6 +53,9 @@ public class ControllerBehaviour : MonoBehaviour
 		{
 			_stateController.Tick(Time.deltaTime);
 		}
-
+		if (Input.GetKeyDown(KeyCode.DownArrow))
+		{
+			Application.CaptureScreenshot(System.DateTime.UtcNow.ToFileTimeUtc() + ".png");
+		}
 	}
 }

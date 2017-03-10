@@ -36,7 +36,7 @@ public class LoadingStateInput : TickStateInput
 			}
 			else
 			{
-				Debug.LogError("Sign In FAAILL");
+				Debug.LogError("Sign In Failed");
 			}
 		});
 	}
