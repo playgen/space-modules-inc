@@ -63,4 +63,12 @@ public class SettingsStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
+
+	protected override void OnTick(float deltaTime)
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			OnBackClick();
+		}
+	}
 }

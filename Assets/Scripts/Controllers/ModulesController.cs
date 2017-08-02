@@ -88,8 +88,8 @@ public class ModulesController : ICommandAction
             var moduleType = moduleTypes[i];
             var listItem = InstantiateListItem(_moduleIndexItemPrefab);
 	        var iconId = _modulesDatabase.FirstOrDefault(entry => entry.Type.Equals(moduleType)).Icon;
-            listItem.transform.FindChild("Text").GetComponent<Text>().text = moduleType;
-            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
+            listItem.transform.Find("Text").GetComponent<Text>().text = moduleType;
+            listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
 
             var offset = i * listItem.GetComponent<RectTransform>().rect.height;
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
@@ -117,9 +117,9 @@ public class ModulesController : ICommandAction
             var module = modules[i];
             var listItem = InstantiateListItem(_moduleItemPrefab);
 
-            listItem.transform.FindChild("Text").GetComponent<Text>().text = module.Name;
-            listItem.transform.FindChild("Id").GetComponent<Text>().text = module.Id;
-            listItem.transform.FindChild("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
+            listItem.transform.Find("Text").GetComponent<Text>().text = module.Name;
+            listItem.transform.Find("Id").GetComponent<Text>().text = module.Id;
+            listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
 
             var offset = i * listItem.GetComponent<RectTransform>().rect.height;
             listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
@@ -156,13 +156,13 @@ public class ModulesController : ICommandAction
 
 
 		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-	    problemItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
-		var problemItemText = problemItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>();
+	    problemItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
+		var problemItemText = problemItem.transform.Find("Panel").GetChild(0).GetComponent<Text>();
 		problemItemText.text = currentModuleList[0].Problem;
 
 		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		solutionItem.transform.FindChild("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
-		var solutionItemText = solutionItem.transform.FindChild("Panel").GetChild(0).GetComponent<Text>();
+		solutionItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
+		var solutionItemText = solutionItem.transform.Find("Panel").GetChild(0).GetComponent<Text>();
 		solutionItemText.text = currentModuleList[0].Solution;
 
 		// Step through arrow listeners

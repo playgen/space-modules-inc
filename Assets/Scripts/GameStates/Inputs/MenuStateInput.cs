@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
+
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
+
+using UnityEngine;
 
 public class MenuStateInput : TickStateInput
 {
@@ -12,6 +16,8 @@ public class MenuStateInput : TickStateInput
 
 	private ButtonList _buttons;
 	private Button _playButton;
+	private GameObject _menuPanel;
+	private GameObject _quitPanel;
 
 	protected override void OnInitialize()
 	{
@@ -38,6 +44,12 @@ public class MenuStateInput : TickStateInput
 		{
 			Tracker.T.accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
 		});
+		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
+		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
+		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.RemoveAllListeners();
+		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
+		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.RemoveAllListeners();
+		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(OnQuitPanelNoClick);
 	}
 
 	private void OnSettingsClick()
@@ -48,6 +60,7 @@ public class MenuStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
+		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
 		_playButton.GetComponentInChildren<Text>().fontSize *= 2;
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
@@ -60,8 +73,47 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
 
+	protected override void OnTick(float deltaTime)
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (SUGARManager.Achievement.IsActive)
+			{
+				SUGARManager.Achievement.Hide();
+			}
+			else if (SUGARManager.Leaderboard.IsActive)
+			{
+				SUGARManager.Leaderboard.Hide();
+			}
+			else if (_quitPanel.activeSelf)
+			{
+				OnQuitPanelNoClick();
+			}
+			else
+			{
+				OnQuitAttempt();
+			}
+		}
+	}
+
 	private void OnPlayClick()
 	{
 		if (PlayClickedEvent != null) PlayClickedEvent();
+	}
+
+	private void OnQuitAttempt()
+	{
+		_menuPanel.SetActive(false);
+		_quitPanel.SetActive(true);
+		_menuPanel.BestFit();
+		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
+	}
+
+	private void OnQuitPanelNoClick()
+	{
+		_menuPanel.SetActive(true);
+		_quitPanel.SetActive(false);
+		_menuPanel.BestFit();
+		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
 	}
 }

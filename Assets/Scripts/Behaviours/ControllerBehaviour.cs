@@ -41,10 +41,6 @@ public class ControllerBehaviour : MonoBehaviour
 
 	void Update ()
 	{
-		if (Input.GetKeyDown(KeyCode.Escape))
-		{
-			Application.Quit();
-		}
 		if (_audioController != null)
 		{
 			_audioController.Tick(Time.deltaTime);

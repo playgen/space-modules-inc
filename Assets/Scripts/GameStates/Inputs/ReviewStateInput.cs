@@ -71,7 +71,7 @@ public class ReviewStateInput : TickStateInput
 
 			if (chatObject != null)
 			{
-				chatObject.FindChild("Panel").GetChild(0).GetComponent<Text>().text = t.Utterence;
+				chatObject.Find("Panel").GetChild(0).GetComponent<Text>().text = t.Utterence;
 				chatObject.transform.SetParent(_reviewContent.GetComponent<ScrollRect>().content, false);
 			}
 		}
