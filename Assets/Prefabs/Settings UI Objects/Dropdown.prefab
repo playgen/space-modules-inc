@@ -56,7 +56,6 @@ GameObject:
   - component: {fileID: 222542763639454008}
   - component: {fileID: 114615251088746124}
   - component: {fileID: 114132202809136794}
-  - component: {fileID: 114952041863242554}
   m_Layer: 5
   m_Name: Dropdown
   m_TagString: Untagged
@@ -697,18 +696,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114952041863242554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1152337951854376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12469560, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _options: []
 --- !u!222 &222103067191846200
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -784,8 +771,8 @@ RectTransform:
   m_Father: {fileID: 224414980875587376}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: -3}
-  m_AnchorMax: {x: 1, y: 0}
+  m_AnchorMin: {x: 0, y: -2}
+  m_AnchorMax: {x: 1, y: 0.1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 1}

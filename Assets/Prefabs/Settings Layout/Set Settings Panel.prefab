@@ -40,12 +40,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
-    m_Bottom: 0
+    m_Left: 10
+    m_Right: 10
+    m_Top: 10
+    m_Bottom: 10
   m_ChildAlignment: 4
-  m_Spacing: 0
+  m_Spacing: 10
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -71,7 +71,7 @@ MonoBehaviour:
   _toggle: {fileID: 114290137210761754, guid: 11f61f881449732429d93afebe34c4f2, type: 2}
   _slider: {fileID: 114029084379025326, guid: a398bea92236e144996ab3d79d5ee10b, type: 2}
   _button: {fileID: 114211652757733088, guid: 8ce9c16695e8abc429679f1b79ac1195, type: 2}
-  _labelAnchor: 5
+  _labelAnchor: 7
 --- !u!224 &224991992386991090
 RectTransform:
   m_ObjectHideFlags: 1

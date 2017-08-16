@@ -36,8 +36,8 @@ public class ScoreStateInput : TickStateInput
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
 		if (_scenarioController.CurrentLevel == _scenarioController.LevelMax)
 		{
-			_nextButton.GetComponentInChildren<Localization>().Key = "EXIT";
-			_nextButton.GetComponentInChildren<Localization>().Set();
+			_nextButton.GetComponentInChildren<TextLocalization>().Key = "EXIT";
+			_nextButton.GetComponentInChildren<TextLocalization>().Set();
 		}
 		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
