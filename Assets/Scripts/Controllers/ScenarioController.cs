@@ -316,6 +316,7 @@ public class ScenarioController : ICommandAction
 								StringComparison.CurrentCultureIgnoreCase));
 				if (characterDialogue != null)
 				{
+					UpdateScore(characterDialogue);
 					var characterDialogueText = characterDialogue.Utterance;
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 					_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
