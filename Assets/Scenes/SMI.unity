@@ -4425,7 +4425,7 @@ MonoBehaviour:
   checkInterval: 3
   storageType: net
   traceFormat: xapi
-  host: http://tracker.playgen.com/api/proxy/gleaner/collector/
+  host: https://tracker.playgen.com/api/proxy/gleaner/collector/
   trackingCode: 5888fc78924fa4006e96b11efou6h95urrafw29
   debug: 0
 --- !u!4 &796368921
