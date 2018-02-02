@@ -51,7 +51,7 @@ public class ControllerBehaviour : MonoBehaviour
 		}
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
-			Application.CaptureScreenshot(System.DateTime.UtcNow.ToFileTimeUtc() + ".png");
+			ScreenCapture.CaptureScreenshot(System.DateTime.UtcNow.ToFileTimeUtc() + ".png");
 		}
 	}
 }

@@ -178,7 +178,7 @@ public class GameStateInput : TickStateInput
 			choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
 			var offset = i * choiceItem.GetComponent<RectTransform>().rect.height;
 			contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
-			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset * 0.85f);
+			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
 			choiceItem.GetComponent<Button>().onClick.AddListener(delegate
 			{
 				OnDialogueOptionClick(dialogueAction);
