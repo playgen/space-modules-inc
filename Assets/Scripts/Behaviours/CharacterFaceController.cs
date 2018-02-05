@@ -109,7 +109,7 @@ public class CharacterFaceController : MonoBehaviour
 			foreach (var sprite in _currentExpression.MouthFrames)
 			{
 				_mouthRenderer.sprite = sprite;
-				yield return new WaitForSeconds(0.01f);
+				yield return null;
 			}
 		}
 		_mouthRenderer.sprite = _currentExpression.Mouth;
