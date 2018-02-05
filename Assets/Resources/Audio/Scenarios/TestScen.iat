@@ -1,0 +1,128 @@
+{
+  "root":
+  {
+    "classId": 0,
+    "ScenarioName": "Space Modules - Test Scenario",
+    "Description": "Scenario for Space Modules Inc.",
+    "Characters": [
+      {
+        "Name": "Positive",
+        "Source": "Positive.rpc"
+      },
+      {
+        "Name": "Neutral",
+        "Source": "Neutral.rpc"
+      },
+      {
+        "Name": "Negative",
+        "Source": "Negative.rpc"
+      }
+    ],
+    "PlayerDialogues": [
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-OP-P",
+        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-OP-N",
+        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
+      },
+      {
+        "CurrentState": "Start",
+        "NextState": "Opening",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-OP-R",
+        "Utterance": "Hallo daar, wat is er aan de hand?"
+      },
+      {
+        "CurrentState": "Response",
+        "NextState": "Goodbye",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-RSPDM-P",
+        "Utterance": "O, dat is fijn om te horen. We zijn blij met tevreden klanten. Kan ik verder nog iets voor U doen?"
+      },
+      {
+        "CurrentState": "Response",
+        "NextState": "Goodbye",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-RSPDM-N",
+        "Utterance": "Leuk hoor. Nog iets anders te melden?"
+      },
+      {
+        "CurrentState": "Response",
+        "NextState": "Goodbye",
+        "Meaning": [],
+        "Style": [],
+        "FileName": "S-RSPDM-R",
+        "Utterance": "Ok. Verder?"
+      }
+    ],
+    "AgentDialogues": [
+      {
+        "CurrentState": "Opening",
+        "NextState": "Response",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "FileName": "A-OP-DEMO",
+        "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
+      },
+      {
+        "CurrentState": "Opening",
+        "NextState": "Response",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "FileName": "A-OP-DEMO",
+        "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
+      },
+      {
+        "CurrentState": "Opening",
+        "NextState": "Response",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "FileName": "A-OP-DEMO",
+        "Utterance": "Hoi goedemorgen. Ik wilde eigenlijk alleen maar even zeggen dat ik heel tevreden ben met jullie apparatuur en service!"
+      },
+      {
+        "CurrentState": "Goodbye",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Positive"],
+        "FileName": "A-GB-DEMO",
+        "Utterance": "Nee, dat was alles. Tot ziens maar weer."
+      },
+      {
+        "CurrentState": "Goodbye",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Neutral"],
+        "FileName": "A-GB-DEMO",
+        "Utterance": "Nee, dat was alles. Tot ziens maar weer."
+      },
+      {
+        "CurrentState": "Goodbye",
+        "NextState": "End",
+        "Meaning": [],
+        "Style": ["Negative"],
+        "FileName": "A-GB-DEMO",
+        "Utterance": "Nee, dat was alles. Tot ziens maar weer."
+      }
+    ]
+  },
+  "types": [
+    {
+      "TypeId": 0,
+      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+    }
+  ]
+}

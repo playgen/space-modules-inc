@@ -21,8 +21,10 @@ public class CharacterFaceController : MonoBehaviour
 		public Sprite[] MouthFrames;
 	}
 
+	private const float Min = 1f;
+	private const float Max = 10f;
 	[SerializeField]
-	[Range(1, 10f)]
+	[Range(Min, Max)]
 	private float _blinkDelay;
 
 	[SerializeField]
@@ -75,7 +77,7 @@ public class CharacterFaceController : MonoBehaviour
 			_eyeRenderer.sprite = _currentExpression.Eyes;
 
 			yield return new WaitForSeconds(_blinkDelay);
-
+			_blinkDelay = UnityEngine.Random.Range(Min, Max);
 			foreach (var sprite in _currentExpression.BlinkFrames)
 			{
 				_eyeRenderer.sprite = sprite;
@@ -104,12 +106,12 @@ public class CharacterFaceController : MonoBehaviour
 		{
 			_mouthRenderer.sprite = _currentExpression.Mouth;
 
-			yield return new WaitForSeconds(0.2f);
+			yield return new WaitForSeconds(0.15f);
 
 			foreach (var sprite in _currentExpression.MouthFrames)
 			{
 				_mouthRenderer.sprite = sprite;
-				yield return null;
+				yield return new WaitForSeconds(0.03f);
 			}
 		}
 		_mouthRenderer.sprite = _currentExpression.Mouth;

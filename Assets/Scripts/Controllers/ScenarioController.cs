@@ -139,7 +139,8 @@ public class ScenarioController : ICommandAction
 
 	private void LoadScenarios()
 	{
-		_allScenarioPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat");
+		var path = Path.Combine(Application.dataPath, "Resources/Audio");
+		_allScenarioPaths = Directory.GetFiles(Path.Combine(path, "Scenarios"), "*.iat");
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
 		var streamReader = new StreamReader(streamingAssetsPath);
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
@@ -341,7 +342,7 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		var filePath = Path.Combine(Application.streamingAssetsPath, String.Format("Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".ogg");
+		var filePath = Path.Combine(Application.dataPath, String.Format("Resources/Audio/Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".ogg");
 		if (File.Exists(filePath))
 		{
 			IsTalking = true;
