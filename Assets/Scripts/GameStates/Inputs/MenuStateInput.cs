@@ -62,7 +62,7 @@ public class MenuStateInput : TickStateInput
 		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
 		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
-		_playButton.GetComponentInChildren<Text>().fontSize *= 2;
+
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 	}

@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 1827919002, guid: 38ec7f93f5a114b4e8e5bc73e8ce5808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spinSpeed: 900
+  _spinSpeed: 300
   _spinClockwise: 1
 --- !u!114 &114669874930601928
 MonoBehaviour:
