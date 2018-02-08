@@ -49,9 +49,11 @@ public class ControllerBehaviour : MonoBehaviour
 		{
 			_stateController.Tick(Time.deltaTime);
 		}
+#if UNITY_EDITOR
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
 			ScreenCapture.CaptureScreenshot(System.DateTime.UtcNow.ToFileTimeUtc() + ".png");
 		}
+#endif
 	}
 }

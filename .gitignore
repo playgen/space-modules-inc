@@ -41,4 +41,8 @@ sysinfo.txt
 !lib/**/*.dll
 !lib/**/*.dll.meta
 *.sln
+*.lock
+*.ide
+*.ide-shm
+*.ide-wal
 space-modules-inc-setup/bin/
