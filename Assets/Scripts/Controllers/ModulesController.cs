@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections;
+using System.IO;
 using System.Linq;
 using GameWork.Core.Commands.Interfaces;
 using Newtonsoft.Json;
@@ -157,13 +158,16 @@ public class ModulesController : ICommandAction
 
 		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
 	    problemItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
-		var problemItemText = problemItem.transform.Find("Panel").GetChild(0).GetComponent<Text>();
+		var problemItemText = problemItem.transform.GetChild(2).GetComponent<Text>();
 		problemItemText.text = currentModuleList[0].Problem;
+	    problemItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
+
 
 		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
 		solutionItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
-		var solutionItemText = solutionItem.transform.Find("Panel").GetChild(0).GetComponent<Text>();
+		var solutionItemText = solutionItem.transform.GetChild(2).GetComponent<Text>();
 		solutionItemText.text = currentModuleList[0].Solution;
+		solutionItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
 
 		// Step through arrow listeners
 		_nextArrow.onClick.AddListener(() =>
@@ -199,7 +203,10 @@ public class ModulesController : ICommandAction
 			LoadModules(module.Type);
 			Tracker.T.accessible.Accessed("BackToModuleDeviceTypes", AccessibleTracker.Accessible.Screen);
 		});
+    }
 
+	private void Rebuild()
+	{
 		LayoutRebuilder.ForceRebuildLayoutImmediate(_modulesContent);
 	}
 
