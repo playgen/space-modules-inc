@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
+using Utilities;
 
 public class CharacterFaceController : MonoBehaviour
 {
@@ -143,7 +144,22 @@ public class CharacterFaceController : MonoBehaviour
 					break;
 			}
 
-			var eyeFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Eyes/" + emotionName);
+			var eyes = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Eyes/" + emotionName);
+			// Flip eye frames
+			var eyeFrames = new Sprite[eyes.Length*2];
+			for (var e = 0; e < eyeFrames.Length; e++)
+			{
+				if (e < eyes.Length)
+				{
+					eyeFrames[e] = eyes[e];
+				}
+				else
+				{
+					var reverseIndex = eyes.Length - (e - (eyes.Length-1));
+					eyeFrames[e] = eyes[reverseIndex];
+				}
+			}
+
 			var mouthFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Mouth/Mouth_Loop_" + mouthId);
 			var expression = new FacialExpression()
 			{
