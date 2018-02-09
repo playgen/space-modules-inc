@@ -20,7 +20,6 @@ public class GameStateInput : TickStateInput
 	private GameObject _dialoguePanel;
 
 	private GameObject _listChoicePrefab;
-	private GameObject _multipleChoicePrefab;
 	private GameObject _npcDialoguePanel;
 	private GameObject _characterObject;
 	private Image _characterMood;
@@ -36,7 +35,6 @@ public class GameStateInput : TickStateInput
 		_characterMalePrefab = Resources.Load("Prefabs/Characters/Male") as GameObject;
 		_characterPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/CharacterPanel");
 		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
-		_multipleChoicePrefab = Resources.Load("Prefabs/MultipleChoiceGroup") as GameObject;
 		_dialoguePanel =
 			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
 		_npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCTextHolder/NPCText");
@@ -146,24 +144,6 @@ public class GameStateInput : TickStateInput
 		// TODO: Refactor
 		var rnd = new System.Random();
 		var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
-
-		//	For Multiple Choice view
-		//      if (randomDialogueActions.Length == 4)
-		//      {
-		//          dialogueObject = GameObject.Instantiate(_multipleChoicePrefab);
-		//          for (var i = 0; i < randomDialogueActions.Length; i++)
-		//          {
-		//              var dialogueAction = randomDialogueActions[i];
-		//              var optionText = dialogueAction.Utterance;
-		//              var optionObject = dialogueObject.transform.GetChild(i);
-		//              optionObject.GetChild(0).GetComponent<Text>().text = optionText;//
-		//              optionObject.GetComponent<Button>().onClick.AddListener(delegate
-		//              {
-		//                  OnDialogueOptionClick(dialogueAction);
-		//              });
-		//          }
-		//	dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
-		//}
 
 		var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
 		var scrollRect = dialogueObject.GetComponent<ScrollRect>();
