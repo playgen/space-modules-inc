@@ -7,24 +7,31 @@
 					"Perspective": "Negative",
 					"Knowledge":
 						{
-
+							"SELF":
+								{
+									"DialogueState(Player)": "Start, 1",
+									"Gender(Mary)": "Female, 1",
+									"ID(Mary)": "1, 1"
+								}
 						}
 				},
 			"BodyName": "Female",
 			"VoiceName": null,
 			"EmotionalAppraisalAssetSource": "GeneralAppraisal.ea",
 			"EmotionalDecisionMakingSource": "MoodResponse.edm",
-			"SocialImportanceAssetSource": null,
+			"SocialImportanceAssetSource": "SI.si",
 			"CommeillFautAssetSource": null,
 			"EmotionalState":
 				{
 					"Mood": -3,
+					"initialTick": 0,
 					"EmotionalPool": [
 						{
 							"Intensity": 3,
 							"Decay": 1,
 							"Threshold": 1,
 							"CauseId": 2,
+							"EventName": "Event(Property-Change, World, HasProblem(Mary), True)",
 							"EmotionType": "Distress",
 							"Valence": "Negative",
 							"AppraisalVariables": ["DESIRABILITY"],
@@ -54,6 +61,10 @@
 							"Property": "HasProblem(Mary)",
 							"NewValue": true
 						}]
+				},
+			"OtherAgents":
+				{
+					"dictionary": []
 				}
 		},
 	"types": [
@@ -63,6 +74,6 @@
 		}, 
 		{
 			"TypeId": 1,
-			"ClassName": "RolePlayCharacter.RolePlayCharacterAsset, RolePlayCharacter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+			"ClassName": "RolePlayCharacter.RolePlayCharacterAsset, RolePlayCharacter, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
 		}]
 }

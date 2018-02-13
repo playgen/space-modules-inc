@@ -45,7 +45,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 
 	public bool Exists(string fileId)
 	{
-		return _provider.FileExists(fileId);
+		return File.Exists(fileId);
 	}
 
 	public string[] Files()
@@ -55,7 +55,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 
 	public string Load(string fileId)
 	{
-		using (var reader = new StreamReader(_provider.LoadFile(fileId, FileMode.Open, FileAccess.Read)))
+		using (var reader = File.OpenText(fileId))
 		{
 			return reader.ReadToEnd();
 		}
@@ -63,6 +63,9 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 
 	public void Save(string fileId, string fileData)
 	{
-		throw new InvalidOperationException();
+		using (var writer = File.CreateText(fileId))
+		{
+			writer.Write(fileData);
+		}
 	}
 }

@@ -1,568 +1,618 @@
 {
-  "root":
-  {
-    "classId": 0,
-    "ScenarioName": "Space Modules - Unknown / Expert: Device SG3200B - problem 8",
-    "Description": "Scenario for Space Modules Inc.",
-    "Characters": [
-      {
-        "Name": "Positive",
-        "Source": "Positive.rpc"
-      },
-      {
-        "Name": "Neutral",
-        "Source": "Neutral.rpc"
-      },
-      {
-        "Name": "Negative",
-        "Source": "Negative.rpc"
-      }
-    ],
-    "PlayerDialogues": [
-      {
-        "CurrentState": "Start",
-        "NextState": "Opening1",
-        "Meaning": [],
-        "Style": ["Polite(1)"],
-        "FileName": "S-OP-P",
-        "Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?"
-      },
-      {
-        "CurrentState": "Start",
-        "NextState": "Opening1",
-        "Meaning": [],
-        "Style": [],
-        "FileName": "S-OP-N",
-        "Utterance": "Hallo, Space Modules Inc. Zegt U het maar."
-      },
-      {
-        "CurrentState": "Start",
-        "NextState": "Opening2",
-        "Meaning": [],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-OP-R",
-        "Utterance": "Hallo daar, wat is er aan de hand?"
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "AnswerDetails",
-        "Meaning": [],
-        "Style": ["Polite(1)"],
-        "FileName": "S-ASKPR-P",
-        "Utterance": "Het spijt me dat te horen. Kunt U aangeven wat het probleem is?"
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "AnswerDetails",
-        "Meaning": [],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-ASKPR-R",
-        "Utterance": "Wat is het probleem dan?"
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "AnswerType3",
-        "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(1)"],
-        "FileName": "S-ASKTP1-P",
-        "Utterance": "Kunt U mij vertellen wat het typenummer is?"
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "AnswerType3",
-        "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-ASKTP1-R",
-        "Utterance": "Typenummer?"
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "DealAnger1",
-        "Meaning": [],
-        "Style": ["Polite(1)"],
-        "FileName": "S-DLANG-P",
-        "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
-      },
-      {
-        "CurrentState": "FirstResponse",
-        "NextState": "DealAnger2",
-        "Meaning": [],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-DLANG-R",
-        "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
-      },
-      {
-        "CurrentState": "SecondChance",
-        "NextState": "DealAnger1",
-        "Meaning": [],
-        "Style": ["Polite(1)"],
-        "FileName": "S-DLANG-P",
-        "Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen."
-      },
-      {
-        "CurrentState": "SecondChance",
-        "NextState": "DealAnger2",
-        "Meaning": [],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-DLANG-R",
-        "Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt."
-      },
-      {
-        "CurrentState": "SecondChance",
-        "NextState": "BadFinish",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-CALM-R",
-        "Utterance": "Ja hallo, als U niet antwoord dan kan ik U niet helpen!"
-      },
-      {
-        "CurrentState": "SecondChance",
-        "NextState": "Reroute",
-        "Meaning": ["Empathy(-1)", "Faq(-1)"],
-        "Style": ["Polite(1)"],
-        "FileName": "S-REROUTE",
-        "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
-      },
-      {
-        "CurrentState": "AskProblem1",
-        "NextState": "AnswerDetails",
-        "Meaning": [],
-        "Style": ["Polite(1)"],
-        "FileName": "S-ASKPR2-P",
-        "Utterance": "Kunt U aangeven wat het probleem is?"
-      },
-      {
-        "CurrentState": "AskProblem1",
-        "NextState": "AnswerDetails",
-        "Meaning": [],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-ASKPR-R",
-        "Utterance": "Wat is het probleem dan?"
-      },
-      {
-        "CurrentState": "AskProblem1",
-        "NextState": "AnswerType3",
-        "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(1)"],
-        "FileName": "S-ASKTP1-P",
-        "Utterance": "Kunt U mij vertellen wat het typenummer is?"
-      },
-      {
-        "CurrentState": "AskProblem1",
-        "NextState": "AnswerType3",
-        "Meaning": ["Inquire(-1)"],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-ASKTP1-R",
-        "Utterance": "Typenummer?"
-      },
-      {
-        "CurrentState": "DataCollected",
-        "NextState": "WaitForAnswer",
-        "Meaning": [],
-        "Style": [],
-        "FileName": "S-LKUP",
-        "Utterance": "Ik ga het voor U even opzoeken..."
-      },
-      {
-        "CurrentState": "DataCollected",
-        "NextState": "Reroute",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-REROUTE",
-        "Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345"
-      },
-      {
-        "CurrentState": "DataCollected",
-        "NextState": "AnswerType3",
-        "Meaning": ["Inquire(-1)"],
-        "Style": [],
-        "FileName": "S-ASKTP2",
-        "Utterance": "Wat was het typenummer ook al weer?"
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-BROKEN",
-        "Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-RECAL",
-        "Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-HEAT",
-        "Utterance": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-FAST",
-        "Utterance": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-CLEAN",
-        "Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-POWR",
-        "Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-REPL",
-        "Utterance": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-COLD",
-        "Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "RespSolution",
-        "Meaning": ["Faq(-1)"],
-        "Style": [],
-        "FileName": "S-DSS-BOOT",
-        "Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
-      },
-      {
-        "CurrentState": "FaqResponse",
-        "NextState": "Reroute",
-        "Meaning": ["Faq(3)"],
-        "Style": [],
-        "FileName": "S-NOTFND",
-        "Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen."
-      },
-      {
-        "CurrentState": "Closure",
-        "NextState": "Goodbye1",
-        "Meaning": ["Closure(3)"],
-        "Style": ["Polite(1)"],
-        "FileName": "S-CLOSE-P",
-        "Utterance": "Prima. Kan ik nog iets anders voor U doen?"
-      },
-      {
-        "CurrentState": "Closure",
-        "NextState": "Goodbye2",
-        "Meaning": ["Closure(-1)"],
-        "Style": ["Polite(1)"],
-        "FileName": "S-ENDGB-P",
-        "Utterance": "Prima, fijne dag verder."
-      },
-      {
-        "CurrentState": "Closure",
-        "NextState": "Goodbye2",
-        "Meaning": ["Closure(-1)"],
-        "Style": ["Polite(-3)"],
-        "FileName": "S-ENDGB-R",
-        "Utterance": "Doei."
-      }
-    ],
-    "AgentDialogues": [
-      {
-        "CurrentState": "Opening1",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-OPE-P-S3",
-        "Utterance": "Hoi hoi, ik heb problemen met het sensornet, type SG3200B"
-      },
-      {
-        "CurrentState": "Opening1",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-OPE-N-S3",
-        "Utterance": "Hee, ik heb weer eens problemen met het sensornet, type SG3200B"
-      },
-      {
-        "CurrentState": "Opening1",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-OP1E-A-S3",
-        "Utterance": "het sensornet type SG3200B doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?"
-      },
-      {
-        "CurrentState": "Opening2",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-OPE-P-S3",
-        "Utterance": "Hoi hoi, ik heb problemen met het sensornet, type SG3200B"
-      },
-      {
-        "CurrentState": "Opening2",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-OPE-N-S3",
-        "Utterance": "Hee, ik heb weer eens problemen met het sensornet, type SG3200B"
-      },
-      {
-        "CurrentState": "Opening2",
-        "NextState": "FirstResponse",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-OP2E-A-S3",
-        "Utterance": "Wat is er aan de hand? Wat is er aan de hand?! het sensornet type SG3200B is weer eens kapot, waardeloos is het!!"
-      },
-      {
-        "CurrentState": "DealAnger1",
-        "NextState": "AskProblem1",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Positive"],
-        "FileName": "A-RSPANG-P",
-        "Utterance": "Fijn dat je het wilt oplossen, maar boos ben ik niet hoor!"
-      },
-      {
-        "CurrentState": "DealAnger1",
-        "NextState": "AskProblem1",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPANG-N",
-        "Utterance": "Dat is goed om te horen..."
-      },
-      {
-        "CurrentState": "DealAnger1",
-        "NextState": "AskProblem1",
-        "Meaning": ["Empathy(3)"],
-        "Style": ["Negative"],
-        "FileName": "A-RSPANG-A",
-        "Utterance": "Nou, dat hoop ik ook, want het is knap vervelend."
-      },
-      {
-        "CurrentState": "DealAnger2",
-        "NextState": "AskProblem1",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Positive"],
-        "FileName": "A-RSPCLM-P",
-        "Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit..."
-      },
-      {
-        "CurrentState": "DealAnger2",
-        "NextState": "AskProblem1",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPCLM-N",
-        "Utterance": "Zo wordt ik wel boos, ja...kun je me helpen of niet?"
-      },
-      {
-        "CurrentState": "DealAnger2",
-        "NextState": "End",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Negative"],
-        "FileName": "A-RSPCLM-A",
-        "Utterance": "Ja hallo, dat maak ik zelf wel uit! Ik bel wel met je baas!"
-      },
-      {
-        "CurrentState": "WaitForAnswer",
-        "NextState": "FaqResponse",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-RSPWT-P",
-        "Utterance": "Ok. Ik wacht geduldig af"
-      },
-      {
-        "CurrentState": "WaitForAnswer",
-        "NextState": "FaqResponse",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPWT-N",
-        "Utterance": "Als het maar niet te lang duurt..."
-      },
-      {
-        "CurrentState": "WaitForAnswer",
-        "NextState": "FaqResponse",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-RSPWT-A",
-        "Utterance": "Pfff...het zij zo..."
-      },
-      {
-        "CurrentState": "Reroute",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-RSPRR-P",
-        "Utterance": "Jammer, maar goed. Ik zal de specialist bellen. Bedankt tot zover"
-      },
-      {
-        "CurrentState": "Reroute",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPRR-N",
-        "Utterance": "Oh...ok. Tot ziens dan, ik ga die specialist bellen."
-      },
-      {
-        "CurrentState": "Reroute",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-RSPRR-A",
-        "Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
-      },
-      {
-        "CurrentState": "AnswerDetails",
-        "NextState": "DataCollected",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-DDS-OPP",
-        "Utterance": "De sensoren geven aan dat objecten aan de andere kant van het schip zijn."
-      },
-      {
-        "CurrentState": "AnswerDetails",
-        "NextState": "DataCollected",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-DDS-OPP",
-        "Utterance": "De sensoren geven aan dat objecten aan de andere kant van het schip zijn."
-      },
-      {
-        "CurrentState": "AnswerDetails",
-        "NextState": "SecondChance",
-        "Meaning": ["Empathy(-1)"],
-        "Style": ["Negative"],
-        "FileName": "A-RSPPR-A",
-        "Utterance": "Dat zei ik al: hij is kapot!"
-      },
-      {
-        "CurrentState": "AnswerType3",
-        "NextState": "DataCollected",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-RSPTP2-P-S3",
-        "Utterance": "Oh, vergeetachtig? Het is type SG3200B"
-      },
-      {
-        "CurrentState": "AnswerType3",
-        "NextState": "DataCollected",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPTP2-N-S3",
-        "Utterance": "Oh, had ik al gezegd he. Maar het is type SG3200B"
-      },
-      {
-        "CurrentState": "AnswerType3",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-RSPTP2-A",
-        "Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!"
-      },
-      {
-        "CurrentState": "RespSolution",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-RSPSOL-P",
-        "Utterance": "Ok, bedankt voor dat antwoord. Dat ga ik doen."
-      },
-      {
-        "CurrentState": "RespSolution",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-RSPSOL-N",
-        "Utterance": "Ok, dat zal ik doen."
-      },
-      {
-        "CurrentState": "RespSolution",
-        "NextState": "Closure",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-RSPSOL-A",
-        "Utterance": "Ok, dan hoop ik maar dat dat werkt..."
-      },
-      {
-        "CurrentState": "Goodbye1",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-END-P",
-        "Utterance": "Nee, bedankt voor het vragen. Prettige dag verder."
-      },
-      {
-        "CurrentState": "Goodbye1",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-END-N",
-        "Utterance": "Nee hoor, het is goed zo."
-      },
-      {
-        "CurrentState": "Goodbye1",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-END-A",
-        "Utterance": "Nee, het heeft me al genoeg tijd gekost. Tot ziens"
-      },
-      {
-        "CurrentState": "Goodbye2",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Positive"],
-        "FileName": "A-ENDGB-P",
-        "Utterance": "Tot ziens en bedankt."
-      },
-      {
-        "CurrentState": "Goodbye2",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Neutral"],
-        "FileName": "A-ENDGB-N",
-        "Utterance": "Tot ziens."
-      },
-      {
-        "CurrentState": "Goodbye2",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-ENDGB-A",
-        "Utterance": "Ja, daaagggg"
-      },
-      {
-        "CurrentState": "BadFinish",
-        "NextState": "End",
-        "Meaning": [],
-        "Style": ["Negative"],
-        "FileName": "A-NOHELP-A",
-        "Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je."
-      }
-    ]
-  },
-  "types": [
-    {
-      "TypeId": 0,
-      "ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ]
+	"root":
+		{
+			"classId": 0,
+			"ScenarioName": "Space Modules - Unknown / Expert: Device SG3200B - problem 8",
+			"Description": "Scenario for Space Modules Inc.",
+			"CharacterSources": ["Negative.rpc", "Neutral.rpc", "Positive.rpc"],
+			"Dialogues": [
+				{
+					"CurrentState": "Opening1",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-OPE-P-S3",
+					"Utterance": "Hoi hoi, ik heb problemen met het sensornet, type SG3200B",
+					"UtteranceId": "TTS-CF3B9582FBA25BEEC983ED277F023ED4"
+				}, 
+				{
+					"CurrentState": "Opening1",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-OPE-N-S3",
+					"Utterance": "Hee, ik heb weer eens problemen met het sensornet, type SG3200B",
+					"UtteranceId": "TTS-382DA4687801339BDA7303D778928CAD"
+				}, 
+				{
+					"CurrentState": "Opening1",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-OP1E-A-S3",
+					"Utterance": "het sensornet type SG3200B doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
+					"UtteranceId": "TTS-051049F81ACFDA6A6B6E20CCDC7D0650"
+				}, 
+				{
+					"CurrentState": "Opening2",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-OPE-P-S3",
+					"Utterance": "Hoi hoi, ik heb problemen met het sensornet, type SG3200B",
+					"UtteranceId": "TTS-CF3B9582FBA25BEEC983ED277F023ED4"
+				}, 
+				{
+					"CurrentState": "Opening2",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-OPE-N-S3",
+					"Utterance": "Hee, ik heb weer eens problemen met het sensornet, type SG3200B",
+					"UtteranceId": "TTS-382DA4687801339BDA7303D778928CAD"
+				}, 
+				{
+					"CurrentState": "Opening2",
+					"NextState": "FirstResponse",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-OP2E-A-S3",
+					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! het sensornet type SG3200B is weer eens kapot, waardeloos is het!!",
+					"UtteranceId": "TTS-29AAF71670F7ABA09D650977DB0A0D58"
+				}, 
+				{
+					"CurrentState": "DealAnger1",
+					"NextState": "AskProblem1",
+					"Meaning": "Empathy(-1)",
+					"Style": "Positive",
+					"FileName": "A-RSPANG-P",
+					"Utterance": "Fijn dat je het wilt oplossen, maar boos ben ik niet hoor!",
+					"UtteranceId": "TTS-262014FCADFC7B70ADE49DC8F21C7CB1"
+				}, 
+				{
+					"CurrentState": "DealAnger1",
+					"NextState": "AskProblem1",
+					"Meaning": "Empathy(-1)",
+					"Style": "Neutral",
+					"FileName": "A-RSPANG-N",
+					"Utterance": "Dat is goed om te horen...",
+					"UtteranceId": "TTS-378767163CE83F6A1C8498E5EA254406"
+				}, 
+				{
+					"CurrentState": "DealAnger1",
+					"NextState": "AskProblem1",
+					"Meaning": "Empathy(3)",
+					"Style": "Negative",
+					"FileName": "A-RSPANG-A",
+					"Utterance": "Nou, dat hoop ik ook, want het is knap vervelend.",
+					"UtteranceId": "TTS-A8F8D018369F5ABEFE50C9ED5E5F583B"
+				}, 
+				{
+					"CurrentState": "DealAnger2",
+					"NextState": "AskProblem1",
+					"Meaning": "Empathy(-1)",
+					"Style": "Positive",
+					"FileName": "A-RSPCLM-P",
+					"Utterance": "Wat is dat nou voor een opmerking...ik ben helemaal niet boos, maar vooruit...",
+					"UtteranceId": "TTS-BB798C1406D4FDC45ABF51DF23377533"
+				}, 
+				{
+					"CurrentState": "DealAnger2",
+					"NextState": "AskProblem1",
+					"Meaning": "Empathy(-1)",
+					"Style": "Neutral",
+					"FileName": "A-RSPCLM-N",
+					"Utterance": "Zo wordt ik wel boos, ja...kun je me helpen of niet?",
+					"UtteranceId": "TTS-EAC3B919A04109B69D691A7B9D3B180B"
+				}, 
+				{
+					"CurrentState": "DealAnger2",
+					"NextState": "End",
+					"Meaning": "Empathy(-1)",
+					"Style": "Negative",
+					"FileName": "A-RSPCLM-A",
+					"Utterance": "Ja hallo, dat maak ik zelf wel uit! Ik bel wel met je baas!",
+					"UtteranceId": "TTS-F06FB641082E453DF87CA036E470F878"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer",
+					"NextState": "FaqResponse",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPWT-P",
+					"Utterance": "Ok. Ik wacht geduldig af",
+					"UtteranceId": "TTS-A7791ED7F9CF640A611ED49A3042F2F7"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer",
+					"NextState": "FaqResponse",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPWT-N",
+					"Utterance": "Als het maar niet te lang duurt...",
+					"UtteranceId": "TTS-0D9D9177137AD2FFD46B3B2EB33C2290"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer",
+					"NextState": "FaqResponse",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPWT-A",
+					"Utterance": "Pfff...het zij zo...",
+					"UtteranceId": "TTS-24A0A8ABCF0618CB1DE8E87E6E1D8BA6"
+				}, 
+				{
+					"CurrentState": "Reroute",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPRR-P",
+					"Utterance": "Jammer, maar goed. Ik zal de specialist bellen. Bedankt tot zover",
+					"UtteranceId": "TTS-041107FCE236504CA30AEE6E090654C3"
+				}, 
+				{
+					"CurrentState": "Reroute",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPRR-N",
+					"Utterance": "Oh...ok. Tot ziens dan, ik ga die specialist bellen.",
+					"UtteranceId": "TTS-4DB4D075557B54C80FB18DEDE9F6786E"
+				}, 
+				{
+					"CurrentState": "Reroute",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPRR-A",
+					"Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor.",
+					"UtteranceId": "TTS-D2C2AC6027E2A658F15FB081E1DA4341"
+				}, 
+				{
+					"CurrentState": "AnswerDetails",
+					"NextState": "DataCollected",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-DDS-OPP",
+					"Utterance": "De sensoren geven aan dat objecten aan de andere kant van het schip zijn.",
+					"UtteranceId": "TTS-EDCBD5FF37618D0C432FFE5B11908152"
+				}, 
+				{
+					"CurrentState": "AnswerDetails",
+					"NextState": "DataCollected",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-DDS-OPP",
+					"Utterance": "De sensoren geven aan dat objecten aan de andere kant van het schip zijn.",
+					"UtteranceId": "TTS-EDCBD5FF37618D0C432FFE5B11908152"
+				}, 
+				{
+					"CurrentState": "AnswerDetails",
+					"NextState": "SecondChance",
+					"Meaning": "Empathy(-1)",
+					"Style": "Negative",
+					"FileName": "A-RSPPR-A",
+					"Utterance": "Dat zei ik al: hij is kapot!",
+					"UtteranceId": "TTS-C0FEB594ADE7A07C91BD744FA1E31548"
+				}, 
+				{
+					"CurrentState": "AnswerType3",
+					"NextState": "DataCollected",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPTP2-P-S3",
+					"Utterance": "Oh, vergeetachtig? Het is type SG3200B",
+					"UtteranceId": "TTS-C1601E2D5EE39B127881F4B209CCB59B"
+				}, 
+				{
+					"CurrentState": "AnswerType3",
+					"NextState": "DataCollected",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPTP2-N-S3",
+					"Utterance": "Oh, had ik al gezegd he. Maar het is type SG3200B",
+					"UtteranceId": "TTS-D88B418ABADAD7663C90D244795FBE7E"
+				}, 
+				{
+					"CurrentState": "AnswerType3",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPTP2-A",
+					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
+					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
+				}, 
+				{
+					"CurrentState": "RespSolution",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPSOL-P",
+					"Utterance": "Ok, bedankt voor dat antwoord. Dat ga ik doen.",
+					"UtteranceId": "TTS-CA52189364C42E2FEAA2AA6D4F9D8C89"
+				}, 
+				{
+					"CurrentState": "RespSolution",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPSOL-N",
+					"Utterance": "Ok, dat zal ik doen.",
+					"UtteranceId": "TTS-B28A04EDBF6D3D27A750C54364A8E46A"
+				}, 
+				{
+					"CurrentState": "RespSolution",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPSOL-A",
+					"Utterance": "Ok, dan hoop ik maar dat dat werkt...",
+					"UtteranceId": "TTS-A465D67F53E5ADB48632087CFE588AB9"
+				}, 
+				{
+					"CurrentState": "Goodbye1",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-END-P",
+					"Utterance": "Nee, bedankt voor het vragen. Prettige dag verder.",
+					"UtteranceId": "TTS-84E209E8B7EC6121A671AA94DE51BBF5"
+				}, 
+				{
+					"CurrentState": "Goodbye1",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-END-N",
+					"Utterance": "Nee hoor, het is goed zo.",
+					"UtteranceId": "TTS-7BC912AF9D243C7A6A54A16A0E9C8ED8"
+				}, 
+				{
+					"CurrentState": "Goodbye1",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-END-A",
+					"Utterance": "Nee, het heeft me al genoeg tijd gekost. Tot ziens",
+					"UtteranceId": "TTS-398F37C719E4DF78E79829CDB825F8C2"
+				}, 
+				{
+					"CurrentState": "Goodbye2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-ENDGB-P",
+					"Utterance": "Tot ziens en bedankt.",
+					"UtteranceId": "TTS-FC90A4E5121CD4F7C349B6B5FE852B32"
+				}, 
+				{
+					"CurrentState": "Goodbye2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-ENDGB-N",
+					"Utterance": "Tot ziens.",
+					"UtteranceId": "TTS-3EF4B55658FF8DFB560BD1B8314406DD"
+				}, 
+				{
+					"CurrentState": "Goodbye2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-ENDGB-A",
+					"Utterance": "Ja, daaagggg",
+					"UtteranceId": "TTS-0EC6A479A423F6FA3BC2F6CDF4097DEF"
+				}, 
+				{
+					"CurrentState": "BadFinish",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-NOHELP-A",
+					"Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je.",
+					"UtteranceId": "TTS-2F52A6BD271386F82B37CBFA3C454E2C"
+				}, 
+				{
+					"CurrentState": "Start",
+					"NextState": "Opening1",
+					"Meaning": "-",
+					"Style": "Polite(1)",
+					"FileName": "S-OP-P",
+					"Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?",
+					"UtteranceId": "TTS-C468151DE3D61832A10A2B166B06534A"
+				}, 
+				{
+					"CurrentState": "Start",
+					"NextState": "Opening1",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "S-OP-N",
+					"Utterance": "Hallo, Space Modules Inc. Zegt U het maar.",
+					"UtteranceId": "TTS-4433A976BB133DD2DE051024824F93F4"
+				}, 
+				{
+					"CurrentState": "Start",
+					"NextState": "Opening2",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-OP-R",
+					"Utterance": "Hallo daar, wat is er aan de hand?",
+					"UtteranceId": "TTS-FB90CBA10DA57BA000361B12884B634A"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "AnswerDetails",
+					"Meaning": "-",
+					"Style": "Polite(1)",
+					"FileName": "S-ASKPR-P",
+					"Utterance": "Het spijt me dat te horen. Kunt U aangeven wat het probleem is?",
+					"UtteranceId": "TTS-F4B9D4B8C7597B008D38C2F349B8630E"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "AnswerDetails",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-ASKPR-R",
+					"Utterance": "Wat is het probleem dan?",
+					"UtteranceId": "TTS-2BF1F72470169011DFB019F09412CAA2"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "AnswerType3",
+					"Meaning": "Inquire(-1)",
+					"Style": "Polite(1)",
+					"FileName": "S-ASKTP1-P",
+					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
+					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "AnswerType3",
+					"Meaning": "Inquire(-1)",
+					"Style": "Polite(-3)",
+					"FileName": "S-ASKTP1-R",
+					"Utterance": "Typenummer?",
+					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "DealAnger1",
+					"Meaning": "-",
+					"Style": "Polite(1)",
+					"FileName": "S-DLANG-P",
+					"Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen.",
+					"UtteranceId": "TTS-81A34466C20122C9B941268EE7A0FE4E"
+				}, 
+				{
+					"CurrentState": "FirstResponse",
+					"NextState": "DealAnger2",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-DLANG-R",
+					"Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt.",
+					"UtteranceId": "TTS-B9AF6A010ABB5765E642C44E26C7EF14"
+				}, 
+				{
+					"CurrentState": "SecondChance",
+					"NextState": "DealAnger1",
+					"Meaning": "-",
+					"Style": "Polite(1)",
+					"FileName": "S-DLANG-P",
+					"Utterance": "Ik hoor dat U boos bent, wat ik me goed kan voorstellen. Ik wil U graag helpen om het zo snel mogelijk op te lossen.",
+					"UtteranceId": "TTS-81A34466C20122C9B941268EE7A0FE4E"
+				}, 
+				{
+					"CurrentState": "SecondChance",
+					"NextState": "DealAnger2",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-DLANG-R",
+					"Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt.",
+					"UtteranceId": "TTS-B9AF6A010ABB5765E642C44E26C7EF14"
+				}, 
+				{
+					"CurrentState": "SecondChance",
+					"NextState": "BadFinish",
+					"Meaning": "Empathy(-1)",
+					"Style": "Polite(-3)",
+					"FileName": "S-CALM-R",
+					"Utterance": "Ja hallo, als U niet antwoord dan kan ik U niet helpen!",
+					"UtteranceId": "TTS-8429B5A0EBB703D97EE3787F55BF6B69"
+				}, 
+				{
+					"CurrentState": "SecondChance",
+					"NextState": "Reroute",
+					"Meaning": "Empathy_Faq(-1)",
+					"Style": "Polite(1)",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "AskProblem1",
+					"NextState": "AnswerDetails",
+					"Meaning": "-",
+					"Style": "Polite(1)",
+					"FileName": "S-ASKPR2-P",
+					"Utterance": "Kunt U aangeven wat het probleem is?",
+					"UtteranceId": "TTS-8DEB99A8280A50207CAFCFF449D67F0E"
+				}, 
+				{
+					"CurrentState": "AskProblem1",
+					"NextState": "AnswerDetails",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-ASKPR-R",
+					"Utterance": "Wat is het probleem dan?",
+					"UtteranceId": "TTS-2BF1F72470169011DFB019F09412CAA2"
+				}, 
+				{
+					"CurrentState": "AskProblem1",
+					"NextState": "AnswerType3",
+					"Meaning": "Inquire(-1)",
+					"Style": "Polite(1)",
+					"FileName": "S-ASKTP1-P",
+					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
+					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
+				}, 
+				{
+					"CurrentState": "AskProblem1",
+					"NextState": "AnswerType3",
+					"Meaning": "Inquire(-1)",
+					"Style": "Polite(-3)",
+					"FileName": "S-ASKTP1-R",
+					"Utterance": "Typenummer?",
+					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
+				}, 
+				{
+					"CurrentState": "DataCollected",
+					"NextState": "WaitForAnswer",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "DataCollected",
+					"NextState": "AnswerType3",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-ASKTP2",
+					"Utterance": "Wat was het typenummer ook al weer?",
+					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-BROKEN",
+					"Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt.",
+					"UtteranceId": "TTS-7F1BC9C83F22E44D8F473BA76A7BDA33"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-RECAL",
+					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
+					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-HEAT",
+					"Utterance": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen.",
+					"UtteranceId": "TTS-15F3473534B665DA11790680E24862B4"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-FAST",
+					"Utterance": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor.",
+					"UtteranceId": "TTS-D1A6D71E92F8BB102D63484D7D6CD99C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-CLEAN",
+					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
+					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-POWR",
+					"Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net.",
+					"UtteranceId": "TTS-38FDECC11E36B9ED5BADE9BF6769A286"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-REPL",
+					"Utterance": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen.",
+					"UtteranceId": "TTS-EED093EFA0CC60D929B80452BADAFBD4"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-COLD",
+					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
+					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-BOOT",
+					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
+					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "Reroute",
+					"Meaning": "Faq(3)",
+					"Style": "-",
+					"FileName": "S-NOTFND",
+					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
+					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
+				}, 
+				{
+					"CurrentState": "Closure",
+					"NextState": "Goodbye1",
+					"Meaning": "Closure(3)",
+					"Style": "Polite(1)",
+					"FileName": "S-CLOSE-P",
+					"Utterance": "Prima. Kan ik nog iets anders voor U doen?",
+					"UtteranceId": "TTS-D4EB5D51D5FFDA6E4EEC4BB3D62CDB9A"
+				}, 
+				{
+					"CurrentState": "Closure",
+					"NextState": "Goodbye2",
+					"Meaning": "Closure(-1)",
+					"Style": "Polite(1)",
+					"FileName": "S-ENDGB-P",
+					"Utterance": "Prima, fijne dag verder.",
+					"UtteranceId": "TTS-2ADF7BBF474DDC5163438A3E931A713E"
+				}, 
+				{
+					"CurrentState": "Closure",
+					"NextState": "Goodbye2",
+					"Meaning": "Closure(-1)",
+					"Style": "Polite(-3)",
+					"FileName": "S-ENDGB-R",
+					"Utterance": "Doei.",
+					"UtteranceId": "TTS-45B0D2F46A77681FB1A4DC759AAFE34C"
+				}]
+		},
+	"types": [
+		{
+			"TypeId": 0,
+			"ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+		}]
 }

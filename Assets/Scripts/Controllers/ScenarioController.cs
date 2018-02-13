@@ -181,22 +181,9 @@ public class ScenarioController : ICommandAction
 		if (_currentScenario != null)
 		{
 			_integratedAuthoringTool = _currentScenario.GetRandomVariation();
-			CurrentCharacter = _integratedAuthoringTool.GetCharacterProfile(_currentScenario.Character);
-			CurrentCharacter.Initialize();
-			// TODO: This is temporary fix until update to new IAT asset updates the character mood correctly
-			switch (_currentScenario.Character)
-			{
-				case "Positive":
-					CurrentCharacter.Mood = 5;
-					break;
-				case "Neutral":
-					CurrentCharacter.Mood = 0;
-					break;
-				case "Negative":
-					CurrentCharacter.Mood = -3;
-					break;
-			}
-			//  TODO: random character switching and force male if tutorial round (take out for fixed characters)
+			CurrentCharacter = RolePlayCharacterAsset.LoadFromFile(_integratedAuthoringTool.GetAllCharacterSources().First(c => c.Source.Contains(_currentScenario.Character)).Source);
+			CurrentCharacter.LoadAssociatedAssets();
+			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
 			if (_currentScenario.Prefix == "TestScen")
 			{
 				CurrentCharacter.BodyName = "Male";
@@ -206,7 +193,6 @@ public class ScenarioController : ICommandAction
 				Random rand = new Random();
 				CurrentCharacter.BodyName = (rand.NextDouble() >= 0.5) ? "Male" : "Female";
 			}
-			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
 		}
 	}
 
@@ -251,7 +237,7 @@ public class ScenarioController : ICommandAction
 	{
 		UpdateCurrentState();
 		_currentPlayerDialogue =
-			_integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.PLAYER, _currentStateName).ToArray();
+			_integratedAuthoringTool.GetDialogueActionsByState(_currentStateName.ToString()).ToArray();
 		if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
 	}
 
@@ -274,14 +260,12 @@ public class ScenarioController : ICommandAction
 
 		if (reply != null)
 		{
-			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.GetMeaningName(),
-				reply.GetStylesName());
+			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
 
 			// Submit dialogue choice to the IAT event list.
-			_events.Add((Name)string.Format("Event(Action-Start,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-			_events.Add(
-				(Name)string.Format("Event(Action-Finished,Player,{0},{1})", actionFormat, CurrentCharacter.CharacterName));
-			_events.Add((Name)string.Format("Event(Property-change,self,DialogueState(Player),{0})", reply.NextState));
+			_events.Add(EventHelper.ActionStart(IATConsts.PLAYER, actionFormat, CurrentCharacter.CharacterName.ToString()));
+			_events.Add(EventHelper.ActionEnd(IATConsts.PLAYER, actionFormat, CurrentCharacter.CharacterName.ToString()));
+			_events.Add(EventHelper.PropertyChange(string.Format(IATConsts.DIALOGUE_STATE_PROPERTY, IATConsts.PLAYER), reply.NextState, "Player"));
 
 			// UCM tracker tracks the filename ID of each player dialogue choice made
 			Tracker.T.setExtension("PlayerDialogueChoice", reply.CurrentState + "." + reply.FileName);
@@ -298,29 +282,31 @@ public class ScenarioController : ICommandAction
 
 	public void GetCharacterResponse()
 	{
-		var action = CurrentCharacter.PerceptionActionLoop(_events);
+		CurrentCharacter.Perceive(_events);
+		var possibleActions = CurrentCharacter.Decide();
+		var action = RolePlayCharacterAsset.TakeBestActions(possibleActions).FirstOrDefault();
 		_events.Clear();
-		//CurrentCharacter.Update(); // Updates mood over time
+		CurrentCharacter.Update();
 		if (action != null)
 		{
-			var actionKey = action.ActionName.ToString();
+			var actionKey = action.Key.ToString();
 			if (actionKey == "Speak")
 			{
 				var nextState = action.Parameters[1];
-				var dialogues = _integratedAuthoringTool.GetDialogueActions(IntegratedAuthoringToolAsset.AGENT, action.Parameters[0]);
+				var dialogues = _integratedAuthoringTool.GetDialogueActionsByState(action.Parameters[0].ToString());
 				var characterDialogue =
 					dialogues.FirstOrDefault(
 						dto =>
-							string.Equals(dto.GetMeaningName().ToString(), action.Parameters[2].ToString(),
+							string.Equals(dto.Meaning.ToString(), action.Parameters[2].ToString(),
 								StringComparison.CurrentCultureIgnoreCase) &&
-							string.Equals(dto.GetStylesName().ToString(), action.Parameters[3].ToString(),
+							string.Equals(dto.Style.ToString(), action.Parameters[3].ToString(),
 								StringComparison.CurrentCultureIgnoreCase));
 				if (characterDialogue != null)
 				{
 					UpdateScore(characterDialogue);
 					var characterDialogueText = characterDialogue.Utterance;
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
-					_events.Add((Name) string.Format("Event(Property-change,self,DialogueState(Player),{0})", nextState));
+					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
 					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.CurrentState + "." + characterDialogue.FileName});
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
@@ -328,14 +314,13 @@ public class ScenarioController : ICommandAction
 					if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
 				}
 			}
-			CurrentCharacter.ActionFinished(action);
 		}
 		GetCharacterStrongestEmotion();
 	}
 
 	private void UpdateCurrentState()
 	{
-		CurrentCharacter.PerceptionActionLoop(_events);
+		CurrentCharacter.Perceive(_events);
 		_events.Clear();
 		_currentStateName = (Name)CurrentCharacter.GetBeliefValue("DialogueState(Player)");
 	}
@@ -440,15 +425,8 @@ public class ScenarioController : ICommandAction
 
 	private void UpdateScore(DialogueStateActionDTO reply)
 	{
-		foreach (var meaning in reply.Meaning)
-		{
-			HandleKeywords(meaning);
-		}
-
-		foreach (var style in reply.Style)
-		{
-			HandleKeywords(style);
-		}
+		HandleKeywords(reply.Meaning);
+		HandleKeywords(reply.Style);
 	}
 
 	// extract scores from Meanings and Styles
@@ -461,13 +439,17 @@ public class ScenarioController : ICommandAction
 		if (result.Length > 1)
 		{
 			int value;
-			if (_scores.TryGetValue(result[0], out value))
+			var keywords = result[0].Split('_');
+			foreach (var keyword in keywords)
 			{
-				_scores[result[0]] = value + Int32.Parse(result[1]);
-			}
-			else
-			{
-				_scores.Add(result[0], Int32.Parse(result[1]));
+				if (_scores.TryGetValue(result[0], out value))
+				{
+					_scores[keyword] = value + Int32.Parse(result[1]);
+				}
+				else
+				{
+					_scores.Add(keyword, Int32.Parse(result[1]));
+				}
 			}
 		}
 	}

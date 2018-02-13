@@ -3,19 +3,6 @@
 		{
 			"classId": 0,
 			"Description": null,
-			"KnowledgeBase":
-				{
-					"Perspective": "Mary",
-					"Knowledge":
-						{
-							"SELF":
-								{
-									"DialogueState(Player)": "Start",
-									"Gender(Mary)": "Female",
-									"ID(Mary)": 1
-								}
-						}
-				},
 			"AppraisalRules":
 				{
 					"AppraisalWeight": 1,
@@ -26,7 +13,8 @@
 								{
 									"Set": ["[x] > 0"]
 								},
-							"Desirability": 5
+							"Desirability": 5,
+							"Praiseworthiness": 0
 						}, 
 						{
 							"EventName": "Event(Action-Start, *, Speak(*, *, FAQ([x]), *), *)",
@@ -38,7 +26,7 @@
 							"Praiseworthiness": -5
 						}, 
 						{
-							"EventName": "Event(Action-Start, *, Speak(*, *, Meanings(Empathy(-1), FAQ(-1)), Polite(1)), *)",
+							"EventName": "Event(Action-Start, *, Speak(*, *, Empathy_FAQ(-1), Polite(1)), *)",
 							"Conditions":
 								{
 									"Set": []
@@ -52,7 +40,8 @@
 								{
 									"Set": ["[x] > 0"]
 								},
-							"Desirability": 5
+							"Desirability": 5,
+							"Praiseworthiness": 0
 						}, 
 						{
 							"EventName": "Event(Action-Start, *, Speak(*, *, *, Polite([x])), *)",
@@ -69,21 +58,11 @@
 					"Emotion": "*",
 					"Decay": 1,
 					"Threshold": 1
-				}, 
-				{
-					"Emotion": "Joy",
-					"Decay": 1,
-					"Threshold": 1
-				}, 
-				{
-					"Emotion": "Anger",
-					"Decay": 1,
-					"Threshold": 1
 				}]
 		},
 	"types": [
 		{
 			"TypeId": 0,
-			"ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+			"ClassName": "EmotionalAppraisal.EmotionalAppraisalAsset, EmotionalAppraisal, Version=1.4.1.0, Culture=neutral, PublicKeyToken=null"
 		}]
 }

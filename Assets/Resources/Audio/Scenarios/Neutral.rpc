@@ -1,24 +1,30 @@
 {
 	"root":
 		{
-			"classId": 1,
+			"classId": 0,
 			"KnowledgeBase":
 				{
 					"Perspective": "Mary",
 					"Knowledge":
 						{
-
+							"SELF":
+								{
+									"DialogueState(Player)": "Start, 1",
+									"Gender(Mary)": "Female, 1",
+									"ID(Mary)": "1, 1"
+								}
 						}
 				},
 			"BodyName": "Female",
 			"VoiceName": null,
 			"EmotionalAppraisalAssetSource": "GeneralAppraisal.ea",
 			"EmotionalDecisionMakingSource": "MoodResponse.edm",
-			"SocialImportanceAssetSource": null,
+			"SocialImportanceAssetSource": "SI.si",
 			"CommeillFautAssetSource": null,
 			"EmotionalState":
 				{
 					"Mood": 0,
+					"initialTick": 0,
 					"EmotionalPool": [],
 					"AppraisalConfiguration":
 						{
@@ -34,15 +40,15 @@
 				{
 					"Tick": 0,
 					"records": []
+				},
+			"OtherAgents":
+				{
+					"dictionary": []
 				}
 		},
 	"types": [
 		{
 			"TypeId": 0,
-			"ClassName": "AutobiographicMemory.AM+PropertyChangeEvent, AutobiographicMemory, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-		}, 
-		{
-			"TypeId": 1,
-			"ClassName": "RolePlayCharacter.RolePlayCharacterAsset, RolePlayCharacter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+			"ClassName": "RolePlayCharacter.RolePlayCharacterAsset, RolePlayCharacter, Version=1.5.0.0, Culture=neutral, PublicKeyToken=null"
 		}]
 }

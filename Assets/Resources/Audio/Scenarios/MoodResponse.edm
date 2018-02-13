@@ -2,11 +2,11 @@
 	"root":
 		{
 			"classId": 0,
-			"DefaultActionPriority": 2,
 			"ActionTendencies": [
 				{
 					"Action": "Speak([cs], [ns], [m], Negative)",
 					"Target": "[x]",
+					"Type": "[x]",
 					"Conditions":
 						{
 							"Set": ["ValidDialogue([cs], [ns], [m], Negative) = True", "DialogueState([x]) = [cs]", "Mood(Self) < -2"]
@@ -16,6 +16,7 @@
 				{
 					"Action": "Speak([cs], [ns], [m], Positive)",
 					"Target": "[x]",
+					"Type": "[x]",
 					"Conditions":
 						{
 							"Set": ["ValidDialogue([cs], [ns], [m], Positive) = True", "DialogueState([x]) = [cs]", "Mood(Self) > 2"]
@@ -25,6 +26,7 @@
 				{
 					"Action": "Speak([cs], [ns], [m], Neutral)",
 					"Target": "[x]",
+					"Type": "[x]",
 					"Conditions":
 						{
 							"Set": ["ValidDialogue([cs], [ns], [m], Neutral) = True", "DialogueState([x]) = [cs]"]
@@ -33,6 +35,8 @@
 				}, 
 				{
 					"Action": "Disconnect",
+					"Target": "-",
+					"Type": "-",
 					"Conditions":
 						{
 							"Set": ["DialogueState(Player) = End"]
@@ -43,6 +47,6 @@
 	"types": [
 		{
 			"TypeId": 0,
-			"ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+			"ClassName": "EmotionalDecisionMaking.EmotionalDecisionMakingAsset, EmotionalDecisionMaking, Version=1.2.0.0, Culture=neutral, PublicKeyToken=null"
 		}]
 }
