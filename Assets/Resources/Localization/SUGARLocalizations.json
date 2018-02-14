@@ -26,7 +26,7 @@
 {"Key":"NO_RESULTS_ERROR","en-gb":"No results found.","nl":"XXXX"},
 {"Key":"NO_USER_ERROR","en-gb":"Error: No user currently signed in.","nl":"XXXX"},
 {"Key":"PAGE","en-gb":"Page {0}","nl":"{0}"},
-{"Key":"PASSWORD","en-gb":"Password:","nl":"XXXX"},
+{"Key":"PASSWORD","en-gb":"Password","nl":"XXXX"},
 {"Key":"POSITION","en-gb":"#","nl":"XXXX"},
 {"Key":"PREVIOUS","en-gb":"Previous","nl":"XXXX"},
 {"Key":"REGISTER","en-gb":"Register","nl":"XXXX"},
@@ -35,6 +35,6 @@
 {"Key":"SIGN_IN","en-gb":"Sign-in","nl":"XXXX"},
 {"Key":"TOP","en-gb":"Top","nl":"XXXX"},
 {"Key":"USER","en-gb":"User","nl":"XXXX"},
-{"Key":"USERNAME","en-gb":"Username:","nl":"XXXX"},
+{"Key":"USERNAME","en-gb":"Username","nl":"XXXX"},
 {"Key":"VALUE","en-gb":"Score","nl":"XXXX"},
 {"Key":"GROUPS_LOAD_ERROR","en-gb":"Error: Unable to gather list of group members.","nl":"XXXX"}]

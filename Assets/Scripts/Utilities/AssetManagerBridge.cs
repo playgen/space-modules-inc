@@ -7,17 +7,6 @@ using UnityEngine;
 
 public class AssetManagerBridge : IBridge, ILog, IDataStorage
 {
-	private readonly IStorageProvider _provider;
-
-	public AssetManagerBridge()
-	{
-#if UNITY_WEBGL && !UNITY_EDITOR
-		_provider = new WebGLStorageProvider();
-#else
-		_provider = new StreamingAssetsStorageProvider();
-#endif
-	}
-
 	public void Log(Severity severity, string msg)
 	{
 		switch (severity)
@@ -45,7 +34,9 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 
 	public bool Exists(string fileId)
 	{
-		return File.Exists(fileId);
+		fileId = FilePathFormat(fileId);
+		var loaded = Resources.Load(fileId);
+		return loaded;
 	}
 
 	public string[] Files()
@@ -55,10 +46,13 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 
 	public string Load(string fileId)
 	{
-		using (var reader = File.OpenText(fileId))
+		fileId = FilePathFormat(fileId);
+		var fileText = Resources.Load<TextAsset>(fileId)?.text;
+		if (!string.IsNullOrEmpty(fileText))
 		{
-			return reader.ReadToEnd();
+			fileText = fileText.Replace("..\\\\", "..\\\\..\\\\");
 		}
+		return fileText;
 	}
 
 	public void Save(string fileId, string fileData)
@@ -67,5 +61,18 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 		{
 			writer.Write(fileData);
 		}
+	}
+
+	private string FilePathFormat(string fileId)
+	{
+		if (fileId.StartsWith("\\") || fileId.StartsWith("/"))
+		{
+			fileId = fileId.Remove(0, 1);
+		}
+		fileId = fileId.Replace(".rpc", string.Empty);
+		fileId = fileId.Replace(".ea", string.Empty);
+		fileId = fileId.Replace(".edm", string.Empty);
+		fileId = fileId.Replace(".si", string.Empty);
+		return fileId;
 	}
 }

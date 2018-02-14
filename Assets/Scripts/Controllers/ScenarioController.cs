@@ -44,7 +44,7 @@ public class ScenarioController : ICommandAction
 			int index = rng.Next(_scenarioPaths.Length);
 			Debug.Log(_scenarioPaths[index]);
 			string error;
-			var iat = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioPaths[index], out error);
+			var iat = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _scenarioPaths[index]), out error);
 			return iat;
 		}
 	}
@@ -139,11 +139,13 @@ public class ScenarioController : ICommandAction
 
 	private void LoadScenarios()
 	{
-		var path = Path.Combine(Application.dataPath, "Resources/Audio");
-		_allScenarioPaths = Directory.GetFiles(Path.Combine(path, "Scenarios"), "*.iat");
+		_allScenarioPaths = Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
-		var streamReader = new StreamReader(streamingAssetsPath);
-		var obj = JsonConvert.DeserializeObject<RoundConfig>(streamReader.ReadToEnd());
+		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
+		while (!www.isDone)
+		{
+		}
+		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
 		//var round = obj.Rounds[1].Levels;
 		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
@@ -327,8 +329,7 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		var filePath = Path.Combine(Application.dataPath, String.Format("Resources/Audio/Scenarios/Audio/{0}/", CurrentCharacter.BodyName) + audioName + ".ogg");
-		if (File.Exists(filePath))
+		if (Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
 		{
 			IsTalking = true;
 			if (_audioClip != null)
@@ -338,7 +339,7 @@ public class ScenarioController : ICommandAction
 
 			_audioClip = new AudioClipModel()
 			{
-				Name = filePath
+				Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
 			};
 
 			_audioController.Play(_audioClip,

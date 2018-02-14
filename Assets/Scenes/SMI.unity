@@ -4955,7 +4955,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 796368919}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1067b5db669982e45b30cb3e84f13fa2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1ef26519a418a446f834e3f77d246219, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rawCopy: 0
@@ -5162,20 +5162,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114000011669735270, guid: 991ef3e1f70851f458b55f5f7eae55a2,
-        type: 2}
-      propertyPath: _gameId
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 223000012450321626, guid: 991ef3e1f70851f458b55f5f7eae55a2,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 577450941}
-    - target: {fileID: 1000012920798932, guid: 991ef3e1f70851f458b55f5f7eae55a2, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 991ef3e1f70851f458b55f5f7eae55a2, type: 2}
   m_IsPrefabParent: 0

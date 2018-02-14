@@ -222,8 +222,11 @@ public class ModulesController : ICommandAction
     private void LoadJSONModules()
     {
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "modules.json");
-		var streamReader = new StreamReader(streamingAssetsPath);
-		_modulesDatabase = JsonConvert.DeserializeObject<ModulesDatabase>(streamReader.ReadToEnd()).Database;
+		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
+		while (!www.isDone)
+		{
+		}
+		_modulesDatabase = JsonConvert.DeserializeObject<ModulesDatabase>(www.text).Database;
 	}
 
 	private GameObject InstantiateListItem(GameObject prefab)
