@@ -167,7 +167,8 @@ public class GameStateInput : TickStateInput
 		}
 		var rectContent = scrollRect.content;
 		rectContent.sizeDelta = new Vector2(0, contentTotalHeight);
-		CommandQueue.AddCommand(new UpdateDialogueFontSizeCommand(dialogueObject));
+		//CommandQueue.AddCommand(new UpdateDialogueFontSizeCommand(dialogueObject));
+		ResizeOptions(dialogueObject);
 	}
 
 	public void ResizeOptions(GameObject dialogueObject)
