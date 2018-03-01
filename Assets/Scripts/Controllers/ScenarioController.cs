@@ -443,7 +443,7 @@ public class ScenarioController : ICommandAction
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
-				if (_scores.TryGetValue(result[0], out value))
+				if (_scores.TryGetValue(keyword, out value))
 				{
 					_scores[keyword] = value + Int32.Parse(result[1]);
 				}
