@@ -12,6 +12,8 @@ public class ReviewStateInput : TickStateInput
 	private GameObject _reviewContent;
 	private GameObject _clientChatPrefab;
 	private GameObject _playerChatPrefab;
+	private GameObject _playerChatFeedbackPrefab;
+	private GameObject _feedbackPrefab;
 	private readonly ScenarioController _scenarioController;
 
 	public ReviewStateInput(ScenarioController scenarioController)
@@ -25,6 +27,8 @@ public class ReviewStateInput : TickStateInput
 		_reviewContent = GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/Scroll View");
 		_clientChatPrefab = Resources.Load("Prefabs/ClientChatItem") as GameObject;
 		_playerChatPrefab = Resources.Load("Prefabs/PlayerChatItem") as GameObject;
+		_playerChatFeedbackPrefab = Resources.Load("Prefabs/PlayerChatFeedbackItem") as GameObject;
+		_feedbackPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 
 		var nextButton =
 			GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/NextButton");
@@ -49,7 +53,7 @@ public class ReviewStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
 	}
 
-	public void BuildReviewData(List<ScenarioController.ChatObject> history, float mood)
+	public void BuildReviewData(List<ScenarioController.ChatObject> history, float mood, List<ScenarioController.ChatScoreObject> historyScores)
 	{
 		_characterMood.fillAmount = (mood + 10) / 20;
 		ClearList();
@@ -65,7 +69,29 @@ public class ReviewStateInput : TickStateInput
 					chatObject = UnityEngine.Object.Instantiate(_clientChatPrefab).transform;
 					break;
 				case "Player":
-					chatObject = UnityEngine.Object.Instantiate(_playerChatPrefab).transform;
+					// TODO Check the feedback model
+					var feedback = historyScores.Find(c => c.ChatObject == t);
+					
+					if (feedback != null)
+					{
+						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
+						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
+						foreach (var feedbackScore in feedback.Scores)
+						{
+							var score = UnityEngine.Object.Instantiate(_feedbackPrefab).transform;
+							score.transform.SetParent(feedbackPanel, false);
+							var change = feedbackScore.Value;
+							score.GetComponentInChildren<Text>().text = change > 0 ? "+" + change : change.ToString();
+
+							var iconPath = "Prefabs/Icons/" + feedbackScore.Key;
+							var icon = Resources.Load<Sprite>(iconPath);
+							score.GetComponentInChildren<Image>().sprite = icon;
+						}
+					}
+					else
+					{
+						chatObject = UnityEngine.Object.Instantiate(_playerChatPrefab).transform;
+					}
 					break;
 			}
 

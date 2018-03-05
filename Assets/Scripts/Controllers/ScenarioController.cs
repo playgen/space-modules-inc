@@ -124,7 +124,7 @@ public class ScenarioController : ICommandAction
 	private int _roundNumber;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<List<ChatObject>, float> GetReviewDataSuccessEvent;
+	public event Action<List<ChatObject>, float, List<ChatScoreObject>> GetReviewDataSuccessEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -599,7 +599,7 @@ public class ScenarioController : ICommandAction
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood, _chatScoreHistory);
 		Reset();
 	}
 
