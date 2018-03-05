@@ -105,7 +105,6 @@ public class ScenarioController : ICommandAction
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
 	private readonly List<Name> _events = new List<Name>();
-	private readonly List<ChatObject> _chatHistory = new List<ChatObject>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private string[] _allScenarioPaths;
 	private Dictionary<string, int> _scores;
@@ -124,7 +123,7 @@ public class ScenarioController : ICommandAction
 	private int _roundNumber;
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<List<ChatObject>, float, List<ChatScoreObject>> GetReviewDataSuccessEvent;
+	public event Action<List<ChatScoreObject>, float> GetReviewDataSuccessEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -186,7 +185,6 @@ public class ScenarioController : ICommandAction
 	public void NextLevel()
 	{
 		CurrentLevel++;
-		_scores = new Dictionary<string, int>();
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -266,7 +264,7 @@ public class ScenarioController : ICommandAction
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-
+		var chat = new ChatObject();
 		if (reply != null)
 		{
 			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
@@ -281,12 +279,17 @@ public class ScenarioController : ICommandAction
 			Tracker.T.completable.Initialized("PlayerActionCompleted");
 
 			//Tracker.T.RequestFlush();
-
-			_chatHistory.Add(new ChatObject()
+			
+			chat = new ChatObject 
 			{
 				Utterence = reply.Utterance,
 				Agent = "Player",
 				Code = reply.CurrentState + "." + reply.FileName
+			};
+			_chatScoreHistory.Add(new ChatScoreObject
+			{
+				ChatObject = chat,
+				Scores = new Dictionary<string, int>()
 			});
 		}
 		UpdateScore(reply);
@@ -326,8 +329,11 @@ public class ScenarioController : ICommandAction
 						Agent = "Client",
 						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
 					};
-					_chatHistory.Add(chat);
-
+					_chatScoreHistory.Add(new ChatScoreObject
+					{
+						ChatObject = chat,
+						Scores = new Dictionary<string, int>()
+					});
 					UpdateScore(characterDialogue);
 
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
@@ -397,9 +403,12 @@ public class ScenarioController : ICommandAction
 	{
 		var mood = (CurrentCharacter.Mood + 10) / 20;
 		var scoreTotal = 0;
-		foreach (var scoreVal in _scores.Values)
+		foreach (var chatScoreObject in _chatScoreHistory)
 		{
-			scoreTotal += scoreVal;
+			foreach (var i in chatScoreObject.Scores.Values)
+			{
+				scoreTotal += i;
+			}
 		}
 		var lowerScoreBracket = _currentScenario.MaxPoints*0.4f;
 		var upperScoreBracket = _currentScenario.MaxPoints*0.8f;
@@ -444,6 +453,7 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("stars", stars);
 			SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
 		}
+		Reset();
 	}
 
 	private void UpdateScore(DialogueStateActionDTO reply)
@@ -461,31 +471,20 @@ public class ScenarioController : ICommandAction
 
 		if (result.Length > 1)
 		{
-			int value;
+			var chat = _chatScoreHistory.Last().ChatObject;
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
 				var score = Int32.Parse(result[1]);
-				SaveChatScore(keyword, score);
-				if (_scores.TryGetValue(keyword, out value))
-				{
-					_scores[keyword] = value + score;
-				}
-				else
-				{
-					_scores.Add(keyword, score);
-				}
+				SaveChatScore(chat, keyword, score);
 			}
 		}
 	}
 
-	private void SaveChatScore(string keyword, int score)
+	private void SaveChatScore(ChatObject chat, string keyword, int score)
 	{
-		// Save the score for each element of the chat history
-		var chatObject = _chatHistory.Last();
-
 		// Check if the list already has an element for the current chat object
-		var chatScoreObject = _chatScoreHistory.Find(c => c.ChatObject == chatObject);
+		var chatScoreObject = _chatScoreHistory.Find(c => c.ChatObject == chat);
 
 		if (chatScoreObject != null)
 		{
@@ -495,7 +494,7 @@ public class ScenarioController : ICommandAction
 		{
 			var newChatScoreObject = new ChatScoreObject
 				{
-					ChatObject = chatObject,
+					ChatObject = chat,
 					Scores = new Dictionary<string, int>()
 				};
 			newChatScoreObject.Scores.Add(keyword, score);
@@ -537,7 +536,7 @@ public class ScenarioController : ICommandAction
 		//The following string contains the key for the google form that will be used to write trace data
 
 	    string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
-		var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
+		var codeArray = _chatScoreHistory.Where(o => o.ChatObject.Agent == "Player").Select(o => o.ChatObject.Code).ToArray();
 		var sb = new StringBuilder();
 		string prefix = "";
 		foreach (var s in codeArray)
@@ -599,14 +598,13 @@ public class ScenarioController : ICommandAction
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood, _chatScoreHistory);
-		Reset();
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood);
+		//Reset();
 	}
 
 	private void Reset()
 	{
 		Initialize();
-		_chatHistory.Clear();
 		_chatScoreHistory.Clear();
 		_events.Clear();
 	}

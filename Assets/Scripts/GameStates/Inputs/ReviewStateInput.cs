@@ -53,7 +53,7 @@ public class ReviewStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
 	}
 
-	public void BuildReviewData(List<ScenarioController.ChatObject> history, float mood, List<ScenarioController.ChatScoreObject> historyScores)
+	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood)
 	{
 		_characterMood.fillAmount = (mood + 10) / 20;
 		ClearList();
@@ -62,7 +62,7 @@ public class ReviewStateInput : TickStateInput
 		{
 			Transform chatObject = null;
 
-			var entryKey = t.Agent;
+			var entryKey = t.ChatObject.Agent;
 			switch (entryKey)
 			{
 				case "Client":
@@ -70,9 +70,9 @@ public class ReviewStateInput : TickStateInput
 					break;
 				case "Player":
 					// TODO Check the feedback model
-					var feedback = historyScores.Find(c => c.ChatObject == t);
+					var feedback = history.Find(c => c.ChatObject == t.ChatObject);
 					
-					if (feedback != null)
+					if (feedback != null && feedback.Scores.Count > 0)
 					{
 						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
 						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
@@ -97,7 +97,7 @@ public class ReviewStateInput : TickStateInput
 
 			if (chatObject != null)
 			{
-				chatObject.Find("Panel").GetChild(0).GetComponent<Text>().text = t.Utterence;
+				chatObject.Find("Panel").GetChild(0).GetComponent<Text>().text = t.ChatObject.Utterence;
 				chatObject.transform.SetParent(_reviewContent.GetComponent<ScrollRect>().content, false);
 			}
 		}
