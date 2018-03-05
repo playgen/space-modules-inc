@@ -107,7 +107,7 @@ public class ScenarioController : ICommandAction
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private string[] _allScenarioPaths;
-	private Dictionary<string, int> _scores;
+	private Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
 
 	// Round Based
 	public int CurrentLevel;
@@ -124,6 +124,7 @@ public class ScenarioController : ICommandAction
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<List<ChatScoreObject>, float> GetReviewDataSuccessEvent;
+	public event Action<Dictionary<string, int>> GetFeedbackEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -141,6 +142,7 @@ public class ScenarioController : ICommandAction
 	public void Initialize()
 	{
 		LoadScenarios();
+		
 		//_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioFile);
 	}
 
@@ -185,6 +187,8 @@ public class ScenarioController : ICommandAction
 	public void NextLevel()
 	{
 		CurrentLevel++;
+		_feedbackScores.Clear();
+		GetFeedbackEvent(_feedbackScores);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -265,6 +269,7 @@ public class ScenarioController : ICommandAction
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
 		var chat = new ChatObject();
+
 		if (reply != null)
 		{
 			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
@@ -293,6 +298,8 @@ public class ScenarioController : ICommandAction
 			});
 		}
 		UpdateScore(reply);
+		_feedbackScores = _chatScoreHistory.Last().Scores;
+		GetFeedbackEvent(_feedbackScores);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -305,6 +312,7 @@ public class ScenarioController : ICommandAction
 		var action = RolePlayCharacterAsset.TakeBestActions(possibleActions).FirstOrDefault();
 		_events.Clear();
 		CurrentCharacter.Update();
+
 		if (action != null)
 		{
 			var actionKey = action.Key.ToString();
@@ -345,6 +353,7 @@ public class ScenarioController : ICommandAction
 				}
 			}
 		}
+		
 		GetCharacterStrongestEmotion();
 	}
 
@@ -492,6 +501,7 @@ public class ScenarioController : ICommandAction
 		}
 		else
 		{
+			
 			var newChatScoreObject = new ChatScoreObject
 				{
 					ChatObject = chat,

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
@@ -18,6 +19,10 @@ public class GameStateInput : TickStateInput
 	private CharacterFaceController _characterController;
 	private GameObject _characterPanel;
 	private GameObject _dialoguePanel;
+
+	private GameObject _feedbackPanel;
+	private GameObject _feedbackElementPrefab;
+	private List<GameObject> _feedbackElements = new List<GameObject>();
 
 	private GameObject _listChoicePrefab;
 	private GameObject _npcDialoguePanel;
@@ -41,6 +46,9 @@ public class GameStateInput : TickStateInput
 		var modulesButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton");
 		_characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
 
+		_feedbackPanel =
+			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
+		_feedbackElementPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 		modulesButton.GetComponent<Button>().onClick.AddListener(delegate { CommandQueue.AddCommand(new ToggleModulesCommand()); });
 
 
@@ -49,6 +57,7 @@ public class GameStateInput : TickStateInput
 		_scenarioController.GetCharacterStrongestEmotionSuccessEvent += UpdateCharacterExpression;
 		_scenarioController.FinalStateEvent += HandleFinalState;
 		_scenarioController.StopTalkAnimationEvent += StopCharacterTalkAnimation;
+		_scenarioController.GetFeedbackEvent += UpdateFeedbackForChoice;
 	}
 
 	protected override void OnTerminate()
@@ -58,6 +67,7 @@ public class GameStateInput : TickStateInput
 		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
 		_scenarioController.FinalStateEvent -= HandleFinalState;
 		_scenarioController.StopTalkAnimationEvent -= StopCharacterTalkAnimation;
+		_scenarioController.GetFeedbackEvent -= UpdateFeedbackForChoice;
 	}
 
 	protected override void OnEnter()
@@ -103,6 +113,24 @@ public class GameStateInput : TickStateInput
 		if (_scenarioController.IsTalking)
 		{
 			_characterController.StartTalkAnimation();
+		}
+	}
+
+	public void UpdateFeedbackForChoice(Dictionary<string, int> feedback)
+	{
+		foreach (var element in _feedbackElements)
+		{
+			UnityEngine.Object.DestroyImmediate(element.gameObject);
+		}
+		foreach (var i in feedback)
+		{
+			var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
+			element.transform.SetParent(_feedbackPanel.transform, false);
+			var iconPath = "Prefabs/Icons/" + i.Key;
+			var icon = Resources.Load<Sprite>(iconPath);
+			element.GetComponentInChildren<Image>().sprite = icon;
+			element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
+			_feedbackElements.Add(element);
 		}
 	}
 
