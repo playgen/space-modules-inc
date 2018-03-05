@@ -54,7 +54,7 @@ public class ReviewStateInput : TickStateInput
 		_characterMood.fillAmount = (mood + 10) / 20;
 		ClearList();
 
-		foreach (ScenarioController.ChatObject t in history)
+		foreach (var t in history)
 		{
 			Transform chatObject = null;
 

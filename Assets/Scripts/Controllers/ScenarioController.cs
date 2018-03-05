@@ -91,6 +91,13 @@ public class ScenarioController : ICommandAction
 		public string Code;
 	}
 
+	public class ChatScoreObject
+	{
+		public ChatObject ChatObject;
+		public Dictionary<string, int> Scores;
+	}
+
+
 	#endregion
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
@@ -99,6 +106,7 @@ public class ScenarioController : ICommandAction
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatObject> _chatHistory = new List<ChatObject>();
+	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private string[] _allScenarioPaths;
 	private Dictionary<string, int> _scores;
 
@@ -258,7 +266,6 @@ public class ScenarioController : ICommandAction
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-		UpdateScore(reply);
 
 		if (reply != null)
 		{
@@ -275,8 +282,14 @@ public class ScenarioController : ICommandAction
 
 			//Tracker.T.RequestFlush();
 
-			_chatHistory.Add(new ChatObject() { Utterence = reply.Utterance, Agent = "Player", Code = reply.CurrentState + "." + reply.FileName });
+			_chatHistory.Add(new ChatObject()
+			{
+				Utterence = reply.Utterance,
+				Agent = "Player",
+				Code = reply.CurrentState + "." + reply.FileName
+			});
 		}
+		UpdateScore(reply);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -305,11 +318,20 @@ public class ScenarioController : ICommandAction
 								StringComparison.CurrentCultureIgnoreCase));
 				if (characterDialogue != null)
 				{
-					UpdateScore(characterDialogue);
 					var characterDialogueText = characterDialogue.Utterance;
+
+					var chat = new ChatObject()
+					{
+						Utterence = characterDialogueText,
+						Agent = "Client",
+						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
+					};
+					_chatHistory.Add(chat);
+
+					UpdateScore(characterDialogue);
+
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
-					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.CurrentState + "." + characterDialogue.FileName});
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
 
@@ -443,32 +465,52 @@ public class ScenarioController : ICommandAction
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
+				var score = Int32.Parse(result[1]);
+				SaveChatScore(keyword, score);
 				if (_scores.TryGetValue(keyword, out value))
 				{
-					_scores[keyword] = value + Int32.Parse(result[1]);
+					_scores[keyword] = value + score;
 				}
 				else
 				{
-					_scores.Add(keyword, Int32.Parse(result[1]));
+					_scores.Add(keyword, score);
 				}
 			}
+		}
+	}
+
+	private void SaveChatScore(string keyword, int score)
+	{
+		// Save the score for each element of the chat history
+		var chatObject = _chatHistory.Last();
+
+		// Check if the list already has an element for the current chat object
+		var chatScoreObject = _chatScoreHistory.Find(c => c.ChatObject == chatObject);
+
+		if (chatScoreObject != null)
+		{
+			chatScoreObject.Scores.Add(keyword, score);
+		}
+		else
+		{
+			var newChatScoreObject = new ChatScoreObject
+				{
+					ChatObject = chatObject,
+					Scores = new Dictionary<string, int>()
+				};
+			newChatScoreObject.Scores.Add(keyword, score);
+			_chatScoreHistory.Add(newChatScoreObject);
 		}
 	}
 
 	private void TraceScore()
 	{
 		// check for scores before referencing key
-		int closure;
-		_scores.TryGetValue("Closure", out closure);
-		int empathy;
-		_scores.TryGetValue("Empathy", out empathy);
-		int faq;
-		_scores.TryGetValue("Faq", out faq);
-		int inquire;
-		_scores.TryGetValue("Inquire", out inquire);
-		int polite;
-		_scores.TryGetValue("Polite", out polite);
-
+		var closure = GetScore("Closure");
+		var empathy = GetScore("Empathy");
+		var faq = GetScore("Faq");
+		var inquire = GetScore("Inquire");
+		var polite = GetScore("Polite");
 
 		// Trace the scores and submit them via UCM tracker
 		if (SUGARManager.CurrentUser != null)
@@ -542,6 +584,17 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
+	private int GetScore(string key)
+	{
+		var all = _chatScoreHistory.FindAll(c => c.Scores.ContainsKey(key));
+		var total = 0;
+		foreach (var a in all)
+		{
+			total += a.Scores[key];
+		}
+		return total;
+	}
+
 	#endregion
 
 	public void GetReviewData()
@@ -554,6 +607,7 @@ public class ScenarioController : ICommandAction
 	{
 		Initialize();
 		_chatHistory.Clear();
+		_chatScoreHistory.Clear();
 		_events.Clear();
 	}
 }
