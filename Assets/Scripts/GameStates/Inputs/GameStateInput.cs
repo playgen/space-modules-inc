@@ -118,19 +118,32 @@ public class GameStateInput : TickStateInput
 
 	public void UpdateFeedbackForChoice(Dictionary<string, int> feedback)
 	{
+		// Make sure the anim plays from the beginning
+		var anim = _feedbackPanel.GetComponent<Animation>();
+		anim.Stop();
+		anim[anim.clip.name].time = 0f;
+		_feedbackPanel.GetComponent<CanvasGroup>().alpha = 0f;
+
 		foreach (var element in _feedbackElements)
 		{
 			UnityEngine.Object.DestroyImmediate(element.gameObject);
 		}
-		foreach (var i in feedback)
+
+		// TODO check feedback model level
+		if (feedback.Count > 0)
 		{
-			var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
-			element.transform.SetParent(_feedbackPanel.transform, false);
-			var iconPath = "Prefabs/Icons/" + i.Key;
-			var icon = Resources.Load<Sprite>(iconPath);
-			element.GetComponentInChildren<Image>().sprite = icon;
-			element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
-			_feedbackElements.Add(element);
+			foreach (var i in feedback)
+			{
+				var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
+				element.transform.SetParent(_feedbackPanel.transform, false);
+				var iconPath = "Prefabs/Icons/" + i.Key;
+				var icon = Resources.Load<Sprite>(iconPath);
+				element.GetComponentInChildren<Image>().sprite = icon;
+				element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
+				_feedbackElements.Add(element);
+			}
+			
+			anim.Play();
 		}
 	}
 
