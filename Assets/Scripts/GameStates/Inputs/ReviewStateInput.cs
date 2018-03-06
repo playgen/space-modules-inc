@@ -53,7 +53,7 @@ public class ReviewStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
 	}
 
-	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood)
+	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood, ScenarioController.FeedbackModel feedbackModel)
 	{
 		_characterMood.fillAmount = (mood + 10) / 20;
 		ClearList();
@@ -69,10 +69,9 @@ public class ReviewStateInput : TickStateInput
 					chatObject = UnityEngine.Object.Instantiate(_clientChatPrefab).transform;
 					break;
 				case "Player":
-					// TODO Check the feedback model
 					var feedback = history.Find(c => c.ChatObject == t.ChatObject);
 					
-					if (feedback != null && feedback.Scores.Count > 0)
+					if ((int)feedbackModel >= 1 && feedback != null && feedback.Scores.Count > 0)
 					{
 						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
 						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;

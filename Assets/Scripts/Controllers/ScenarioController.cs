@@ -97,6 +97,12 @@ public class ScenarioController : ICommandAction
 		public Dictionary<string, int> Scores;
 	}
 
+	public enum FeedbackModel
+	{
+		Minimal = 0, 
+		EndGame, 
+		InGame
+	}
 
 	#endregion
 
@@ -121,10 +127,12 @@ public class ScenarioController : ICommandAction
 	private AudioClipModel _audioClip;
 	private ScenarioData _currentScenario;
 	private int _roundNumber;
+	private FeedbackModel _feedbackModel; 
+
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<List<ChatScoreObject>, float> GetReviewDataSuccessEvent;
-	public event Action<Dictionary<string, int>> GetFeedbackEvent;
+	public event Action<List<ChatScoreObject>, float, FeedbackModel> GetReviewDataSuccessEvent;
+	public event Action<Dictionary<string, int>, FeedbackModel> GetFeedbackEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -142,7 +150,6 @@ public class ScenarioController : ICommandAction
 	public void Initialize()
 	{
 		LoadScenarios();
-		
 		//_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioFile);
 	}
 
@@ -188,7 +195,7 @@ public class ScenarioController : ICommandAction
 	{
 		CurrentLevel++;
 		_feedbackScores.Clear();
-		GetFeedbackEvent(_feedbackScores);
+		GetFeedbackEvent(_feedbackScores, _feedbackModel);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -299,7 +306,7 @@ public class ScenarioController : ICommandAction
 		}
 		UpdateScore(reply);
 		_feedbackScores = _chatScoreHistory.Last().Scores;
-		GetFeedbackEvent(_feedbackScores);
+		GetFeedbackEvent(_feedbackScores, _feedbackModel);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -608,7 +615,7 @@ public class ScenarioController : ICommandAction
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood);
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood, _feedbackModel);
 		//Reset();
 	}
 

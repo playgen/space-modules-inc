@@ -116,7 +116,7 @@ public class GameStateInput : TickStateInput
 		}
 	}
 
-	public void UpdateFeedbackForChoice(Dictionary<string, int> feedback)
+	public void UpdateFeedbackForChoice(Dictionary<string, int> feedback, ScenarioController.FeedbackModel feedbackModel)
 	{
 		// Make sure the anim plays from the beginning
 		var anim = _feedbackPanel.GetComponent<Animation>();
@@ -129,8 +129,7 @@ public class GameStateInput : TickStateInput
 			UnityEngine.Object.DestroyImmediate(element.gameObject);
 		}
 
-		// TODO check feedback model level
-		if (feedback.Count > 0)
+		if (feedback.Count > 0 && (int)feedbackModel >= 2)
 		{
 			foreach (var i in feedback)
 			{
