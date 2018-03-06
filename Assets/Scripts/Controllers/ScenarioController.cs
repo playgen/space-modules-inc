@@ -76,6 +76,7 @@ public class ScenarioController : ICommandAction
 		public bool MoodImage;
 		public string EmotionCommentToken;
 		public int Bonus;
+		public Dictionary<string, int> MeasuredPoints;
 	}
 
 	public class LevelObject
@@ -97,7 +98,7 @@ public class ScenarioController : ICommandAction
 		public Dictionary<string, int> Scores;
 	}
 
-	public enum FeedbackModel
+	public enum FeedbackMode
 	{
 		Minimal = 0, 
 		EndGame, 
@@ -127,12 +128,12 @@ public class ScenarioController : ICommandAction
 	private AudioClipModel _audioClip;
 	private ScenarioData _currentScenario;
 	private int _roundNumber;
-	private FeedbackModel _feedbackModel; 
+	private FeedbackMode _feedbackMode; 
 
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<List<ChatScoreObject>, float, FeedbackModel> GetReviewDataSuccessEvent;
-	public event Action<Dictionary<string, int>, FeedbackModel> GetFeedbackEvent;
+	public event Action<List<ChatScoreObject>, float, FeedbackMode> GetReviewDataSuccessEvent;
+	public event Action<Dictionary<string, int>, FeedbackMode> GetFeedbackEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -195,7 +196,7 @@ public class ScenarioController : ICommandAction
 	{
 		CurrentLevel++;
 		_feedbackScores.Clear();
-		GetFeedbackEvent(_feedbackScores, _feedbackModel);
+		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -306,7 +307,7 @@ public class ScenarioController : ICommandAction
 		}
 		UpdateScore(reply);
 		_feedbackScores = _chatScoreHistory.Last().Scores;
-		GetFeedbackEvent(_feedbackScores, _feedbackModel);
+		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -448,6 +449,17 @@ public class ScenarioController : ICommandAction
 			scoreTotal = 1;
 		}
 
+		var allScores = GetScoresByKey();
+
+		var measuredPoints = new Dictionary<string, int>
+		{
+			{"Closure", GetScore(allScores, "Closure")},
+			{"Empathy", GetScore(allScores, "Empathy")},
+			{"Faq", GetScore(allScores, "Faq")},
+			{"Inquire", GetScore(allScores, "Inquire")},
+			{"Polite", GetScore(allScores, "Polite")}
+		};
+
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
@@ -455,7 +467,8 @@ public class ScenarioController : ICommandAction
 			ScoreFeedbackToken = "FEEDBACK_" + stars,
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
-			Bonus = Mathf.CeilToInt(mood * 999)
+			Bonus = Mathf.CeilToInt(mood * 999),
+			MeasuredPoints = measuredPoints
 		};
 
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
@@ -521,12 +534,14 @@ public class ScenarioController : ICommandAction
 
 	private void TraceScore()
 	{
+		var allScores = GetScoresByKey();
+
 		// check for scores before referencing key
-		var closure = GetScore("Closure");
-		var empathy = GetScore("Empathy");
-		var faq = GetScore("Faq");
-		var inquire = GetScore("Inquire");
-		var polite = GetScore("Polite");
+		var closure = GetScore(allScores, "Closure");
+		var empathy = GetScore(allScores, "Empathy");
+		var faq = GetScore(allScores, "Faq");
+		var inquire = GetScore(allScores, "Inquire");
+		var polite = GetScore(allScores, "Polite");
 
 		// Trace the scores and submit them via UCM tracker
 		if (SUGARManager.CurrentUser != null)
@@ -600,22 +615,43 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
-	private int GetScore(string key)
+	private Dictionary<string, int> GetScoresByKey()
 	{
-		var all = _chatScoreHistory.FindAll(c => c.Scores.ContainsKey(key));
-		var total = 0;
-		foreach (var a in all)
+		var scores = new Dictionary<string, int>();
+
+		var all = _chatScoreHistory.FindAll(c => c.Scores.Count > 0);
+		foreach (var chatScoreObject in all)
 		{
-			total += a.Scores[key];
+			foreach (var score in chatScoreObject.Scores)
+			{
+				if (scores.ContainsKey(score.Key))
+				{
+					scores[score.Key] = scores[score.Key] + score.Value;
+				}
+				else
+				{
+					scores[score.Key] = score.Value;
+				}
+			}
 		}
-		return total;
+
+		return scores;
+	}
+
+	private int GetScore(Dictionary<string, int> scores, string key)
+	{
+		if (scores.ContainsKey(key))
+		{
+			return scores[key];
+		}
+		return 0;
 	}
 
 	#endregion
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood, _feedbackModel);
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood, _feedbackMode);
 		//Reset();
 	}
 
