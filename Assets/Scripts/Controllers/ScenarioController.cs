@@ -98,10 +98,22 @@ public class ScenarioController : ICommandAction
 		public Dictionary<string, int> Scores;
 	}
 
+	/// <summary>
+	/// The feedback mode identifies the level of feedback to give to the player
+	/// </summary>
 	public enum FeedbackMode
 	{
+		/// <summary>
+		/// Feedback only at the end of game
+		/// </summary>
 		Minimal = 0, 
+		/// <summary>
+		/// Feedback at the end of game and broken down in the chat history
+		/// </summary>
 		EndGame, 
+		/// <summary>
+		/// Feedback at the end of game, in chat history and during the game
+		/// </summary>
 		InGame
 	}
 
