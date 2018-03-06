@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
+using PlayGen.Unity.Utilities.BestFit;
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -131,17 +132,27 @@ public class GameStateInput : TickStateInput
 
 		if (feedback.Count > 0 && (int)feedbackMode >= 2)
 		{
+			var rect = _feedbackPanel.GetComponent<RectTransform>().rect;
+			var width = rect.width / feedback.Count;
+			var height = rect.height;
+			width = Mathf.Min(width, _feedbackElementPrefab.GetComponent<RectTransform>().rect.width);
+
 			foreach (var i in feedback)
 			{
 				var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
 				element.transform.SetParent(_feedbackPanel.transform, false);
+
+				element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
+
 				var iconPath = "Prefabs/Icons/" + i.Key;
 				var icon = Resources.Load<Sprite>(iconPath);
 				element.GetComponentInChildren<Image>().sprite = icon;
 				element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
 				_feedbackElements.Add(element);
 			}
-			
+
+			_feedbackPanel.BestFit();
+
 			anim.Play();
 		}
 	}

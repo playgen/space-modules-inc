@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
+using PlayGen.Unity.Utilities.BestFit;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -75,6 +76,11 @@ public class ReviewStateInput : TickStateInput
 					{
 						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
 						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
+
+						var rect = _reviewContent.GetComponent<ScrollRect>().content.GetComponent<RectTransform>().rect;
+						var width = rect.width / feedback.Scores.Count;
+						width = Mathf.Min(width, _feedbackPrefab.GetComponent<RectTransform>().rect.width);
+
 						foreach (var feedbackScore in feedback.Scores)
 						{
 							var score = UnityEngine.Object.Instantiate(_feedbackPrefab).transform;
@@ -82,10 +88,14 @@ public class ReviewStateInput : TickStateInput
 							var change = feedbackScore.Value;
 							score.GetComponentInChildren<Text>().text = change > 0 ? "+" + change : change.ToString();
 
+							score.GetComponent<RectTransform>().sizeDelta = new Vector2(width, width/2);
+
+
 							var iconPath = "Prefabs/Icons/" + feedbackScore.Key;
 							var icon = Resources.Load<Sprite>(iconPath);
 							score.GetComponentInChildren<Image>().sprite = icon;
 						}
+						
 					}
 					else
 					{
