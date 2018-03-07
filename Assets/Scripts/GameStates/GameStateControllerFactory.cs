@@ -101,6 +101,12 @@ public class GameStateControllerFactory
 		var input = new CallStateInput();
 		var state = new CallState(input);
 
+		// To Test questionnaire
+		//var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
+		//input.AnswerClickedEvent+= questionnaireTransition.ChangeState;
+
+		//state.AddTransitions(questionnaireTransition);
+
 		var gameTransition = new EventTransition(GameState.StateName);
 		input.AnswerClickedEvent += gameTransition.ChangeState;
 

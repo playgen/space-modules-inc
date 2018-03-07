@@ -40,6 +40,18 @@ public class QuestionnaireStateInput : TickStateInput
 			Number = 2,
 			Question = "Are you tired of answering questions now?",
 			Answers = new[] {"yes", "No", "Maybe"}
+		},
+		new TempQuestions
+		{
+			Number = 3,
+			Question = "One More?",
+			Answers = new[] {"You serious?"}
+		},
+		new TempQuestions
+		{
+			Number = 4,
+			Question = "Ok, thats it?",
+			Answers = new[] {"yes", "Thank You", "Option 3", "Another option", "So many options", "when will it stop", "testing many options", "and 1 more"}
 		}
 	};
 
@@ -76,7 +88,7 @@ public class QuestionnaireStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 
 		ShowCharacter();
-		UpdateQuestion(_questions.First());
+		NextQuestion();
 	}
 
 	protected override void OnExit()
@@ -203,10 +215,10 @@ public class QuestionnaireStateInput : TickStateInput
 
 	private void NextQuestion()
 	{
-		_questions.RemoveAt(0);
 		if (_questions.Count > 0)
 		{
 			UpdateQuestion(_questions.First());
+			_questions.RemoveAt(0);
 		}
 		else
 		{
@@ -218,14 +230,11 @@ public class QuestionnaireStateInput : TickStateInput
 
 	private void LogAnswers()
 	{
+		var str = "";
 		foreach (var answer in _tempAnswers)
 		{
-			Debug.Log(answer.Question + ": " + answer.Answer);
+			str += answer.Question + " " + answer.Answer + "\n";
 		}
-	}
-
-	protected override void OnTick(float deltaTime)
-	{
-
+		Debug.Log(str);
 	}
 }
