@@ -76,6 +76,7 @@ public class ScenarioController : ICommandAction
 		public bool MoodImage;
 		public string EmotionCommentToken;
 		public int Bonus;
+		public Dictionary<string, int> MeasuredPoints;
 	}
 
 	public class LevelObject
@@ -91,6 +92,31 @@ public class ScenarioController : ICommandAction
 		public string Code;
 	}
 
+	public class ChatScoreObject
+	{
+		public ChatObject ChatObject;
+		public Dictionary<string, int> Scores;
+	}
+
+	/// <summary>
+	/// The feedback mode identifies the level of feedback to give to the player
+	/// </summary>
+	public enum FeedbackMode
+	{
+		/// <summary>
+		/// Feedback only at the end of game
+		/// </summary>
+		Minimal = 0, 
+		/// <summary>
+		/// Feedback at the end of game and broken down in the chat history
+		/// </summary>
+		EndGame, 
+		/// <summary>
+		/// Feedback at the end of game, in chat history and during the game
+		/// </summary>
+		InGame
+	}
+
 	#endregion
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
@@ -98,9 +124,9 @@ public class ScenarioController : ICommandAction
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
 	private readonly List<Name> _events = new List<Name>();
-	private readonly List<ChatObject> _chatHistory = new List<ChatObject>();
+	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private string[] _allScenarioPaths;
-	private Dictionary<string, int> _scores;
+	private Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
 
 	// Round Based
 	public int CurrentLevel;
@@ -114,9 +140,12 @@ public class ScenarioController : ICommandAction
 	private AudioClipModel _audioClip;
 	private ScenarioData _currentScenario;
 	private int _roundNumber;
+	private FeedbackMode _feedbackMode; 
+
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
-	public event Action<List<ChatObject>, float> GetReviewDataSuccessEvent;
+	public event Action<List<ChatScoreObject>, float, FeedbackMode> GetReviewDataSuccessEvent;
+	public event Action<Dictionary<string, int>, FeedbackMode> GetFeedbackEvent;
 	public event Action<ScoreObject> GetScoreDataSuccessEvent;
 	public event Action<string> GetCharacterDialogueSuccessEvent;
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
@@ -178,7 +207,8 @@ public class ScenarioController : ICommandAction
 	public void NextLevel()
 	{
 		CurrentLevel++;
-		_scores = new Dictionary<string, int>();
+		_feedbackScores.Clear();
+		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -258,7 +288,7 @@ public class ScenarioController : ICommandAction
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-		UpdateScore(reply);
+		var chat = new ChatObject();
 
 		if (reply != null)
 		{
@@ -274,9 +304,22 @@ public class ScenarioController : ICommandAction
 			Tracker.T.completable.Initialized("PlayerActionCompleted");
 
 			//Tracker.T.RequestFlush();
-
-			_chatHistory.Add(new ChatObject() { Utterence = reply.Utterance, Agent = "Player", Code = reply.CurrentState + "." + reply.FileName });
+			
+			chat = new ChatObject 
+			{
+				Utterence = reply.Utterance,
+				Agent = "Player",
+				Code = reply.CurrentState + "." + reply.FileName
+			};
+			_chatScoreHistory.Add(new ChatScoreObject
+			{
+				ChatObject = chat,
+				Scores = new Dictionary<string, int>()
+			});
 		}
+		UpdateScore(reply);
+		_feedbackScores = _chatScoreHistory.Last().Scores;
+		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -289,6 +332,7 @@ public class ScenarioController : ICommandAction
 		var action = RolePlayCharacterAsset.TakeBestActions(possibleActions).FirstOrDefault();
 		_events.Clear();
 		CurrentCharacter.Update();
+
 		if (action != null)
 		{
 			var actionKey = action.Key.ToString();
@@ -305,11 +349,23 @@ public class ScenarioController : ICommandAction
 								StringComparison.CurrentCultureIgnoreCase));
 				if (characterDialogue != null)
 				{
-					UpdateScore(characterDialogue);
 					var characterDialogueText = characterDialogue.Utterance;
+
+					var chat = new ChatObject()
+					{
+						Utterence = characterDialogueText,
+						Agent = "Client",
+						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
+					};
+					_chatScoreHistory.Add(new ChatScoreObject
+					{
+						ChatObject = chat,
+						Scores = new Dictionary<string, int>()
+					});
+					UpdateScore(characterDialogue);
+
 					//_integratedAuthoringTool.SetDialogueState(CurrentCharacter.Perspective.ToString(), nextState.ToString());
 					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
-					_chatHistory.Add(new ChatObject() {Utterence = characterDialogueText, Agent = "Client", Code = characterDialogue.CurrentState + "." + characterDialogue.FileName});
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
 
@@ -317,6 +373,7 @@ public class ScenarioController : ICommandAction
 				}
 			}
 		}
+		
 		GetCharacterStrongestEmotion();
 	}
 
@@ -375,9 +432,12 @@ public class ScenarioController : ICommandAction
 	{
 		var mood = (CurrentCharacter.Mood + 10) / 20;
 		var scoreTotal = 0;
-		foreach (var scoreVal in _scores.Values)
+		foreach (var chatScoreObject in _chatScoreHistory)
 		{
-			scoreTotal += scoreVal;
+			foreach (var i in chatScoreObject.Scores.Values)
+			{
+				scoreTotal += i;
+			}
 		}
 		var lowerScoreBracket = _currentScenario.MaxPoints*0.4f;
 		var upperScoreBracket = _currentScenario.MaxPoints*0.8f;
@@ -401,6 +461,17 @@ public class ScenarioController : ICommandAction
 			scoreTotal = 1;
 		}
 
+		var allScores = GetScoresByKey();
+
+		var measuredPoints = new Dictionary<string, int>
+		{
+			{"Closure", GetScore(allScores, "Closure")},
+			{"Empathy", GetScore(allScores, "Empathy")},
+			{"Faq", GetScore(allScores, "Faq")},
+			{"Inquire", GetScore(allScores, "Inquire")},
+			{"Polite", GetScore(allScores, "Polite")}
+		};
+
 		var scoreObj = new ScoreObject()
 		{
 			Stars = stars,
@@ -408,7 +479,8 @@ public class ScenarioController : ICommandAction
 			ScoreFeedbackToken = "FEEDBACK_" + stars,
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
-			Bonus = Mathf.CeilToInt(mood * 999)
+			Bonus = Mathf.CeilToInt(mood * 999),
+			MeasuredPoints = measuredPoints
 		};
 
 		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
@@ -422,6 +494,7 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("stars", stars);
 			SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
 		}
+		Reset();
 	}
 
 	private void UpdateScore(DialogueStateActionDTO reply)
@@ -439,36 +512,48 @@ public class ScenarioController : ICommandAction
 
 		if (result.Length > 1)
 		{
-			int value;
+			var chat = _chatScoreHistory.Last().ChatObject;
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
-				if (_scores.TryGetValue(keyword, out value))
-				{
-					_scores[keyword] = value + Int32.Parse(result[1]);
-				}
-				else
-				{
-					_scores.Add(keyword, Int32.Parse(result[1]));
-				}
+				var score = Int32.Parse(result[1]);
+				SaveChatScore(chat, keyword, score);
 			}
+		}
+	}
+
+	private void SaveChatScore(ChatObject chat, string keyword, int score)
+	{
+		// Check if the list already has an element for the current chat object
+		var chatScoreObject = _chatScoreHistory.Find(c => c.ChatObject == chat);
+
+		if (chatScoreObject != null)
+		{
+			chatScoreObject.Scores.Add(keyword, score);
+		}
+		else
+		{
+			
+			var newChatScoreObject = new ChatScoreObject
+				{
+					ChatObject = chat,
+					Scores = new Dictionary<string, int>()
+				};
+			newChatScoreObject.Scores.Add(keyword, score);
+			_chatScoreHistory.Add(newChatScoreObject);
 		}
 	}
 
 	private void TraceScore()
 	{
-		// check for scores before referencing key
-		int closure;
-		_scores.TryGetValue("Closure", out closure);
-		int empathy;
-		_scores.TryGetValue("Empathy", out empathy);
-		int faq;
-		_scores.TryGetValue("Faq", out faq);
-		int inquire;
-		_scores.TryGetValue("Inquire", out inquire);
-		int polite;
-		_scores.TryGetValue("Polite", out polite);
+		var allScores = GetScoresByKey();
 
+		// check for scores before referencing key
+		var closure = GetScore(allScores, "Closure");
+		var empathy = GetScore(allScores, "Empathy");
+		var faq = GetScore(allScores, "Faq");
+		var inquire = GetScore(allScores, "Inquire");
+		var polite = GetScore(allScores, "Polite");
 
 		// Trace the scores and submit them via UCM tracker
 		if (SUGARManager.CurrentUser != null)
@@ -495,7 +580,7 @@ public class ScenarioController : ICommandAction
 		//The following string contains the key for the google form that will be used to write trace data
 
 	    string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
-		var codeArray = _chatHistory.Where(o => o.Agent == "Player").Select(o => o.Code).ToArray();
+		var codeArray = _chatScoreHistory.Where(o => o.ChatObject.Agent == "Player").Select(o => o.ChatObject.Code).ToArray();
 		var sb = new StringBuilder();
 		string prefix = "";
 		foreach (var s in codeArray)
@@ -542,18 +627,50 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
+	private Dictionary<string, int> GetScoresByKey()
+	{
+		var scores = new Dictionary<string, int>();
+
+		var all = _chatScoreHistory.FindAll(c => c.Scores.Count > 0);
+		foreach (var chatScoreObject in all)
+		{
+			foreach (var score in chatScoreObject.Scores)
+			{
+				if (scores.ContainsKey(score.Key))
+				{
+					scores[score.Key] = scores[score.Key] + score.Value;
+				}
+				else
+				{
+					scores[score.Key] = score.Value;
+				}
+			}
+		}
+
+		return scores;
+	}
+
+	private int GetScore(Dictionary<string, int> scores, string key)
+	{
+		if (scores.ContainsKey(key))
+		{
+			return scores[key];
+		}
+		return 0;
+	}
+
 	#endregion
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatHistory, CurrentCharacter.Mood);
-		Reset();
+		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood, _feedbackMode);
+		//Reset();
 	}
 
 	private void Reset()
 	{
 		Initialize();
-		_chatHistory.Clear();
+		_chatScoreHistory.Clear();
 		_events.Clear();
 	}
 }
