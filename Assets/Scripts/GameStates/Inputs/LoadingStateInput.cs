@@ -28,6 +28,7 @@ public class LoadingStateInput : TickStateInput
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
 		// Check for SUGAR login
+		
 		SUGARManager.Account.DisplayPanel(success =>
 		{
 			if (success)
@@ -39,6 +40,17 @@ public class LoadingStateInput : TickStateInput
 				Debug.LogError("Sign In Failed");
 			}
 		});
+
+		if (SUGARManager.CurrentUser != null)
+		{
+			// set username on account panel
+			var username = GameObject.Find("SUGAR/SUGAR Canvas/AccountPanel/Username/InputField").GetComponent<InputField>();
+			if (username != null)
+			{
+				username.text = SUGARManager.CurrentUser.Name;
+				username.textComponent.text = SUGARManager.CurrentUser.Name;
+			}
+		}
 	}
 
 	protected override void OnExit()
