@@ -38,8 +38,10 @@ public class ScoreState : InputTickState
 
 
 			// Open the default browser and show the form
-			Application.OpenURL(googleFormsURL);
-			Application.Quit();
+
+			// TODO hand open url and quit in next state?
+			//Application.OpenURL(googleFormsURL);
+			//Application.Quit();
 
 		}
 

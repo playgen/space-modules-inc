@@ -149,15 +149,21 @@ public class GameStateControllerFactory
 		var menuTransition = new FalseEventTransition(MenuState.StateName);
 		state.NextEvent += menuTransition.ChangeState;
 
-		//var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
-		//input.Next Event += questionnaireTransition.ChangeState;
+		// TODO check if the questionnaire or the quit event should be launched
+		if (true) 
+		{
+			var questionnaireTransition = new TrueEventTransition(QuestionnaireState.StateName);
+			state.NextEvent += questionnaireTransition.ChangeState;
 
-		//state.AddTransitions(questionnaireTransition);
-		
-		var quitTransition = new QuitOnTrueEventTransition();
-		state.NextEvent += quitTransition.Quit;
+			state.AddTransitions(menuTransition, questionnaireTransition);
+		}
+		else
+		{
+			var quitTransition = new QuitOnTrueEventTransition();
+			state.NextEvent += quitTransition.Quit;
 
-		state.AddTransitions(menuTransition, quitTransition);
+			state.AddTransitions(menuTransition, quitTransition);
+		}
 
 		return state;
 	}
