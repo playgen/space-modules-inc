@@ -173,10 +173,10 @@ public class GameStateControllerFactory
 		var input = new QuestionnaireStateInput();
 		var state = new QuestionnaireState(input);
 
-		var menuTransition = new EventTransition(MenuState.StateName);
-		input.FinishClickedEvent += menuTransition.ChangeState;
+		var loadingTransition = new EventTransition(LoadingState.StateName);
+		input.FinishClickedEvent += loadingTransition.ChangeState;
 
-		state.AddTransitions(menuTransition);
+		state.AddTransitions(loadingTransition);
 
 		return state;
 	}

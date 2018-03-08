@@ -163,6 +163,7 @@ public class ScenarioController : ICommandAction
 	public void Initialize()
 	{
 		LoadScenarios();
+		_feedbackMode = FeedbackMode.InGame;
 		//_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioFile);
 	}
 
@@ -187,7 +188,7 @@ public class ScenarioController : ICommandAction
 			_roundNumber = 1;
 		}
 		var round = obj.Rounds[_roundNumber];
-		List<ScenarioData> data = new List<ScenarioData>();
+		var data = new List<ScenarioData>();
 		foreach (var level in round.Levels)
 		{
 			data.Add(CreateScenario(level.Id, level.Prefix, level.Character, level.MaxPoints));
@@ -207,6 +208,7 @@ public class ScenarioController : ICommandAction
 	public void NextLevel()
 	{
 		CurrentLevel++;
+
 		_feedbackScores.Clear();
 		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));

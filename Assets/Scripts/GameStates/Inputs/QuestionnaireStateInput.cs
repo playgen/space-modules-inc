@@ -139,6 +139,7 @@ public class QuestionnaireStateInput : TickStateInput
 			if (childGameObject != null) UnityEngine.Object.Destroy(childGameObject.gameObject);
 		}
 
+		// TODO Translate
 		_questionTrackText.text = "Vraag " + question.Number;
 		_questionText.text = question.Question;
 
