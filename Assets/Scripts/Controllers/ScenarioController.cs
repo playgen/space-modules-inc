@@ -132,6 +132,7 @@ public class ScenarioController : ICommandAction
 	public int CurrentLevel;
 	public int LevelMax;
 	public bool PostQuestions;
+	public bool UseInGameQuestionnaire;
 
 
 	public RolePlayCharacterAsset CurrentCharacter;
@@ -163,7 +164,6 @@ public class ScenarioController : ICommandAction
 	public void Initialize()
 	{
 		LoadScenarios();
-		_feedbackMode = FeedbackMode.InGame;
 		//_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(_scenarioFile);
 	}
 
@@ -196,6 +196,21 @@ public class ScenarioController : ICommandAction
 		_scenarios = data.ToArray();
 		LevelMax = _scenarios.Length;
 		// Boolean for checking if the post game questionnaire is opened after the round
+		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+		{
+			var feedback = Int32.Parse(CommandLineUtility.CustomArgs["feedback"]);
+			_feedbackMode = (FeedbackMode) feedback;
+		}
+		else
+		{
+			_feedbackMode = FeedbackMode.Minimal;
+		}
+
+		if (CommandLineUtility.CustomArgs.ContainsKey("ingameq"))
+		{
+			var useq = bool.Parse(CommandLineUtility.CustomArgs["ingameq"]);
+			UseInGameQuestionnaire = useq;
+		}
 		PostQuestions = round.PostQuestions;
 	}
 
