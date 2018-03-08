@@ -28,7 +28,7 @@ public class LoadingStateInput : TickStateInput
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
 		// Check for SUGAR login
-		SUGARManager.Account.DisplayPanel(success =>
+		SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
 		{
 			if (success)
 			{
