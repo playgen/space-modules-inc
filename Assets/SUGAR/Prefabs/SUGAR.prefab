@@ -40,6 +40,7 @@ GameObject:
   - component: {fileID: 4000010393178106}
   - component: {fileID: 114000011669735270}
   - component: {fileID: 114000013496830746}
+  - component: {fileID: 114075106552128546}
   - component: {fileID: 114000010768160430}
   - component: {fileID: 114021355374949024}
   - component: {fileID: 114000012611603444}
@@ -77,12 +78,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012920798932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 106238491, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
+  m_Script: {fileID: -454488637, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 114000011335328718, guid: da1b3e420bd0de7438fc02f71340f4d4,
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 114000011335328718, guid: da1b3e420bd0de7438fc02f71340f4d4,
     type: 2}
-  _achievementPopup: {fileID: 114000013413874684, guid: 30bf371ff31e0bc429751b3218cfa999,
+  _landscapeAchievementPopup: {fileID: 0}
+  _portraitAchievementPopup: {fileID: 114000013413874684, guid: 30bf371ff31e0bc429751b3218cfa999,
     type: 2}
   _notificationCheckRate: 2.5
 --- !u!114 &114000011156416006
@@ -132,7 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 1493326051, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 114087798976199502, guid: eba715bbb0ee311459857f49f8a7bda8,
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 114087798976199502, guid: eba715bbb0ee311459857f49f8a7bda8,
     type: 2}
   _positionCount: 10
   _currentFilter: 0
@@ -168,7 +172,8 @@ MonoBehaviour:
   m_Script: {fileID: -1070070240, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 0}
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 0}
   _currentActorType: 1
 --- !u!114 &114000013496830746
 MonoBehaviour:
@@ -181,7 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: -89677467, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _accountInterface: {fileID: 114000014259607728, guid: dc10a0a8ffb27c6428ace1508de391a5,
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 114000014259607728, guid: dc10a0a8ffb27c6428ace1508de391a5,
     type: 2}
   _allowAutoLogin: 1
   _allowRegister: 0
@@ -197,7 +203,21 @@ MonoBehaviour:
   m_Script: {fileID: 1776674429, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 0}
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 0}
+--- !u!114 &114075106552128546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012920798932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cded2c49ed592f649a2ea63e49a2d622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allowAutoLogin: 1
+  _defaultSourceToken: SPL
 --- !u!114 &114259976721560528
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -221,7 +241,8 @@ MonoBehaviour:
   m_Script: {fileID: -1907648989, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 0}
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 0}
 --- !u!114 &114787435018956752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,7 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 1429074576, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _interface: {fileID: 0}
+  _landscapeInterface: {fileID: 0}
+  _portraitInterface: {fileID: 0}
 --- !u!114 &114981336963392634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,7 +281,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _resourceCheckRate: 2.5
-  _checkGlobalGameResources: 0
   _checkGlobalUserResources: 0
 --- !u!223 &223000012450321626
 Canvas:

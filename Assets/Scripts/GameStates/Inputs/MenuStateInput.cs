@@ -38,7 +38,7 @@ public class MenuStateInput : TickStateInput
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
 		{
-			SUGARManager.Achievement.DisplayList();
+			SUGARManager.Evaluation.DisplayAchievementList();
 		});
 		achievementButton.onClick.AddListener(delegate
 		{
@@ -77,9 +77,9 @@ public class MenuStateInput : TickStateInput
 	{
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (SUGARManager.Achievement.IsActive)
+			if (SUGARManager.Evaluation.IsActive)
 			{
-				SUGARManager.Achievement.Hide();
+				SUGARManager.Evaluation.Hide();
 			}
 			else if (SUGARManager.Leaderboard.IsActive)
 			{

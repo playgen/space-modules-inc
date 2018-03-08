@@ -561,9 +561,9 @@ public class ScenarioController : ICommandAction
 		if (SUGARManager.CurrentUser != null)
 		{
 			Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Name);
-			if (!string.IsNullOrEmpty(SUGARManager.GroupId))
+			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
 			{
-				Tracker.T.setExtension("GroupId", SUGARManager.GroupId);
+				Tracker.T.setExtension("GroupId", SUGARManager.ClassId);
 			}
 		}
 		Tracker.T.setExtension("DifficultyLevel", _currentScenario.Prefix);
@@ -598,7 +598,7 @@ public class ScenarioController : ICommandAction
 			+ "/formResponse?entry.1676366924="
 			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Name : "NoCurrentUser")
 			+ "&entry.858779356="
-			+ (SUGARManager.GroupId ?? "0")
+			+ (SUGARManager.ClassId ?? "0")
 			+ "&entry.2050844213="
 			+ _currentScenario.Prefix
 			+ "&entry.2005028859="
