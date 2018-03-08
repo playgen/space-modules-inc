@@ -89,7 +89,6 @@ public class AccountUnityClientAdditions : MonoBehaviour
 						break;
 				}
 			}
-			options.Custom = CommandLineUtility.CustomArgs.Select(p => p.Key + "=" + p.Value).ToArray();
 		}
 		if (options != null && options.AuthenticationSource == null)
 		{
