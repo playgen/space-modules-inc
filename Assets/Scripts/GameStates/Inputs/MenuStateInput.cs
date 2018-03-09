@@ -19,6 +19,9 @@ public class MenuStateInput : TickStateInput
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
 
+	private bool _gameLocked;
+	private GameObject _gameLockedPanel;
+
 	protected override void OnInitialize()
 	{
 		_buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
@@ -44,8 +47,11 @@ public class MenuStateInput : TickStateInput
 		{
 			Tracker.T.accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
 		});
+
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
 		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
+		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
+
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.RemoveAllListeners();
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
 		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.RemoveAllListeners();
@@ -65,6 +71,8 @@ public class MenuStateInput : TickStateInput
 
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
+
+		_gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
 	}
 
 	protected override void OnExit()
@@ -94,6 +102,8 @@ public class MenuStateInput : TickStateInput
 				OnQuitAttempt();
 			}
 		}
+		_playButton.interactable = !_gameLocked;
+		_gameLockedPanel.SetActive(_gameLocked);
 	}
 
 	private void OnPlayClick()

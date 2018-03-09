@@ -24,38 +24,49 @@ public class ScoreState : InputTickState
 	{
 		var isGameOver = _scenarioController.CurrentLevel == _scenarioController.LevelMax;
 
-		if (isGameOver && _scenarioController.UseInGameQuestionnaire)
+		if (isGameOver)
 		{
-			if (InGameQuestionnaire != null) InGameQuestionnaire();
-		}
-		else
-		{
-			if (isGameOver && _scenarioController.PostQuestions)
+			if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
 			{
-				// The following string contains the key for the google form is used for the cognitive load questionnaire
-				string formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";
-
-				// Google form ID
-				string googleFormsURL = "https://docs.google.com/forms/d/e/"
-				                        + formsKey
-				                        + "/viewform?entry.1596836094="
-				                        + SUGARManager.CurrentUser.Name;
-
-				Tracker.T.accessible.Accessed("Questionnaire");
-
-				// Open the default browser and show the form
-
-				// TODO hand open url and quit in next state?
-				Application.OpenURL(googleFormsURL);
-				Application.Quit();
-
+				var locked = bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]);
+				if (locked)
+				{
+					CommandLineUtility.CustomArgs = null;
+				}
 			}
 
+			if (_scenarioController.UseInGameQuestionnaire)
+			{
+				if (InGameQuestionnaire != null) InGameQuestionnaire();
+			}
+			else
+			{
+				if (_scenarioController.PostQuestions)
+				{
+					// The following string contains the key for the google form is used for the cognitive load questionnaire
+					string formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";
 
-			if (NextEvent != null) NextEvent(isGameOver);
+					// Google form ID
+					string googleFormsURL = "https://docs.google.com/forms/d/e/"
+					                        + formsKey
+					                        + "/viewform?entry.1596836094="
+					                        + SUGARManager.CurrentUser.Name;
+
+					Tracker.T.accessible.Accessed("Questionnaire");
+
+					// Open the default browser and show the form
+
+					// TODO hand open url and quit in next state?
+					Application.OpenURL(googleFormsURL);
+					//Application.Quit();
+				}
+			}
 		}
-		Tracker.T.RequestFlush();
+		if (NextEvent != null) NextEvent(false);
+		//if (NextEvent != null) NextEvent(isGameOver);
 
+
+		Tracker.T.RequestFlush();
 	}
 
 	public override string Name

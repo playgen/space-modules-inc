@@ -163,7 +163,7 @@ PlayerSettings:
     tvOS: com.PlayGen.SpaceModulesInc
   buildNumber:
     iOS: 0
-  AndroidBundleVersionCode: 2
+  AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1
@@ -244,6 +244,7 @@ PlayerSettings:
   AndroidTargetDevice: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
+  AndroidKeystoreName: C:/Users/Felix/Documents/Projects/RAGE/SpaceMods/user.keystore
   AndroidKeyaliasName: release
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
