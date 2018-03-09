@@ -238,8 +238,7 @@ public class QuestionnaireStateInput : TickStateInput
 		{
 			// continue to next state
 			LogAnswers();
-			SceneManager.LoadScene(0);
-			//FinishClickedEvent();
+			FinishClickedEvent();
 		}
 	}
 
