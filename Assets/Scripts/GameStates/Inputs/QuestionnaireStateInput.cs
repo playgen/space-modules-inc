@@ -7,6 +7,9 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
+
+using RAGE.Analytics;
+
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -95,7 +98,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("Questionnaire", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("Questionnaire", AccessibleTracker.Accessible.Screen);
 
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);

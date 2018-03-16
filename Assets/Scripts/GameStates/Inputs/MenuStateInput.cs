@@ -7,6 +7,8 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
+using RAGE.Analytics;
+
 using UnityEngine;
 
 public class MenuStateInput : TickStateInput
@@ -36,7 +38,7 @@ public class MenuStateInput : TickStateInput
 		});
 		leaderboardButton.onClick.AddListener(delegate
 		{
-			Tracker.T.accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
 		});
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
@@ -45,7 +47,7 @@ public class MenuStateInput : TickStateInput
 		});
 		achievementButton.onClick.AddListener(delegate
 		{
-			Tracker.T.accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
 		});
 
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
@@ -65,7 +67,7 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
 		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
 

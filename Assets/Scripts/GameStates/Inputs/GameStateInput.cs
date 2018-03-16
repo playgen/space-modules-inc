@@ -4,6 +4,9 @@ using System.Linq;
 using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
 using PlayGen.Unity.Utilities.BestFit;
+
+using RAGE.Analytics;
+
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,7 +76,7 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
 
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		RefreshPlayerDialogueOptions();

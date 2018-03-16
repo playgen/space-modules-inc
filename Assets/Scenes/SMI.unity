@@ -5892,7 +5892,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 796368919}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47cb96979c068e5499785b0415f504f9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3741620789581e84897c0fb01677034d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rawCopy: 0
@@ -5903,6 +5903,8 @@ MonoBehaviour:
   host: 
   trackingCode: 
   debug: 0
+  username: 
+  password: 
 --- !u!4 &796368921
 Transform:
   m_ObjectHideFlags: 0

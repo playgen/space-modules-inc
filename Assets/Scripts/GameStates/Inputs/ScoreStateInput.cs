@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
 
+using RAGE.Analytics;
+
 public class ScoreStateInput : TickStateInput
 {
 	public event Action NextButtonClicked;
@@ -30,7 +32,7 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("ScoreState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("ScoreState", AccessibleTracker.Accessible.Screen);
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
