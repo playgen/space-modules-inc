@@ -3,6 +3,8 @@ using GameWork.Core.States.Tick.Input;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
+using RAGE.Analytics;
+
 public class CallStateInput : TickStateInput
 {
 	public event Action AnswerClickedEvent;
@@ -20,7 +22,7 @@ public class CallStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("CallState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("CallState", AccessibleTracker.Accessible.Screen);
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();

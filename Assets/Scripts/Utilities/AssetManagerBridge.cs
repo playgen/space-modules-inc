@@ -75,4 +75,9 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 		fileId = fileId.Replace(".si", string.Empty);
 		return fileId;
 	}
+
+	public void Append(string fileId, string fileData)
+	{
+		throw new NotImplementedException();
+	}
 }

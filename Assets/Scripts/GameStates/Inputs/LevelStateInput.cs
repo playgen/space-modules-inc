@@ -14,7 +14,7 @@ public class LevelStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		//Tracker.T.accessible.Accessed("LevelState");
+		//Tracker.T.Accessible.Accessed("LevelState");
 
 		_gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
 		ConfigureGridSize(3, 3);
