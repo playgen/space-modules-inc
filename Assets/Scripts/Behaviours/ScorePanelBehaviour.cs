@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using PlayGen.Unity.Utilities.BestFit;
 using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
@@ -6,6 +7,12 @@ using UnityEngine.UI;
 
 public class ScorePanelBehaviour : MonoBehaviour
 {
+	[SerializeField]
+	private GameObject _finalScorePanel;
+
+	[SerializeField]
+	private GameObject _finalScoreFeedbackPanel;
+
     [SerializeField]
     private Sprite _starSprite;
 
@@ -15,13 +22,7 @@ public class ScorePanelBehaviour : MonoBehaviour
     [SerializeField]
     private GameObject[] _starSlots;
 
-    [SerializeField]
-    private Text _scoreText;
-
-    [SerializeField]
-    private Text _scoreFeedbackText;
-
-    [SerializeField]
+    [SerializeField]	
     private Image _emotionImage;
 
     [SerializeField]
@@ -33,16 +34,24 @@ public class ScorePanelBehaviour : MonoBehaviour
     [SerializeField]
     private Sprite _emotionNegativeSprite;
 
-    [SerializeField]
-    private Text _bonusText;
-
 	private GameObject _feedbackElementGameObject;
 	private Transform _feedbackPanel;
-	private List<GameObject> _feedbackElements = new List<GameObject>();
+    private Text _scoreText;
+    private Text _scoreFeedbackText;
+	private GameObject _scorePanel;
 
-    public void SetScorePanel(ScenarioController.ScoreObject score)
+	public void SetScorePanel(ScenarioController.ScoreObject score)
     {
-	    SetupFeedback();
+		_finalScorePanel.SetActive(false);
+		_finalScoreFeedbackPanel.SetActive(false);
+
+	    _scorePanel = score.MeasuredPoints.Any() ? _finalScoreFeedbackPanel : _finalScorePanel;
+		_scorePanel.SetActive(true);
+
+	    _scoreText = _scorePanel.transform.Find("ScoreText").GetComponent<Text>();
+	    _scoreFeedbackText = _scorePanel.transform.Find("ScoreFeedback").GetComponent<Text>();
+
+		SetupFeedback();
 	    SetFeedbackIcons(score.MeasuredPoints);
 		
 		// set stars
@@ -67,49 +76,30 @@ public class ScorePanelBehaviour : MonoBehaviour
 
         _emotionComment.text = Localization.Get(score.EmotionCommentToken);
 
-        _bonusText.text = "+" + score.Bonus.ToString("N0");
+        //_bonusText.text = "+" + score.Bonus.ToString("N0");
     }
 
 	private void SetupFeedback()
 	{
 		if (_feedbackPanel == null)
 		{
-			_feedbackPanel = GameObjectUtilities
-				.Find("ScoreContainer/ScorePanelContainer/ScorePanel/TopPanel/FinalScorePanel/FeedbackPanel").transform;
+			_feedbackPanel = _finalScoreFeedbackPanel.transform.Find("FeedbackPanel").GetComponent<FeedbackHelper>().transform;
 		}
 		if (_feedbackElementGameObject == null)
 		{
 			_feedbackElementGameObject = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 		}
-
-		if (_feedbackElements.Count > 0)
-		{
-			foreach (var feedbackElement in _feedbackElements)
-			{
-				DestroyImmediate(feedbackElement);
-			}
-		}
 	}
 
 	private void SetFeedbackIcons(Dictionary<string, int> points)
 	{
-		var rect = _feedbackPanel.GetComponent<RectTransform>().rect;
-		var width = rect.width / points.Count;
-		var height = rect.height;
-		width = Mathf.Min(width, _feedbackElementGameObject.GetComponent<RectTransform>().rect.width);
+		var feedbackHelper = _feedbackPanel.GetComponent<FeedbackHelper>();
 
-		_feedbackElements.Clear();
 		foreach (var point in points)
 		{
-			var element = Object.Instantiate(_feedbackElementGameObject);
-			element.transform.SetParent(_feedbackPanel.transform, false);
+			var value = feedbackHelper.GetTextComponent(point.Key);
 
-			element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
-
-			var icon = Resources.Load<Sprite>("Prefabs/Icons/" + point.Key);
-			element.GetComponentInChildren<Image>().sprite = icon;
-			element.GetComponentInChildren<Text>().text = point.Value > 0 ? "+" + point.Value : point.Value.ToString();
-			_feedbackElements.Add(element);
+			value.text = point.Value > 0 ? "+" + point.Value : point.Value.ToString();
 		}
 
 		_feedbackPanel.BestFit();

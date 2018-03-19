@@ -4,6 +4,7 @@ using System.Linq;
 using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Localization;
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -134,7 +135,8 @@ public class GameStateInput : TickStateInput
 		{
 			var rect = _feedbackPanel.GetComponent<RectTransform>().rect;
 			var width = rect.width / feedback.Count;
-			var height = rect.height;
+			var height = Mathf.Min(rect.height, width/3);
+
 			width = Mathf.Min(width, _feedbackElementPrefab.GetComponent<RectTransform>().rect.width);
 
 			foreach (var i in feedback)
@@ -144,10 +146,10 @@ public class GameStateInput : TickStateInput
 
 				element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
 
-				var iconPath = "Prefabs/Icons/" + i.Key;
-				var icon = Resources.Load<Sprite>(iconPath);
-				element.GetComponentInChildren<Image>().sprite = icon;
-				element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
+				//var iconPath = "Prefabs/Icons/" + i.Key;
+				//var icon = Resources.Load<Sprite>(iconPath);
+				element.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + i.Key.ToUpper());
+				element.transform.Find("Value").GetComponent<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
 				_feedbackElements.Add(element);
 			}
 
