@@ -406,18 +406,18 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		if (Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
+		_audioClip = new AudioClipModel()
+		{
+			Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
+		};
+
+		if (!string.IsNullOrEmpty(_audioClip.Name))
 		{
 			IsTalking = true;
 			if (_audioClip != null)
 			{
 				_audioController.Stop(_audioClip);
 			}
-
-			_audioClip = new AudioClipModel()
-			{
-				Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
-			};
 
 			_audioController.Play(_audioClip,
 				onComplete: HandleEndAudio);

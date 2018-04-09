@@ -181,47 +181,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	public void ResizeOptions(GameObject dialogueObject)
 	{
-		int smallestFontSize = 0;
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				text.resizeTextForBestFit = true;
-				text.resizeTextMinSize = 1;
-				text.resizeTextMaxSize = 100;
-				text.fontSize = text.resizeTextMaxSize;
-				text.cachedTextGenerator.Invalidate();
-				text.cachedTextGenerator.Populate(text.text, text.GetGenerationSettings(text.rectTransform.rect.size));
-				text.resizeTextForBestFit = false;
-				var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
-
-				var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
-				if (text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y < newSizeRescale)
-				{
-					newSizeRescale = text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y;
-				}
-				newSize = Mathf.FloorToInt(newSize * newSizeRescale);
-				if (newSize < smallestFontSize || smallestFontSize == 0)
-				{
-					smallestFontSize = newSize;
-				}
-			}
-		}
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				if (!text)
-				{
-					continue;
-				}
-				text.fontSize = smallestFontSize;
-			}
-		}
+		dialogueObject.GetComponent<ScrollRect>().content.BestFit();
 	}
 
 	private void OnDialogueOptionClick(TempAnswers answer)
