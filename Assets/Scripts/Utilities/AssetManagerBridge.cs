@@ -51,6 +51,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 		if (!string.IsNullOrEmpty(fileText))
 		{
 			fileText = fileText.Replace("..\\\\", "..\\\\..\\\\");
+			fileText = fileText.Replace("..//", "..//..//");
 		}
 		return fileText;
 	}

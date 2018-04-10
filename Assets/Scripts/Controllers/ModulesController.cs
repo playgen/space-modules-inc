@@ -51,6 +51,13 @@ public class ModulesController : ICommandAction
 
 	public ModulesController()
     {
+		var aotFaq = new FaqEntry ();
+		var aotFaqList = new List<FaqEntry> ();
+		var aotModEnt = new ModuleEntry ();
+		var aotModEntList = new List<ModuleEntry> ();
+		var aotModDat = new ModulesDatabase ();
+		var aotModDatList = new List<ModulesDatabase> ();
+
 	    _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
         var backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");

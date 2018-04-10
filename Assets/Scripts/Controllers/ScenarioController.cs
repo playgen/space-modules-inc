@@ -48,6 +48,10 @@ public class ScenarioController : ICommandAction
 			Debug.Log(_scenarioPaths[index]);
 			string error;
 			var iat = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _scenarioPaths[index]), out error);
+			if (!string.IsNullOrEmpty(error))
+			{
+				Debug.LogError(error);
+			}
 			return iat;
 		}
 	}
