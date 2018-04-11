@@ -1,11 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Net;
+using System.Text;
+
 using AssetPackage;
 
 using UnityEngine;
 
-
-public class AssetManagerBridge : IBridge, ILog, IDataStorage
+public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceRequest
 {
 	public void Log(Severity severity, string msg)
 	{
@@ -81,4 +83,29 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage
 	{
 		throw new NotImplementedException();
 	}
+
+	public void WebServiceRequest(RequestSetttings requestSettings, out RequestResponse requestResponse)
+	{
+		var request = (HttpWebRequest)WebRequest.Create(requestSettings.uri);
+
+		var postData = requestSettings.body;
+		var data = Encoding.ASCII.GetBytes(postData);
+
+		request.Method = "POST";
+		foreach (var header in requestSettings.requestHeaders)
+		{
+			request.Headers.Add(header.Key, header.Value);
+		}
+		request.ContentLength = data.Length;
+
+		using (var stream = request.GetRequestStream())
+		{
+			stream.Write(data, 0, data.Length);
+		}
+
+		var response = (HttpWebResponse)request.GetResponse();
+
+		requestResponse = new RequestResponse { responseCode = (int)response.StatusCode };
+	}
+
 }

@@ -34,7 +34,7 @@ namespace RAGE.Analytics
 	{
 		public static DateTime START_DATE = new DateTime (1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
 		public bool rawCopy;
-		public static bool strictMode = true;
+		public static bool strictMode = false;
 		private float nextFlush;
 		private bool flushRequested = false;
 		public float flushInterval = 3;

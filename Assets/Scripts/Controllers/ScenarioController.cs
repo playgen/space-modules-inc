@@ -410,6 +410,14 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
+		if (!string.IsNullOrEmpty(_audioClip?.Name))
+		{
+			if (_audioClip != null)
+			{
+				_audioController.Stop(_audioClip);
+			}
+		}
+
 		_audioClip = new AudioClipModel()
 		{
 			Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
@@ -418,13 +426,8 @@ public class ScenarioController : ICommandAction
 		if (!string.IsNullOrEmpty(_audioClip.Name))
 		{
 			IsTalking = true;
-			if (_audioClip != null)
-			{
-				_audioController.Stop(_audioClip);
-			}
 
-			_audioController.Play(_audioClip,
-				onComplete: HandleEndAudio);
+			_audioController.Play(_audioClip, onComplete: HandleEndAudio);
 		}
 		else
 		{

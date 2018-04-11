@@ -1,6 +1,9 @@
 ﻿using System;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
+
+using RAGE.EvaluationAsset;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,6 +36,9 @@ public class LoadingStateInput : TickStateInput
 		{
 			if (success)
 			{
+				var settings = new EvaluationAssetSettings();
+				settings.PlayerId = SUGARManager.CurrentUser.Name;
+				EvaluationAsset.Instance.Settings = settings;
 				if (LoggedInEvent != null) LoggedInEvent();
 			}
 			else
