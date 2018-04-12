@@ -52,9 +52,9 @@ public class ScoreState : InputTickState
 
 					// Google form ID
 					string googleFormsURL = "https://docs.google.com/forms/d/e/"
-					                        + formsKey
-					                        + "/viewform?entry.1596836094="
-					                        + SUGARManager.CurrentUser.Name;
+											+ formsKey
+											+ "/viewform?entry.1596836094="
+											+ SUGARManager.CurrentUser.Name;
 
 					Tracker.T.Accessible.Accessed("Questionnaire");
 
@@ -62,7 +62,10 @@ public class ScoreState : InputTickState
 
 					// TODO hand open url and quit in next state?
 					Application.OpenURL(googleFormsURL);
-					//Application.Quit();
+					if (Application.platform == RuntimePlatform.WindowsPlayer)
+					{
+						Application.Quit();
+					}
 				}
 			}
 		}

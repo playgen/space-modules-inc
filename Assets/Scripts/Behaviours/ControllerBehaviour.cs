@@ -12,7 +12,14 @@ public class ControllerBehaviour : MonoBehaviour
 	{
 		FixScreenRatio();
 
-		_audioController = new AudioController(new ResourceAudioChannelFactory(), 1);
+		if (Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			_audioController = new AudioController(new StreamingAssetsAudioChannelFactory(), 1);
+		}
+		else
+		{
+			_audioController = new AudioController(new ResourceAudioChannelFactory(), 1);
+		}
 		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
 

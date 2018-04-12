@@ -36,6 +36,10 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 
 	public bool Exists(string fileId)
 	{
+		if (Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			return File.Exists(fileId);
+		}
 		fileId = FilePathFormat(fileId);
 		var loaded = Resources.Load(fileId);
 		return loaded;
@@ -48,6 +52,13 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 
 	public string Load(string fileId)
 	{
+		if (Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			using (var reader = File.OpenText(fileId))
+			{
+				return reader.ReadToEnd();
+			}
+		}
 		fileId = FilePathFormat(fileId);
 		var fileText = Resources.Load<TextAsset>(fileId)?.text;
 		if (!string.IsNullOrEmpty(fileText))

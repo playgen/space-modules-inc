@@ -176,7 +176,14 @@ public class ScenarioController : ICommandAction
 
 	private void LoadScenarios()
 	{
-		_allScenarioPaths = Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
+		if (Application.platform == RuntimePlatform.WindowsPlayer)
+		{
+			_allScenarioPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat");
+		}
+		else
+		{
+			_allScenarioPaths = Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
+		}
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
 		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
 		while (!www.isDone)
