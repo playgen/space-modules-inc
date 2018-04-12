@@ -4,6 +4,10 @@ using System.Linq;
 using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Localization;
+
+using RAGE.Analytics;
+
 using RolePlayCharacter;
 using UnityEngine;
 using UnityEngine.UI;
@@ -73,7 +77,7 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
 
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		RefreshPlayerDialogueOptions();
@@ -134,7 +138,7 @@ public class GameStateInput : TickStateInput
 		{
 			var rect = _feedbackPanel.GetComponent<RectTransform>().rect;
 			var width = rect.width / feedback.Count;
-			var height = rect.height;
+			var height = Mathf.Min(rect.height, width / 3);
 			width = Mathf.Min(width, _feedbackElementPrefab.GetComponent<RectTransform>().rect.width);
 
 			foreach (var i in feedback)
@@ -144,10 +148,9 @@ public class GameStateInput : TickStateInput
 
 				element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
 
-				var iconPath = "Prefabs/Icons/" + i.Key;
-				var icon = Resources.Load<Sprite>(iconPath);
-				element.GetComponentInChildren<Image>().sprite = icon;
-				element.GetComponentInChildren<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
+				element.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + i.Key.ToUpper());
+				element.transform.Find("Value").GetComponent<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
+
 				_feedbackElements.Add(element);
 			}
 
@@ -224,47 +227,7 @@ public class GameStateInput : TickStateInput
 
 	public void ResizeOptions(GameObject dialogueObject)
 	{
-		int smallestFontSize = 0;
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				text.resizeTextForBestFit = true;
-				text.resizeTextMinSize = 1;
-				text.resizeTextMaxSize = 100;
-				text.fontSize = text.resizeTextMaxSize;
-				text.cachedTextGenerator.Invalidate();
-				text.cachedTextGenerator.Populate(text.text, text.GetGenerationSettings(text.rectTransform.rect.size));
-				text.resizeTextForBestFit = false;
-				var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
-
-				var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
-				if (text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y < newSizeRescale)
-				{
-					newSizeRescale = text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y;
-				}
-				newSize = Mathf.FloorToInt(newSize * newSizeRescale);
-				if (newSize < smallestFontSize || smallestFontSize == 0)
-				{
-					smallestFontSize = newSize;
-				}
-			}
-		}
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				if (!text)
-				{
-					continue;
-				}
-				text.fontSize = smallestFontSize;
-			}
-		}
+		dialogueObject.GetComponent<ScrollRect>().content.BestFit();
 	}
 
 	private void OnDialogueOptionClick(DialogueStateActionDTO dialogueAction)

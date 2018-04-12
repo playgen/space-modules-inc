@@ -1,6 +1,9 @@
 ﻿using System;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
+
+using RAGE.EvaluationAsset;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,37 +11,61 @@ public class LoadingStateInput : TickStateInput
 {
 	public event Action OfflineClickedEvent;
 	public event Action LoggedInEvent;
+	private float _timeSinceStart;
 
 	protected override void OnInitialize()
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer/OfflineButton")
 			.GetComponent<Button>()
-			.onClick.AddListener(() => {
+			.onClick.AddListener(() =>
+			{
 				if (OfflineClickedEvent != null) OfflineClickedEvent();
 			});
 		var backgrounds = GameObjectUtilities.FindGameObject("BackgroundContainer");
 		var aspect = Camera.main.aspect;
 		var backgroundSize = (3f / 4f) / aspect;
 		backgroundSize = backgroundSize < 1 ? 1 : backgroundSize;
-		((RectTransform)backgrounds.transform).anchorMin = new Vector2((1 - backgroundSize) * 0.5f, 0);
-		((RectTransform)backgrounds.transform).anchorMax = new Vector2(((backgroundSize - 1) * 0.5f) + 1, 1);
+		((RectTransform) backgrounds.transform).anchorMin = new Vector2((1 - backgroundSize) * 0.5f, 0);
+		((RectTransform) backgrounds.transform).anchorMax = new Vector2(((backgroundSize - 1) * 0.5f) + 1, 1);
 	}
 
 	protected override void OnEnter()
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
-		// Check for SUGAR login
-		SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
-		{
-			if (success)
-			{
-				if (LoggedInEvent != null) LoggedInEvent();
+		_timeSinceStart = 0;
+	}
+
+	protected override void OnTick(float deltaTime) {
+		if (_timeSinceStart < 1) {
+			_timeSinceStart += deltaTime;
+			if (_timeSinceStart >= 1) {
+				// Check for SUGAR login
+				SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
+					{
+						if (success)
+						{
+							var settings = new EvaluationAssetSettings();
+							settings.PlayerId = SUGARManager.CurrentUser.Name;
+							EvaluationAsset.Instance.Settings = settings;
+							if (LoggedInEvent != null) LoggedInEvent();
+						}
+						else
+						{
+							if (LoggedInEvent != null) LoggedInEvent();
+						}
+					});
+				if (SUGARManager.CurrentUser != null)
+				{
+					// set username on account panel
+					var username = GameObject.Find("SUGAR/SUGAR Canvas/AccountPanel/Username/InputField").GetComponent<InputField>();
+					if (username != null)
+					{
+						username.text = SUGARManager.CurrentUser.Name;
+						username.textComponent.text = SUGARManager.CurrentUser.Name;
+					}
+				}
 			}
-			else
-			{
-				Debug.LogError("Sign In Failed");
-			}
-		});
+		}
 	}
 
 	protected override void OnExit()

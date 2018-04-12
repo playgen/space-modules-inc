@@ -14,6 +14,9 @@ using System.Text;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
+
+using RAGE.Analytics;
+
 using Random = System.Random;
 
 public class ScenarioController : ICommandAction
@@ -45,6 +48,10 @@ public class ScenarioController : ICommandAction
 			Debug.Log(_scenarioPaths[index]);
 			string error;
 			var iat = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _scenarioPaths[index]), out error);
+			if (!string.IsNullOrEmpty(error))
+			{
+				Debug.LogError(error);
+			}
 			return iat;
 		}
 	}
@@ -132,6 +139,7 @@ public class ScenarioController : ICommandAction
 	public int CurrentLevel;
 	public int LevelMax;
 	public bool PostQuestions;
+	public bool UseInGameQuestionnaire;
 
 
 	public RolePlayCharacterAsset CurrentCharacter;
@@ -187,7 +195,7 @@ public class ScenarioController : ICommandAction
 			_roundNumber = 1;
 		}
 		var round = obj.Rounds[_roundNumber];
-		List<ScenarioData> data = new List<ScenarioData>();
+		var data = new List<ScenarioData>();
 		foreach (var level in round.Levels)
 		{
 			data.Add(CreateScenario(level.Id, level.Prefix, level.Character, level.MaxPoints));
@@ -195,6 +203,21 @@ public class ScenarioController : ICommandAction
 		_scenarios = data.ToArray();
 		LevelMax = _scenarios.Length;
 		// Boolean for checking if the post game questionnaire is opened after the round
+		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+		{
+			var feedback = Int32.Parse(CommandLineUtility.CustomArgs["feedback"]);
+			_feedbackMode = (FeedbackMode) feedback;
+		}
+		else
+		{
+			_feedbackMode = FeedbackMode.Minimal;
+		}
+
+		if (CommandLineUtility.CustomArgs.ContainsKey("ingameq"))
+		{
+			var useq = bool.Parse(CommandLineUtility.CustomArgs["ingameq"]);
+			UseInGameQuestionnaire = useq;
+		}
 		PostQuestions = round.PostQuestions;
 	}
 
@@ -207,6 +230,7 @@ public class ScenarioController : ICommandAction
 	public void NextLevel()
 	{
 		CurrentLevel++;
+
 		_feedbackScores.Clear();
 		GetFeedbackEvent(_feedbackScores, _feedbackMode);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
@@ -300,8 +324,8 @@ public class ScenarioController : ICommandAction
 			_events.Add(EventHelper.PropertyChange(string.Format(IATConsts.DIALOGUE_STATE_PROPERTY, IATConsts.PLAYER), reply.NextState, "Player"));
 
 			// UCM tracker tracks the filename ID of each player dialogue choice made
-			Tracker.T.setExtension("PlayerDialogueChoice", reply.CurrentState + "." + reply.FileName);
-			Tracker.T.completable.Initialized("PlayerActionCompleted");
+			Tracker.T.setVar("PlayerDialogueChoice", reply.CurrentState + "." + reply.FileName);
+			Tracker.T.Completable.Initialized("PlayerActionCompleted");
 
 			//Tracker.T.RequestFlush();
 			
@@ -386,21 +410,24 @@ public class ScenarioController : ICommandAction
 
 	private void PlayDialogueAudio(string audioName)
 	{
-		if (Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
+		if (!string.IsNullOrEmpty(_audioClip?.Name))
 		{
-			IsTalking = true;
 			if (_audioClip != null)
 			{
 				_audioController.Stop(_audioClip);
 			}
+		}
 
-			_audioClip = new AudioClipModel()
-			{
-				Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
-			};
+		_audioClip = new AudioClipModel()
+		{
+			Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
+		};
 
-			_audioController.Play(_audioClip,
-				onComplete: HandleEndAudio);
+		if (!string.IsNullOrEmpty(_audioClip.Name))
+		{
+			IsTalking = true;
+
+			_audioController.Play(_audioClip, onComplete: HandleEndAudio);
 		}
 		else
 		{
@@ -558,24 +585,24 @@ public class ScenarioController : ICommandAction
 		// Trace the scores and submit them via UCM tracker
 		if (SUGARManager.CurrentUser != null)
 		{
-			Tracker.T.setExtension("UserId", SUGARManager.CurrentUser.Name);
+			Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
 			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
 			{
-				Tracker.T.setExtension("GroupId", SUGARManager.ClassId);
+				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
 			}
 		}
-		Tracker.T.setExtension("DifficultyLevel", _currentScenario.Prefix);
-		Tracker.T.setExtension("LevelId", _currentScenario.LevelId.ToString());
-		Tracker.T.setExtension("SessionId", _roundNumber.ToString());
-		Tracker.T.setExtension("Closure", closure.ToString());
-		Tracker.T.setExtension("Empathy", empathy.ToString());
-		Tracker.T.setExtension("Faq", faq.ToString());
-		Tracker.T.setExtension("Inquire", inquire.ToString());
-		Tracker.T.setExtension("Polite", polite.ToString());
-		Tracker.T.setExtension("MaxPoints", _currentScenario.MaxPoints.ToString());
-		Tracker.T.completable.Initialized("LevelComplete");
+		Tracker.T.setVar("DifficultyLevel", _currentScenario.Prefix);
+		Tracker.T.setVar("LevelId", _currentScenario.LevelId.ToString());
+		Tracker.T.setVar("SessionId", _roundNumber.ToString());
+		Tracker.T.setVar("Closure", closure.ToString());
+		Tracker.T.setVar("Empathy", empathy.ToString());
+		Tracker.T.setVar("Faq", faq.ToString());
+		Tracker.T.setVar("Inquire", inquire.ToString());
+		Tracker.T.setVar("Polite", polite.ToString());
+		Tracker.T.setVar("MaxPoints", _currentScenario.MaxPoints.ToString());
+		Tracker.T.Completable.Initialized("LevelComplete");
 
-		Tracker.T.RequestFlush();
+		Tracker.T.Flush();
 
 		//The following string contains the key for the google form that will be used to write trace data
 

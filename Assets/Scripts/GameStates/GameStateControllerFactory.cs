@@ -147,17 +147,15 @@ public class GameStateControllerFactory
 		var state = new ScoreState(input, scenarioController);
 
 		var menuTransition = new FalseEventTransition(MenuState.StateName);
-		state.NextEvent += menuTransition.ChangeState;
-
-		//var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
-		//input.Next Event += questionnaireTransition.ChangeState;
-
-		//state.AddTransitions(questionnaireTransition);
-		
 		var quitTransition = new QuitOnTrueEventTransition();
+
+		state.NextEvent += menuTransition.ChangeState;
 		state.NextEvent += quitTransition.Quit;
 
-		state.AddTransitions(menuTransition, quitTransition);
+		var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
+		state.InGameQuestionnaire += questionnaireTransition.ChangeState;
+
+		state.AddTransitions(menuTransition, quitTransition, questionnaireTransition);
 
 		return state;
 	}
@@ -167,7 +165,7 @@ public class GameStateControllerFactory
 		var input = new QuestionnaireStateInput();
 		var state = new QuestionnaireState(input);
 
-		var menuTransition = new EventTransition(MenuState.StateName);
+		var menuTransition = new EventTransition(LoadingState.StateName);
 		input.FinishClickedEvent += menuTransition.ChangeState;
 
 		state.AddTransitions(menuTransition);

@@ -7,6 +7,8 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
+using RAGE.Analytics;
+
 using UnityEngine;
 
 public class MenuStateInput : TickStateInput
@@ -18,6 +20,9 @@ public class MenuStateInput : TickStateInput
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
+
+	private bool _gameLocked;
+	private GameObject _gameLockedPanel;
 
 	protected override void OnInitialize()
 	{
@@ -33,7 +38,7 @@ public class MenuStateInput : TickStateInput
 		});
 		leaderboardButton.onClick.AddListener(delegate
 		{
-			Tracker.T.accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
 		});
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
@@ -42,10 +47,13 @@ public class MenuStateInput : TickStateInput
 		});
 		achievementButton.onClick.AddListener(delegate
 		{
-			Tracker.T.accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
 		});
+
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
 		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
+		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
+
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.RemoveAllListeners();
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
 		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.RemoveAllListeners();
@@ -59,12 +67,14 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
 		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
 
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
+
+		_gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
 	}
 
 	protected override void OnExit()
@@ -94,6 +104,8 @@ public class MenuStateInput : TickStateInput
 				OnQuitAttempt();
 			}
 		}
+		_playButton.interactable = !_gameLocked;
+		_gameLockedPanel.SetActive(_gameLocked);
 	}
 
 	private void OnPlayClick()

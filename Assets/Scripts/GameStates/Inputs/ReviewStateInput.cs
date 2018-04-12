@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Localization;
+
+using RAGE.Analytics;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +44,7 @@ public class ReviewStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("ReviewState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("ReviewState", AccessibleTracker.Accessible.Screen);
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
@@ -77,25 +81,15 @@ public class ReviewStateInput : TickStateInput
 						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
 						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
 
-						var rect = _reviewContent.GetComponent<ScrollRect>().content.GetComponent<RectTransform>().rect;
-						var width = rect.width / feedback.Scores.Count;
-						width = Mathf.Min(width, _feedbackPrefab.GetComponent<RectTransform>().rect.width);
-
 						foreach (var feedbackScore in feedback.Scores)
 						{
 							var score = UnityEngine.Object.Instantiate(_feedbackPrefab).transform;
 							score.transform.SetParent(feedbackPanel, false);
-							var change = feedbackScore.Value;
-							score.GetComponentInChildren<Text>().text = change > 0 ? "+" + change : change.ToString();
+							score.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
+							score.transform.Find("Value").GetComponent<Text>().text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
 
-							score.GetComponent<RectTransform>().sizeDelta = new Vector2(width, width/2);
-
-
-							var iconPath = "Prefabs/Icons/" + feedbackScore.Key;
-							var icon = Resources.Load<Sprite>(iconPath);
-							score.GetComponentInChildren<Image>().sprite = icon;
 						}
-						
+
 					}
 					else
 					{

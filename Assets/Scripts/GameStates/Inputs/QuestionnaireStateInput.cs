@@ -7,8 +7,12 @@ using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
+
+using RAGE.Analytics;
+
 using RolePlayCharacter;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class QuestionnaireStateInput : TickStateInput
 {
@@ -32,26 +36,38 @@ public class QuestionnaireStateInput : TickStateInput
 		new TempQuestions
 		{
 			Number = 1,
-			Question = "Do you like this?",
-			Answers = new[] {"yes", "No", "Maybe"}
+			Question = "Hoe mentaal belastend waren de opdrachten in de game?",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
 		},
 		new TempQuestions
 		{
 			Number = 2,
-			Question = "Are you tired of answering questions now?",
-			Answers = new[] {"yes", "No", "Maybe"}
+			Question = "Hoe fysiek belastend waren de opdrachten in de game?",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
 		},
 		new TempQuestions
 		{
 			Number = 3,
-			Question = "One More?",
-			Answers = new[] {"You serious?"}
+			Question = "Hoe gehaast was het tempo van de opdrachten in de game?",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
 		},
 		new TempQuestions
 		{
 			Number = 4,
-			Question = "Ok, thats it?",
-			Answers = new[] {"yes", "Thank You", "Option 3", "Another option", "So many options", "when will it stop", "testing many options", "and 1 more"}
+			Question = "Hoe succesvol was je in het doen van de opdrachten in de game?",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
+		},
+		new TempQuestions
+		{
+			Number = 5,
+			Question = "Hoe hard moest je inspannen om de opdrachten in de game succesvol te kunnen doen?",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
+		},
+		new TempQuestions
+		{
+			Number = 6,
+			Question = "Hoeveel negatieve gevoelens had je tijdens de opdrachten? (negatieve gevoelens zijn bijvoorbeeld: onzeker, ontmoedigd, geïrriteerd, gestrest, geërgerd)",
+			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
 		}
 	};
 
@@ -70,7 +86,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_characterPrefab = Resources.Load("Prefabs/Characters/Male") as GameObject;
+		_characterPrefab = Resources.Load("Prefabs/Characters/Generic") as GameObject;
 		_characterPanel = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/CharacterPanel");
 
 		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
@@ -82,7 +98,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("Questionnaire", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("Questionnaire", AccessibleTracker.Accessible.Screen);
 
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
@@ -126,7 +142,8 @@ public class QuestionnaireStateInput : TickStateInput
 			if (childGameObject != null) UnityEngine.Object.Destroy(childGameObject.gameObject);
 		}
 
-		_questionTrackText.text = "Question " + question.Number;
+		// TODO Translate
+		_questionTrackText.text = "Vraag " + question.Number;
 		_questionText.text = question.Question;
 
 		// Generate Answers
@@ -164,47 +181,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	public void ResizeOptions(GameObject dialogueObject)
 	{
-		int smallestFontSize = 0;
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				text.resizeTextForBestFit = true;
-				text.resizeTextMinSize = 1;
-				text.resizeTextMaxSize = 100;
-				text.fontSize = text.resizeTextMaxSize;
-				text.cachedTextGenerator.Invalidate();
-				text.cachedTextGenerator.Populate(text.text, text.GetGenerationSettings(text.rectTransform.rect.size));
-				text.resizeTextForBestFit = false;
-				var newSize = text.cachedTextGenerator.fontSizeUsedForBestFit;
-
-				var newSizeRescale = text.rectTransform.rect.size.x / text.cachedTextGenerator.rectExtents.size.x;
-				if (text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y < newSizeRescale)
-				{
-					newSizeRescale = text.rectTransform.rect.size.y / text.cachedTextGenerator.rectExtents.size.y;
-				}
-				newSize = Mathf.FloorToInt(newSize * newSizeRescale);
-				if (newSize < smallestFontSize || smallestFontSize == 0)
-				{
-					smallestFontSize = newSize;
-				}
-			}
-		}
-		foreach (var obj in dialogueObject.GetComponent<ScrollRect>().content)
-		{
-			var textObj = obj as Transform;
-			if (textObj != null)
-			{
-				var text = textObj.GetComponentInChildren<Text>();
-				if (!text)
-				{
-					continue;
-				}
-				text.fontSize = smallestFontSize;
-			}
-		}
+		dialogueObject.GetComponent<ScrollRect>().content.BestFit();
 	}
 
 	private void OnDialogueOptionClick(TempAnswers answer)

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using GameWork.Core.Commands.Interfaces;
@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
+using RAGE.Analytics;
 
 public class ModulesController : ICommandAction
 {
@@ -50,6 +51,13 @@ public class ModulesController : ICommandAction
 
 	public ModulesController()
     {
+		var aotFaq = new FaqEntry ();
+		var aotFaqList = new List<FaqEntry> ();
+		var aotModEnt = new ModuleEntry ();
+		var aotModEntList = new List<ModuleEntry> ();
+		var aotModDat = new ModulesDatabase ();
+		var aotModDatList = new List<ModulesDatabase> ();
+
 	    _modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
         var backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
         _popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
@@ -66,7 +74,7 @@ public class ModulesController : ICommandAction
 		backgroundOverlay.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			Tracker.T.accessible.Accessed("CloseModulePopUp", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("CloseModulePopUp", AccessibleTracker.Accessible.Screen);
 		});
 
 		var nextArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow");
@@ -97,14 +105,14 @@ public class ModulesController : ICommandAction
             listItem.GetComponent<Button>().onClick.AddListener(delegate
             {
 				LoadModules(moduleType);
-				Tracker.T.accessible.Accessed("Device." + moduleType.Replace(" ", "_"), AccessibleTracker.Accessible.Screen);
+				Tracker.T.Accessible.Accessed("Device." + moduleType.Replace(" ", "_"), AccessibleTracker.Accessible.Screen);
 			});
 		}
 
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			Tracker.T.accessible.Accessed("CloseModulePopUp", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("CloseModulePopUp", AccessibleTracker.Accessible.Screen);
 		});
     }
 
@@ -129,13 +137,13 @@ public class ModulesController : ICommandAction
 				LoadModule(module, listItem);
 				_nextArrow.gameObject.SetActive(true);
 				_backArrow.gameObject.SetActive(true);
-				Tracker.T.accessible.Accessed("Device." + moduleTypeName.Replace(" ", "_") + "." + module.Id, AccessibleTracker.Accessible.Screen);
+				Tracker.T.Accessible.Accessed("Device." + moduleTypeName.Replace(" ", "_") + "." + module.Id, AccessibleTracker.Accessible.Screen);
 			});
         }
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			LoadIndex();
-			Tracker.T.accessible.Accessed("BackToModuleDevices", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("BackToModuleDevices", AccessibleTracker.Accessible.Screen);
 		});
 	}
 
@@ -179,7 +187,7 @@ public class ModulesController : ICommandAction
 			}
 			problemItemText.text = currentModuleList[index].Problem;
 			solutionItemText.text = currentModuleList[index].Solution;
-			Tracker.T.accessible.Accessed("NextModuleFAQ", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("NextModuleFAQ", AccessibleTracker.Accessible.Screen);
 		});
 
 		_backArrow.onClick.AddListener(() =>
@@ -191,7 +199,7 @@ public class ModulesController : ICommandAction
 			}
 			problemItemText.text = currentModuleList[index].Problem;
 			solutionItemText.text = currentModuleList[index].Solution;
-			Tracker.T.accessible.Accessed("PreviousModuleFAQ", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("PreviousModuleFAQ", AccessibleTracker.Accessible.Screen);
 		});
 
 		_backButton.onClick.AddListener(delegate
@@ -201,7 +209,7 @@ public class ModulesController : ICommandAction
 			_nextArrow.gameObject.SetActive(false);
 			_backArrow.gameObject.SetActive(false);
 			LoadModules(module.Type);
-			Tracker.T.accessible.Accessed("BackToModuleDeviceTypes", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("BackToModuleDeviceTypes", AccessibleTracker.Accessible.Screen);
 		});
     }
 
@@ -250,7 +258,7 @@ public class ModulesController : ICommandAction
 		}
 		else
         {
-			Tracker.T.accessible.Accessed("ModuleList", AccessibleTracker.Accessible.Screen);
+			Tracker.T.Accessible.Accessed("ModuleList", AccessibleTracker.Accessible.Screen);
 			_modulesPopup.SetActive(true);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
 			_popupContent.GetComponent<ScrollRect>().verticalScrollbar.enabled = true;
