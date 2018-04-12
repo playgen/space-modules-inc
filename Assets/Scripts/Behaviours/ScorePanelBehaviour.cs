@@ -101,8 +101,9 @@ public class ScorePanelBehaviour : MonoBehaviour
 
 			value.text = point.Value > 0 ? "+" + point.Value : point.Value.ToString();
 		}
-
+		
 		_feedbackPanel.BestFit();
+		feedbackHelper.DoBestFit();
 	}
 
 }

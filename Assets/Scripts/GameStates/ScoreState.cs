@@ -24,7 +24,8 @@ public class ScoreState : InputTickState
 
 	private void OnNextButtonClicked()
 	{
-		var isGameOver = _scenarioController.CurrentLevel == _scenarioController.LevelMax;
+		Debug.Log(_scenarioController.CurrentLevel + " / " + _scenarioController.LevelMax);
+		var isGameOver = _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 
 		if (isGameOver)
 		{
@@ -36,6 +37,7 @@ public class ScoreState : InputTickState
 					CommandLineUtility.CustomArgs = null;
 				}
 			}
+
 
 			if (_scenarioController.UseInGameQuestionnaire)
 			{
