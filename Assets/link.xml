@@ -1,0 +1,79 @@
+﻿<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="Assembly-CSharp.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="ActionLibrary">
+		<type fullname="ActionLibrary.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="AutobiographicMemory">
+		<type fullname="AutobiographicMemory.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="CommeillFaut">
+		<type fullname="CommeillFaut.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="Conditions">
+		<type fullname="Conditions.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="EmotionalAppraisal">
+		<type fullname="EmotionalAppraisal.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="EmotionalDecisionMaking">
+		<type fullname="EmotionalDecisionMaking.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="GAIPS.Rage">
+		<type fullname="GAIPS.Rage.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="GAIPS.Serialization">
+		<type fullname="GAIPS.Serialization.*" preserve="all"/>
+		<type fullname="SerializationUtilities.*" preserve="all"/>
+		<type fullname="SerializationUtilities.Attributes.*" preserve="all"/>
+		<type fullname="SerializationUtilities.SerializationGraph.*" preserve="all"/>
+		<type fullname="SerializationUtilities.Surrogates.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="IntegratedAuthoringTool">
+		<type fullname="IntegratedAuthoringTool.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="KnowledgeBase">
+		<type fullname="KnowledgeBase.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="MCTS">
+		<type fullname="MCTS.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="RageAssetManager">
+		<type fullname="RageAssetManager.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="RolePlayCharacter">
+		<type fullname="RolePlayCharacter.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="SocialImportanceAsset">
+		<type fullname="SocialImportanceAsset.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="Utilities">
+		<type fullname="Utilities.*" preserve="all"/>
+		<type fullname="Utilities.DataStructures.*" preserve="all"/>
+		<type fullname="Utilities.Json.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="WellFormedNames">
+		<type fullname="WellFormedNames.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="PlayGen.SUGAR.Client">
+		<type fullname="PlayGen.SUGAR.Contracts.*" preserve="all"/>
+	</assembly>
+</linker>

@@ -6,6 +6,8 @@ using PlayGen.Unity.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.Unity.Utilities.BestFit;
 
+using RAGE.Analytics;
+
 public class SettingsStateInput : TickStateInput
 {
 	public event Action BackClickedEvent;
@@ -49,7 +51,7 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("SettingsState", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("SettingsState", AccessibleTracker.Accessible.Screen);
 
 		_buttons.GameObjects.BestFit();
         _creator.RebuildLayout();

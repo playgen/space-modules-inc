@@ -5,6 +5,8 @@ using GameWork.Core.States.Tick.Input;
 
 using PlayGen.SUGAR.Unity;
 
+using RAGE.Analytics;
+
 using UnityEngine;
 
 public class ScoreState : InputTickState
@@ -54,7 +56,7 @@ public class ScoreState : InputTickState
 					                        + "/viewform?entry.1596836094="
 					                        + SUGARManager.CurrentUser.Name;
 
-					Tracker.T.accessible.Accessed("Questionnaire");
+					Tracker.T.Accessible.Accessed("Questionnaire");
 
 					// Open the default browser and show the form
 
@@ -68,7 +70,7 @@ public class ScoreState : InputTickState
 		//if (NextEvent != null) NextEvent(isGameOver);
 
 
-		Tracker.T.RequestFlush();
+		Tracker.T.Flush();
 	}
 
 	public override string Name

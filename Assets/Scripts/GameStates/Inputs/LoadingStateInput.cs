@@ -1,6 +1,9 @@
 ﻿using System;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
+
+using RAGE.EvaluationAsset;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +11,7 @@ public class LoadingStateInput : TickStateInput
 {
 	public event Action OfflineClickedEvent;
 	public event Action LoggedInEvent;
+	private float _timeSinceStart;
 
 	protected override void OnInitialize()
 	{
@@ -28,26 +32,38 @@ public class LoadingStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
-		// Check for SUGAR login
-		SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
-		{
-			if (success)
-			{
-				if (LoggedInEvent != null) LoggedInEvent();
-			}
-			else
-			{
-				Debug.LogError("Sign In Failed");
-			}
-		});
-		if (SUGARManager.CurrentUser != null)
-		{
-			// set username on account panel
-			var username = GameObject.Find("SUGAR/SUGAR Canvas/AccountPanel/Username/InputField").GetComponent<InputField>();
-			if (username != null)
-			{
-				username.text = SUGARManager.CurrentUser.Name;
-				username.textComponent.text = SUGARManager.CurrentUser.Name;
+		_timeSinceStart = 0;
+	}
+
+	protected override void OnTick(float deltaTime) {
+		if (_timeSinceStart < 1) {
+			_timeSinceStart += deltaTime;
+			if (_timeSinceStart >= 1) {
+				// Check for SUGAR login
+				SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
+					{
+						if (success)
+						{
+							var settings = new EvaluationAssetSettings();
+							settings.PlayerId = SUGARManager.CurrentUser.Name;
+							EvaluationAsset.Instance.Settings = settings;
+							if (LoggedInEvent != null) LoggedInEvent();
+						}
+						else
+						{
+							if (LoggedInEvent != null) LoggedInEvent();
+						}
+					});
+				if (SUGARManager.CurrentUser != null)
+				{
+					// set username on account panel
+					var username = GameObject.Find("SUGAR/SUGAR Canvas/AccountPanel/Username/InputField").GetComponent<InputField>();
+					if (username != null)
+					{
+						username.text = SUGARManager.CurrentUser.Name;
+						username.textComponent.text = SUGARManager.CurrentUser.Name;
+					}
+				}
 			}
 		}
 	}

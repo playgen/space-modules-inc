@@ -3,6 +3,8 @@
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
+using RAGE.Analytics;
+
 public class LevelState : InputTickState
 {
 	private readonly ScenarioController _scenarioController;
@@ -17,7 +19,7 @@ public class LevelState : InputTickState
 
 	protected override void OnEnter()
 	{
-		Tracker.T.accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
+		Tracker.T.Accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
 
 		// Round based
 		_scenarioController.NextLevel();
