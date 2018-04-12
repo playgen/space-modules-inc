@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using PlayGen.Unity.Utilities.BestFit;
-using PlayGen.Unity.Utilities.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -62,7 +62,7 @@ public class MenuStateInput : TickStateInput
 
 	private void OnSettingsClick()
 	{
-		if (SettingsClickedEvent != null) SettingsClickedEvent();
+		SettingsClickedEvent?.Invoke();
 	}
 
 	protected override void OnEnter()
@@ -110,7 +110,7 @@ public class MenuStateInput : TickStateInput
 
 	private void OnPlayClick()
 	{
-		if (PlayClickedEvent != null) PlayClickedEvent();
+		PlayClickedEvent?.Invoke();
 	}
 
 	private void OnQuitAttempt()

@@ -27,14 +27,11 @@ public class LevelState : InputTickState
 		//NextState();
 	}
 
-	public override string Name
-	{
-		get { return StateName; }
-	}
+	public override string Name => StateName;
 
 	protected override void OnTick(float deltaTime)
 	{
-		if (CompletedEvent != null) CompletedEvent();
+		CompletedEvent?.Invoke();
 		return;
 
 
@@ -42,16 +39,10 @@ public class LevelState : InputTickState
 		if(CommandQueue.TryTakeFirstCommand(out command))
 		{
 			var refreshLevelDataCommand = command as RefreshLevelDataCommand;
-			if (refreshLevelDataCommand != null)
-			{
-				refreshLevelDataCommand.Execute(_scenarioController);
-			}
+			refreshLevelDataCommand?.Execute(_scenarioController);
 
 			var setLevelCommand = command as SetLevelCommand;
-			if (setLevelCommand != null)
-			{
-				setLevelCommand.Execute(_scenarioController);
-			}
+			setLevelCommand?.Execute(_scenarioController);
 		}
 		
 	}

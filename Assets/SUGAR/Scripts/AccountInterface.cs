@@ -1,6 +1,4 @@
-﻿using System.Linq;
-using PlayGen.SUGAR.Unity;
-using UnityEngine.UI;
+﻿using PlayGen.SUGAR.Unity;
 using PlayGen.Unity.Utilities.BestFit;
 
 public class AccountInterface : BaseAccountInterface

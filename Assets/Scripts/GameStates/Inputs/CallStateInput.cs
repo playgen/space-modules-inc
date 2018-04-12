@@ -17,7 +17,7 @@ public class CallStateInput : TickStateInput
 
 	private void OnAnswerClick()
 	{
-		if (AnswerClickedEvent != null) AnswerClickedEvent();
+		AnswerClickedEvent?.Invoke();
 	}
 
 	protected override void OnEnter()

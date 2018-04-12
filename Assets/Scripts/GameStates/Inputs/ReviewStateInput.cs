@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
-using PlayGen.Unity.Utilities.BestFit;
 using PlayGen.Unity.Utilities.Localization;
 
 using RAGE.Analytics;
@@ -37,9 +36,10 @@ public class ReviewStateInput : TickStateInput
 
 		var nextButton =
 			GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/NextButton");
-		nextButton.GetComponent<Button>().onClick.AddListener(() => {
-			if (NextClickedEvent != null) NextClickedEvent();
-		});
+		nextButton.GetComponent<Button>().onClick.AddListener(() =>
+			{
+				NextClickedEvent?.Invoke();
+			});
 	}
 
 	protected override void OnEnter()

@@ -54,7 +54,7 @@ public class VerticalLayoutGroupCustom : MonoBehaviour
         _myRectTransform = GetComponent<RectTransform>();
     }
 
-    void LateUpdate()
+	private void LateUpdate()
     {
         // Set the pivot of this object
 

@@ -11,21 +11,15 @@ public class ReviewState : InputTickState
 		_scenarioController = scenarioController;
 	}
 	
-	public override string Name
-	{
-		get { return StateName; }
-	}
-	
+	public override string Name => StateName;
+
 	protected override void OnTick(float deltaTime)
 	{
 		ICommand command;
 		if (CommandQueue.TryTakeFirstCommand(out command))
 		{
 			var getReviewDataCommand = command as GetReviewDataCommand;
-			if (getReviewDataCommand != null)
-			{
-				getReviewDataCommand.Execute(_scenarioController);
-			}
+			getReviewDataCommand?.Execute(_scenarioController);
 		}
 	}
 }

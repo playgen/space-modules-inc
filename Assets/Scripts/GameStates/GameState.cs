@@ -16,45 +16,27 @@ public class GameState : InputTickState
         _modulesController = modulesController;
     }
 	
-    public override string Name
-    {
-        get { return StateName; }
-    }
+    public override string Name => StateName;
 
-    protected override void OnTick(float deltaTime)
+	protected override void OnTick(float deltaTime)
     {
 	    ICommand command;
         if (CommandQueue.TryTakeFirstCommand(out command))
         {
 	        var updateDialogueFontSizeCommand = command as UpdateDialogueFontSizeCommand;
-	        if (updateDialogueFontSizeCommand != null)
-	        {
-		        updateDialogueFontSizeCommand.Execute(_input);
-	        }
+			updateDialogueFontSizeCommand?.Execute(_input);
 
-            var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
-            if (refreshPlayerDialogueCommand != null)
-            {
-                refreshPlayerDialogueCommand.Execute(_scenarioController);
-            }
+			var refreshPlayerDialogueCommand = command as RefreshPlayerDialogueCommand;
+			refreshPlayerDialogueCommand?.Execute(_scenarioController);
 
-            var setPlayerActionCommand = command as SetPlayerActionCommand;
-            if (setPlayerActionCommand != null)
-            {
-                setPlayerActionCommand.Execute(_scenarioController);
-            }
+			var setPlayerActionCommand = command as SetPlayerActionCommand;
+			setPlayerActionCommand?.Execute(_scenarioController);
 
-            var refreshCharacterResponseCommand = command as RefreshCharacterResponseCommand;
-            if (refreshCharacterResponseCommand != null)
-            {
-                refreshCharacterResponseCommand.Execute(_scenarioController);
-            }
+			var refreshCharacterResponseCommand = command as RefreshCharacterResponseCommand;
+			refreshCharacterResponseCommand?.Execute(_scenarioController);
 
-            var toggleModulesCommand = command as ToggleModulesCommand;
-            if (toggleModulesCommand != null)
-            {
-                toggleModulesCommand.Execute(_modulesController);
-            }
-        }
+			var toggleModulesCommand = command as ToggleModulesCommand;
+			toggleModulesCommand?.Execute(_modulesController);
+		}
     }
 }

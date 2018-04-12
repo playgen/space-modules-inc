@@ -19,7 +19,7 @@ public class LoadingStateInput : TickStateInput
 			.GetComponent<Button>()
 			.onClick.AddListener(() =>
 			{
-				if (OfflineClickedEvent != null) OfflineClickedEvent();
+				OfflineClickedEvent?.Invoke();
 			});
 		var backgrounds = GameObjectUtilities.FindGameObject("BackgroundContainer");
 		var aspect = Camera.main.aspect;
@@ -44,14 +44,13 @@ public class LoadingStateInput : TickStateInput
 					{
 						if (success)
 						{
-							var settings = new EvaluationAssetSettings();
-							settings.PlayerId = SUGARManager.CurrentUser.Name;
+							var settings = new EvaluationAssetSettings { PlayerId = SUGARManager.CurrentUser.Name };
 							EvaluationAsset.Instance.Settings = settings;
-							if (LoggedInEvent != null) LoggedInEvent();
+							LoggedInEvent?.Invoke();
 						}
 						else
 						{
-							if (LoggedInEvent != null) LoggedInEvent();
+							LoggedInEvent?.Invoke();
 						}
 					});
 				if (SUGARManager.CurrentUser != null)

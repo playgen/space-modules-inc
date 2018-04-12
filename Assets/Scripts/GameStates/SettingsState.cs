@@ -8,8 +8,5 @@ public class SettingsState : InputTickState
     {
     }
 
-    public override string Name
-    {
-        get { return StateName; }
-    }
+    public override string Name => StateName;
 }

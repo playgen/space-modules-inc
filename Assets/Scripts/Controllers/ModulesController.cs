@@ -12,12 +12,12 @@ public class ModulesController : ICommandAction
 {
 	#region Modules Config
 
-	struct ModulesDatabase
+	private struct ModulesDatabase
 	{
 		public ModuleEntry[] Database;
 	}
 
-	struct ModuleEntry
+	private struct ModuleEntry
 	{
 		public string Name;
 		public string Id;
@@ -27,7 +27,7 @@ public class ModulesController : ICommandAction
 		public FaqEntry[] Faq;
 	}
 
-	struct FaqEntry
+	private struct FaqEntry
 	{
 		public string Problem;
 		public string Solution;

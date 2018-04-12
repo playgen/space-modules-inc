@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
-using Utilities;
 
 public class CharacterFaceController : MonoBehaviour
 {
@@ -44,7 +43,7 @@ public class CharacterFaceController : MonoBehaviour
 	private bool _talkingAnimation;
 	private bool _idleAnimation;
 
-	void Start()
+	private void Start()
 	{
 		LoadSprites();
 		_eyebrowRenderer.enabled = true;
@@ -161,7 +160,7 @@ public class CharacterFaceController : MonoBehaviour
 			}
 
 			var mouthFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Mouth/Mouth_Loop_" + mouthId);
-			var expression = new FacialExpression()
+			var expression = new FacialExpression
 			{
 				Name = emotionName,
 				Eyebrows = eyebrowSprites[i],

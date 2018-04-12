@@ -44,7 +44,7 @@ public class ScenarioController : ICommandAction
 		public IntegratedAuthoringToolAsset GetRandomVariation()
 		{
 			var rng = new Random();
-			int index = rng.Next(_scenarioPaths.Length);
+			var index = rng.Next(_scenarioPaths.Length);
 			Debug.Log(_scenarioPaths[index]);
 			string error;
 			var iat = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _scenarioPaths[index]), out error);
@@ -176,14 +176,7 @@ public class ScenarioController : ICommandAction
 
 	private void LoadScenarios()
 	{
-		if (Application.platform == RuntimePlatform.WindowsPlayer)
-		{
-			_allScenarioPaths = Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat");
-		}
-		else
-		{
-			_allScenarioPaths = Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
-		}
+		_allScenarioPaths = Application.platform == RuntimePlatform.WindowsPlayer ? Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat") : Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
 		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
 		while (!www.isDone)
@@ -195,7 +188,7 @@ public class ScenarioController : ICommandAction
 		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
 		if (CommandLineUtility.CustomArgs.ContainsKey("round"))
 		{
-			_roundNumber = Int32.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
+			_roundNumber = int.Parse(CommandLineUtility.CustomArgs["round"]) - 1;
 		}
 		else
 		{
@@ -212,7 +205,7 @@ public class ScenarioController : ICommandAction
 		// Boolean for checking if the post game questionnaire is opened after the round
 		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
 		{
-			var feedback = Int32.Parse(CommandLineUtility.CustomArgs["feedback"]);
+			var feedback = int.Parse(CommandLineUtility.CustomArgs["feedback"]);
 			_feedbackMode = (FeedbackMode) feedback;
 		}
 		else
@@ -239,7 +232,7 @@ public class ScenarioController : ICommandAction
 		CurrentLevel++;
 
 		_feedbackScores.Clear();
-		GetFeedbackEvent(_feedbackScores, _feedbackMode);
+		GetFeedbackEvent?.Invoke(_feedbackScores, _feedbackMode);
 		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
 		if (_currentScenario != null)
 		{
@@ -253,7 +246,7 @@ public class ScenarioController : ICommandAction
 			}
 			else
 			{
-				Random rand = new Random();
+				var rand = new Random();
 				CurrentCharacter.BodyName = (rand.NextDouble() >= 0.5) ? "Male" : "Female";
 			}
 		}
@@ -301,7 +294,7 @@ public class ScenarioController : ICommandAction
 		UpdateCurrentState();
 		_currentPlayerDialogue =
 			_integratedAuthoringTool.GetDialogueActionsByState(_currentStateName.ToString()).ToArray();
-		if (GetPlayerDialogueSuccessEvent != null) GetPlayerDialogueSuccessEvent(_currentPlayerDialogue);
+		GetPlayerDialogueSuccessEvent?.Invoke(_currentPlayerDialogue);
 	}
 
 	public void GetCharacterStrongestEmotion()
@@ -312,15 +305,12 @@ public class ScenarioController : ICommandAction
 		{
 			emotionType = emotion.EmotionType;
 		}
-		if (GetCharacterStrongestEmotionSuccessEvent != null)
-			GetCharacterStrongestEmotionSuccessEvent(emotionType, CurrentCharacter.Mood);
+		GetCharacterStrongestEmotionSuccessEvent?.Invoke(emotionType, CurrentCharacter.Mood);
 	}
 
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-		var chat = new ChatObject();
-
 		if (reply != null)
 		{
 			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
@@ -336,7 +326,7 @@ public class ScenarioController : ICommandAction
 
 			//Tracker.T.RequestFlush();
 			
-			chat = new ChatObject 
+			var chat = new ChatObject 
 			{
 				Utterence = reply.Utterance,
 				Agent = "Player",
@@ -350,7 +340,7 @@ public class ScenarioController : ICommandAction
 		}
 		UpdateScore(reply);
 		_feedbackScores = _chatScoreHistory.Last().Scores;
-		GetFeedbackEvent(_feedbackScores, _feedbackMode);
+		GetFeedbackEvent?.Invoke(_feedbackScores, _feedbackMode);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -382,7 +372,7 @@ public class ScenarioController : ICommandAction
 				{
 					var characterDialogueText = characterDialogue.Utterance;
 
-					var chat = new ChatObject()
+					var chat = new ChatObject
 					{
 						Utterence = characterDialogueText,
 						Agent = "Client",
@@ -400,7 +390,7 @@ public class ScenarioController : ICommandAction
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
 
-					if (GetCharacterDialogueSuccessEvent != null) GetCharacterDialogueSuccessEvent(characterDialogueText);
+					GetCharacterDialogueSuccessEvent?.Invoke(characterDialogueText);
 				}
 			}
 		}
@@ -425,7 +415,7 @@ public class ScenarioController : ICommandAction
 			}
 		}
 
-		_audioClip = new AudioClipModel()
+		_audioClip = new AudioClipModel
 		{
 			Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
 		};
@@ -445,7 +435,7 @@ public class ScenarioController : ICommandAction
 	private void HandleEndAudio()
 	{
 		IsTalking = false;
-		if (StopTalkAnimationEvent != null) StopTalkAnimationEvent();
+		StopTalkAnimationEvent?.Invoke();
 
 		if (_currentStateName == Name.BuildName("End"))
 		{
@@ -453,7 +443,7 @@ public class ScenarioController : ICommandAction
 			{
 				TraceScore();
 			}
-			if (FinalStateEvent != null) FinalStateEvent();
+			FinalStateEvent?.Invoke();
 		}
 	}
 
@@ -506,7 +496,7 @@ public class ScenarioController : ICommandAction
 			{"Polite", GetScore(allScores, "Polite")}
 		};
 
-		var scoreObj = new ScoreObject()
+		var scoreObj = new ScoreObject
 		{
 			Stars = stars,
 			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(_currentScenario.MaxPoints - 1))),
@@ -517,7 +507,7 @@ public class ScenarioController : ICommandAction
 			MeasuredPoints = measuredPoints
 		};
 
-		if (GetScoreDataSuccessEvent != null) GetScoreDataSuccessEvent(scoreObj);
+		GetScoreDataSuccessEvent?.Invoke(scoreObj);
 
 		var score = (long)scoreObj.Score;
 		// Player score traced by SUGAR
@@ -542,7 +532,7 @@ public class ScenarioController : ICommandAction
 	{
 		char[] delimitedChars = {'(', ')'};
 
-		string[] result = s.Split(delimitedChars);
+		var result = s.Split(delimitedChars);
 
 		if (result.Length > 1)
 		{
@@ -550,7 +540,7 @@ public class ScenarioController : ICommandAction
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
-				var score = Int32.Parse(result[1]);
+				var score = int.Parse(result[1]);
 				SaveChatScore(chat, keyword, score);
 			}
 		}
@@ -613,10 +603,10 @@ public class ScenarioController : ICommandAction
 
 		//The following string contains the key for the google form that will be used to write trace data
 
-	    string sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
+	    var sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
 		var codeArray = _chatScoreHistory.Where(o => o.ChatObject.Agent == "Player").Select(o => o.ChatObject.Code).ToArray();
 		var sb = new StringBuilder();
-		string prefix = "";
+		var prefix = "";
 		foreach (var s in codeArray)
 		{
 			sb.Append(prefix);
@@ -625,7 +615,7 @@ public class ScenarioController : ICommandAction
 		}
 		var codeArrayPayload = sb.ToString();
 		// Here the proper string is conclassed to fill and directly post the trace to a google form
-		string directSubmitUrl = "https://docs.google.com/forms/d/e/"
+		var directSubmitUrl = "https://docs.google.com/forms/d/e/"
 			+ sheetsKey
 			+ "/formResponse?entry.1676366924="
 			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Name : "NoCurrentUser")
@@ -686,18 +676,15 @@ public class ScenarioController : ICommandAction
 
 	private int GetScore(Dictionary<string, int> scores, string key)
 	{
-		if (scores.ContainsKey(key))
-		{
-			return scores[key];
-		}
-		return 0;
+		return scores.ContainsKey(key) ? scores[key] : 0;
 	}
 
 	#endregion
 
 	public void GetReviewData()
 	{
-		if (GetReviewDataSuccessEvent != null) GetReviewDataSuccessEvent(_chatScoreHistory, CurrentCharacter.Mood, _feedbackMode);
+		GetReviewDataSuccessEvent?.Invoke(_chatScoreHistory, CurrentCharacter.Mood, _feedbackMode);
+
 		//Reset();
 	}
 

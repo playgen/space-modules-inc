@@ -41,17 +41,17 @@ public class ScoreState : InputTickState
 
 			if (_scenarioController.UseInGameQuestionnaire)
 			{
-				if (InGameQuestionnaire != null) InGameQuestionnaire();
+				InGameQuestionnaire?.Invoke();
 			}
 			else
 			{
 				if (_scenarioController.PostQuestions)
 				{
 					// The following string contains the key for the google form is used for the cognitive load questionnaire
-					string formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";
+					var formsKey = "1FAIpQLSctM-kR-1hlmF6Nk-pQNIWYnFGxRAVvyP6o3ZV0kr8K7JD5dQ";
 
 					// Google form ID
-					string googleFormsURL = "https://docs.google.com/forms/d/e/"
+					var googleFormsURL = "https://docs.google.com/forms/d/e/"
 											+ formsKey
 											+ "/viewform?entry.1596836094="
 											+ SUGARManager.CurrentUser.Name;
@@ -69,28 +69,23 @@ public class ScoreState : InputTickState
 				}
 			}
 		}
-		if (NextEvent != null) NextEvent(false);
+		NextEvent?.Invoke(false);
+
 		//if (NextEvent != null) NextEvent(isGameOver);
 
 
 		Tracker.T.Flush();
 	}
 
-	public override string Name
-	{
-		get { return StateName; }
-	}
-	
+	public override string Name => StateName;
+
 	protected override void OnTick(float deltaTime)
 	{
 		ICommand command;
 		if (CommandQueue.TryTakeFirstCommand(out command))
 		{
 			var getScoreDataCommand = command as GetScoreDataCommand;
-			if (getScoreDataCommand != null)
-			{
-				getScoreDataCommand.Execute(_scenarioController);
-			}
+			getScoreDataCommand?.Execute(_scenarioController);
 		}
 	}
 }

@@ -22,7 +22,7 @@ public class CallAnimationBehaviour : MonoBehaviour
 
 	private bool _ringing;
 
-	void Awake()
+	private void Awake()
 	{
 		_ringImages = new Image[_callRings.Length];
 
@@ -45,7 +45,7 @@ public class CallAnimationBehaviour : MonoBehaviour
 		_ringing = false;
 	}
 
-	IEnumerator RingLoop()
+	private IEnumerator RingLoop()
 	{
 		_ringing = true;
 

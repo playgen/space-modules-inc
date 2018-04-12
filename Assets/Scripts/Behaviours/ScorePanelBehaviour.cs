@@ -55,7 +55,7 @@ public class ScorePanelBehaviour : MonoBehaviour
 	    SetFeedbackIcons(score.MeasuredPoints);
 		
 		// set stars
-		foreach (GameObject starSlot in _starSlots)
+		foreach (var starSlot in _starSlots)
         {
             if (score.Stars > 0)
             {

@@ -25,7 +25,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 				Debug.Log(msg);
 				break;
 			default:
-				throw new ArgumentOutOfRangeException("severity", severity, null);
+				throw new ArgumentOutOfRangeException(nameof(severity), severity, null);
 		}
 	}
 

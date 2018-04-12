@@ -46,7 +46,7 @@ public class AchievementListInterface : BaseEvaluationListInterface
 	protected override void Draw()
 	{
 		var achievementList = SUGARManager.Evaluation.Progress.Take(_achievementItems.Length).ToList();
-		for (int i = 0; i < _achievementItems.Length; i++)
+		for (var i = 0; i < _achievementItems.Length; i++)
 		{
 			if (i >= achievementList.Count)
 			{

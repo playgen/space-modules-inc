@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 ///<summary>
@@ -13,7 +11,7 @@ public class ButtonText : MonoBehaviour
 	private Color _color;
 
 	// Use this for initialization
-	void Start ()
+	private void Start ()
 	{
 		_button = GetComponentInParent<Button>();
 		_text = GetComponent<Text>();
@@ -21,7 +19,7 @@ public class ButtonText : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	private void Update ()
 	{
 		_color.a = _button.interactable ? _button.colors.normalColor.a : _button.colors.disabledColor.a;
 		_text.color = _color;

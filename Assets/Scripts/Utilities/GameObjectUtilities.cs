@@ -29,7 +29,7 @@ public static class GameObjectUtilities
         var currentLevel = new List<Transform> { rootTransform };
         var nextLevel = new List<Transform>();
 
-        List<Transform> matches = FindMatches(++level, segments, currentLevel, nextLevel);
+        var matches = FindMatches(++level, segments, currentLevel, nextLevel);
 
         return matches.ToArray();
     }
@@ -98,7 +98,7 @@ public static class GameObjectUtilities
         {
             foreach (var transform in currentLevel)
             {
-                for (int i = 0; i < transform.childCount; i++)
+                for (var i = 0; i < transform.childCount; i++)
                 {
                     if (transform.GetChild(i).name == pathSegments[level])
                     {

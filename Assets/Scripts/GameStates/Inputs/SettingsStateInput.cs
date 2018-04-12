@@ -27,7 +27,7 @@ public class SettingsStateInput : TickStateInput
 		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
 		_creator.Wipe();
 		//var volume = _creator.Volume(Localization.Get("Volume"), AudioListener.volume, false);
-		var language = _creator.Language(localizeDropdown: true, layoutHorizontal:false);
+		var language = _creator.Language(true, false);
 		//applyButton.onClick.AddListener(delegate { OnApplyClick(language, volume); });
 		applyButton.onClick.AddListener(delegate { OnApplyClick(language); });
 		backButton.onClick.AddListener(OnBackClick);
@@ -46,7 +46,7 @@ public class SettingsStateInput : TickStateInput
 
 	private void OnBackClick()
 	{
-		if (BackClickedEvent != null) BackClickedEvent();
+		BackClickedEvent?.Invoke();
 	}
 
 	protected override void OnEnter()

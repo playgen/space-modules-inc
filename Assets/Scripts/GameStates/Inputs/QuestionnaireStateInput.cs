@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 
 using GameWork.Core.States.Tick.Input;
-using PlayGen.SUGAR.Common.Shared;
-using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
 using RAGE.Analytics;
 
-using RolePlayCharacter;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class QuestionnaireStateInput : TickStateInput
 {
@@ -31,7 +27,7 @@ public class QuestionnaireStateInput : TickStateInput
 		public string Answer;
 	}
 	
-	private List<TempQuestions> _questions = new List<TempQuestions>
+	private readonly List<TempQuestions> _questions = new List<TempQuestions>
 	{
 		new TempQuestions
 		{
@@ -81,7 +77,7 @@ public class QuestionnaireStateInput : TickStateInput
 	private Text _questionTrackText;
 	private Text _questionText;
 
-	private List<TempAnswers> _tempAnswers = new List<TempAnswers>();
+	private readonly List<TempAnswers> _tempAnswers = new List<TempAnswers>();
 
 
 	protected override void OnInitialize()
@@ -201,7 +197,7 @@ public class QuestionnaireStateInput : TickStateInput
 		{
 			// continue to next state
 			LogAnswers();
-			FinishClickedEvent();
+			FinishClickedEvent?.Invoke();
 		}
 	}
 

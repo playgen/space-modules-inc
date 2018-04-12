@@ -13,11 +13,7 @@ public class LoadingState : InputTickState
 		_scenarioController = scenarioController;
 	}
 
-	public override string Name
-	{
-		get { return StateName; }
-	}
-	
+	public override string Name => StateName;
 
 	protected override void OnEnter()
 	{

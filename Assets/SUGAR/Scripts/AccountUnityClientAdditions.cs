@@ -6,7 +6,6 @@ using System.Text;
 
 using PlayGen.SUGAR.Contracts.Shared;
 using PlayGen.SUGAR.Unity;
-using PlayGen.Unity.Utilities.Localization;
 
 using UnityEngine;
 
@@ -34,11 +33,11 @@ public class AccountUnityClientAdditions : MonoBehaviour
 
 		if (Application.platform == RuntimePlatform.Android && SUGARManager.Client != null)
 		{
-			AndroidSignIn();
+			SignIn(AndroidDeepLink.GetURL());
 		}
 		else if (Application.platform == RuntimePlatform.IPhonePlayer && SUGARManager.Client != null)
 		{
-			IOSSignIn();
+			SignIn(UnityDeeplinks.DeepLink);
 		}
 		else
 		{
@@ -46,15 +45,19 @@ public class AccountUnityClientAdditions : MonoBehaviour
 		}
 	}
 
-	private void AndroidSignIn()
+	private void SignIn(string url)
 	{
 		if (_allowAutoLogin)
 		{
 			options = new CommandLineOptions();
 			CommandLineUtility.CustomArgs = new Dictionary<string, string>();
-			var androidParams = AndroidDeepLink.GetURL().Split(new[] { '?' }, 2);
-			var androidParam = androidParams.Length != 2 ? string.Empty : androidParams[1] ?? string.Empty;
-			var paramArray = androidParam.Split('&');
+			var urlParams = url.Split(new[] { '?' }, 2);
+			var urlParam = urlParams.Length != 2 ? string.Empty : urlParams[1] ?? string.Empty;
+			if (urlParams.Length > 0 && urlParams[0] != "smi")
+			{
+				urlParam = string.Empty;
+			}
+			var paramArray = urlParam.Split('&');
 			var parametersDictionary = new Dictionary<string, string>();
 			foreach (var parameter in paramArray)
 			{
@@ -64,72 +67,7 @@ public class AccountUnityClientAdditions : MonoBehaviour
 					parametersDictionary.Add(keyValuePair[0].ToLower(), keyValuePair[1]);
 				}
 			}
-			if (!parametersDictionary.ContainsKey("hash") || !VerifyUrlString(androidParam, parametersDictionary["hash"]))
-			{
-				_signInCallback(false);
-				return;
-			}
-			foreach (var par in parametersDictionary)
-			{
-				switch (par.Key.ToLower())
-				{
-				case "source":
-					options.AuthenticationSource = par.Value;
-					break;
-				case "class":
-					options.ClassId = par.Value;
-					break;
-				case "username":
-					options.UserId = par.Value;
-					break;
-				case "password":
-					options.Password = par.Value;
-					break;
-				case "sessionid":
-					CommandLineUtility.CustomArgs.Add("round", par.Value);
-					break;
-				default:
-					CommandLineUtility.CustomArgs.Add(par.Key.ToLower(), par.Value);
-					break;
-				}
-			}
-		}
-		if (options != null && options.AuthenticationSource == null)
-		{
-			options.AuthenticationSource = _defaultSourceToken;
-		}
-		if (options != null && _allowAutoLogin)
-		{
-			LoginUser(options.UserId, options.Password ?? string.Empty, options.AuthenticationSource);
-		}
-		else
-		{
-			_signInCallback(false);
-		}
-	}
-
-	private void IOSSignIn()
-	{
-		if (_allowAutoLogin)
-		{
-			options = new CommandLineOptions();
-			CommandLineUtility.CustomArgs = new Dictionary<string, string>();
-			var iOSParams = UnityDeeplinks.DeepLink.Split(new[] { '?' }, 2);
-			var iOSParam = iOSParams.Length != 2 ? string.Empty : iOSParams[1] ?? string.Empty;
-			if (iOSParams.Length > 0 && iOSParams [0] != "smi") {
-				iOSParam = string.Empty;
-			}
-			var paramArray = iOSParam.Split('&');
-			var parametersDictionary = new Dictionary<string, string>();
-			foreach (var parameter in paramArray)
-			{
-				var keyValuePair = parameter.Split('=');
-				if (keyValuePair.Length == 2)
-				{
-					parametersDictionary.Add(keyValuePair[0].ToLower(), keyValuePair[1]);
-				}
-			}
-			if (!parametersDictionary.ContainsKey("hash") || !VerifyUrlString(iOSParam, parametersDictionary["hash"]))
+			if (!parametersDictionary.ContainsKey("hash") || !VerifyUrlString(urlParam, parametersDictionary["hash"]))
 			{
 				_signInCallback(false);
 				return;
@@ -219,10 +157,10 @@ public class AccountUnityClientAdditions : MonoBehaviour
 
 	public static string ComputeHash(string input)
 	{
-		byte[] intputBytes = Encoding.UTF8.GetBytes(input);
+		var intputBytes = Encoding.UTF8.GetBytes(input);
 		var hashProvider = new SHA1Managed();
-		byte[] hashed = hashProvider.ComputeHash(intputBytes);
-		string hashValue = BitConverter.ToString(hashed).Replace("-", string.Empty);
+		var hashed = hashProvider.ComputeHash(intputBytes);
+		var hashValue = BitConverter.ToString(hashed).Replace("-", string.Empty);
 		return hashValue;
 	}
 

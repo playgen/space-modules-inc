@@ -27,7 +27,7 @@ public class GameStateInput : TickStateInput
 
 	private GameObject _feedbackPanel;
 	private GameObject _feedbackElementPrefab;
-	private List<GameObject> _feedbackElements = new List<GameObject>();
+	private readonly List<GameObject> _feedbackElements = new List<GameObject>();
 
 	private GameObject _listChoicePrefab;
 	private GameObject _npcDialoguePanel;
@@ -243,6 +243,6 @@ public class GameStateInput : TickStateInput
 
 	public void HandleFinalState()
 	{
-		if (HandleFinalStateEvent != null) HandleFinalStateEvent();
+		HandleFinalStateEvent?.Invoke();
 	}
 }

@@ -6,26 +6,16 @@ public static class PopupUtility
     public static event Action StartLoadingEvent;
     public static event Action EndLoadingEvent;
     public static void LogError(string message)
-    {
-        if (LogErrorEvent != null)
-        {
-
-            LogErrorEvent(message);
-        }
-    }
+	{
+		LogErrorEvent?.Invoke(message);
+	}
     public static void ShowLoadingPopup()
-    {
-        if (StartLoadingEvent != null)
-        {
-            StartLoadingEvent();
-        }
-    }
+	{
+		StartLoadingEvent?.Invoke();
+	}
 
     public static void HideLoadingPopup()
-    {
-        if (EndLoadingEvent != null)
-        {
-            EndLoadingEvent();
-        }
-    }
+	{
+		EndLoadingEvent?.Invoke();
+	}
 }

@@ -40,13 +40,13 @@ public class LevelStateInput : TickStateInput
 
 	private void OnBackClick()
 	{
-		if (BackClickedEvent != null) BackClickedEvent();
+		BackClickedEvent?.Invoke();
 	}
 
 	private void LoadLevel(string name)
 	{
 		CommandQueue.AddCommand(new SetLevelCommand(name));
-		if (LoadLevelEvent != null) LoadLevelEvent();
+		LoadLevelEvent?.Invoke();
 
 		//EnqueueCommand(new NextStateCommand());
 	}

@@ -13,15 +13,15 @@ public class Gradient : BaseMeshEffect
 		if (!IsActive() || helper.currentVertCount == 0)
 			return;
 
-		List<UIVertex> vertices = new List<UIVertex>();
+		var vertices = new List<UIVertex>();
 		helper.GetUIVertexStream(vertices);
 
-		float bottomY = vertices[0].position.y;
-		float topY = vertices[0].position.y;
+		var bottomY = vertices[0].position.y;
+		var topY = vertices[0].position.y;
 
-		for (int i = 1; i < vertices.Count; i++)
+		for (var i = 1; i < vertices.Count; i++)
 		{
-			float y = vertices[i].position.y;
+			var y = vertices[i].position.y;
 			if (y > topY)
 			{
 				topY = y;
@@ -32,11 +32,11 @@ public class Gradient : BaseMeshEffect
 			}
 		}
 
-		float uiElementHeight = topY - bottomY;
+		var uiElementHeight = topY - bottomY;
 
-		UIVertex v = new UIVertex();
+		var v = new UIVertex();
 
-		for (int i = 0; i < helper.currentVertCount; i++)
+		for (var i = 0; i < helper.currentVertCount; i++)
 		{
 			helper.PopulateUIVertex(ref v, i);
 			v.color = Color32.Lerp(bottomColor, topColor, (v.position.y - bottomY) / uiElementHeight);

@@ -25,9 +25,10 @@ public class ScoreStateInput : TickStateInput
 
 		_nextButton = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
 
-		_nextButton.GetComponent<Button>().onClick.AddListener(() => {
-			if (NextButtonClicked != null) NextButtonClicked();
-		});
+		_nextButton.GetComponent<Button>().onClick.AddListener(() =>
+			{
+				NextButtonClicked?.Invoke();
+			});
 	}
 
 	protected override void OnEnter()

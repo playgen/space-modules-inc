@@ -8,18 +8,11 @@ public class ControllerBehaviour : MonoBehaviour
 	private TickStateController _stateController;
 	private AudioController _audioController;
 
-	void Awake()
+	private void Awake()
 	{
 		FixScreenRatio();
 
-		if (Application.platform == RuntimePlatform.WindowsPlayer)
-		{
-			_audioController = new AudioController(new StreamingAssetsAudioChannelFactory(), 1);
-		}
-		else
-		{
-			_audioController = new AudioController(new ResourceAudioChannelFactory(), 1);
-		}
+		_audioController = Application.platform == RuntimePlatform.WindowsPlayer ? new AudioController(new StreamingAssetsAudioChannelFactory(), 1) : new AudioController(new ResourceAudioChannelFactory(), 1);
 		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
 
@@ -41,21 +34,15 @@ public class ControllerBehaviour : MonoBehaviour
 		}
 	}
 
-	void Start()
+	private void Start()
 	{
 		_stateController.EnterState(LoadingState.StateName);
 	}
 
-	void Update ()
+	private void Update ()
 	{
-		if (_audioController != null)
-		{
-			_audioController.Tick(Time.deltaTime);
-		}
-		if (_stateController != null)
-		{
-			_stateController.Tick(Time.deltaTime);
-		}
+		_audioController?.Tick(Time.deltaTime);
+		_stateController?.Tick(Time.deltaTime);
 #if UNITY_EDITOR
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
