@@ -1,0 +1,121 @@
+{
+  "Rounds":
+  [
+    {
+      "PostQuestions": false,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "TestScen",
+          "Character": "Positive",
+          "MaxPoints": 0
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Positive",
+          "MaxPoints": 9
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 3,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Neutral",
+          "MaxPoints": 9
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 5,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 13
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 3,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 13
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 13
+        },
+        {
+          "ID": 5,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 12
+        }
+      ]
+    },
+    {
+      "PostQuestions": true,
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 13
+        },
+        {
+          "ID": 3,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 12
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 5,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 14
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+	<Product Id="2abadc3f-3581-4618-bd2e-bee3d1a3973b" Name="Space Modules Inc" Language="1033" Version="1.0.0.0" Manufacturer="PlayGen" UpgradeCode="dfcb41fd-5e8e-4dad-a13d-9fc440518b05">
+		<Package Id="*" InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+    <Condition Message="You need to be an administrator to install this product.">
+      Privileged
+    </Condition>
+
+
+
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+	<MediaTemplate EmbedCab="yes" />
+
+		<Property Id="INSTALLDIR">
+      <RegistrySearch Id="PlayGenRageLauncherRegistry" Type="raw" Root="HKLM" Key="SOFTWARE\[Manufacturer]\RAGE Launcher" Name="InstallDir"/>
+    </Property>
+
+		<Property Id="GAMEID">SMI</Property>
+
+    <Condition Message="Launcher not found. Please install the Launcher before installing games.">
+      Installed OR INSTALLDIR
+    </Condition>
+
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="INSTALLDIR">
+        <Directory Id="smiDIR" Name="SpaceModulesInc">
+          <Component Id="MainExecutable" Guid="73b1531f-f68b-4f9b-a0f4-fc271c4d6aec">
+            <File Id="smiEXE" Source="$(var.space-modules-inc.ProjectDir)/Build/WindowsSMI/SMI.exe" KeyPath="yes" />
+          </Component>
+          <Component Id="ChangeConfig" Guid="59fa452a-cf8d-4ee3-ac75-287ec94fb929" KeyPath="yes">
+            <util:XmlConfig Id="elem1"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="add"
+							Sequence="1">
+				<util:XmlConfig Id="elem11"
+								ElementId="elem1"
+								Name="id"
+								Value="[GAMEID]"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="elem12"
+								ElementId="elem1"
+								Name="path"
+								Value="[smiDIR]SMI.exe"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="elem13"
+								ElementId="elem1"
+								Name="key"
+								Value="kYglGuirZwfC2qMi2i0YOtQzyYRoCS7AzGpJHHhSKMFCD26jYqEqK3iPehNQ"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+            </util:XmlConfig>
+			<util:XmlConfig Id="param"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="parameters"
+							Sequence="2">
+			</util:XmlConfig>
+
+			<util:XmlConfig Id="param5"
+						Action="create"
+						ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]/parameters"
+						File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+						Node="element"
+						On="install"
+						Name="add"
+						Sequence="3">
+				<util:XmlConfig Id="param51"
+								ElementId="param5"
+								Name="urlParameter"
+								Value="autologin"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param52"
+								ElementId="param5"
+								Name="commandParameter"
+								Value="a"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param53"
+								ElementId="param5"
+								Name="requiredParameter"
+								Value="true"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param54"
+								ElementId="param5"
+								Name="defaultValue"
+								Value="true"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+			</util:XmlConfig>
+			  
+			<util:XmlConfig Id="param1"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]/parameters"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="add"
+							Sequence="6">
+				<util:XmlConfig Id="param11"
+								ElementId="param1"
+								Name="urlParameter"
+								Value="username"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param12"
+								ElementId="param1"
+								Name="commandParameter"
+								Value="u"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param13"
+								ElementId="param1"
+								Name="requiredParameter"
+								Value="true"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+			</util:XmlConfig>
+			<util:XmlConfig Id="param2"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]/parameters"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="add"
+							Sequence="5">
+				<util:XmlConfig Id="param21"
+								ElementId="param2"
+								Name="urlParameter"
+								Value="class"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param22"
+								ElementId="param2"
+								Name="commandParameter"
+								Value="g"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param23"
+								ElementId="param2"
+								Name="requiredParameter"
+								Value="true"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+			</util:XmlConfig>
+			<util:XmlConfig Id="param3"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]/parameters"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="add"
+							Sequence="4">
+				<util:XmlConfig Id="param31"
+								ElementId="param3"
+								Name="urlParameter"
+								Value="source"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param32"
+								ElementId="param3"
+								Name="commandParameter"
+								Value="s"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param33"
+								ElementId="param3"
+								Name="requiredParameter"
+								Value="true"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param34"
+								ElementId="param3"
+								Name="defaultValue"
+								Value="SPL"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+			</util:XmlConfig>
+			<util:XmlConfig Id="param4"
+							Action="create"
+							ElementPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]/parameters"
+							File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+							Node="element"
+							On="install"
+							Name="add"
+							Sequence="7">
+				<util:XmlConfig Id="param41"
+								ElementId="param4"
+								Name="urlParameter"
+								Value="sessionid"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param42"
+								ElementId="param4"
+								Name="commandParameter"
+								Value="round"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+				<util:XmlConfig Id="param43"
+								ElementId="param4"
+								Name="requiredParameter"
+								Value="false"
+								File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"/>
+			</util:XmlConfig>
+						
+            <util:XmlConfig   Id="elem1Delete"
+															Action="delete"
+															ElementPath="/configuration/LauncherConfiguration/games"
+															VerifyPath="/configuration/LauncherConfiguration/games/add[\[]@id='[GAMEID]'[\]]"
+															File="[INSTALLDIR]PlayGen.RAGE.Launcher.exe.config"
+															Node="element"
+															On="uninstall"
+															Sequence="100" />
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+
+    <Feature Id="ProductFeature" Title="space_modules_inc_setup" Level="1">
+      <ComponentRef Id="MainExecutable" />
+      <ComponentRef Id="ChangeConfig"/>
+      <ComponentGroupRef Id="SourceComponentGroup"/>
+    </Feature>
+	</Product>
+
+</Wix>
