@@ -58,4 +58,3 @@
  mklink /j "..\Assets\Editor\ExcelToJsonConverter\bin" "..\lib\ExcelToJsonConverter"
  mklink /j "..\Assets\Plugins\IntegratedAuthoringTool" "..\lib\IntegratedAuthoringTool"
  mklink /j "..\Assets\Plugins\PlayGen Utilities" "..\lib\PlayGenUtilities"
- mklink /j "..\Assets\StreamingAssets\Scenarios\Audio" "..\Audio\ogg"
