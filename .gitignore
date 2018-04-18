@@ -46,3 +46,8 @@ sysinfo.txt
 *.ide-shm
 *.ide-wal
 space-modules-inc-setup/bin/
+
+# Symlinked
+Assets/SUGAR/bin
+Assets/Plugins/PlayGen Utilities
+Assets/Plugins/IntegratedAuthoringTool
