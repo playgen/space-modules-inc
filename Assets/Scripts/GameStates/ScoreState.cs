@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
 using PlayGen.SUGAR.Unity;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 using UnityEngine;
 
@@ -56,7 +57,10 @@ public class ScoreState : InputTickState
 											+ "/viewform?entry.1596836094="
 											+ SUGARManager.CurrentUser.Name;
 
-					Tracker.T.Accessible.Accessed("Questionnaire");
+					TrackerEventSender.SendEvent(new TraceEvent("Questionnaire", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+					{
+
+					}));
 
 					// Open the default browser and show the form
 
@@ -72,9 +76,6 @@ public class ScoreState : InputTickState
 		NextEvent?.Invoke(false);
 
 		//if (NextEvent != null) NextEvent(isGameOver);
-
-
-		Tracker.T.Flush();
 	}
 
 	public override string Name => StateName;

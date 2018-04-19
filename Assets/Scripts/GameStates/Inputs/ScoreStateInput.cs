@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 public class ScoreStateInput : TickStateInput
 {
@@ -33,7 +35,10 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("ScoreState", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("ScoreState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+
+		}, AccessibleTracker.Accessible.Screen));
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;

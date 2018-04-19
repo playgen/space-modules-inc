@@ -6,9 +6,10 @@ using IntegratedAuthoringTool.DTOs;
 using PlayGen.Unity.Utilities.BestFit;
 using PlayGen.Unity.Utilities.Localization;
 
-using RAGE.Analytics;
-
 using RolePlayCharacter;
+
+using TrackerAssetPackage;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,8 +78,10 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("GameState", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("GameState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
 
+		}, AccessibleTracker.Accessible.Screen));
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		RefreshPlayerDialogueOptions();
 		RefreshCharacterDialogueText();

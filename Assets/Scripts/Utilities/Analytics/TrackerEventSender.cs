@@ -50,7 +50,11 @@ public class TrackerEventSender {
 			}
 			if (SUGARManager.CurrentUser != null)
 			{
-				Tracker.T.setVar("CurrentUser", SUGARManager.CurrentUser.Name);
+				Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
+			}
+			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
+			{
+				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
 			}
 			switch (trace.ActionType)
 			{
@@ -218,7 +222,10 @@ public class TrackerEventSender {
 				paraString += "=";
 				paraString += para.Value.ToLower();
 			}
-			EvaluationAsset.Instance.sensorData(ev.ToString().ToLower(), paraString);
+			if (!Application.isEditor)
+			{
+				EvaluationAsset.Instance.sensorData(ev.ToString().ToLower(), paraString);
+			}
 		}
 		catch (Exception ex)
 		{

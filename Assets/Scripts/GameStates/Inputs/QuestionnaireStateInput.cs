@@ -6,7 +6,7 @@ using GameWork.Core.States.Tick.Input;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 using UnityEngine;
 
@@ -94,8 +94,10 @@ public class QuestionnaireStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("Questionnaire", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("Questionnaire", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
 
+		}, AccessibleTracker.Accessible.Screen));
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 
