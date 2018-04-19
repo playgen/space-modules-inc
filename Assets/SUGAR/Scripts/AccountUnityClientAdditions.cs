@@ -53,7 +53,7 @@ public class AccountUnityClientAdditions : MonoBehaviour
 			CommandLineUtility.CustomArgs = new Dictionary<string, string>();
 			var urlParams = url.Split(new[] { '?' }, 2);
 			var urlParam = urlParams.Length != 2 ? string.Empty : urlParams[1] ?? string.Empty;
-			if (urlParams.Length > 0 && urlParams[0] != "smi")
+			if (urlParams.Length > 0 && urlParams[0].Replace("rage://", string.Empty) != "smi")
 			{
 				urlParam = string.Empty;
 			}
