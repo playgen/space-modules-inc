@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.Unity.Utilities.Localization;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -44,7 +44,10 @@ public class ReviewStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("ReviewState", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("ReviewState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+
+		}, AccessibleTracker.Accessible.Screen));
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);

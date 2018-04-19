@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using GameWork.Core.States.Tick.Input;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 public class CallStateInput : TickStateInput
 {
@@ -22,7 +24,10 @@ public class CallStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("CallState", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("CallState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+			
+		}, AccessibleTracker.Accessible.Screen));
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();

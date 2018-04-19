@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 public class LevelState : InputTickState
 {
@@ -19,7 +20,10 @@ public class LevelState : InputTickState
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("LevelSelect", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("LevelSelect", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+
+		}, AccessibleTracker.Accessible.Screen));
 
 		// Round based
 		_scenarioController.NextLevel();

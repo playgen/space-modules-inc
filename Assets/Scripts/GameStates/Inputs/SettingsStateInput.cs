@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +8,7 @@ using PlayGen.Unity.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.Unity.Utilities.BestFit;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 public class SettingsStateInput : TickStateInput
 {
@@ -51,7 +53,10 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("SettingsState", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("SettingsState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+
+		}, AccessibleTracker.Accessible.Screen));
 
 		_buttons.GameObjects.BestFit();
         _creator.RebuildLayout();

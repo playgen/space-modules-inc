@@ -10,12 +10,12 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using WellFormedNames;
 using System.IO;
-using System.Text;
+
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 using Random = System.Random;
 
@@ -321,8 +321,10 @@ public class ScenarioController : ICommandAction
 			_events.Add(EventHelper.PropertyChange(string.Format(IATConsts.DIALOGUE_STATE_PROPERTY, IATConsts.PLAYER), reply.NextState, "Player"));
 
 			// UCM tracker tracks the filename ID of each player dialogue choice made
-			Tracker.T.setVar("PlayerDialogueChoice", reply.CurrentState + "." + reply.FileName);
-			Tracker.T.Completable.Initialized("PlayerActionCompleted");
+			TrackerEventSender.SendEvent(new TraceEvent("PlayerActionCompleted", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
+			{
+				{ TrackerContextKeys.PlayerDialogueChoice.ToString(), reply.CurrentState + "." + reply.FileName }
+			}));
 
 			//Tracker.T.RequestFlush();
 			
@@ -579,76 +581,18 @@ public class ScenarioController : ICommandAction
 		var inquire = GetScore(allScores, "Inquire");
 		var polite = GetScore(allScores, "Polite");
 
-		// Trace the scores and submit them via UCM tracker
-		if (SUGARManager.CurrentUser != null)
+		TrackerEventSender.SendEvent(new TraceEvent("LevelComplete", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 		{
-			Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
-			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
-			{
-				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
-			}
-		}
-		Tracker.T.setVar("DifficultyLevel", _currentScenario.Prefix);
-		Tracker.T.setVar("LevelId", _currentScenario.LevelId.ToString());
-		Tracker.T.setVar("SessionId", _roundNumber.ToString());
-		Tracker.T.setVar("Closure", closure.ToString());
-		Tracker.T.setVar("Empathy", empathy.ToString());
-		Tracker.T.setVar("Faq", faq.ToString());
-		Tracker.T.setVar("Inquire", inquire.ToString());
-		Tracker.T.setVar("Polite", polite.ToString());
-		Tracker.T.setVar("MaxPoints", _currentScenario.MaxPoints.ToString());
-		Tracker.T.Completable.Initialized("LevelComplete");
-
-		Tracker.T.Flush();
-
-		//The following string contains the key for the google form that will be used to write trace data
-
-	    var sheetsKey = "1FAIpQLSebq1WzlCPSfVIzYJDHA3u2cWUwSp1-5KTvaSyM-4ayQn1eWg";
-		var codeArray = _chatScoreHistory.Where(o => o.ChatObject.Agent == "Player").Select(o => o.ChatObject.Code).ToArray();
-		var sb = new StringBuilder();
-		var prefix = "";
-		foreach (var s in codeArray)
-		{
-			sb.Append(prefix);
-			sb.Append(s);
-			prefix = ":";
-		}
-		var codeArrayPayload = sb.ToString();
-		// Here the proper string is conclassed to fill and directly post the trace to a google form
-		var directSubmitUrl = "https://docs.google.com/forms/d/e/"
-			+ sheetsKey
-			+ "/formResponse?entry.1676366924="
-			+ (SUGARManager.CurrentUser != null ? SUGARManager.CurrentUser.Name : "NoCurrentUser")
-			+ "&entry.858779356="
-			+ (SUGARManager.ClassId ?? "0")
-			+ "&entry.2050844213="
-			+ _currentScenario.Prefix
-			+ "&entry.2005028859="
-			+ _currentScenario.LevelId
-			+ "&entry.621099182="
-			+ _roundNumber
-			+ "&entry.1962055523="
-			+ closure
-			+ "&entry.976064318="
-			+ empathy
-			+ "&entry.408530093="
-			+ faq
-			+ "&entry.2140003828="
-			+ inquire
-			+ "&entry.695568148="
-			+ polite
-			+ "&entry.639080950="
-			+ _currentScenario.MaxPoints
-			+ "&entry.1253336920="
-			+ codeArrayPayload
-			+ "&submit=Submit"; // This part ensures direct writing instead of first opening the form
-
-		// The actual write to google
-		var www = new WWW(directSubmitUrl);
-		while (!www.isDone)
-		{
-			
-		}
+			{ TrackerContextKeys.DifficultyLevel.ToString(), _currentScenario.Prefix },
+			{ TrackerContextKeys.LevelId.ToString(), _currentScenario.LevelId.ToString() },
+			{ TrackerContextKeys.SessionId.ToString(), _roundNumber.ToString() },
+			{ TrackerContextKeys.Closure.ToString(), closure.ToString() },
+			{ TrackerContextKeys.Empathy.ToString(), empathy.ToString() },
+			{ TrackerContextKeys.Faq.ToString(), faq.ToString() },
+			{ TrackerContextKeys.Inquire.ToString(), inquire.ToString() },
+			{ TrackerContextKeys.Polite.ToString(), polite.ToString() },
+			{ TrackerContextKeys.MaxPoints.ToString(), _currentScenario.MaxPoints.ToString() }
+		}));
 	}
 
 	private Dictionary<string, int> GetScoresByKey()

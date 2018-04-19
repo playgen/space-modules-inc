@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 using GameWork.Core.States.Tick.Input;
@@ -7,7 +8,7 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
 
-using RAGE.Analytics;
+using TrackerAssetPackage;
 
 using UnityEngine;
 
@@ -38,7 +39,10 @@ public class MenuStateInput : TickStateInput
 		});
 		leaderboardButton.onClick.AddListener(delegate
 		{
-			Tracker.T.Accessible.Accessed("LeaderboardState", AccessibleTracker.Accessible.Screen);
+			TrackerEventSender.SendEvent(new TraceEvent("LeaderboardState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			{
+
+			}, AccessibleTracker.Accessible.Screen));
 		});
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
@@ -47,7 +51,10 @@ public class MenuStateInput : TickStateInput
 		});
 		achievementButton.onClick.AddListener(delegate
 		{
-			Tracker.T.Accessible.Accessed("AchievementsState", AccessibleTracker.Accessible.Screen);
+			TrackerEventSender.SendEvent(new TraceEvent("AchievementsState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			{
+
+			}, AccessibleTracker.Accessible.Screen));
 		});
 
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
@@ -67,7 +74,10 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		Tracker.T.Accessible.Accessed("MainMenu", AccessibleTracker.Accessible.Screen);
+		TrackerEventSender.SendEvent(new TraceEvent("MainMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		{
+
+		}, AccessibleTracker.Accessible.Screen));
 		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
 

@@ -3,9 +3,15 @@
 /// </summary>
 public enum TrackerContextKeys
 {
-	DialogueID,
-	DialogueStyle,
-	EventID,
-	Score,
+	DifficultyLevel,
+	LevelId,
+	SessionId,
+	Closure,
+	Empathy,
+	Faq,
+	Inquire,
+	Polite,
+	MaxPoints,
+	PlayerDialogueChoice,
 	TriggerUI
 }
