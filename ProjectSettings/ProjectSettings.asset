@@ -165,7 +165,7 @@ PlayerSettings:
     Android: com.PlayGen.SpaceModulesInc
     Standalone: unity.PlayGen.SpaceModulesInc
     Tizen: com.PlayGen.SpaceModulesInc
-    iOS: com.PlayGen.SpaceModulesInc
+    iOS: com.playgen.spacemodulesinc
     tvOS: com.PlayGen.SpaceModulesInc
   buildNumber:
     iOS: 0
@@ -715,6 +715,7 @@ PlayerSettings:
   XboxOneSplashScreen: {fileID: 0}
   XboxOneAllowedProductIds: []
   XboxOnePersistentLocalStorageSize: 0
+  XboxOneXTitleMemory: 8
   xboxOneScriptCompiler: 0
   vrEditorSettings:
     daydream:
