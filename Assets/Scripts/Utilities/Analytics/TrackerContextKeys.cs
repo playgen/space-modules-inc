@@ -16,5 +16,5 @@ public enum TrackerContextKeys
 	SelectedModuleType,
 	CurrentModuleType,
 	SelectedModule,
-	CurrentModule,
+	CurrentModule
 }

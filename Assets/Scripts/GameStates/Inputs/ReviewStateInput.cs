@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.Unity.Utilities.Localization;
-
-using TrackerAssetPackage;
-
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -1,13 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
-
 using PlayGen.SUGAR.Unity;
-
-using TrackerAssetPackage;
-
 using UnityEngine;
 
 public class ScoreState : InputTickState

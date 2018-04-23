@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
-
-using TrackerAssetPackage;
 
 public class ScoreStateInput : TickStateInput
 {

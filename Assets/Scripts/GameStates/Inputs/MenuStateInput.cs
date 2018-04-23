@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Common.Shared;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
-
-using TrackerAssetPackage;
-
 using UnityEngine;
 
 public class MenuStateInput : TickStateInput

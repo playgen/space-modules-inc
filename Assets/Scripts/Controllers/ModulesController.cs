@@ -278,7 +278,7 @@ public class ModulesController : ICommandAction
 			});
 		});
 
-		_backButton.onClick.AddListener(delegate
+		_backButton.onClick.AddListener(() =>
 		{
 			_nextArrow.onClick.RemoveAllListeners();
 			_backArrow.onClick.RemoveAllListeners();

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using GameWork.Core.States.Tick.Input;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
-
-using TrackerAssetPackage;
 
 public class CallStateInput : TickStateInput
 {

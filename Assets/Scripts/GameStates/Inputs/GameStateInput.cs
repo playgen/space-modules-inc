@@ -5,11 +5,7 @@ using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
 using PlayGen.Unity.Utilities.BestFit;
 using PlayGen.Unity.Utilities.Localization;
-
 using RolePlayCharacter;
-
-using TrackerAssetPackage;
-
 using UnityEngine;
 using UnityEngine.UI;
 
