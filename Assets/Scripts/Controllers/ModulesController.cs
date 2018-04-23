@@ -75,10 +75,17 @@ public class ModulesController : ICommandAction
 		backgroundOverlay.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			TrackerEventSender.SendEvent(new TraceEvent("CloseModulePopUp", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			TrackerEventSender.SendEvent(new TraceEvent("ClosedModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ClosedModuleMenu" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 
 		var nextArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow");
@@ -109,20 +116,35 @@ public class ModulesController : ICommandAction
 			listItem.GetComponent<Button>().onClick.AddListener(delegate
 			{
 				LoadModules(moduleType);
-				TrackerEventSender.SendEvent(new TraceEvent("Device." + moduleType.Replace(" ", "_"), TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+				TrackerEventSender.SendEvent(new TraceEvent("SelectedModuleType", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 				{
-
+					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleType },
+					//TODO CurrentModuleType
+					//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
 				}, AccessibleTracker.Accessible.Screen));
+				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+				{
+					{ TrackerEvaluationKeys.Event, "SelectedModuleType" },
+					{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+					{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+				});
 			});
 		}
 
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			TrackerEventSender.SendEvent(new TraceEvent("CloseModulePopUp", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			TrackerEventSender.SendEvent(new TraceEvent("CloseModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "CloseModuleMenu" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 	}
 
@@ -147,19 +169,37 @@ public class ModulesController : ICommandAction
 				LoadModule(module, listItem);
 				_nextArrow.gameObject.SetActive(true);
 				_backArrow.gameObject.SetActive(true);
-				TrackerEventSender.SendEvent(new TraceEvent("Device." + moduleTypeName.Replace(" ", "_") + "." + module.Id, TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+				TrackerEventSender.SendEvent(new TraceEvent("SelectedModule", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 				{
-
+					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleTypeName },
+					//TODO CurrentModuleType
+					//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
+					{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
+					//TODO CurrentModule
+					//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
 				}, AccessibleTracker.Accessible.Screen));
+				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+				{
+					{ TrackerEvaluationKeys.Event, "SelectedModule" },
+					{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+					{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+				});
 			});
 		}
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			LoadIndex();
-			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleDevices", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleTypeList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "BackToModuleTypeList" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 	}
 
@@ -197,8 +237,19 @@ public class ModulesController : ICommandAction
 			solutionItemText.text = currentModuleList[index].Solution;
 			TrackerEventSender.SendEvent(new TraceEvent("NextModuleFAQ", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				{ TrackerContextKeys.SelectedModuleType.ToString(), module.Type },
+				//TODO CurrentModuleType
+				//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
+				{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
+				//TODO CurrentModule
+				//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ViewNextProblem" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 
 		_backArrow.onClick.AddListener(() =>
@@ -212,8 +263,19 @@ public class ModulesController : ICommandAction
 			solutionItemText.text = currentModuleList[index].Solution;
 			TrackerEventSender.SendEvent(new TraceEvent("PreviousModuleFAQ", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				{ TrackerContextKeys.SelectedModuleType.ToString(), module.Type },
+				//TODO CurrentModuleType
+				//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
+				{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
+				//TODO CurrentModule
+				//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ViewPreviousProblem" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 
 		_backButton.onClick.AddListener(delegate
@@ -225,8 +287,15 @@ public class ModulesController : ICommandAction
 			LoadModules(module.Type);
 			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleDeviceTypes", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "BackToModuleList" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 		});
 	}
 
@@ -277,8 +346,15 @@ public class ModulesController : ICommandAction
 		{
 			TrackerEventSender.SendEvent(new TraceEvent("ModuleList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
-
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ViewModules" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
+				{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			});
 			_modulesPopup.SetActive(true);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
 			_popupContent.GetComponent<ScrollRect>().verticalScrollbar.enabled = true;

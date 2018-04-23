@@ -39,10 +39,15 @@ public class MenuStateInput : TickStateInput
 		});
 		leaderboardButton.onClick.AddListener(delegate
 		{
-			TrackerEventSender.SendEvent(new TraceEvent("LeaderboardState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
-
-			}, AccessibleTracker.Accessible.Screen));
+				{ TrackerEvaluationKeys.Asset, "SUGAR" },
+				{ TrackerEvaluationKeys.Done, "true" }
+			});
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ViewLeaderboard" }
+			});
 		});
 		var achievementButton = _buttons.GetButton("AchievementButton");
 		achievementButton.onClick.AddListener(delegate
@@ -51,15 +56,21 @@ public class MenuStateInput : TickStateInput
 		});
 		achievementButton.onClick.AddListener(delegate
 		{
-			TrackerEventSender.SendEvent(new TraceEvent("AchievementsState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
-
-			}, AccessibleTracker.Accessible.Screen));
+				{ TrackerEvaluationKeys.Asset, "SUGAR" },
+				{ TrackerEvaluationKeys.Done, "true" }
+			});
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "ViewAchievements" }
+			});
 		});
 
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
 		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
 		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
+		_gameLockedPanel.SetActive(false);
 
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.RemoveAllListeners();
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
@@ -74,10 +85,12 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("MainMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
-
-		}, AccessibleTracker.Accessible.Screen));
+			{ TrackerEvaluationKeys.Type, "MainMenuState" },
+			{ TrackerEvaluationKeys.Id, "0" },
+			{ TrackerEvaluationKeys.Completed, "success" }
+		});
 		OnQuitPanelNoClick();
 		_buttons.GameObjects.BestFit();
 

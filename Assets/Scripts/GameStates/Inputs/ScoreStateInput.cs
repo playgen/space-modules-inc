@@ -35,10 +35,12 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("ScoreState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
-
-		}, AccessibleTracker.Accessible.Screen));
+			{ TrackerEvaluationKeys.Type, "ScoreState" },
+			{ TrackerEvaluationKeys.Id, "0" },
+			{ TrackerEvaluationKeys.Completed, "success" }
+		});
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;

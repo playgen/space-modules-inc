@@ -44,10 +44,12 @@ public class ReviewStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("ReviewState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
-
-		}, AccessibleTracker.Accessible.Screen));
+			{ TrackerEvaluationKeys.Type, "ReviewState" },
+			{ TrackerEvaluationKeys.Id, "0" },
+			{ TrackerEvaluationKeys.Completed, "success" }
+		});
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);

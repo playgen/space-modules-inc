@@ -78,10 +78,12 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("GameState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
-
-		}, AccessibleTracker.Accessible.Screen));
+			{ TrackerEvaluationKeys.Type, "GameState" },
+			{ TrackerEvaluationKeys.Id, "0" },
+			{ TrackerEvaluationKeys.Completed, "success" }
+		});
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		RefreshPlayerDialogueOptions();
 		RefreshCharacterDialogueText();

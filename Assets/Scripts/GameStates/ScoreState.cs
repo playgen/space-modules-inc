@@ -57,10 +57,10 @@ public class ScoreState : InputTickState
 											+ "/viewform?entry.1596836094="
 											+ SUGARManager.CurrentUser.Name;
 
-					TrackerEventSender.SendEvent(new TraceEvent("Questionnaire", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+					TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
 					{
-
-					}));
+						{ TrackerEvaluationKeys.Event, "GameFinish" }
+					});
 
 					// Open the default browser and show the form
 

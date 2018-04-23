@@ -24,10 +24,6 @@ public class CallStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("CallState", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-		{
-			
-		}, AccessibleTracker.Accessible.Screen));
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();

@@ -94,10 +94,12 @@ public class QuestionnaireStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("Questionnaire", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
-
-		}, AccessibleTracker.Accessible.Screen));
+			{ TrackerEvaluationKeys.Type, "QuestionnaireState" },
+			{ TrackerEvaluationKeys.Id, "0" },
+			{ TrackerEvaluationKeys.Completed, "success" }
+		});
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 
@@ -185,6 +187,8 @@ public class QuestionnaireStateInput : TickStateInput
 	private void OnDialogueOptionClick(TempAnswers answer)
 	{
 		_tempAnswers.Add(answer);
+		//TODO Game Activity
+		//TODO Asset Activity
 		NextQuestion();
 	}
 
@@ -199,6 +203,10 @@ public class QuestionnaireStateInput : TickStateInput
 		{
 			// continue to next state
 			LogAnswers();
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "GameFinish" }
+			});
 			FinishClickedEvent?.Invoke();
 		}
 	}

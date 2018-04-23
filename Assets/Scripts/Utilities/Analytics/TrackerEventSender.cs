@@ -62,16 +62,6 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 0 && trace.Params[0].GetType() == typeof(AccessibleTracker.Accessible))
 					{
 						Tracker.T.Accessible.Accessed(trace.Key, (AccessibleTracker.Accessible)Enum.Parse(typeof(AccessibleTracker.Accessible), trace.Params[0].ToString()));
-						//TODO need to review this logic for SMI
-						if ((AccessibleTracker.Accessible)Enum.Parse(typeof(AccessibleTracker.Accessible), trace.Params[0].ToString()) == AccessibleTracker.Accessible.Accessible)
-						{
-							SendEvaluationEvent(TrackerEvalautionEvents.Support, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key } });
-						}
-						else
-						{
-							//TODO Need to work out what should replace 'tool'
-							SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key }, { TrackerEvaluationKeys.GoalOrientation, "neutral" }, { TrackerEvaluationKeys.Tool, "tool" } });
-						}
 						break;
 					}
 					Tracker.T.Accessible.Accessed(trace.Key);
@@ -80,8 +70,6 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 0 && trace.Params[0].GetType() == typeof(AccessibleTracker.Accessible))
 					{
 						Tracker.T.Accessible.Skipped(trace.Key, (AccessibleTracker.Accessible)Enum.Parse(typeof(AccessibleTracker.Accessible), trace.Params[0].ToString()));
-						//TODO Need to work out what should replace 'tool'
-						SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key }, { TrackerEvaluationKeys.GoalOrientation, "neutral" }, { TrackerEvaluationKeys.Tool, "tool" } });
 						break;
 					}
 					Tracker.T.Accessible.Skipped(trace.Key);
@@ -90,8 +78,6 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 1 && trace.Params[1].GetType() == typeof(AlternativeTracker.Alternative) && trace.Params[0] is string)
 					{
 						Tracker.T.Alternative.Selected(trace.Key, trace.Params[0].ToString(), (AlternativeTracker.Alternative)Enum.Parse(typeof(AlternativeTracker.Alternative), trace.Params[1].ToString()));
-						//TODO Need to work out what should replace 'tool'
-						SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key }, { TrackerEvaluationKeys.GoalOrientation, "neutral" }, { TrackerEvaluationKeys.Tool, "tool" } });
 						break;
 					}
 					if (trace.Params.Length > 0 && trace.Params[0] is string)
@@ -118,8 +104,7 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 0 && trace.Params[0].GetType() == typeof(CompletableTracker.Completable))
 					{
 						Tracker.T.Completable.Initialized(trace.Key, (CompletableTracker.Completable)Enum.Parse(typeof(CompletableTracker.Completable), trace.Params[0].ToString()));
-						SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key } });
-					break;
+						break;
 					}
 					Tracker.T.Completable.Initialized(trace.Key);
 					break;
@@ -140,8 +125,6 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 0 && trace.Params[0].GetType() == typeof(CompletableTracker.Completable))
 					{
 						Tracker.T.Completable.Completed(trace.Key, (CompletableTracker.Completable)Enum.Parse(typeof(CompletableTracker.Completable), trace.Params[0].ToString()));
-						//TODO Scenario needs to be replaced with the current level number
-						SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Type, trace.Key }, { TrackerEvaluationKeys.Id, "scenario" }, { TrackerEvaluationKeys.Completed, "success" } });
 						break;
 					}
 					Tracker.T.Completable.Completed(trace.Key);
@@ -150,8 +133,6 @@ public class TrackerEventSender {
 					if (trace.Params.Length > 0 && trace.Params[0].GetType() == typeof(GameObjectTracker.TrackedGameObject))
 					{
 						Tracker.T.GameObject.Interacted(trace.Key, (GameObjectTracker.TrackedGameObject)Enum.Parse(typeof(GameObjectTracker.TrackedGameObject), trace.Params[0].ToString()));
-						//TODO Need to work out what should replace 'tool'
-						SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string> { { TrackerEvaluationKeys.Event, trace.Key }, { TrackerEvaluationKeys.GoalOrientation, "neutral" }, { TrackerEvaluationKeys.Tool, "tool" } });
 						break;
 					}
 					Tracker.T.GameObject.Interacted(trace.Key);

@@ -3,9 +3,8 @@
 /// </summary>
 public enum TrackerContextKeys
 {
-	DifficultyLevel,
-	LevelId,
-	SessionId,
+	CurrentScenario,
+	LevelNumber,
 	Closure,
 	Empathy,
 	Faq,
@@ -13,5 +12,9 @@ public enum TrackerContextKeys
 	Polite,
 	MaxPoints,
 	PlayerDialogueChoice,
-	TriggerUI
+	TriggerUI,
+	SelectedModuleType,
+	CurrentModuleType,
+	SelectedModule,
+	CurrentModule,
 }

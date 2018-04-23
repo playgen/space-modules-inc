@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
 
@@ -46,6 +48,19 @@ public class LoadingStateInput : TickStateInput
 						{
 							var settings = new EvaluationAssetSettings { PlayerId = SUGARManager.CurrentUser.Name };
 							EvaluationAsset.Instance.Settings = settings;
+							TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
+							{
+								{ TrackerEvaluationKeys.Event, "GameStart" }
+							});
+							TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.UserProfile, new Dictionary<TrackerEvaluationKeys, string>
+							{
+								{ TrackerEvaluationKeys.Event, "SUGARSignIn" }
+							});
+							TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
+							{
+								{ TrackerEvaluationKeys.Asset, "SUGAR" },
+								{ TrackerEvaluationKeys.Done, "true" }
+							});
 							LoggedInEvent?.Invoke();
 						}
 						else

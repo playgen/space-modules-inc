@@ -321,13 +321,26 @@ public class ScenarioController : ICommandAction
 			_events.Add(EventHelper.PropertyChange(string.Format(IATConsts.DIALOGUE_STATE_PROPERTY, IATConsts.PLAYER), reply.NextState, "Player"));
 
 			// UCM tracker tracks the filename ID of each player dialogue choice made
-			TrackerEventSender.SendEvent(new TraceEvent("PlayerActionCompleted", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
+			TrackerEventSender.SendEvent(new TraceEvent("DialogueSelection", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 			{
-				{ TrackerContextKeys.PlayerDialogueChoice.ToString(), reply.CurrentState + "." + reply.FileName }
+				//TODO Current scenario
+				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
+				{ TrackerContextKeys.PlayerDialogueChoice.ToString(), reply.CurrentState + " " + reply.FileName }
 			}));
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Asset, "FAtiMA" },
+				{ TrackerEvaluationKeys.Done, "true" }
+			});
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			{
+				{ TrackerEvaluationKeys.Event, "DialogueSelection" },
+				{ TrackerEvaluationKeys.GoalOrientation, "Progression" },
+				{ TrackerEvaluationKeys.Tool, "DialogueChoices" }
+			});
 
 			//Tracker.T.RequestFlush();
-			
+
 			var chat = new ChatObject 
 			{
 				Utterence = reply.Utterance,
@@ -583,9 +596,10 @@ public class ScenarioController : ICommandAction
 
 		TrackerEventSender.SendEvent(new TraceEvent("LevelComplete", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 		{
-			{ TrackerContextKeys.DifficultyLevel.ToString(), _currentScenario.Prefix },
-			{ TrackerContextKeys.LevelId.ToString(), _currentScenario.LevelId.ToString() },
-			{ TrackerContextKeys.SessionId.ToString(), _roundNumber.ToString() },
+			//TODO should be module name instead of level id
+			{ TrackerContextKeys.CurrentScenario.ToString(), _currentScenario.Prefix + _currentScenario.LevelId },
+			//TODO should be current level number 
+			{ TrackerContextKeys.LevelNumber.ToString(), _roundNumber.ToString() },
 			{ TrackerContextKeys.Closure.ToString(), closure.ToString() },
 			{ TrackerContextKeys.Empathy.ToString(), empathy.ToString() },
 			{ TrackerContextKeys.Faq.ToString(), faq.ToString() },

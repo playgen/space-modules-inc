@@ -20,11 +20,6 @@ public class LevelState : InputTickState
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvent(new TraceEvent("LevelSelect", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-		{
-
-		}, AccessibleTracker.Accessible.Screen));
-
 		// Round based
 		_scenarioController.NextLevel();
 		
