@@ -36,7 +36,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224800147769304378}
-  - component: {fileID: 222627272116422426}
   m_Layer: 0
   m_Name: Face
   m_TagString: Untagged
@@ -169,20 +168,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1159946483285794}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2498d608cd85a274caeaddebf7d5d709, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -203,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -230,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -250,20 +249,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721330719749730}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: a246b190bd0d6eb498ca5ea378890a9e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -284,11 +283,154 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterId: 01
   Gender: Male
-  _blinkDelay: 10
+  _blinkDelay: 8.508573
   _eyebrowRenderer: {fileID: 114803968404067230}
   _eyeRenderer: {fileID: 114210538778153404}
   _mouthRenderer: {fileID: 114518843295729898}
-  _facialExpressions: []
+  _facialExpressions:
+  - Name: Anger
+    Eyebrows: {fileID: 21300000, guid: a2f02697a08af3b4381eb6377f9bc2ee, type: 3}
+    Eyes: {fileID: 21300000, guid: 42dc664521b15ad4f9fbe82e1cebffe9, type: 3}
+    Mouth: {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 42dc664521b15ad4f9fbe82e1cebffe9, type: 3}
+    - {fileID: 21300000, guid: 1bb43f446c4dcce4e9e545c353d5b22a, type: 3}
+    - {fileID: 21300000, guid: 994d7d33e0e409449871a6f1616a20d0, type: 3}
+    - {fileID: 21300000, guid: 082418e28c3225d48b606f685a77f6e0, type: 3}
+    - {fileID: 21300000, guid: 082418e28c3225d48b606f685a77f6e0, type: 3}
+    - {fileID: 21300000, guid: 994d7d33e0e409449871a6f1616a20d0, type: 3}
+    - {fileID: 21300000, guid: 1bb43f446c4dcce4e9e545c353d5b22a, type: 3}
+    - {fileID: 21300000, guid: 42dc664521b15ad4f9fbe82e1cebffe9, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    - {fileID: 21300000, guid: 5409f95877ec84d4b984f71143a82a74, type: 3}
+    - {fileID: 21300000, guid: 5213f7912ff8fe04bb337480ab7791d7, type: 3}
+    - {fileID: 21300000, guid: 85a92600da55a9845b6c390471510f6c, type: 3}
+    - {fileID: 21300000, guid: 66ce5649635e745428f90f81dadaaa95, type: 3}
+    - {fileID: 21300000, guid: 25296ac63415ab2488844a3004d43389, type: 3}
+    - {fileID: 21300000, guid: 5ab673ca8704e554d98b4b6148cc4326, type: 3}
+  - Name: Distress
+    Eyebrows: {fileID: 21300000, guid: a1f9f7e326123bb46afefe96d5101d9a, type: 3}
+    Eyes: {fileID: 21300000, guid: 464bf0cf9b0296f4e841b6c6456bd7ea, type: 3}
+    Mouth: {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 464bf0cf9b0296f4e841b6c6456bd7ea, type: 3}
+    - {fileID: 21300000, guid: b941a0bfef2548d4fb5b590704b7fead, type: 3}
+    - {fileID: 21300000, guid: 733c8defec9ddb1428fbddc165991200, type: 3}
+    - {fileID: 21300000, guid: e733e1089a256c14c915899ecb548136, type: 3}
+    - {fileID: 21300000, guid: e733e1089a256c14c915899ecb548136, type: 3}
+    - {fileID: 21300000, guid: 733c8defec9ddb1428fbddc165991200, type: 3}
+    - {fileID: 21300000, guid: b941a0bfef2548d4fb5b590704b7fead, type: 3}
+    - {fileID: 21300000, guid: 464bf0cf9b0296f4e841b6c6456bd7ea, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    - {fileID: 21300000, guid: 5409f95877ec84d4b984f71143a82a74, type: 3}
+    - {fileID: 21300000, guid: 5213f7912ff8fe04bb337480ab7791d7, type: 3}
+    - {fileID: 21300000, guid: 85a92600da55a9845b6c390471510f6c, type: 3}
+    - {fileID: 21300000, guid: 66ce5649635e745428f90f81dadaaa95, type: 3}
+    - {fileID: 21300000, guid: 25296ac63415ab2488844a3004d43389, type: 3}
+    - {fileID: 21300000, guid: 5ab673ca8704e554d98b4b6148cc4326, type: 3}
+  - Name: Fear
+    Eyebrows: {fileID: 21300000, guid: 80b6f5ad77bf4ec4792a233b4569541c, type: 3}
+    Eyes: {fileID: 21300000, guid: 946fcacb0d038934189544894dfd7109, type: 3}
+    Mouth: {fileID: 21300000, guid: 76b4e20bfbc7ebc41880994e449d47a3, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 946fcacb0d038934189544894dfd7109, type: 3}
+    - {fileID: 21300000, guid: bc67f547eeb9f8843b8af3a693d4373d, type: 3}
+    - {fileID: 21300000, guid: 9ae3e5fa49e64fc4483736834df55716, type: 3}
+    - {fileID: 21300000, guid: 80c5b819525aedf4fbff59e1513c993f, type: 3}
+    - {fileID: 21300000, guid: 80c5b819525aedf4fbff59e1513c993f, type: 3}
+    - {fileID: 21300000, guid: 9ae3e5fa49e64fc4483736834df55716, type: 3}
+    - {fileID: 21300000, guid: bc67f547eeb9f8843b8af3a693d4373d, type: 3}
+    - {fileID: 21300000, guid: 946fcacb0d038934189544894dfd7109, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: 76b4e20bfbc7ebc41880994e449d47a3, type: 3}
+    - {fileID: 21300000, guid: f4eb508615f925147a064b02c8fbc8bd, type: 3}
+    - {fileID: 21300000, guid: 5a1b457447b4cc44ba9a9f592169c2be, type: 3}
+    - {fileID: 21300000, guid: b910e5b579cc0784094dbb1fbaa2aebb, type: 3}
+    - {fileID: 21300000, guid: 176953d8c207cf14289bf1ff8fb02976, type: 3}
+    - {fileID: 21300000, guid: ba44e7557802a754290e2d8e30255c68, type: 3}
+    - {fileID: 21300000, guid: 2379bd7f796b3cd41a8ee6b6c155d66b, type: 3}
+  - Name: Idle
+    Eyebrows: {fileID: 21300000, guid: 842ce95601a82844ab36b98a5fe9ec90, type: 3}
+    Eyes: {fileID: 21300000, guid: 2498d608cd85a274caeaddebf7d5d709, type: 3}
+    Mouth: {fileID: 21300000, guid: a246b190bd0d6eb498ca5ea378890a9e, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 2498d608cd85a274caeaddebf7d5d709, type: 3}
+    - {fileID: 21300000, guid: f4882c973f514a04f99f6e2ac217835d, type: 3}
+    - {fileID: 21300000, guid: c864c7344b1b30e418616a7d322c5e15, type: 3}
+    - {fileID: 21300000, guid: 9f3a8b5b2e28d77478c0cd0e22865abe, type: 3}
+    - {fileID: 21300000, guid: 9f3a8b5b2e28d77478c0cd0e22865abe, type: 3}
+    - {fileID: 21300000, guid: c864c7344b1b30e418616a7d322c5e15, type: 3}
+    - {fileID: 21300000, guid: f4882c973f514a04f99f6e2ac217835d, type: 3}
+    - {fileID: 21300000, guid: 2498d608cd85a274caeaddebf7d5d709, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: a246b190bd0d6eb498ca5ea378890a9e, type: 3}
+    - {fileID: 21300000, guid: ea1944cfca5bb73479c9d1dc20122800, type: 3}
+    - {fileID: 21300000, guid: b891d4fb5ceacba4a9451c29b8b07e09, type: 3}
+    - {fileID: 21300000, guid: 14ac4130f8366b4409963bfa6e99a393, type: 3}
+    - {fileID: 21300000, guid: de079f7c88e33784d8e74b4c2c6a2603, type: 3}
+    - {fileID: 21300000, guid: 689b714838a07954ca622c05fa0216c8, type: 3}
+    - {fileID: 21300000, guid: c2993d29d3f8c0e4ea925076f6b8870f, type: 3}
+  - Name: Joy
+    Eyebrows: {fileID: 21300000, guid: 7f855dd00805e194d928f8fdb57c8e80, type: 3}
+    Eyes: {fileID: 21300000, guid: 6d67e4f8a5704944e8379beac5c466ad, type: 3}
+    Mouth: {fileID: 21300000, guid: adfc5fcbf60f8bf428aecc76f8429233, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 6d67e4f8a5704944e8379beac5c466ad, type: 3}
+    - {fileID: 21300000, guid: 26270b53a75832a429900c65e7e415ee, type: 3}
+    - {fileID: 21300000, guid: 9904b0ee339e49e46994efbc93d9189f, type: 3}
+    - {fileID: 21300000, guid: dd0d0d87ab6fe834dbe8d35acbd0307b, type: 3}
+    - {fileID: 21300000, guid: dd0d0d87ab6fe834dbe8d35acbd0307b, type: 3}
+    - {fileID: 21300000, guid: 9904b0ee339e49e46994efbc93d9189f, type: 3}
+    - {fileID: 21300000, guid: 26270b53a75832a429900c65e7e415ee, type: 3}
+    - {fileID: 21300000, guid: 6d67e4f8a5704944e8379beac5c466ad, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: adfc5fcbf60f8bf428aecc76f8429233, type: 3}
+    - {fileID: 21300000, guid: 99afb817de3b56c4599c818c8edc43e5, type: 3}
+    - {fileID: 21300000, guid: dd3bd7dadb185e94f8236ceedc994973, type: 3}
+    - {fileID: 21300000, guid: 5799739330aab0a43804f721f8042121, type: 3}
+    - {fileID: 21300000, guid: 23ae5a6bba0da9e48a07b30c5ff03c99, type: 3}
+    - {fileID: 21300000, guid: 5587fe9f92e3d3d46918a2af0f76a626, type: 3}
+    - {fileID: 21300000, guid: 5c3a06879408bb44188a735cf6a4d346, type: 3}
+  - Name: Reproach
+    Eyebrows: {fileID: 21300000, guid: fd71aac1f17a7e84f9a6c8bad5898e83, type: 3}
+    Eyes: {fileID: 21300000, guid: a5e62369a39a610419092a66d12be860, type: 3}
+    Mouth: {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: a5e62369a39a610419092a66d12be860, type: 3}
+    - {fileID: 21300000, guid: 586bdc5988a17ae4c963f2568ee7b91b, type: 3}
+    - {fileID: 21300000, guid: 730d8de2a9bc2fd478b918df8d085eb8, type: 3}
+    - {fileID: 21300000, guid: 730d8de2a9bc2fd478b918df8d085eb8, type: 3}
+    - {fileID: 21300000, guid: 586bdc5988a17ae4c963f2568ee7b91b, type: 3}
+    - {fileID: 21300000, guid: a5e62369a39a610419092a66d12be860, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: 4d4020035ecdd0e499153e1cf5ce7077, type: 3}
+    - {fileID: 21300000, guid: 5409f95877ec84d4b984f71143a82a74, type: 3}
+    - {fileID: 21300000, guid: 5213f7912ff8fe04bb337480ab7791d7, type: 3}
+    - {fileID: 21300000, guid: 85a92600da55a9845b6c390471510f6c, type: 3}
+    - {fileID: 21300000, guid: 66ce5649635e745428f90f81dadaaa95, type: 3}
+    - {fileID: 21300000, guid: 25296ac63415ab2488844a3004d43389, type: 3}
+    - {fileID: 21300000, guid: 5ab673ca8704e554d98b4b6148cc4326, type: 3}
+  - Name: Sadness
+    Eyebrows: {fileID: 21300000, guid: 6f2e8d104babd1748a4e5a7acfb11b7e, type: 3}
+    Eyes: {fileID: 21300000, guid: 7112e123543ec7a4797984ecc866cbf6, type: 3}
+    Mouth: {fileID: 21300000, guid: 76b4e20bfbc7ebc41880994e449d47a3, type: 3}
+    BlinkFrames:
+    - {fileID: 21300000, guid: 7112e123543ec7a4797984ecc866cbf6, type: 3}
+    - {fileID: 21300000, guid: b710b9bfd36af7b488d30246d0903820, type: 3}
+    - {fileID: 21300000, guid: 4386e070607cfcc4c988909bd041a270, type: 3}
+    - {fileID: 21300000, guid: 4386e070607cfcc4c988909bd041a270, type: 3}
+    - {fileID: 21300000, guid: b710b9bfd36af7b488d30246d0903820, type: 3}
+    - {fileID: 21300000, guid: 7112e123543ec7a4797984ecc866cbf6, type: 3}
+    MouthFrames:
+    - {fileID: 21300000, guid: 76b4e20bfbc7ebc41880994e449d47a3, type: 3}
+    - {fileID: 21300000, guid: f4eb508615f925147a064b02c8fbc8bd, type: 3}
+    - {fileID: 21300000, guid: 5a1b457447b4cc44ba9a9f592169c2be, type: 3}
+    - {fileID: 21300000, guid: b910e5b579cc0784094dbb1fbaa2aebb, type: 3}
+    - {fileID: 21300000, guid: 176953d8c207cf14289bf1ff8fb02976, type: 3}
+    - {fileID: 21300000, guid: ba44e7557802a754290e2d8e30255c68, type: 3}
+    - {fileID: 21300000, guid: 2379bd7f796b3cd41a8ee6b6c155d66b, type: 3}
 --- !u!114 &114731240704703394
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,7 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -322,20 +464,20 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1697557704848256}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 842ce95601a82844ab36b98a5fe9ec90, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -356,7 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -394,12 +536,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1668913765668884}
---- !u!222 &222627272116422426
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1334232483731950}
 --- !u!222 &222665877073494934
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -437,9 +573,9 @@ RectTransform:
   m_Father: {fileID: 224800147769304378}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: 0}
+  m_AnchorMin: {x: 0.015, y: 0}
+  m_AnchorMax: {x: 1.015, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224129995089647300
@@ -457,8 +593,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.18414307}
-  m_SizeDelta: {x: 0, y: 0.36828613}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224293166009513154
 RectTransform:
@@ -473,10 +609,10 @@ RectTransform:
   m_Father: {fileID: 224800147769304378}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: 70}
-  m_SizeDelta: {x: 60, y: 0}
+  m_AnchorMin: {x: -0.025, y: 0.12}
+  m_AnchorMax: {x: 1.055, y: 1.12}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224365880363855502
 RectTransform:
@@ -493,8 +629,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.18414307}
-  m_SizeDelta: {x: 0, y: 0.36828613}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224381903834978580
 RectTransform:
@@ -532,9 +668,9 @@ RectTransform:
   m_Father: {fileID: 224800147769304378}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15, y: 0}
+  m_AnchorMin: {x: 0.02, y: 0}
+  m_AnchorMax: {x: 1.02, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224726554090719374
@@ -591,6 +727,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.18414307}
-  m_SizeDelta: {x: 0, y: 0.36828613}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

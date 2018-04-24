@@ -16,7 +16,7 @@
 						}
 				},
 			"BodyName": "Female",
-			"VoiceName": null,
+			"VoiceName": "Negative",
 			"EmotionalAppraisalAssetSource": "GeneralAppraisal.ea",
 			"EmotionalDecisionMakingSource": "MoodResponse.edm",
 			"SocialImportanceAssetSource": "SI.si",
