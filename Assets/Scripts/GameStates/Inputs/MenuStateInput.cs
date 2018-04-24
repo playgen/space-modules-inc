@@ -12,8 +12,6 @@ public class MenuStateInput : TickStateInput
 {
 	public event Action SettingsClickedEvent;
 	public event Action PlayClickedEvent;
-
-	private ButtonList _buttons;
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
@@ -23,12 +21,11 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_buttons = new ButtonList("MenuContainer/MenuPanelContainer/MenuPanel");
-		_playButton = _buttons.GetButton("PlayButton");
+		_playButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/PlayButton").GetComponent<Button>();
 		_playButton.onClick.AddListener(OnPlayClick);
-		var settingsButton = _buttons.GetButton("SettingsButton");
+		var settingsButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/SettingsButton").GetComponent<Button>(); ;
 		settingsButton.onClick.AddListener(OnSettingsClick);
-		var leaderboardButton = _buttons.GetButton("LeaderboardButton");
+		var leaderboardButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/LeaderboardButton").GetComponent<Button>(); ;
 		leaderboardButton.onClick.AddListener(delegate
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
@@ -45,7 +42,7 @@ public class MenuStateInput : TickStateInput
 				{ TrackerEvaluationKeys.Event, "ViewLeaderboard" }
 			});
 		});
-		var achievementButton = _buttons.GetButton("AchievementButton");
+		var achievementButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/AchievementButton").GetComponent<Button>(); ;
 		achievementButton.onClick.AddListener(delegate
 		{
 			SUGARManager.Evaluation.DisplayAchievementList();
@@ -88,7 +85,7 @@ public class MenuStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 		OnQuitPanelNoClick();
-		_buttons.GameObjects.BestFit();
+		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel").BestFit();
 
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);

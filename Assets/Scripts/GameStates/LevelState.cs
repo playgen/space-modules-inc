@@ -1,11 +1,9 @@
-﻿using System;
-using GameWork.Core.Commands.Interfaces;
+﻿using GameWork.Core.Commands.Interfaces;
 using GameWork.Core.States.Tick.Input;
 
 public class LevelState : InputTickState
 {
 	private readonly ScenarioController _scenarioController;
-	public event Action CompletedEvent;
 
 	public const string StateName = "LevelState";
 
@@ -14,22 +12,10 @@ public class LevelState : InputTickState
 		_scenarioController = scenarioController;
 	}
 
-	protected override void OnEnter()
-	{
-		// Round based
-		_scenarioController.NextLevel();
-		
-		//NextState();
-	}
-
 	public override string Name => StateName;
 
 	protected override void OnTick(float deltaTime)
 	{
-		CompletedEvent?.Invoke();
-		return;
-
-
 		ICommand command;
 		if(CommandQueue.TryTakeFirstCommand(out command))
 		{

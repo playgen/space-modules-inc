@@ -42,17 +42,12 @@ public class GameStateInput : TickStateInput
 		_characterMalePrefab = Resources.Load("Prefabs/Characters/Male") as GameObject;
 		_characterPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/CharacterPanel");
 		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
-		_dialoguePanel =
-			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
+		_dialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
 		_npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCTextHolder/NPCText");
-		var modulesButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton");
 		_characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
-
-		_feedbackPanel =
-			GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
+		_feedbackPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
 		_feedbackElementPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
-		modulesButton.GetComponent<Button>().onClick.AddListener(delegate { CommandQueue.AddCommand(new ToggleModulesCommand()); });
-
+		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(delegate { CommandQueue.AddCommand(new ToggleModulesCommand()); });
 
 		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
@@ -81,11 +76,11 @@ public class GameStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 		ShowCharacter(_scenarioController.CurrentCharacter);
-		RefreshPlayerDialogueOptions();
-		RefreshCharacterDialogueText();
+		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
+		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
 		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
-		_npcDialoguePanel.GetComponent<Text>().text = "";
+		_npcDialoguePanel.GetComponent<Text>().text = string.Empty;
 	}
 
 	protected override void OnExit()
@@ -99,17 +94,9 @@ public class GameStateInput : TickStateInput
 	{
 		_characterObject = UnityEngine.Object.Instantiate(currentCharacter.BodyName == "Female" ? _characterFemalePrefab : _characterMalePrefab);
 		_characterController = _characterObject.GetComponent<CharacterFaceController>();
-		_characterController.CharacterId = "01";//currentCharacter.BodyName; 
-		_characterController.Gender = currentCharacter.BodyName; //currentCharacter.GetBeliefValue("Gender");
-
+		_characterController.CharacterId = "01";
+		_characterController.Gender = currentCharacter.BodyName;
 		_characterObject.transform.SetParent(_characterPanel.transform, false);
-		_characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;
-		_characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
-	}
-
-	public void ResetGameStateUi()
-	{
-
 	}
 
 	public void UpdateCharacterExpression(string emotion, float mood)
@@ -132,7 +119,7 @@ public class GameStateInput : TickStateInput
 
 		foreach (var element in _feedbackElements)
 		{
-			UnityEngine.Object.DestroyImmediate(element.gameObject);
+			UnityEngine.Object.Destroy(element.gameObject);
 		}
 
 		if (feedback.Count > 0 && (int)feedbackMode >= 2)
@@ -146,17 +133,13 @@ public class GameStateInput : TickStateInput
 			{
 				var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
 				element.transform.SetParent(_feedbackPanel.transform, false);
-
 				element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
-
 				element.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + i.Key.ToUpper());
 				element.transform.Find("Value").GetComponent<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
-
 				_feedbackElements.Add(element);
 			}
 
 			_feedbackPanel.BestFit();
-
 			anim.Play();
 		}
 	}
@@ -166,40 +149,15 @@ public class GameStateInput : TickStateInput
 		_characterController.StopTalkAnimation();
 	}
 
-	public void RefreshPlayerDialogueOptions()
-	{
-		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
-	}
-
-	public void RefreshCharacterDialogueText()
-	{
-		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
-	}
-
 	public void UpdatePlayerDialogue(DialogueStateActionDTO[] dialogueActions)
 	{
-
-		if (_dialoguePanel.GetComponentInChildren<ScrollRect>())
+		foreach (Transform child in _dialoguePanel.transform)
 		{
-			foreach (var child in _dialoguePanel.GetComponentInChildren<ScrollRect>().content)
-			{
-				var childObj = child as Transform;
-				if (childObj != null) UnityEngine.Object.Destroy(childObj.gameObject);
-			}
-
-
-		}
-		foreach (var child in _dialoguePanel.transform)
-		{
-			var childGameObject = child as Transform;
-			if (childGameObject != null) UnityEngine.Object.Destroy(childGameObject.gameObject);
+			UnityEngine.Object.Destroy(child.gameObject);
 		}
 
-
-		// TODO: Refactor
 		var rnd = new System.Random();
 		var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
-
 		var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
 		var scrollRect = dialogueObject.GetComponent<ScrollRect>();
 		var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
@@ -208,38 +166,24 @@ public class GameStateInput : TickStateInput
 		for (var i = 0; i < randomDialogueActions.Length; i++)
 		{
 			var dialogueAction = randomDialogueActions[i];
-			var optionText = dialogueAction.Utterance;
 			var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
-			choiceItem.transform.GetChild(0).GetComponent<Text>().text = optionText;
-			var offset = i * choiceItem.GetComponent<RectTransform>().rect.height;
+			choiceItem.transform.GetChild(0).GetComponent<Text>().text = dialogueAction.Utterance;
 			contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
-			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
+			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
 			choiceItem.GetComponent<Button>().onClick.AddListener(delegate
 			{
-				OnDialogueOptionClick(dialogueAction);
+				CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id));
 			});
 			choiceItem.transform.SetParent(scrollRect.content, false);
 		}
-		var rectContent = scrollRect.content;
-		rectContent.sizeDelta = new Vector2(0, contentTotalHeight);
-		//CommandQueue.AddCommand(new UpdateDialogueFontSizeCommand(dialogueObject));
-		ResizeOptions(dialogueObject);
-	}
-
-	public void ResizeOptions(GameObject dialogueObject)
-	{
+		scrollRect.content.sizeDelta = new Vector2(0, contentTotalHeight);
 		dialogueObject.GetComponent<ScrollRect>().content.BestFit();
-	}
-
-	private void OnDialogueOptionClick(DialogueStateActionDTO dialogueAction)
-	{
-		CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id));
 	}
 
 	public void UpdateCharacterDialogue(string text)
 	{
 		_npcDialoguePanel.GetComponent<Text>().text = text;
-		RefreshPlayerDialogueOptions();
+		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
 	}
 
 	public void HandleFinalState()

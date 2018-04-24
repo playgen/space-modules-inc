@@ -75,11 +75,7 @@ public class ModulesController : ICommandAction
 		backgroundOverlay.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			TrackerEventSender.SendEvent(new TraceEvent("ClosedModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
-			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvent(new TraceEvent("ClosedModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Event, "ClosedModuleMenu" },
@@ -118,9 +114,7 @@ public class ModulesController : ICommandAction
 				LoadModules(moduleType);
 				TrackerEventSender.SendEvent(new TraceEvent("SelectedModuleType", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 				{
-					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleType },
-					//TODO CurrentModuleType
-					//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
+					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleType }
 				}, AccessibleTracker.Accessible.Screen));
 				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 				{
@@ -134,11 +128,7 @@ public class ModulesController : ICommandAction
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			TogglePopup();
-			TrackerEventSender.SendEvent(new TraceEvent("CloseModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
-			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvent(new TraceEvent("CloseModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Event, "CloseModuleMenu" },
@@ -172,11 +162,7 @@ public class ModulesController : ICommandAction
 				TrackerEventSender.SendEvent(new TraceEvent("SelectedModule", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 				{
 					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleTypeName },
-					//TODO CurrentModuleType
-					//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
-					{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
-					//TODO CurrentModule
-					//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
+					{ TrackerContextKeys.SelectedModule.ToString(), module.Id }
 				}, AccessibleTracker.Accessible.Screen));
 				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 				{
@@ -189,11 +175,7 @@ public class ModulesController : ICommandAction
 		_backButton.GetComponent<Button>().onClick.AddListener(delegate
 		{
 			LoadIndex();
-			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleTypeList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
-			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleTypeList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Event, "BackToModuleTypeList" },
@@ -238,11 +220,7 @@ public class ModulesController : ICommandAction
 			TrackerEventSender.SendEvent(new TraceEvent("NextModuleFAQ", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
 				{ TrackerContextKeys.SelectedModuleType.ToString(), module.Type },
-				//TODO CurrentModuleType
-				//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
-				{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
-				//TODO CurrentModule
-				//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
+				{ TrackerContextKeys.SelectedModule.ToString(), module.Id }
 			}, AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
@@ -264,11 +242,7 @@ public class ModulesController : ICommandAction
 			TrackerEventSender.SendEvent(new TraceEvent("PreviousModuleFAQ", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 			{
 				{ TrackerContextKeys.SelectedModuleType.ToString(), module.Type },
-				//TODO CurrentModuleType
-				//{ TrackerContextKeys.CurrentModuleType.ToString(), moduleType }
-				{ TrackerContextKeys.SelectedModule.ToString(), module.Id },
-				//TODO CurrentModule
-				//{ TrackerContextKeys.CurrentModule.ToString(), moduleType }
+				{ TrackerContextKeys.SelectedModule.ToString(), module.Id }
 			}, AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
@@ -285,11 +259,7 @@ public class ModulesController : ICommandAction
 			_nextArrow.gameObject.SetActive(false);
 			_backArrow.gameObject.SetActive(false);
 			LoadModules(module.Type);
-			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleDeviceTypes", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
-			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleDeviceTypes", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Event, "BackToModuleList" },
@@ -344,11 +314,7 @@ public class ModulesController : ICommandAction
 		}
 		else
 		{
-			TrackerEventSender.SendEvent(new TraceEvent("ModuleList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
-			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
-			}, AccessibleTracker.Accessible.Screen));
+			TrackerEventSender.SendEvent(new TraceEvent("ModuleList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Event, "ViewModules" },

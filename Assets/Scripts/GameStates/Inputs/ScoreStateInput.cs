@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
+
+using PlayGen.SUGAR.Unity;
+
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
 
 public class ScoreStateInput : TickStateInput
 {
-	public event Action NextButtonClicked;
+	public event Action NextEvent;
+	public event Action InGameQuestionnaire;
 
 	private ScorePanelBehaviour _scorePanelScript;
 	private readonly ScenarioController _scenarioController;
@@ -24,10 +28,7 @@ public class ScoreStateInput : TickStateInput
 
 		_nextButton = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
 
-		_nextButton.GetComponent<Button>().onClick.AddListener(() =>
-			{
-				NextButtonClicked?.Invoke();
-			});
+		_nextButton.GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
 	}
 
 	protected override void OnEnter()
@@ -61,6 +62,27 @@ public class ScoreStateInput : TickStateInput
 	{
 		_scorePanelScript.SetScorePanel(obj);
 	}
+
+	private void OnNextButtonClicked()
+	{
+		if (_scenarioController.CurrentLevel >= _scenarioController.LevelMax)
+		{
+			if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
+			{
+				var locked = bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]);
+				if (locked)
+				{
+					CommandLineUtility.CustomArgs = null;
+				}
+			}
+		}
+		if (_scenarioController.UseInGameQuestionnaire && _scenarioController.CurrentLevel % 5 == 0)
+		{
+			InGameQuestionnaire?.Invoke();
+		}
+		else
+		{
+			NextEvent?.Invoke();
+		}
+	}
 }
-
-

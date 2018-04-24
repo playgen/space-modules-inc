@@ -140,15 +140,14 @@ public class ScenarioController : ICommandAction
 	public int LevelMax;
 	public bool PostQuestions;
 	public bool UseInGameQuestionnaire;
-
-
 	public RolePlayCharacterAsset CurrentCharacter;
 	public bool IsTalking;
+	public ScenarioData CurrentScenario;
+	public FeedbackMode FeedbackLevel;
+
 	private readonly AudioController _audioController;
 	private AudioClipModel _audioClip;
-	private ScenarioData _currentScenario;
 	private int _roundNumber;
-	private FeedbackMode _feedbackMode; 
 
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
@@ -206,11 +205,11 @@ public class ScenarioController : ICommandAction
 		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
 		{
 			var feedback = int.Parse(CommandLineUtility.CustomArgs["feedback"]);
-			_feedbackMode = (FeedbackMode) feedback;
+			FeedbackLevel = (FeedbackMode) feedback;
 		}
 		else
 		{
-			_feedbackMode = FeedbackMode.Minimal;
+			FeedbackLevel = FeedbackMode.Minimal;
 		}
 
 		if (CommandLineUtility.CustomArgs.ContainsKey("ingameq"))
@@ -232,15 +231,15 @@ public class ScenarioController : ICommandAction
 		CurrentLevel++;
 
 		_feedbackScores.Clear();
-		GetFeedbackEvent?.Invoke(_feedbackScores, _feedbackMode);
-		_currentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
-		if (_currentScenario != null)
+		GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
+		CurrentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
+		if (CurrentScenario != null)
 		{
-			_integratedAuthoringTool = _currentScenario.GetRandomVariation();
-			CurrentCharacter = RolePlayCharacterAsset.LoadFromFile(_integratedAuthoringTool.GetAllCharacterSources().First(c => c.Source.Contains(_currentScenario.Character)).Source);
+			_integratedAuthoringTool = CurrentScenario.GetRandomVariation();
+			CurrentCharacter = RolePlayCharacterAsset.LoadFromFile(_integratedAuthoringTool.GetAllCharacterSources().First(c => c.Source.Contains(CurrentScenario.Character)).Source);
 			CurrentCharacter.LoadAssociatedAssets();
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
-			if (_currentScenario.Prefix == "TestScen")
+			if (CurrentScenario.Prefix == "TestScen")
 			{
 				CurrentCharacter.BodyName = "Male";
 			}
@@ -323,8 +322,6 @@ public class ScenarioController : ICommandAction
 			// UCM tracker tracks the filename ID of each player dialogue choice made
 			TrackerEventSender.SendEvent(new TraceEvent("DialogueSelection", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 			{
-				//TODO Current scenario
-				//{ TrackerContextKeys.CurrentScenario.ToString(), "" }
 				{ TrackerContextKeys.PlayerDialogueChoice.ToString(), reply.CurrentState + " " + reply.FileName }
 			}));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
@@ -355,7 +352,7 @@ public class ScenarioController : ICommandAction
 		}
 		UpdateScore(reply);
 		_feedbackScores = _chatScoreHistory.Last().Scores;
-		GetFeedbackEvent?.Invoke(_feedbackScores, _feedbackMode);
+		GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
 
 		// Update EmotionExpression
 		GetCharacterResponse();
@@ -478,8 +475,8 @@ public class ScenarioController : ICommandAction
 				scoreTotal += i;
 			}
 		}
-		var lowerScoreBracket = _currentScenario.MaxPoints*0.4f;
-		var upperScoreBracket = _currentScenario.MaxPoints*0.8f;
+		var lowerScoreBracket = CurrentScenario.MaxPoints*0.4f;
+		var upperScoreBracket = CurrentScenario.MaxPoints*0.8f;
 		int stars;
 		if (scoreTotal < lowerScoreBracket)
 		{
@@ -514,7 +511,7 @@ public class ScenarioController : ICommandAction
 		var scoreObj = new ScoreObject
 		{
 			Stars = stars,
-			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(_currentScenario.MaxPoints - 1))),
+			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(CurrentScenario.MaxPoints - 1))),
 			ScoreFeedbackToken = "FEEDBACK_" + stars,
 			MoodImage = (mood >= 0.5),
 			EmotionCommentToken = "COMMENT_" + ((mood >= 0.5) ? "POSITIVE" : "NEGATIVE"),
@@ -596,16 +593,13 @@ public class ScenarioController : ICommandAction
 
 		TrackerEventSender.SendEvent(new TraceEvent("LevelComplete", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 		{
-			//TODO should be module name instead of level id
-			{ TrackerContextKeys.CurrentScenario.ToString(), _currentScenario.Prefix + _currentScenario.LevelId },
-			//TODO should be current level number 
-			{ TrackerContextKeys.LevelNumber.ToString(), _roundNumber.ToString() },
+			{ TrackerContextKeys.LevelNumber.ToString(), CurrentLevel.ToString() },
 			{ TrackerContextKeys.Closure.ToString(), closure.ToString() },
 			{ TrackerContextKeys.Empathy.ToString(), empathy.ToString() },
 			{ TrackerContextKeys.Faq.ToString(), faq.ToString() },
 			{ TrackerContextKeys.Inquire.ToString(), inquire.ToString() },
 			{ TrackerContextKeys.Polite.ToString(), polite.ToString() },
-			{ TrackerContextKeys.MaxPoints.ToString(), _currentScenario.MaxPoints.ToString() }
+			{ TrackerContextKeys.MaxPoints.ToString(), CurrentScenario.MaxPoints.ToString() }
 		}));
 	}
 
@@ -641,7 +635,7 @@ public class ScenarioController : ICommandAction
 
 	public void GetReviewData()
 	{
-		GetReviewDataSuccessEvent?.Invoke(_chatScoreHistory, CurrentCharacter.Mood, _feedbackMode);
+		GetReviewDataSuccessEvent?.Invoke(_chatScoreHistory, CurrentCharacter.Mood, FeedbackLevel);
 
 		//Reset();
 	}

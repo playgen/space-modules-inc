@@ -2,7 +2,6 @@
 
 public class QuestionnaireState : InputTickState
 {
-
 	public const string StateName = "QuestionnaireState";
 
 	public override string Name => StateName;

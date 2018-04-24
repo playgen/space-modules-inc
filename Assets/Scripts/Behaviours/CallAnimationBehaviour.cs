@@ -48,10 +48,11 @@ public class CallAnimationBehaviour : MonoBehaviour
 	private IEnumerator RingLoop()
 	{
 		_ringing = true;
+		var delay = new WaitForSeconds(_animationDelay);
 
 		while (_ringing)
 		{
-			yield return new WaitForSeconds(_animationDelay);
+			yield return delay;
 			for (var i = 0; i < _ringImages.Length; i++)
 			{
 				var index = _frameCounter - i;

@@ -9,8 +9,7 @@ public class CallStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		var answerButton = GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/AnswerButton").GetComponent<Button>();
-		answerButton.onClick.AddListener(OnAnswerClick);
+		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/AnswerButton").GetComponent<Button>().onClick.AddListener(OnAnswerClick);
 	}
 
 	private void OnAnswerClick()

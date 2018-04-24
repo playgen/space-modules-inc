@@ -13,71 +13,69 @@ public class ScorePanelBehaviour : MonoBehaviour
 	[SerializeField]
 	private GameObject _finalScoreFeedbackPanel;
 
-    [SerializeField]
-    private Sprite _starSprite;
+	[SerializeField]
+	private Sprite _starSprite;
 
-    [SerializeField]
-    private Sprite _starEmptySprite;
+	[SerializeField]
+	private Sprite _starEmptySprite;
 
-    [SerializeField]
-    private GameObject[] _starSlots;
+	[SerializeField]
+	private GameObject[] _starSlots;
 
-    [SerializeField]	
-    private Image _emotionImage;
+	[SerializeField]	
+	private Image _emotionImage;
 
-    [SerializeField]
-    private Text _emotionComment;
+	[SerializeField]
+	private Text _emotionComment;
 
-    [SerializeField]
-    private Sprite _emotionPositiveSprite;
+	[SerializeField]
+	private Sprite _emotionPositiveSprite;
 
-    [SerializeField]
-    private Sprite _emotionNegativeSprite;
+	[SerializeField]
+	private Sprite _emotionNegativeSprite;
 
 	private GameObject _feedbackElementGameObject;
 	private Transform _feedbackPanel;
-    private Text _scoreText;
-    private Text _scoreFeedbackText;
+	private Text _scoreText;
+	private Text _scoreFeedbackText;
 	private GameObject _scorePanel;
 
 	public void SetScorePanel(ScenarioController.ScoreObject score)
-    {
+	{
 		_finalScorePanel.SetActive(false);
 		_finalScoreFeedbackPanel.SetActive(false);
 
-	    _scorePanel = score.MeasuredPoints.Any() ? _finalScoreFeedbackPanel : _finalScorePanel;
+		_scorePanel = score.MeasuredPoints.Any() ? _finalScoreFeedbackPanel : _finalScorePanel;
 		_scorePanel.SetActive(true);
 
-	    _scoreText = _scorePanel.transform.Find("ScoreText").GetComponent<Text>();
-	    _scoreFeedbackText = _scorePanel.transform.Find("ScoreFeedback").GetComponent<Text>();
+		_scoreText = _scorePanel.transform.Find("ScoreText").GetComponent<Text>();
+		_scoreFeedbackText = _scorePanel.transform.Find("ScoreFeedback").GetComponent<Text>();
 
 		SetupFeedback();
-	    SetFeedbackIcons(score.MeasuredPoints);
+		SetFeedbackIcons(score.MeasuredPoints);
 		
 		// set stars
 		foreach (var starSlot in _starSlots)
-        {
-            if (score.Stars > 0)
-            {
-                starSlot.GetComponent<Image>().sprite = _starSprite;
-                score.Stars--;
-            }
-            else
-            {
-                starSlot.GetComponent<Image>().sprite = _starEmptySprite;
-            }
-        }
-        
-        _scoreText.text = score.Score.ToString("N0");
+		{
+			if (score.Stars > 0)
+			{
+				starSlot.GetComponent<Image>().sprite = _starSprite;
+				score.Stars--;
+			}
+			else
+			{
+				starSlot.GetComponent<Image>().sprite = _starEmptySprite;
+			}
+		}
+		
+		_scoreText.text = score.Score.ToString("N0");
 
-        _scoreFeedbackText.text = Localization.Get(score.ScoreFeedbackToken);
+		_scoreFeedbackText.text = Localization.Get(score.ScoreFeedbackToken);
 
-        _emotionImage.sprite = score.MoodImage? _emotionPositiveSprite : _emotionNegativeSprite;
+		_emotionImage.sprite = score.MoodImage ? _emotionPositiveSprite : _emotionNegativeSprite;
 
-        _emotionComment.text = Localization.Get(score.EmotionCommentToken);
-
-        //_bonusText.text = "+" + score.Bonus.ToString("N0");
-    }
+		_emotionComment.text = Localization.Get(score.EmotionCommentToken);
+	}
 
 	private void SetupFeedback()
 	{

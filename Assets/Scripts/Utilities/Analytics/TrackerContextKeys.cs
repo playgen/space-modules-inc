@@ -12,9 +12,10 @@ public enum TrackerContextKeys
 	Polite,
 	MaxPoints,
 	PlayerDialogueChoice,
-	TriggerUI,
 	SelectedModuleType,
 	CurrentModuleType,
 	SelectedModule,
-	CurrentModule
+	CurrentModule,
+	CurrentCharacter,
+	FeedbackMode
 }

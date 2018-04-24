@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class CharacterFaceController : MonoBehaviour
 {
-
 	public string CharacterId;    // '<Gender>_Character_<number>', e.g 'Female_Character_01'
 	public string Gender;
 
@@ -46,10 +45,10 @@ public class CharacterFaceController : MonoBehaviour
 	private void Start()
 	{
 		LoadSprites();
+		SetEmotion("Idle");
 		_eyebrowRenderer.enabled = true;
 		_eyeRenderer.enabled = true;
 		_mouthRenderer.enabled = true;
-		SetEmotion("Idle");
 	}
 
 	public void SetEmotion(string emotion)
@@ -72,16 +71,19 @@ public class CharacterFaceController : MonoBehaviour
 	private IEnumerator IdleAnimation()
 	{
 		_idleAnimation = true;
+		var blinkDelay = new WaitForSeconds(_blinkDelay);
+		var fixedDelay = new WaitForFixedUpdate();
+
 		while (_idleAnimation)
 		{
 			_eyeRenderer.sprite = _currentExpression.Eyes;
 
-			yield return new WaitForSeconds(_blinkDelay);
+			yield return blinkDelay;
 			_blinkDelay = UnityEngine.Random.Range(Min, Max);
 			foreach (var sprite in _currentExpression.BlinkFrames)
 			{
 				_eyeRenderer.sprite = sprite;
-				yield return new WaitForFixedUpdate();
+				yield return fixedDelay;
 			}
 		}
 	}
@@ -102,16 +104,19 @@ public class CharacterFaceController : MonoBehaviour
 	private IEnumerator TalkAnimation()
 	{
 		_talkingAnimation = true;
+		var audioSource = FindObjectOfType<AudioSource>();
+
+		_mouthRenderer.sprite = _currentExpression.Mouth;
 		while (_talkingAnimation)
 		{
-			_mouthRenderer.sprite = _currentExpression.Mouth;
-
-			yield return new WaitForSeconds(0.15f);
-
 			foreach (var sprite in _currentExpression.MouthFrames)
 			{
 				_mouthRenderer.sprite = sprite;
-				yield return new WaitForSeconds(0.03f);
+				yield return new WaitForSeconds(UnityEngine.Random.Range(0.035f, 0.06f));
+			}
+			if (!audioSource.isPlaying)
+			{
+				_talkingAnimation = false;
 			}
 		}
 		_mouthRenderer.sprite = _currentExpression.Mouth;

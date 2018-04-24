@@ -13,7 +13,7 @@ public class GameStateControllerFactory
 
 	public TickStateController Create()
 	{
-		var loadingState = CreateLoadingState(_scenarioController);
+		var loadingState = CreateLoadingState();
 		var menuState = CreateMenuState();
 		var settingsState = CreateSettingsState();
 		var levelState = CreateLevelState(_scenarioController);
@@ -22,6 +22,7 @@ public class GameStateControllerFactory
 		var reviewState = CreateReviewState(_scenarioController);
 		var scoreState = CreateScoreState(_scenarioController);
 		var questionnaireState = CreateQuestionnaireState();
+		TrackerEventSender.ScenarioController = _scenarioController;
 
 		var stateController = new TickStateController(
 			loadingState,
@@ -40,12 +41,13 @@ public class GameStateControllerFactory
 		return stateController;
 	}
 
-	private LoadingState CreateLoadingState(ScenarioController scenarioController)
+	private LoadingState CreateLoadingState()
 	{
 		var input = new LoadingStateInput();
-		var state = new LoadingState(input, scenarioController);
+		var state = new LoadingState(input);
 
 		var menuTransition = new EventTransition(MenuState.StateName);
+		input.LoggedInEvent += _scenarioController.Initialize;
 		input.LoggedInEvent += menuTransition.ChangeState;
 		input.OfflineClickedEvent += menuTransition.ChangeState;
 
@@ -62,7 +64,8 @@ public class GameStateControllerFactory
 		var settingsTransition = new EventTransition(SettingsState.StateName);
 		input.SettingsClickedEvent += settingsTransition.ChangeState;
 
-		var levelTransition = new EventTransition(LevelState.StateName);
+		var levelTransition = new EventTransition(CallState.StateName);
+		input.PlayClickedEvent += _scenarioController.NextLevel;
 		input.PlayClickedEvent += levelTransition.ChangeState;
 
 		state.AddTransitions(settingsTransition, levelTransition);
@@ -89,7 +92,6 @@ public class GameStateControllerFactory
 		var state = new LevelState(input, scenarioController);
 
 		var callTransition = new EventTransition(CallState.StateName);
-		state.CompletedEvent += callTransition.ChangeState;
 
 		state.AddTransitions(callTransition);
 
@@ -146,16 +148,13 @@ public class GameStateControllerFactory
 		var input = new ScoreStateInput(scenarioController);
 		var state = new ScoreState(input, scenarioController);
 
-		var menuTransition = new FalseEventTransition(MenuState.StateName);
-		var quitTransition = new QuitOnTrueEventTransition();
-
-		state.NextEvent += menuTransition.ChangeState;
-		state.NextEvent += quitTransition.Quit;
+		var menuTransition = new EventTransition(MenuState.StateName);
+		input.NextEvent += menuTransition.ChangeState;
 
 		var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
-		state.InGameQuestionnaire += questionnaireTransition.ChangeState;
+		input.InGameQuestionnaire += questionnaireTransition.ChangeState;
 
-		state.AddTransitions(menuTransition, quitTransition, questionnaireTransition);
+		state.AddTransitions(menuTransition, questionnaireTransition);
 
 		return state;
 	}

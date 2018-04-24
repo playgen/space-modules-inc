@@ -30,24 +30,14 @@ public class TraceEvent
 /// Class used to handle events before passing them to the RAGE tracker
 /// </summary>
 public class TrackerEventSender {
+	public static ScenarioController ScenarioController;
+
 	public static void SendEvent(TraceEvent trace)
 	{
 		try
 		{
 			foreach (var v in trace.Values.OrderBy(v => v.Key))
 			{
-				if (v.Key == TrackerContextKeys.TriggerUI.ToString())
-				{
-					if (string.IsNullOrEmpty(v.Value))
-					{
-						Debug.LogWarning(trace.Key + " event not tracked due to null TriggerUI value. If not caused by internal game event, this is a bug!");
-						return;
-					}
-					if (!Enum.IsDefined(typeof(TrackerTriggerSources), v.Value))
-					{
-						Debug.LogWarning("TrackerTriggerSources does not contain key " + v.Value + ". This is likely due to a typo in the inspector.");
-					}
-				}
 				Tracker.T.setVar(v.Key, v.Value);
 			}
 			if (SUGARManager.CurrentUser != null)
@@ -58,6 +48,11 @@ public class TrackerEventSender {
 			{
 				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
 			}
+			Tracker.T.setVar(TrackerContextKeys.CurrentScenario.ToString(), ScenarioController.CurrentScenario.Prefix);
+			Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), "");
+			Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), "");
+			Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), ScenarioController.CurrentCharacter.VoiceName);
+			Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), ScenarioController.FeedbackLevel.ToString());
 			switch (trace.ActionType)
 			{
 				case TrackerAsset.Verb.Accessed:

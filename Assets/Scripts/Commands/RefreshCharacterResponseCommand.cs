@@ -2,7 +2,6 @@
 
 public class RefreshCharacterResponseCommand : ICommand<ScenarioController>
 {
-
     public void Execute(ScenarioController parameter)
     {
         parameter.GetCharacterResponse();

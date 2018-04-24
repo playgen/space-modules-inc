@@ -4,8 +4,8 @@ using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Settings;
-using PlayGen.Unity.Utilities.Localization;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Localization;
 
 public class SettingsStateInput : TickStateInput
 {
@@ -13,15 +13,13 @@ public class SettingsStateInput : TickStateInput
 
 	private GameObject _settingsPanel;
 	private SettingCreation _creator;
-	private ButtonList _buttons;
 
 	protected override void OnInitialize()
 	{
 		AudioListener.volume = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1;
 		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
-		_buttons = new ButtonList("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer");
-		var backButton = _buttons.GetButton("BackButton");
-		var applyButton = _buttons.GetButton("ApplyButton");
+		var backButton = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/BackButton").GetComponent<Button>();
+		var applyButton = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/ApplyButton").GetComponent<Button>();
 		_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
 		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
 		_creator.Wipe();
@@ -40,7 +38,7 @@ public class SettingsStateInput : TickStateInput
 		//AudioListener.volume = volume.value;
 		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
 		_creator.RebuildLayout();
-		_buttons.GameObjects.BestFit();
+		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer").BestFit();
 	}
 
 	private void OnBackClick()
@@ -57,10 +55,10 @@ public class SettingsStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 
-		_buttons.GameObjects.BestFit();
-        _creator.RebuildLayout();
+		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer").BestFit();
+		_creator.RebuildLayout();
 
-        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 	}
 
