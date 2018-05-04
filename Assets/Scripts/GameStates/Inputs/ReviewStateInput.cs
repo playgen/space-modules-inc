@@ -31,12 +31,7 @@ public class ReviewStateInput : TickStateInput
 		_playerChatFeedbackPrefab = Resources.Load("Prefabs/PlayerChatFeedbackItem") as GameObject;
 		_feedbackPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 
-		var nextButton =
-			GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/NextButton");
-		nextButton.GetComponent<Button>().onClick.AddListener(() =>
-			{
-				NextClickedEvent?.Invoke();
-			});
+		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/NextButton").GetComponent<Button>().onClick.AddListener(() => NextClickedEvent?.Invoke());
 	}
 
 	protected override void OnEnter()
@@ -63,56 +58,27 @@ public class ReviewStateInput : TickStateInput
 	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood, ScenarioController.FeedbackMode feedbackMode)
 	{
 		_characterMood.fillAmount = (mood + 10) / 20;
-		ClearList();
+        foreach (RectTransform child in _reviewContent.GetComponent<ScrollRect>().content)
+        {
+            UnityEngine.Object.Destroy(child.gameObject);
+        }
 
-		foreach (var t in history)
+        foreach (var t in history)
 		{
-			Transform chatObject = null;
-
 			var entryKey = t.ChatObject.Agent;
-			switch (entryKey)
+            var feedback = history.Find(c => c.ChatObject == t.ChatObject);
+            var chatObject = UnityEngine.Object.Instantiate(entryKey == "Client" ? _clientChatPrefab : ((int)feedbackMode >= 1 && feedback != null && feedback.Scores.Count > 0) ? _playerChatFeedbackPrefab : _playerChatPrefab, _reviewContent.GetComponent<ScrollRect>().content, false);
+            chatObject.transform.Find("Panel").GetChild(0).GetComponent<Text>().text = t.ChatObject.Utterence;
+            if (entryKey == "Player" && (int)feedbackMode >= 1 && feedback != null && feedback.Scores.Count > 0)
 			{
-				case "Client":
-					chatObject = UnityEngine.Object.Instantiate(_clientChatPrefab).transform;
-					break;
-				case "Player":
-					var feedback = history.Find(c => c.ChatObject == t.ChatObject);
-					
-					if ((int)feedbackMode >= 1 && feedback != null && feedback.Scores.Count > 0)
-					{
-						chatObject = UnityEngine.Object.Instantiate(_playerChatFeedbackPrefab).transform;
-						var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
-
-						foreach (var feedbackScore in feedback.Scores)
-						{
-							var score = UnityEngine.Object.Instantiate(_feedbackPrefab).transform;
-							score.transform.SetParent(feedbackPanel, false);
-							score.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
-							score.transform.Find("Value").GetComponent<Text>().text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
-
-						}
-
-					}
-					else
-					{
-						chatObject = UnityEngine.Object.Instantiate(_playerChatPrefab).transform;
-					}
-					break;
-			}
-
-			if (chatObject != null)
-			{
-				chatObject.Find("Panel").GetChild(0).GetComponent<Text>().text = t.ChatObject.Utterence;
-				chatObject.transform.SetParent(_reviewContent.GetComponent<ScrollRect>().content, false);
-			}
-		}
-	}
-
-	private void ClearList()
-	{
-		foreach (RectTransform child in _reviewContent.GetComponent<ScrollRect>().content)
-		{
-			UnityEngine.Object.Destroy(child.gameObject);
+                var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
+                foreach (var feedbackScore in feedback.Scores)
+                {
+                    var score = UnityEngine.Object.Instantiate(_feedbackPrefab, feedbackPanel, false);
+                    score.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
+                    score.transform.Find("Value").GetComponent<Text>().text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
+                }
+            }
 		}
 	}
 }

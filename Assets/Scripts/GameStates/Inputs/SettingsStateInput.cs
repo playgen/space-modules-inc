@@ -16,27 +16,18 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		AudioListener.volume = PlayerPrefs.HasKey("Volume") ? PlayerPrefs.GetFloat("Volume") : 1;
-		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
-		var backButton = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/BackButton").GetComponent<Button>();
-		var applyButton = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/ApplyButton").GetComponent<Button>();
-		_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
-		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
-		_creator.Wipe();
-		//var volume = _creator.Volume(Localization.Get("Volume"), AudioListener.volume, false);
-		var language = _creator.Language(true, false);
-		//applyButton.onClick.AddListener(delegate { OnApplyClick(language, volume); });
-		applyButton.onClick.AddListener(delegate { OnApplyClick(language); });
-		backButton.onClick.AddListener(OnBackClick);
-		_creator.RebuildLayout();
+        _settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
+        _creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
+        _creator.Wipe();
+        var language = _creator.Language(true, false);
+        _creator.RebuildLayout();
+        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/ApplyButton").GetComponent<Button>().onClick.AddListener(() => OnApplyClick(language));
 	}
 
-	//private void OnApplyClick(Dropdown language, Slider volume)
 	private void OnApplyClick(Dropdown language)
 	{
 		Localization.UpdateLanguage(Localization.Languages[language.value]);
-		//AudioListener.volume = volume.value;
-		PlayerPrefs.SetFloat("Volume", AudioListener.volume);
 		_creator.RebuildLayout();
 		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer").BestFit();
 	}

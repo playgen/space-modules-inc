@@ -349,13 +349,12 @@ public class ScenarioController : ICommandAction
 				ChatObject = chat,
 				Scores = new Dictionary<string, int>()
 			});
-		}
-		UpdateScore(reply);
-		_feedbackScores = _chatScoreHistory.Last().Scores;
-		GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
-
-		// Update EmotionExpression
-		GetCharacterResponse();
+            UpdateScore(reply);
+            _feedbackScores = _chatScoreHistory.Last().Scores;
+            GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
+            // Update EmotionExpression
+            GetCharacterResponse();
+        }
 	}
 
 	public void GetCharacterResponse()

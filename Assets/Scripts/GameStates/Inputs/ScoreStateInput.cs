@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
-
 using PlayGen.SUGAR.Unity;
-
 using UnityEngine;
 using UnityEngine.UI;
-using PlayGen.Unity.Utilities.Localization;
 
 public class ScoreStateInput : TickStateInput
 {
 	public event Action NextEvent;
 	public event Action InGameQuestionnaire;
 
-	private ScorePanelBehaviour _scorePanelScript;
+	private ScorePanelBehaviour _scorePanel;
 	private readonly ScenarioController _scenarioController;
 	private GameObject _nextButton;
 
@@ -24,10 +21,8 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_scorePanelScript = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel").GetComponent<ScorePanelBehaviour>();
-
+		_scorePanel = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel").GetComponent<ScorePanelBehaviour>();
 		_nextButton = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
-
 		_nextButton.GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
 	}
 
@@ -42,11 +37,6 @@ public class ScoreStateInput : TickStateInput
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
-		if (_scenarioController.CurrentLevel == _scenarioController.LevelMax)
-		{
-			_nextButton.GetComponentInChildren<TextLocalization>().Key = "EXIT";
-			_nextButton.GetComponentInChildren<TextLocalization>().Set();
-		}
 		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 	}
@@ -60,7 +50,7 @@ public class ScoreStateInput : TickStateInput
 
 	public void UpdateScore(ScenarioController.ScoreObject obj)
 	{
-		_scorePanelScript.SetScorePanel(obj);
+		_scorePanel.SetScorePanel(obj);
 	}
 
 	private void OnNextButtonClicked()
