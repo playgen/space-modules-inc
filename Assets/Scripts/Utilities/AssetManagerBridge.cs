@@ -22,7 +22,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 				break;
 			case Severity.Information:
 			case Severity.Verbose:
-				Debug.Log(msg);
+				//Debug.Log(msg);
 				break;
 			default:
 				throw new ArgumentOutOfRangeException(nameof(severity), severity, null);

@@ -5,13 +5,11 @@ public class GameState : InputTickState
 {
 	private readonly ScenarioController _scenarioController;
 	private readonly ModulesController _modulesController;
-	private readonly GameStateInput _input;
 
 	public const string StateName = "GameState";
 
 	public GameState(GameStateInput input, ScenarioController scenarioController, ModulesController modulesController) : base(input)
 	{
-		_input = input;
 		_scenarioController = scenarioController;
 		_modulesController = modulesController;
 	}

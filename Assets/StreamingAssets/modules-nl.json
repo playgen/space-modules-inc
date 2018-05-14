@@ -1,0 +1,689 @@
+[
+    {
+      "Name": "Warp Drive 500 WideAngle 3",
+      "Id": "WD500PX43W",
+      "Type": "Sterremotor",
+      "Icon": "Engines",
+      "Description": "Zeer betrouwbare sterremotor van Fang Xenotech. Door zijn brede straalvanger van 300 graden zijn hoge snelheden mogelijk.",
+      "Faq": [
+        {
+          "Problem": "Drukken op start geeft 3 toontjes en de motor start niet op.",
+          "Solution": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden."
+        },
+        {
+          "Problem": "De motor is erg heet en wil niet starten.",
+          "Solution": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden"
+        },
+        {
+          "Problem": "De motor start niet op, en het rode lampje onder de startknop brandt kort.",
+          "Solution": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten."
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af en op het display verschijnt foutcode EC5612.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af, en er klinkt een waarschuwingstoon totdat op Reset wordt gedrukt.",
+          "Solution": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen"
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC6112.",
+          "Solution": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
+          "Solution": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje gaat knipperen bij 50% vermogen. Het vermogen neemt daarna niet meer toe.",
+          "Solution": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje brandt als de motor aan staat. Het maximale vermogen is 50%.",
+          "Solution": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!"
+        },
+        {
+          "Problem": "De motor gaat maximaal naar 50% vermogen.",
+          "Solution": "De veiligheidsmode staat dan aan. Zet deze eerst uit."
+        }
+      ]
+    },
+    {
+      "Name": "Warp Drive 500 WideAngle 2",
+      "Id": "WD500PS42D",
+      "Type": "Sterremotor",
+      "Icon": "Engines",
+      "Description": "Betrouwbare sterremotor van Fang Xenotech. Een goede straalvanger van 200 graden zorgt voor een rustige en snelle reis door de ruimte.",
+      "Faq": [
+        {
+          "Problem": "Drukken op start geeft 3 toontjes en de motor start niet op.",
+          "Solution": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen"
+        },
+        {
+          "Problem": "De motor is erg heet en wil niet starten.",
+          "Solution": "Dit type moet eerst afkoelen. Je moet een uur wachten"
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af en op het display verschijnt foutcode EC5612.",
+          "Solution": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen."
+        },
+        {
+          "Problem": "De motor wordt erg heet en slaat na een uur af.",
+          "Solution": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig."
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af, en er klinkt een waarschuwingstoon totdat op Reset wordt gedrukt.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC6112.",
+          "Solution": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
+          "Solution": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje gaat knipperen bij 50% vermogen. Het vermogen neemt daarna niet meer toe.",
+          "Solution": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!"
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje brandt als de motor aan staat. Het maximale vermogen is 50%.",
+          "Solution": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien."
+        }
+      ]
+    },
+    {
+      "Name": "Flash Drive 5.1 2D",
+      "Id": "FD501PY42D",
+      "Type": "Sterremotor",
+      "Icon": "Engines",
+      "Description": "Sterremotor van Newfarer-Terragraphics. Kleine gecontroleerde kernexplosies liggen in het hart van deze krachtige motor. Zeer geschikt voor kleinere schepen omdat er slechts weinig brandstof hoeft te worden opgeslagen.",
+      "Faq": [
+        {
+          "Problem": "Drukken op start geeft 3 toontjes en de motor start niet op.",
+          "Solution": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden."
+        },
+        {
+          "Problem": "De motor is erg heet en wil niet starten.",
+          "Solution": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop."
+        },
+        {
+          "Problem": "De motor start niet op, en het rode lampje onder de startknop brandt kort.",
+          "Solution": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten."
+        },
+        {
+          "Problem": "De motor wordt erg heet en slaat na een uur af.",
+          "Solution": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
+          "Solution": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
+          "Solution": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje brandt als de motor aan staat. Het maximale vermogen is 50%.",
+          "Solution": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        },
+        {
+          "Problem": "De motor gaat maximaal naar 50% vermogen.",
+          "Solution": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien."
+        }
+      ]
+    },
+    {
+      "Name": "Continuum 50/32W",
+      "Id": "CD50PY32W",
+      "Type": "Sterremotor",
+      "Icon": "Engines",
+      "Description": "Motor van StellarLabs Inc, die voortgedreven wordt door opgevangen sterrelicht. Zeer geschikt voor langere reizen, minder geschikt voor korte tripjes.",
+      "Faq": [
+        {
+          "Problem": "Drukken op start geeft 3 toontjes en de motor start niet op.",
+          "Solution": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken."
+        },
+        {
+          "Problem": "De motor start niet op, en het rode lampje onder de startknop brandt kort.",
+          "Solution": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten."
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af en op het display verschijnt foutcode EC5612.",
+          "Solution": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
+        },
+        {
+          "Problem": "De motor wordt erg heet en slaat na een uur af.",
+          "Solution": "Dit type moet eerst afkoelen. Je moet een uur wachten"
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af, en er klinkt een waarschuwingstoon totdat op Reset wordt gedrukt.",
+          "Solution": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
+          "Solution": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje gaat knipperen bij 50% vermogen. Het vermogen neemt daarna niet meer toe.",
+          "Solution": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren."
+        },
+        {
+          "Problem": "De motor gaat maximaal naar 50% vermogen.",
+          "Solution": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken."
+        }
+      ]
+    },
+    {
+      "Name": "Interstellar Drive Y-Band",
+      "Id": "ID502YZ20",
+      "Type": "Sterremotor",
+      "Icon": "Engines",
+      "Description": "Deze bijna mystieke motor van Tang-Turner Technologies is omgeven door allerlei vreemde geruchten. De werking van deze motor wordt nog steeds goed geheim gehouden, maar hij blijkt zeer goed en betrouwbaar te werken! Er zijn slechts een handvol (fatale) ongelukken gebeurd sinds hij 2 jaar geleden op de markt is gekomen.",
+      "Faq": [
+        {
+          "Problem": "De motor is erg heet en wil niet starten.",
+          "Solution": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen."
+        },
+        {
+          "Problem": "De motor start niet op, en het rode lampje onder de startknop brandt kort.",
+          "Solution": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!"
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af en op het display verschijnt foutcode EC5612.",
+          "Solution": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig."
+        },
+        {
+          "Problem": "De motor wordt erg heet en slaat na een uur af.",
+          "Solution": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen."
+        },
+        {
+          "Problem": "De motor slaat na een uur draaien af, en er klinkt een waarschuwingstoon totdat op Reset wordt gedrukt.",
+          "Solution": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC6112.",
+          "Solution": "Zet de motor uit en zet de sensoren aan voordat je de motor weer start."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC6112.",
+          "Solution": "Druk op de start knop totdat hij weer start."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC5231.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
+          "Problem": "De motor gaat uit bij het aanzetten van een sensornet. Er verschijnt foutcode EC8508.",
+          "Solution": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje gaat knipperen bij 50% vermogen. Het vermogen neemt daarna niet meer toe.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden."
+        },
+        {
+          "Problem": "Het rode waarschuwingslampje brandt als de motor aan staat. Het maximale vermogen is 50%.",
+          "Solution": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren."
+        }
+      ]
+    },
+    {
+      "Name": "NuclearCell 1000PK X1",
+      "Id": "NC1KPKX1",
+      "Type": "Krachtcel",
+      "Icon": "Power_Cells",
+      "Description": "Goede krachtcel met een nucleaire kern van StellarLabs Inc. Bij een juiste afscherming komt er nauwelijks straling vrij. Goedkoop in gebruik.",
+      "Faq": [
+        {
+          "Problem": "De krachtcel wordt erg heet en het rode waarschuwingslampje gaat knipperen.",
+          "Solution": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel wordt erg heet en er komt rook vanaf.",
+          "Solution": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon."
+        },
+        {
+          "Problem": "De krachtcel wordt snel heet. Daarna schakelt hij uit (Op de meeste schepen schakelt dan de noodstroom in).",
+          "Solution": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
+        },
+        {
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan."
+        },
+        {
+          "Problem": "De krachtcel geeft een hoog zoemend geluid wat langzaam steeds hoger wordt.",
+          "Solution": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus."
+        },
+        {
+          "Problem": "Apparaten schakelen uit nadat ze een paar seconden stroom hebben gehad van de krachtcel.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        },
+        {
+          "Problem": "Alleen de hoge prioriteit apparaten krijgen stroom, alle andere apparaten niet.",
+          "Solution": "Dit gebeurt als de krachtcel nog maar voor 20% vol is. Bijvullen moet dit oplossen."
+        },
+        {
+          "Problem": "De krachtcel loopt snel leeg. Na een uur is bijna 80% verbruikt.",
+          "Solution": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
+        },
+        {
+          "Problem": "Op het controlepaneel brandt het lampje van de krachtcel niet, ook niet na opladen.",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
+        },
+        {
+          "Problem": "De krachtcel raakt snel leeg. Het glas om de cel vertoont barsten.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        }
+      ]
+    },
+    {
+      "Name": "NuclearCell 1500PK X",
+      "Id": "NC1K5PKX",
+      "Type": "Krachtcel",
+      "Icon": "Power_Cells",
+      "Description": "Krachtcel voor groot vermogen met een nucleaire kern van StellarLabs Inc. Goede afscherming is wel noodzakelijk om stralingsbproblemen te voorkomen. Goede prijs/prestatie verhouding.",
+      "Faq": [
+        {
+          "Problem": "De krachtcel wordt erg heet en het rode waarschuwingslampje gaat knipperen.",
+          "Solution": "Soms springt de koelingskap los. Controleer of deze goed dicht zit."
+        },
+        {
+          "Problem": "De krachtcel wordt erg heet en er komt rook vanaf.",
+          "Solution": "Dit type krachtcel wordt inderdaad erg heet. Waarschijnlijk ligt er stof op wat de rook veroorzaakt. Schoonmaken en wel goed in de gaten blijven houden."
+        },
+        {
+          "Problem": "De krachtcel wordt snel heet. Daarna schakelt hij uit (Op de meeste schepen schakelt dan de noodstroom in).",
+          "Solution": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel geeft af en toe een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
+        },
+        {
+          "Problem": "Apparaten schakelen uit nadat ze een paar seconden stroom hebben gehad van de krachtcel.",
+          "Solution": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon."
+        },
+        {
+          "Problem": "De krachtcel voedt de apparaten niet goed. De apparaten krijgen wel stroom, maar ze functioneren niet goed.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        },
+        {
+          "Problem": "De krachtcel loopt snel leeg. Na een uur is bijna 80% verbruikt.",
+          "Solution": "Laadt de cel een volle 12 uur op voordat je hem weer gebruikt."
+        },
+        {
+          "Problem": "Op het controlepaneel brandt het lampje van de krachtcel niet, ook niet na opladen.",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan."
+        },
+        {
+          "Problem": "De krachtcel raakt snel leeg. Het glas om de cel vertoont barsten.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        }
+      ]
+    },
+    {
+      "Name": "HydroCell 3400A",
+      "Id": "HC34HA",
+      "Type": "Krachtcel",
+      "Icon": "Power_Cells",
+      "Description": "Waterstof krachtcel voor schone energie van Tang-Turner Technologies. Nadeel is de grootte van deze cel in verhouding met andere types.",
+      "Faq": [
+        {
+          "Problem": "De krachtcel wordt erg heet en het rode waarschuwingslampje gaat knipperen.",
+          "Solution": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus."
+        },
+        {
+          "Problem": "De krachtcel wordt erg heet en er komt rook vanaf.",
+          "Solution": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel wordt snel heet. Daarna schakelt hij uit (Op de meeste schepen schakelt dan de noodstroom in).",
+          "Solution": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
+        },
+        {
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen."
+        },
+        {
+          "Problem": "De krachtcel geeft af en toe een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken."
+        },
+        {
+          "Problem": "De krachtcel geeft een hoog zoemend geluid wat langzaam steeds hoger wordt.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        },
+        {
+          "Problem": "Apparaten schakelen uit nadat ze een paar seconden stroom hebben gehad van de krachtcel.",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
+        },
+        {
+          "Problem": "De krachtcel voedt de apparaten niet goed. De apparaten krijgen wel stroom, maar ze functioneren niet goed.",
+          "Solution": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon."
+        },
+        {
+          "Problem": "Alleen de hoge prioriteit apparaten krijgen stroom, alle andere apparaten niet.",
+          "Solution": "Dit komt vaak door zonnevlammen van een nabije ster. Hier vandaan vliegen zou het probleem moeten oplossen."
+        },
+        {
+          "Problem": "Op het controlepaneel brandt het lampje van de krachtcel niet, ook niet na opladen.",
+          "Solution": "Laadt de cel een volle 12 uur op voordat je hem weer gebruikt."
+        }
+      ]
+    },
+    {
+      "Name": "PowerCell Z-Tech 1215",
+      "Id": "PC1215Z",
+      "Type": "Krachtcel",
+      "Icon": "Power_Cells",
+      "Description": "Krachtcel gebaseerd op de Z-brandstof van Fang Xenotech. Staat vooral bekend om zijn lange levensduur.",
+      "Faq": [
+        {
+          "Problem": "De krachtcel wordt erg heet en het rode waarschuwingslampje gaat knipperen.",
+          "Solution": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
+        },
+        {
+          "Problem": "De krachtcel geeft af en toe een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan."
+        },
+        {
+          "Problem": "De krachtcel geeft een hoog zoemend geluid wat langzaam steeds hoger wordt.",
+          "Solution": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel voedt de apparaten niet goed. De apparaten krijgen wel stroom, maar ze functioneren niet goed.",
+          "Solution": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
+        },
+        {
+          "Problem": "Alleen de hoge prioriteit apparaten krijgen stroom, alle andere apparaten niet.",
+          "Solution": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon."
+        },
+        {
+          "Problem": "De krachtcel loopt snel leeg. Na een uur is bijna 80% verbruikt.",
+          "Solution": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus."
+        },
+        {
+          "Problem": "Op het controlepaneel brandt het lampje van de krachtcel niet, ook niet na opladen.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        },
+        {
+          "Problem": "De krachtcel raakt snel leeg. Het glas om de cel vertoont barsten.",
+          "Solution": "Dit is voorlopig op te lossen door de behuizing te vullen met thermische pasta. De krachtcel wel bij gelegenheid vervangen."
+        }
+      ]
+    },
+    {
+      "Name": "PowerCell Z-Tech 1417",
+      "Id": "PC1417Z",
+      "Type": "Krachtcel",
+      "Icon": "Power_Cells",
+      "Description": "Deze krachtcel lopend op Z-brandstof is het paradepaardje van Fang Xenotech. Geschikt voor hoog vermogen en langdurige reizen.",
+      "Faq": [
+        {
+          "Problem": "De krachtcel wordt erg heet en er komt rook vanaf.",
+          "Solution": "Soms springt de koelingskap los. Controleer of deze goed dicht zit."
+        },
+        {
+          "Problem": "De krachtcel wordt snel heet. Daarna schakelt hij uit (Op de meeste schepen schakelt dan de noodstroom in).",
+          "Solution": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel geeft voortdurend een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken."
+        },
+        {
+          "Problem": "De krachtcel geeft af en toe een hoog zoemend geluid als hij flink wordt belast (bv door de motor).",
+          "Solution": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort."
+        },
+        {
+          "Problem": "Apparaten schakelen uit nadat ze een paar seconden stroom hebben gehad van de krachtcel.",
+          "Solution": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in."
+        },
+        {
+          "Problem": "De krachtcel voedt de apparaten niet goed. De apparaten krijgen wel stroom, maar ze functioneren niet goed.",
+          "Solution": "Dit komt vaak door zonnevlammen van een nabije ster. Hier vandaan vliegen zou het probleem moeten oplossen."
+        },
+        {
+          "Problem": "Alleen de hoge prioriteit apparaten krijgen stroom, alle andere apparaten niet.",
+          "Solution": "De krachtcel is versleten en moet worden vervangen."
+        },
+        {
+          "Problem": "De krachtcel loopt snel leeg. Na een uur is bijna 80% verbruikt.",
+          "Solution": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel."
+        },
+        {
+          "Problem": "De krachtcel raakt snel leeg. Het glas om de cel vertoont barsten.",
+          "Solution": "Dit is voorlopig op te lossen door de behuizing te vullen met thermische pasta. De krachtcel wel bij gelegenheid vervangen."
+        }
+      ]
+    },
+    {
+      "Name": "SensArr Y-Band 3",
+      "Id": "SA67YY3",
+      "Type": "Sensornet",
+      "Icon": "Sensors",
+      "Description": "Standaard sensornet van Fang Xenotech. Actieve en passieve sensors op Y-band zorgen voor 360 graden zicht rondom het schip.",
+      "Faq": [
+        {
+          "Problem": "De handmatige scan van het sensornet werkt niet.",
+          "Solution": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
+        },
+        {
+          "Problem": "De testprocedure van het sensornet geeft geen fouten, maar er wordt niets gedetecteerd.",
+          "Solution": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet geeft een heleboel kleine objecten weer.",
+          "Solution": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
+        },
+        {
+          "Problem": "Het sensornet geeft soms foutief hele grote objecten op het scherm.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten dichterbij weer dan ze horen te zijn.",
+          "Solution": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten verder weg weer dan ze horen te zijn.",
+          "Solution": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
+        },
+        {
+          "Problem": "Het scherm van het sensornet gaat trillen en daarna valt het net uit.",
+          "Solution": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt."
+        },
+        {
+          "Problem": "Er gaan verschillende waarschuwingslampjes branden en daarna valt het sensornet uit.",
+          "Solution": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
+        }
+      ]
+    },
+    {
+      "Name": "SensArr YZ-Band 2",
+      "Id": "SA90YZ2",
+      "Type": "Sensornet",
+      "Icon": "Sensors",
+      "Description": "Sensornet van Fang Xenotech die zowel de Y- als Z-band gebruikt, en daardoor betrouwbaarder is dan de meeste andere modellen.",
+      "Faq": [
+        {
+          "Problem": "De handmatige scan van het sensornet werkt niet.",
+          "Solution": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
+        },
+        {
+          "Problem": "Het sensornet kan niet detecteren of het schip beweegt of niet.",
+          "Solution": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet geeft een heleboel kleine objecten weer.",
+          "Solution": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor."
+        },
+        {
+          "Problem": "Het sensornet geeft soms foutief hele grote objecten op het scherm.",
+          "Solution": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type."
+        },
+        {
+          "Problem": "Het sensornet geeft aan dat het schip in een grote massa zit.",
+          "Solution": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten dichterbij weer dan ze horen te zijn.",
+          "Solution": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet gaat trillen en daarna valt het net uit.",
+          "Solution": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
+        },
+        {
+          "Problem": "Er gaan verschillende waarschuwingslampjes branden en daarna valt het sensornet uit.",
+          "Solution": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet slaat vast en daarna valt het net uit.",
+          "Solution": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
+        }
+      ]
+    },
+    {
+      "Name": "SeGrid 3.2 Beta",
+      "Id": "SG3200B",
+      "Type": "Sensornet",
+      "Icon": "Sensors",
+      "Description": "Instapmodel voor de belangrijkste waarnemingen van StellarLabs Inc. Gebruikt zowel passieve als active sensoren.",
+      "Faq": [
+        {
+          "Problem": "De handmatige scan van het sensornet werkt niet.",
+          "Solution": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
+        },
+        {
+          "Problem": "Het sensornet kan niet detecteren of het schip beweegt of niet.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden."
+        },
+        {
+          "Problem": "De testprocedure van het sensornet geeft geen fouten, maar er wordt niets gedetecteerd.",
+          "Solution": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt."
+        },
+        {
+          "Problem": "Het scherm van het sensornet geeft een heleboel kleine objecten weer.",
+          "Solution": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
+        },
+        {
+          "Problem": "Het sensornet geeft aan dat het schip in een grote massa zit.",
+          "Solution": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten dichterbij weer dan ze horen te zijn.",
+          "Solution": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten verder weg weer dan ze horen te zijn.",
+          "Solution": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet gaat trillen en daarna valt het net uit.",
+          "Solution": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet slaat vast en daarna valt het net uit.",
+          "Solution": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor."
+        }
+      ]
+    },
+    {
+      "Name": "TotalVision 1000 X1",
+      "Id": "TV1KX1",
+      "Type": "Sensornet",
+      "Icon": "Sensors",
+      "Description": "Sensor net voor waarneming in alle bekende spectra. Geproduceerd door Alpha VisionTech en bedoeld voor de hogere prijsklasse van schepen.",
+      "Faq": [
+        {
+          "Problem": "De handmatige scan van het sensornet werkt niet.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden."
+        },
+        {
+          "Problem": "Het sensornet kan niet detecteren of het schip beweegt of niet.",
+          "Solution": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
+        },
+        {
+          "Problem": "De testprocedure van het sensornet geeft geen fouten, maar er wordt niets gedetecteerd.",
+          "Solution": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen."
+        },
+        {
+          "Problem": "Het sensornet geeft soms foutief hele grote objecten op het scherm.",
+          "Solution": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
+        },
+        {
+          "Problem": "Het sensornet geeft aan dat het schip in een grote massa zit.",
+          "Solution": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten dichterbij weer dan ze horen te zijn.",
+          "Solution": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten verder weg weer dan ze horen te zijn.",
+          "Solution": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type."
+        },
+        {
+          "Problem": "Er gaan verschillende waarschuwingslampjes branden en daarna valt het sensornet uit.",
+          "Solution": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor."
+        },
+        {
+          "Problem": "Het scherm van het sensornet slaat vast en daarna valt het net uit.",
+          "Solution": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
+        }
+      ]
+    },
+    {
+      "Name": "TotalVision 2000 ZeroBack",
+      "Id": "TV2KZB",
+      "Type": "Sensornet",
+      "Icon": "Sensors",
+      "Description": "Het sensornet als je echt geen enkele waarneming wilt missen. Beste model van Alpha VisionTech die door de ZeroBack technologie ook geschikt is voor militaire doeleinden.",
+      "Faq": [
+        {
+          "Problem": "Het sensornet kan niet detecteren of het schip beweegt of niet.",
+          "Solution": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen."
+        },
+        {
+          "Problem": "De testprocedure van het sensornet geeft geen fouten, maar er wordt niets gedetecteerd.",
+          "Solution": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net."
+        },
+        {
+          "Problem": "Het scherm van het sensornet geeft een heleboel kleine objecten weer.",
+          "Solution": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen."
+        },
+        {
+          "Problem": "Het sensornet geeft soms foutief hele grote objecten op het scherm.",
+          "Solution": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan."
+        },
+        {
+          "Problem": "Het sensornet geeft aan dat het schip in een grote massa zit.",
+          "Solution": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen."
+        },
+        {
+          "Problem": "Het sensornet geeft objecten verder weg weer dan ze horen te zijn.",
+          "Solution": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen."
+        },
+        {
+          "Problem": "Het scherm van het sensornet gaat trillen en daarna valt het net uit.",
+          "Solution": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor."
+        },
+        {
+          "Problem": "Er gaan verschillende waarschuwingslampjes branden en daarna valt het sensornet uit.",
+          "Solution": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt."
+        },
+        {
+          "Problem": "Het scherm van het sensornet slaat vast en daarna valt het net uit.",
+          "Solution": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden."
+        }
+      ]
+    }
+  ]

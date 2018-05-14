@@ -167,7 +167,7 @@ public class GameStateInput : TickStateInput
 		{
 			var dialogueAction = randomDialogueActions[i];
 			var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
-			choiceItem.transform.GetChild(0).GetComponent<Text>().text = dialogueAction.Utterance;
+			choiceItem.transform.GetChild(0).GetComponent<Text>().text = Localization.Get(dialogueAction.FileName);
 			contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
 			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
 			choiceItem.GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id)));

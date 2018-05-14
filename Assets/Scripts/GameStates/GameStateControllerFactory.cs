@@ -22,7 +22,7 @@ public class GameStateControllerFactory
 		var reviewState = CreateReviewState(_scenarioController);
 		var scoreState = CreateScoreState(_scenarioController);
 		var questionnaireState = CreateQuestionnaireState();
-		TrackerEventSender.ScenarioController = _scenarioController;
+		TrackerEventSender.SetScenarioController(_scenarioController);
 
 		var stateController = new TickStateController(
 			loadingState,

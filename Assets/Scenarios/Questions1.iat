@@ -1,0 +1,483 @@
+{
+	"root":
+		{
+			"classId": 0,
+			"ScenarioName": "Space Modules - Questionnaire 1",
+			"Description": "Scenario for Space Modules Inc.",
+			"CharacterSources": ["..\\ScenarioRelated\\Negative.rpc", "..\\ScenarioRelated\\Neutral.rpc", "..\\ScenarioRelated\\Positive.rpc"],
+			"Dialogues": [
+				{
+					"CurrentState": "Opening",
+					"NextState": "AnswerOK",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-OP",
+					"Utterance": "Goedemorgen, ik heb wat vragen over hoe je het spel vond.",
+					"UtteranceId": "TTS-5D2713D12479B7A0476529D694EC59AC"
+				}, 
+				{
+					"CurrentState": "TaskLoad1",
+					"NextState": "AnswerTL1",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL1",
+					"Utterance": "Hoe mentaal belastend waren de opdrachten in de game?",
+					"UtteranceId": "TTS-40E6592D9B733431E3EBC6788F846146"
+				}, 
+				{
+					"CurrentState": "TaskLoad2",
+					"NextState": "AnswerTL2",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL2",
+					"Utterance": "Hoe fysiek belastend waren de opdrachten in de game?",
+					"UtteranceId": "TTS-74227848B9A5466EC5695BD9E8E30E38"
+				}, 
+				{
+					"CurrentState": "TaskLoad3",
+					"NextState": "AnswerTL3",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL3",
+					"Utterance": "Hoe gehaast was het tempo van de opdrachten in de game?",
+					"UtteranceId": "TTS-18F3BF1F592B844BD6FE52532E2B8018"
+				}, 
+				{
+					"CurrentState": "TaskLoad4",
+					"NextState": "AnswerTL4",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL4",
+					"Utterance": "Hoe succesvol was je in het doen van de opdrachten in de game?",
+					"UtteranceId": "TTS-5221544359BC8D4300531E3C3017C248"
+				}, 
+				{
+					"CurrentState": "TaskLoad5",
+					"NextState": "AnswerTL5",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL5",
+					"Utterance": "Hoe hard moest je je inspannen om de opdrachten in de game succesvol te kunnen doen?",
+					"UtteranceId": "TTS-84175A11DB0DA049C41D2157DF450AA8"
+				}, 
+				{
+					"CurrentState": "TaskLoad6",
+					"NextState": "AnswerTL6",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-TL6",
+					"Utterance": "Hoeveel negatieve gevoelens had je tijdens de opdrachten in de game? (Bijvoorbeeld: onzeker, ontmoedigd, geïrriteerd, gestrest, geërgerd)",
+					"UtteranceId": "TTS-31CC5E0D8E1427EC63F182C2E3B89041"
+				}, 
+				{
+					"CurrentState": "Closing",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "QA-CLOSE",
+					"Utterance": "Dat waren alle vragen. Dank je wel en tot ziens!",
+					"UtteranceId": "TTS-CBEA45E265BA98EBCDCAA694BC2E5848"
+				}, 
+				{
+					"CurrentState": "Start",
+					"NextState": "Opening",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "S-OP-P",
+					"Utterance": "Goedemorgen, dit is Space Modules Inc. Hoe kan ik U helpen?",
+					"UtteranceId": "TTS-C468151DE3D61832A10A2B166B06534A"
+				}, 
+				{
+					"CurrentState": "AnswerOK",
+					"NextState": "TaskLoad1",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-OK",
+					"Utterance": "Ok, dat is goed. Ga je gang.",
+					"UtteranceId": "TTS-2B0F7AC10F3B7A7FC8429BBDCD3B1B6E"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH1",
+					"Utterance": "Zeer laag belastend",
+					"UtteranceId": "TTS-B436CD169F7B768226CB61009502B0B5"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH2",
+					"Utterance": "Laag belastend",
+					"UtteranceId": "TTS-F68EC6689D82732B7546A3EC1E0AC05B"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH3",
+					"Utterance": "Enigszins laag belastend",
+					"UtteranceId": "TTS-3EA91557ADC28BFB3D91059D3F66E7B4"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH5",
+					"Utterance": "Enigszins hoog belastend",
+					"UtteranceId": "TTS-09592A04F8A9D7F02347EDFB7342987A"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH6",
+					"Utterance": "Hoog belastend",
+					"UtteranceId": "TTS-7CB3A128FEE742D3849DFB300E32BFB5"
+				}, 
+				{
+					"CurrentState": "AnswerTL1",
+					"NextState": "TaskLoad2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH7",
+					"Utterance": "Zeer hoog belastend",
+					"UtteranceId": "TTS-BB53190F5F31AB651E3122CD61918575"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH1",
+					"Utterance": "Zeer laag belastend",
+					"UtteranceId": "TTS-B436CD169F7B768226CB61009502B0B5"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH2",
+					"Utterance": "Laag belastend",
+					"UtteranceId": "TTS-F68EC6689D82732B7546A3EC1E0AC05B"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH3",
+					"Utterance": "Enigszins laag belastend",
+					"UtteranceId": "TTS-3EA91557ADC28BFB3D91059D3F66E7B4"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH5",
+					"Utterance": "Enigszins hoog belastend",
+					"UtteranceId": "TTS-09592A04F8A9D7F02347EDFB7342987A"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH6",
+					"Utterance": "Hoog belastend",
+					"UtteranceId": "TTS-7CB3A128FEE742D3849DFB300E32BFB5"
+				}, 
+				{
+					"CurrentState": "AnswerTL2",
+					"NextState": "TaskLoad3",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-CH7",
+					"Utterance": "Zeer hoog belastend",
+					"UtteranceId": "TTS-BB53190F5F31AB651E3122CD61918575"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU1",
+					"Utterance": "Zeer ongehaast",
+					"UtteranceId": "TTS-D413D55D2BD272CADB8618ACEACDA0FC"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU2",
+					"Utterance": "Ongehaast",
+					"UtteranceId": "TTS-3754756D6461560630B3052DF9EDA3DA"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU3",
+					"Utterance": "Enigszins ongehaast",
+					"UtteranceId": "TTS-90006DD81B466DE525FD3D3EE6C1F206"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU5",
+					"Utterance": "Enigszins gehaast",
+					"UtteranceId": "TTS-F17792A0A2C1E5E43EC66690586C867D"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU6",
+					"Utterance": "Gehaast",
+					"UtteranceId": "TTS-2CD5C1937DB7020BAD9BB662A8C5D7AE"
+				}, 
+				{
+					"CurrentState": "AnswerTL3",
+					"NextState": "TaskLoad4",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-HU7",
+					"Utterance": "Zeer gehaast",
+					"UtteranceId": "TTS-B021B06B3EAAE4194ECFE1B79BB4D171"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU1",
+					"Utterance": "Zeer onsuccesvol",
+					"UtteranceId": "TTS-946CCB5D9E5B76648798016D535C5FEE"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU2",
+					"Utterance": "Onsuccesvol",
+					"UtteranceId": "TTS-50C121AEDE42D8A380D1C9B867C88628"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU3",
+					"Utterance": "Enigszins onsuccesvol",
+					"UtteranceId": "TTS-6A092DDF9FDD7BB7CCF795CB6CE0797C"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU5",
+					"Utterance": "Enigszins succesvol",
+					"UtteranceId": "TTS-8532F3EA5746837500304748167F30B9"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU6",
+					"Utterance": "Succcesvol",
+					"UtteranceId": "TTS-11B7541B48E1EB357D4D1FCA562FFA57"
+				}, 
+				{
+					"CurrentState": "AnswerTL4",
+					"NextState": "TaskLoad5",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-SU7",
+					"Utterance": "Zeer succesvol",
+					"UtteranceId": "TTS-5174D69E4EDB091EC72C2D794FBA01AC"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF1",
+					"Utterance": "Zeer weinig inspanning",
+					"UtteranceId": "TTS-54F3EFC4C4E155EBFE1B18518254EEB8"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF2",
+					"Utterance": "Weinig inspanning",
+					"UtteranceId": "TTS-FB2ABD8A7CE7C9E00F70EF611097ACB8"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF3",
+					"Utterance": "Enigszins weinig inspanning",
+					"UtteranceId": "TTS-FE65C83776051D4E510E29FBBA714BA5"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF5",
+					"Utterance": "Enigszins veel inspanning",
+					"UtteranceId": "TTS-F55447F3F4FA518A58784A5FF6C85102"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF6",
+					"Utterance": "Veel inspanning",
+					"UtteranceId": "TTS-98D37E512EAD3BEE623365BCEF93D8C2"
+				}, 
+				{
+					"CurrentState": "AnswerTL5",
+					"NextState": "TaskLoad6",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-EF7",
+					"Utterance": "Zeer veel inspanning",
+					"UtteranceId": "TTS-427F85627E3BE503485D63D380461CCF"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF1",
+					"Utterance": "Zeer weinig negatieve gevoelens",
+					"UtteranceId": "TTS-439C973F98DBAF5D2DD31872FDDBD560"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF2",
+					"Utterance": "Weinig negatieve gevoelens",
+					"UtteranceId": "TTS-B460DB111181136529E687FABC6516BE"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF3",
+					"Utterance": "Enigszins weinig negatieve gevoelens",
+					"UtteranceId": "TTS-6D9C34DAFDFB35AEB455007B33044291"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-ZERO",
+					"Utterance": "Neutraal",
+					"UtteranceId": "TTS-2FDA6A3C07B3C98BE6E5DC28C8A6FEF9"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF5",
+					"Utterance": "Enigszins veel negatieve gevoelens",
+					"UtteranceId": "TTS-0D4E23230485DED3A893F5CC99EE73B2"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF6",
+					"Utterance": "Veel negatieve gevoelens",
+					"UtteranceId": "TTS-1F666B8E2F4EC9BF05B045B93ADD7A38"
+				}, 
+				{
+					"CurrentState": "AnswerTL6",
+					"NextState": "Closing",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "QS-NF7",
+					"Utterance": "Zeer veel negatieve gevoelens",
+					"UtteranceId": "TTS-3E0FFCF810AD064200C0AFCABE620EBB"
+				}]
+		},
+	"types": [
+		{
+			"TypeId": 0,
+			"ClassName": "IntegratedAuthoringTool.IntegratedAuthoringToolAsset, IntegratedAuthoringTool, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null"
+		}]
+}

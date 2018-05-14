@@ -15,6 +15,8 @@ using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
 
+using PlayGen.Unity.Utilities.Localization;
+
 using TrackerAssetPackage;
 
 using Random = System.Random;
@@ -126,6 +128,7 @@ public class ScenarioController : ICommandAction
 	public RolePlayCharacterAsset CurrentCharacter;
 	public bool IsTalking;
 	public ScenarioData CurrentScenario;
+	public string ScenarioCode;
 	public FeedbackMode FeedbackLevel;
 
 	private readonly AudioController _audioController;
@@ -182,6 +185,7 @@ public class ScenarioController : ICommandAction
 			var index = rng.Next(CurrentScenario.ScenarioPaths.Length);
 			Debug.Log(CurrentScenario.ScenarioPaths[index]);
 			var error = string.Empty;
+			ScenarioCode = CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
 			_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", CurrentScenario.ScenarioPaths[index]), out error);
 			if (!string.IsNullOrEmpty(error))
 			{
@@ -278,7 +282,7 @@ public class ScenarioController : ICommandAction
 
 			var chat = new ChatObject 
 			{
-				Utterence = reply.Utterance,
+				Utterence = Localization.Get(reply.FileName),
 				Agent = "Player",
 				Code = reply.CurrentState + "." + reply.FileName
 			};
@@ -314,7 +318,7 @@ public class ScenarioController : ICommandAction
 				{
 					var chat = new ChatObject
 					{
-						Utterence = characterDialogue.Utterance,
+						Utterence = Localization.Get(characterDialogue.FileName),
 						Agent = "Client",
 						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
 					};
@@ -327,7 +331,7 @@ public class ScenarioController : ICommandAction
 					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
-					GetCharacterDialogueSuccessEvent?.Invoke(characterDialogue.Utterance);
+					GetCharacterDialogueSuccessEvent?.Invoke(Localization.Get(characterDialogue.FileName));
 				}
 			}
 		}

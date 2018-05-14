@@ -13,7 +13,7 @@ public class ModulesController : ICommandAction
 {
 	#region Modules Config
 
-	private struct ModuleEntry
+	public struct ModuleEntry
 	{
 		public string Name;
 		public string Id;
@@ -23,7 +23,7 @@ public class ModulesController : ICommandAction
 		public FaqEntry[] Faq;
 	}
 
-	private struct FaqEntry
+	public struct FaqEntry
 	{
 		public string Problem;
 		public string Solution;
@@ -39,17 +39,16 @@ public class ModulesController : ICommandAction
 	private readonly RectTransform _modulesContent;
 
 	private readonly Sprite[] _moduleIcons;
-	private ModuleEntry[] _modulesDatabase;
+	private readonly Dictionary<string, ModuleEntry[]> _modulesDatabase = new Dictionary<string, ModuleEntry[]>();
 	private readonly Button _backButton;
 	private readonly Button _nextArrow;
 	private readonly Button _backArrow;
 
 	public ModulesController()
 	{
-		var aotFaq = new FaqEntry ();
-		var aotFaqList = new List<FaqEntry> ();
-		var aotModEnt = new ModuleEntry ();
-		var aotModEntList = new List<ModuleEntry> ();
+		var aotFaqList = new List<FaqEntry>();
+		var aotModEntList = new List<ModuleEntry>();
+		Localization.Get("Start");
 
 		_modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
 		_modulesContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View").GetComponent<ScrollRect>().content;
@@ -75,22 +74,26 @@ public class ModulesController : ICommandAction
 			});
 		});
 
-		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + Path.Combine(Application.streamingAssetsPath, "modules.json"));
-		while (!www.isDone)
+		foreach (var lang in Localization.Languages)
 		{
+			var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + Path.Combine(Application.streamingAssetsPath, "modules-" + lang.Name + ".json"));
+			while (!www.isDone)
+			{
+			}
+			_modulesDatabase.Add(lang.Name, JsonConvert.DeserializeObject<ModuleEntry[]>(www.text));
 		}
-		_modulesDatabase = JsonConvert.DeserializeObject<ModuleEntry[]>(www.text);
+		TrackerEventSender.SetModuleDatabase(_modulesDatabase[Localization.SelectedLanguage.Name]);
 	}
 
 	private void LoadIndex()
 	{
 		ClearList();
-		var moduleTypes = _modulesDatabase.Select(entry => entry.Type).Distinct().ToArray();
+		var moduleTypes = _modulesDatabase[Localization.SelectedLanguage.Name].Select(entry => entry.Type).Distinct().ToArray();
 
 		foreach (var moduleType in moduleTypes)
 		{
 			var listItem = InstantiateListItem(_moduleIndexItemPrefab);
-			var iconId = _modulesDatabase.FirstOrDefault(entry => entry.Type.Equals(moduleType)).Icon;
+			var iconId = _modulesDatabase[Localization.SelectedLanguage.Name].FirstOrDefault(entry => entry.Type.Equals(moduleType)).Icon;
 			listItem.transform.Find("Text").GetComponent<Text>().text = moduleType;
 			listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
 			listItem.GetComponent<Button>().onClick.AddListener(() =>
@@ -127,7 +130,7 @@ public class ModulesController : ICommandAction
 		ClearList();
 		_nextArrow.gameObject.SetActive(false);
 		_backArrow.gameObject.SetActive(false);
-		var modules = _modulesDatabase.Where(entry => entry.Type.Equals(moduleTypeName)).ToArray();
+		var modules = _modulesDatabase[Localization.SelectedLanguage.Name].Where(entry => entry.Type.Equals(moduleTypeName)).ToArray();
 
 		foreach (var module in modules)
 		{
@@ -279,7 +282,6 @@ public class ModulesController : ICommandAction
 			_backArrow.gameObject.SetActive(false);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
 			_modulesPopup.SetActive(false);
-
 		}
 		else
 		{

@@ -30,7 +30,18 @@ public class TraceEvent
 /// Class used to handle events before passing them to the RAGE tracker
 /// </summary>
 public class TrackerEventSender {
-	public static ScenarioController ScenarioController;
+	private static ScenarioController _scenarioController;
+	private static ModulesController.ModuleEntry[] _moduleDatabase;
+
+	public static void SetScenarioController(ScenarioController scenarioController)
+	{
+		_scenarioController = scenarioController;
+	}
+
+	public static void SetModuleDatabase(ModulesController.ModuleEntry[] moduleDatabase)
+	{
+		_moduleDatabase = moduleDatabase;
+	}
 
 	public static void SendEvent(TraceEvent trace)
 	{
@@ -48,11 +59,11 @@ public class TrackerEventSender {
 			{
 				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
 			}
-			Tracker.T.setVar(TrackerContextKeys.CurrentScenario.ToString(), ScenarioController.CurrentScenario.Prefix);
-			Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), "");
-			Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), "");
-			Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), ScenarioController.CurrentCharacter.VoiceName);
-			Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), ScenarioController.FeedbackLevel.ToString());
+			Tracker.T.setVar(TrackerContextKeys.CurrentScenario.ToString(), _scenarioController.CurrentScenario.Prefix);
+			Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), _moduleDatabase.First(m => m.Id == _scenarioController.ScenarioCode).Type);
+			Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), _scenarioController.ScenarioCode);
+			Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), _scenarioController.CurrentCharacter.VoiceName);
+			Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), _scenarioController.FeedbackLevel.ToString());
 			switch (trace.ActionType)
 			{
 				case TrackerAsset.Verb.Accessed:

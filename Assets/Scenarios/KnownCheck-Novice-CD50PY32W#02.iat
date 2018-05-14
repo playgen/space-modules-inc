@@ -12,8 +12,8 @@
 					"Meaning": "-",
 					"Style": "Positive",
 					"FileName": "A-OP-P-E",
-					"Utterance": "Hoi hoi, ik heb problemen met de sterremotor",
-					"UtteranceId": "TTS-8FCEC291E54C9534C103D602BC41B3CC"
+					"Utterance": "Hoi hoi, ik heb problemen met Sterremotor",
+					"UtteranceId": "TTS-007078DB5F64F5C7BA98832B62AEEE96"
 				}, 
 				{
 					"CurrentState": "Opening1",
@@ -21,8 +21,8 @@
 					"Meaning": "-",
 					"Style": "Neutral",
 					"FileName": "A-OP-N-E",
-					"Utterance": "Hee, ik heb weer eens problemen met de sterremotor",
-					"UtteranceId": "TTS-A73CE53881A9B030F8C824233E57664F"
+					"Utterance": "Hee, ik heb weer eens problemen met Sterremotor",
+					"UtteranceId": "TTS-18074C39A8BFA4AE7F89E18B316C5FEC"
 				}, 
 				{
 					"CurrentState": "Opening1",
@@ -30,8 +30,8 @@
 					"Meaning": "-",
 					"Style": "Negative",
 					"FileName": "A-OP1-A-E",
-					"Utterance": "de sterremotor doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
-					"UtteranceId": "TTS-F56010989D6C41BDB061AA61477B6F6C"
+					"Utterance": "Sterremotor doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
+					"UtteranceId": "TTS-B5171BE0B411539CB7CC273C3B485844"
 				}, 
 				{
 					"CurrentState": "Opening2",
@@ -39,8 +39,8 @@
 					"Meaning": "-",
 					"Style": "Positive",
 					"FileName": "A-OP-P-E",
-					"Utterance": "Hoi hoi, ik heb problemen met de sterremotor",
-					"UtteranceId": "TTS-8FCEC291E54C9534C103D602BC41B3CC"
+					"Utterance": "Hoi hoi, ik heb problemen met Sterremotor",
+					"UtteranceId": "TTS-007078DB5F64F5C7BA98832B62AEEE96"
 				}, 
 				{
 					"CurrentState": "Opening2",
@@ -48,8 +48,8 @@
 					"Meaning": "-",
 					"Style": "Neutral",
 					"FileName": "A-OP-N-E",
-					"Utterance": "Hee, ik heb weer eens problemen met de sterremotor",
-					"UtteranceId": "TTS-A73CE53881A9B030F8C824233E57664F"
+					"Utterance": "Hee, ik heb weer eens problemen met Sterremotor",
+					"UtteranceId": "TTS-18074C39A8BFA4AE7F89E18B316C5FEC"
 				}, 
 				{
 					"CurrentState": "Opening2",
@@ -57,13 +57,13 @@
 					"Meaning": "-",
 					"Style": "Negative",
 					"FileName": "A-OP2-A-E",
-					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! de sterremotor is weer eens kapot, waardeloos is het!!",
-					"UtteranceId": "TTS-8B79CE7F6E38B97175A479716C3624D2"
+					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! Sterremotor is weer eens kapot, waardeloos is het!!",
+					"UtteranceId": "TTS-010FCF5ECA10E57E17AFEF6DD505DBB2"
 				}, 
 				{
 					"CurrentState": "AnswerVague",
 					"NextState": "InquireFurther",
-					"Meaning": "-",
+					"Meaning": "Empathy(1)",
 					"Style": "Positive",
 					"FileName": "A-DVE-NOSTRT",
 					"Utterance": "De motor start niet.",
@@ -72,7 +72,7 @@
 				{
 					"CurrentState": "AnswerVague",
 					"NextState": "InquireFurther",
-					"Meaning": "-",
+					"Meaning": "Empathy(1)",
 					"Style": "Neutral",
 					"FileName": "A-DVE-NOSTRT",
 					"Utterance": "De motor start niet.",
@@ -89,7 +89,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem1",
+					"NextState": "InquireFurther",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPANG-P",
@@ -98,7 +98,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem1",
+					"NextState": "InquireFurther",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPANG-N",
@@ -107,7 +107,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem1",
+					"NextState": "InquireFurther",
 					"Meaning": "Empathy(2)",
 					"Style": "Negative",
 					"FileName": "A-RSPANG-A",
@@ -116,7 +116,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem1",
+					"NextState": "InquireFurther",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPCLM-P",
@@ -125,7 +125,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem1",
+					"NextState": "InquireFurther",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPCLM-N",
@@ -142,85 +142,13 @@
 					"UtteranceId": "TTS-F06FB641082E453DF87CA036E470F878"
 				}, 
 				{
-					"CurrentState": "AnswerType1",
-					"NextState": "AskProblem2",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPTP1-P-E4",
-					"Utterance": "Maar natuurlijk, ogenblikje...het is CD50PY32W",
-					"UtteranceId": "TTS-3B09C8360707ADDC5CB3EA930E0FE8B8"
-				}, 
-				{
-					"CurrentState": "AnswerType1",
-					"NextState": "AskProblem2",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPTP1-N-E4",
-					"Utterance": "Ik kijk even....het is CD50PY32W",
-					"UtteranceId": "TTS-1447291CE85136F32C68BD6676B3349B"
-				}, 
-				{
-					"CurrentState": "AnswerType1",
-					"NextState": "SecondChance",
-					"Meaning": "Empathy(-3)",
-					"Style": "Negative",
-					"FileName": "A-RSPTP1-A",
-					"Utterance": "Typenummer?! Type waardeloos is het!",
-					"UtteranceId": "TTS-86F3A8698D4586B62D96E5523350CD8E"
-				}, 
-				{
-					"CurrentState": "AnswerType2",
-					"NextState": "AskDetails",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPTP1-P-E4",
-					"Utterance": "Maar natuurlijk, ogenblikje...het is CD50PY32W",
-					"UtteranceId": "TTS-3B09C8360707ADDC5CB3EA930E0FE8B8"
-				}, 
-				{
-					"CurrentState": "AnswerType2",
-					"NextState": "AskDetails",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPTP1-N-E4",
-					"Utterance": "Ik kijk even....het is CD50PY32W",
-					"UtteranceId": "TTS-1447291CE85136F32C68BD6676B3349B"
-				}, 
-				{
-					"CurrentState": "AnswerType2",
-					"NextState": "SecondChance",
-					"Meaning": "Empathy(-1)",
-					"Style": "Negative",
-					"FileName": "A-RSPTP1-A",
-					"Utterance": "Typenummer?! Type waardeloos is het!",
-					"UtteranceId": "TTS-86F3A8698D4586B62D96E5523350CD8E"
-				}, 
-				{
-					"CurrentState": "WaitForAnswer",
-					"NextState": "FaqResponse",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPWT-P",
-					"Utterance": "Ok. Ik wacht geduldig af",
-					"UtteranceId": "TTS-A7791ED7F9CF640A611ED49A3042F2F7"
-				}, 
-				{
-					"CurrentState": "WaitForAnswer",
-					"NextState": "FaqResponse",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPWT-N",
-					"Utterance": "Als het maar niet te lang duurt...",
-					"UtteranceId": "TTS-0D9D9177137AD2FFD46B3B2EB33C2290"
-				}, 
-				{
-					"CurrentState": "WaitForAnswer",
-					"NextState": "FaqResponse",
+					"CurrentState": "BadFinish",
+					"NextState": "End",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-RSPWT-A",
-					"Utterance": "Pfff...het zij zo...",
-					"UtteranceId": "TTS-24A0A8ABCF0618CB1DE8E87E6E1D8BA6"
+					"FileName": "A-NOHELP-A",
+					"Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je.",
+					"UtteranceId": "TTS-2F52A6BD271386F82B37CBFA3C454E2C"
 				}, 
 				{
 					"CurrentState": "Reroute",
@@ -250,112 +178,58 @@
 					"UtteranceId": "TTS-D2C2AC6027E2A658F15FB081E1DA4341"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
-					"NextState": "DataCollected",
+					"CurrentState": "AnswerType1",
+					"NextState": "AskDetails",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-DDE-REDLGT",
-					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
-					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+					"FileName": "A-RSPTP1-P-E4",
+					"Utterance": "Maar natuurlijk, ogenblikje...het is CD50PY32W",
+					"UtteranceId": "TTS-3B09C8360707ADDC5CB3EA930E0FE8B8"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
-					"NextState": "DataCollected",
+					"CurrentState": "AnswerType1",
+					"NextState": "AskDetails",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-DDE-REDLGT",
-					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
-					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+					"FileName": "A-RSPTP1-N-E4",
+					"Utterance": "Ik kijk even....het is CD50PY32W",
+					"UtteranceId": "TTS-1447291CE85136F32C68BD6676B3349B"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
-					"NextState": "DataCollected",
+					"CurrentState": "AnswerType1",
+					"NextState": "AskDetails",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-DDE-REDLGT",
-					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
-					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+					"FileName": "A-RSPTP1-N-E4",
+					"Utterance": "Ik kijk even....het is CD50PY32W",
+					"UtteranceId": "TTS-1447291CE85136F32C68BD6676B3349B"
 				}, 
 				{
-					"CurrentState": "AnswerType3",
-					"NextState": "DataCollected",
+					"CurrentState": "WaitForAnswer1",
+					"NextState": "FaqResponse1",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-RSPTP2-P-E4",
-					"Utterance": "Oh, vergeetachtig? Het is type CD50PY32W",
-					"UtteranceId": "TTS-B6304CB0D3353E1DB240B4062D0B2D70"
+					"FileName": "A-RSPWT-P",
+					"Utterance": "Ok. Ik wacht geduldig af",
+					"UtteranceId": "TTS-A7791ED7F9CF640A611ED49A3042F2F7"
 				}, 
 				{
-					"CurrentState": "AnswerType3",
-					"NextState": "DataCollected",
+					"CurrentState": "WaitForAnswer1",
+					"NextState": "FaqResponse1",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-RSPTP2-N-E4",
-					"Utterance": "Oh, had ik al gezegd he. Maar het is type CD50PY32W",
-					"UtteranceId": "TTS-9B66C7276328C5D08291B7F468B02476"
+					"FileName": "A-RSPWT-N",
+					"Utterance": "Als het maar niet te lang duurt...",
+					"UtteranceId": "TTS-0D9D9177137AD2FFD46B3B2EB33C2290"
 				}, 
 				{
-					"CurrentState": "AnswerType3",
-					"NextState": "End",
+					"CurrentState": "WaitForAnswer1",
+					"NextState": "FaqResponse1",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-RSPTP2-A",
-					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
-					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
-				}, 
-				{
-					"CurrentState": "TrySolutionFail",
-					"NextState": "SolutionFailed",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPFAIL-P",
-					"Utterance": "Ok, ik probeer het even...Nee, geen effect, helaas...",
-					"UtteranceId": "TTS-330400E953EDD0788D14783A7457BED9"
-				}, 
-				{
-					"CurrentState": "TrySolutionFail",
-					"NextState": "SolutionFailed",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPFAIL-N",
-					"Utterance": "Ogenblikje, doe dat nu....Nope, nog steeds niet werkend...",
-					"UtteranceId": "TTS-955AED442FA684E2C5B767C8702FEAE5"
-				}, 
-				{
-					"CurrentState": "TrySolutionFail",
-					"NextState": "End",
-					"Meaning": "-",
-					"Style": "Negative",
-					"FileName": "A-RSPFAIL-A",
-					"Utterance": "Even wachten....Nee hoor, zoals verwacht geen effect! Ik geef het op, tot ziens...",
-					"UtteranceId": "TTS-0FDDEA67D54B5F14116DA4E79AA5BCCB"
-				}, 
-				{
-					"CurrentState": "TrySolutionOK",
-					"NextState": "Closure",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPSUC-P",
-					"Utterance": "Ok, ik probeer het even...Ja! Het werkt! Geweldig, je bent een kei!",
-					"UtteranceId": "TTS-8F1D45D2D42D08DF34F6EAD891C53559"
-				}, 
-				{
-					"CurrentState": "TrySolutionOK",
-					"NextState": "Closure",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPSUC-N",
-					"Utterance": "Ogenblikje, doe ik nu....Ja, het werkt, prima.",
-					"UtteranceId": "TTS-3C4D73AE6A45D65DEB2F5B9BE41FB811"
-				}, 
-				{
-					"CurrentState": "TrySolutionOK",
-					"NextState": "Closure",
-					"Meaning": "-",
-					"Style": "Negative",
-					"FileName": "A-RSPSUC-A",
-					"Utterance": "Even wachten....Nee maar, het werkt! Hoe is het mogelijk...",
-					"UtteranceId": "TTS-B2BCF2B1FCE7160762C39A5F9A55C942"
+					"FileName": "A-RSPWT-A",
+					"Utterance": "Pfff...het zij zo...",
+					"UtteranceId": "TTS-24A0A8ABCF0618CB1DE8E87E6E1D8BA6"
 				}, 
 				{
 					"CurrentState": "Goodbye1",
@@ -412,13 +286,166 @@
 					"UtteranceId": "TTS-0EC6A479A423F6FA3BC2F6CDF4097DEF"
 				}, 
 				{
-					"CurrentState": "BadFinish",
+					"CurrentState": "AnswerDetails",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-DDE-REDLGT",
+					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
+					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+				}, 
+				{
+					"CurrentState": "AnswerDetails",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-DDE-REDLGT",
+					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
+					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+				}, 
+				{
+					"CurrentState": "AnswerDetails",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-DDE-REDLGT",
+					"Utterance": "De motor start niet. De startknop licht heel even rood op.",
+					"UtteranceId": "TTS-4F1EEDC7B17E24392DCD57372ACB66EF"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail1",
+					"NextState": "SolutionFailed",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPFAIL-P",
+					"Utterance": "Ok, ik probeer het even...Nee, geen effect, helaas...",
+					"UtteranceId": "TTS-330400E953EDD0788D14783A7457BED9"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail1",
+					"NextState": "SolutionFailed",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPFAIL-N",
+					"Utterance": "Ogenblikje, doe dat nu....Nope, nog steeds niet werkend...",
+					"UtteranceId": "TTS-955AED442FA684E2C5B767C8702FEAE5"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail1",
 					"NextState": "End",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-NOHELP-A",
-					"Utterance": "Het is inderdaad duidelijk dat je me niet kunt helpen zeg! Ik probeer wel een collega van je.",
-					"UtteranceId": "TTS-2F52A6BD271386F82B37CBFA3C454E2C"
+					"FileName": "A-RSPFAIL-A",
+					"Utterance": "Even wachten....Nee hoor, zoals verwacht geen effect! Ik geef het op, tot ziens...",
+					"UtteranceId": "TTS-0FDDEA67D54B5F14116DA4E79AA5BCCB"
+				}, 
+				{
+					"CurrentState": "TrySolutionOK",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPSUC-P",
+					"Utterance": "Ok, ik probeer het even...Ja! Het werkt! Geweldig, je bent een kei!",
+					"UtteranceId": "TTS-8F1D45D2D42D08DF34F6EAD891C53559"
+				}, 
+				{
+					"CurrentState": "TrySolutionOK",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPSUC-N",
+					"Utterance": "Ogenblikje, doe ik nu....Ja, het werkt, prima.",
+					"UtteranceId": "TTS-3C4D73AE6A45D65DEB2F5B9BE41FB811"
+				}, 
+				{
+					"CurrentState": "TrySolutionOK",
+					"NextState": "Closure",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPSUC-A",
+					"Utterance": "Even wachten....Nee maar, het werkt! Hoe is het mogelijk...",
+					"UtteranceId": "TTS-B2BCF2B1FCE7160762C39A5F9A55C942"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPTP2-P-E4",
+					"Utterance": "Oh, vergeetachtig? Het is type CD50PY32W",
+					"UtteranceId": "TTS-B6304CB0D3353E1DB240B4062D0B2D70"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPTP2-N-E4",
+					"Utterance": "Oh, had ik al gezegd he. Maar het is type CD50PY32W",
+					"UtteranceId": "TTS-9B66C7276328C5D08291B7F468B02476"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPTP2-A",
+					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
+					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer2",
+					"NextState": "FaqResponse2",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPWT-P",
+					"Utterance": "Ok. Ik wacht geduldig af",
+					"UtteranceId": "TTS-A7791ED7F9CF640A611ED49A3042F2F7"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer2",
+					"NextState": "FaqResponse2",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPWT-N",
+					"Utterance": "Als het maar niet te lang duurt...",
+					"UtteranceId": "TTS-0D9D9177137AD2FFD46B3B2EB33C2290"
+				}, 
+				{
+					"CurrentState": "WaitForAnswer2",
+					"NextState": "FaqResponse2",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPWT-A",
+					"Utterance": "Pfff...het zij zo...",
+					"UtteranceId": "TTS-24A0A8ABCF0618CB1DE8E87E6E1D8BA6"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPFAIL-A",
+					"Utterance": "Even wachten....Nee hoor, zoals verwacht geen effect! Ik geef het op, tot ziens...",
+					"UtteranceId": "TTS-0FDDEA67D54B5F14116DA4E79AA5BCCB"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPFAIL-A",
+					"Utterance": "Even wachten....Nee hoor, zoals verwacht geen effect! Ik geef het op, tot ziens...",
+					"UtteranceId": "TTS-0FDDEA67D54B5F14116DA4E79AA5BCCB"
+				}, 
+				{
+					"CurrentState": "TrySolutionFail2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPFAIL-A",
+					"Utterance": "Even wachten....Nee hoor, zoals verwacht geen effect! Ik geef het op, tot ziens...",
+					"UtteranceId": "TTS-0FDDEA67D54B5F14116DA4E79AA5BCCB"
 				}, 
 				{
 					"CurrentState": "Start",
@@ -467,24 +494,6 @@
 				}, 
 				{
 					"CurrentState": "FirstResponse",
-					"NextState": "AnswerType1",
-					"Meaning": "Inquire(2)",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKTP1-P",
-					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
-					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
-				}, 
-				{
-					"CurrentState": "FirstResponse",
-					"NextState": "AnswerType1",
-					"Meaning": "Inquire(1)",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKTP1-R",
-					"Utterance": "Typenummer?",
-					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
-				}, 
-				{
-					"CurrentState": "FirstResponse",
 					"NextState": "DealAnger1",
 					"Meaning": "-",
 					"Style": "Polite(1)",
@@ -495,49 +504,13 @@
 				{
 					"CurrentState": "FirstResponse",
 					"NextState": "DealAnger2",
-					"Meaning": "-",
+					"Meaning": "Empathy(-1)",
 					"Style": "Polite(-3)",
 					"FileName": "S-DLANG-R",
 					"Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt.",
 					"UtteranceId": "TTS-B9AF6A010ABB5765E642C44E26C7EF14"
 				}, 
 				{
-					"CurrentState": "InquireFurther",
-					"NextState": "AnswerType2",
-					"Meaning": "Inquire(1)",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKTP1-P",
-					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
-					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
-				}, 
-				{
-					"CurrentState": "InquireFurther",
-					"NextState": "AnswerType2",
-					"Meaning": "Inquire(1)",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKTP1-R",
-					"Utterance": "Typenummer?",
-					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
-				}, 
-				{
-					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
-					"Meaning": "Inquire(-1)",
-					"Style": "-",
-					"FileName": "S-LKUP",
-					"Utterance": "Ik ga het voor U even opzoeken...",
-					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
-				}, 
-				{
-					"CurrentState": "InquireFurther",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
 					"CurrentState": "SecondChance",
 					"NextState": "DealAnger1",
 					"Meaning": "-",
@@ -549,7 +522,7 @@
 				{
 					"CurrentState": "SecondChance",
 					"NextState": "DealAnger2",
-					"Meaning": "-",
+					"Meaning": "Empathy(-1)",
 					"Style": "Polite(-3)",
 					"FileName": "S-DLANG-R",
 					"Utterance": "Ik kan U niet helpen als U boos bent. Het is het beste als U eerst rustig wordt.",
@@ -567,32 +540,14 @@
 				{
 					"CurrentState": "SecondChance",
 					"NextState": "Reroute",
-					"Meaning": "Empathy_Faq(-1)",
+					"Meaning": "Empathy_Faq_Inquire(-1)",
 					"Style": "Polite(1)",
 					"FileName": "S-REROUTE",
 					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
 					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
 				}, 
 				{
-					"CurrentState": "AskProblem1",
-					"NextState": "AnswerDetails",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKPR2-P",
-					"Utterance": "Kunt U aangeven wat het probleem is?",
-					"UtteranceId": "TTS-8DEB99A8280A50207CAFCFF449D67F0E"
-				}, 
-				{
-					"CurrentState": "AskProblem1",
-					"NextState": "AnswerDetails",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKPR-R",
-					"Utterance": "Wat is het probleem dan?",
-					"UtteranceId": "TTS-2BF1F72470169011DFB019F09412CAA2"
-				}, 
-				{
-					"CurrentState": "AskProblem1",
+					"CurrentState": "InquireFurther",
 					"NextState": "AnswerType1",
 					"Meaning": "Inquire(1)",
 					"Style": "Polite(1)",
@@ -601,7 +556,7 @@
 					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
 				}, 
 				{
-					"CurrentState": "AskProblem1",
+					"CurrentState": "InquireFurther",
 					"NextState": "AnswerType1",
 					"Meaning": "Inquire(1)",
 					"Style": "Polite(-3)",
@@ -610,8 +565,8 @@
 					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
 				}, 
 				{
-					"CurrentState": "AskProblem2",
-					"NextState": "WaitForAnswer",
+					"CurrentState": "InquireFurther",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -619,202 +574,13 @@
 					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
 				}, 
 				{
-					"CurrentState": "AskProblem2",
-					"NextState": "AnswerDetails",
-					"Meaning": "Inquire(1)",
-					"Style": "-",
-					"FileName": "S-ASKDET-P",
-					"Utterance": "Wat is er precies aan de hand?",
-					"UtteranceId": "TTS-06DF47CCCE3A5A0E243CAC69C4D97A6A"
-				}, 
-				{
-					"CurrentState": "AskProblem2",
+					"CurrentState": "InquireFurther",
 					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
+					"Meaning": "Faq_Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-REROUTE",
 					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
 					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "AskDetails",
-					"NextState": "WaitForAnswer",
-					"Meaning": "Inquire(-1)",
-					"Style": "-",
-					"FileName": "S-LKUP",
-					"Utterance": "Ik ga het voor U even opzoeken...",
-					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
-				}, 
-				{
-					"CurrentState": "AskDetails",
-					"NextState": "AnswerDetails",
-					"Meaning": "Inquire(1)",
-					"Style": "-",
-					"FileName": "S-ASKDET-P",
-					"Utterance": "Wat is er precies aan de hand?",
-					"UtteranceId": "TTS-06DF47CCCE3A5A0E243CAC69C4D97A6A"
-				}, 
-				{
-					"CurrentState": "AskDetails",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "DataCollected",
-					"NextState": "WaitForAnswer",
-					"Meaning": "-",
-					"Style": "-",
-					"FileName": "S-LKUP",
-					"Utterance": "Ik ga het voor U even opzoeken...",
-					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
-				}, 
-				{
-					"CurrentState": "DataCollected",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "DataCollected",
-					"NextState": "AnswerType3",
-					"Meaning": "Inquire(-1)",
-					"Style": "-",
-					"FileName": "S-ASKTP2",
-					"Utterance": "Wat was het typenummer ook al weer?",
-					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-LOWST5",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
-					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-FIX",
-					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
-					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-RECAL",
-					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
-					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HULL",
-					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
-					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HRDRES5",
-					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
-					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-PROXST5",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
-					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionFail",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HOTWAIT",
-					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
-					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "TrySolutionOK",
-					"Meaning": "Faq(3)",
-					"Style": "-",
-					"FileName": "S-DSE-LOW-RSST",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
-					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-NOTFND",
-					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
-					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
-				}, 
-				{
-					"CurrentState": "SolutionFailed",
-					"NextState": "WaitForAnswer",
-					"Meaning": "-",
-					"Style": "-",
-					"FileName": "S-RETRY-P",
-					"Utterance": "Jammer, ik ga nog een keer voor U zoeken.",
-					"UtteranceId": "TTS-DA4B6C96B29D1B9265560DFC02151205"
-				}, 
-				{
-					"CurrentState": "SolutionFailed",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "SolutionFailed",
-					"NextState": "WaitForAnswer",
-					"Meaning": "-",
-					"Style": "Polite(-3)",
-					"FileName": "S-RETRY-R",
-					"Utterance": "Effe wachten, ik zoek nog even verder",
-					"UtteranceId": "TTS-D4193A2F2B3328D9DDC1E2CF37586B59"
 				}, 
 				{
 					"CurrentState": "Closure",
@@ -842,6 +608,303 @@
 					"FileName": "S-ENDGB-R",
 					"Utterance": "Doei.",
 					"UtteranceId": "TTS-45B0D2F46A77681FB1A4DC759AAFE34C"
+				}, 
+				{
+					"CurrentState": "AskDetails",
+					"NextState": "WaitForAnswer1",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "AskDetails",
+					"NextState": "AnswerDetails",
+					"Meaning": "Inquire(1)",
+					"Style": "-",
+					"FileName": "S-ASKDET-P",
+					"Utterance": "Wat is er precies aan de hand?",
+					"UtteranceId": "TTS-06DF47CCCE3A5A0E243CAC69C4D97A6A"
+				}, 
+				{
+					"CurrentState": "AskDetails",
+					"NextState": "Reroute",
+					"Meaning": "Faq_Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXST5",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
+					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-MGMT",
+					"Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk.",
+					"UtteranceId": "TTS-2EB58FD110C06C1E36803701198CD7DA"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-RECAL",
+					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
+					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXSTR",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
+					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-LOWST5",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
+					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-FIX",
+					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
+					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionOK",
+					"Meaning": "Faq(3)",
+					"Style": "-",
+					"FileName": "S-DSE-LOW-RSST",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
+					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-NOTFND",
+					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
+					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "WaitForAnswer1",
+					"Meaning": "Faq(1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "AnswerType2",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-ASKTP2",
+					"Utterance": "Wat was het typenummer ook al weer?",
+					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
+				}, 
+				{
+					"CurrentState": "DataCollected2",
+					"NextState": "WaitForAnswer1",
+					"Meaning": "Faq(1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected2",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "SolutionFailed",
+					"NextState": "WaitForAnswer2",
+					"Meaning": "-",
+					"Style": "-",
+					"FileName": "S-RETRY-P",
+					"Utterance": "Jammer, ik ga nog een keer voor U zoeken.",
+					"UtteranceId": "TTS-DA4B6C96B29D1B9265560DFC02151205"
+				}, 
+				{
+					"CurrentState": "SolutionFailed",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "SolutionFailed",
+					"NextState": "WaitForAnswer2",
+					"Meaning": "-",
+					"Style": "Polite(-3)",
+					"FileName": "S-RETRY-R",
+					"Utterance": "Effe wachten, ik zoek nog even verder",
+					"UtteranceId": "TTS-D4193A2F2B3328D9DDC1E2CF37586B59"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXST2",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
+					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-NOSL",
+					"Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken.",
+					"UtteranceId": "TTS-D49A711B8CEF5423FB0D5070BC28BEEF"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNINC",
+					"Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies.",
+					"UtteranceId": "TTS-1A7A1B614E799897CCCF62F092494282"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNFRST",
+					"Utterance": "Zet de motor uit en zet de sensoren aan voordat je de motor weer start.",
+					"UtteranceId": "TTS-6FA2C113950810F9C47FEF3D4C28AF99"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-RECAL",
+					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
+					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HOTLIQ",
+					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
+					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXFLY",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
+					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionOK",
+					"Meaning": "Faq(3)",
+					"Style": "-",
+					"FileName": "S-DSE-LOW-RSST",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
+					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-NOTFND",
+					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
+					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
 				}]
 		},
 	"types": [

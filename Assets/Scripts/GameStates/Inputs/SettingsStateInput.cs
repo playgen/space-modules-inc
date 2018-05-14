@@ -16,13 +16,13 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-        _settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
-        _creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
-        _creator.Wipe();
-        var language = _creator.Language(true, false);
-        _creator.RebuildLayout();
-        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
-        GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/ApplyButton").GetComponent<Button>().onClick.AddListener(() => OnApplyClick(language));
+		_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
+		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
+		_creator.Wipe();
+		var language = _creator.Language(true, false);
+		_creator.RebuildLayout();
+		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/ButtonContainer/ApplyButton").GetComponent<Button>().onClick.AddListener(() => OnApplyClick(language));
 	}
 
 	private void OnApplyClick(Dropdown language)
