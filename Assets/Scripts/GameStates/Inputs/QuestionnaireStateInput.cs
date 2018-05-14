@@ -163,10 +163,7 @@ public class QuestionnaireStateInput : TickStateInput
 				Question = question.Question,
 				Answer = question.Answers[i]
 			};
-			choiceItem.GetComponent<Button>().onClick.AddListener(delegate
-			{
-				OnDialogueOptionClick(answer);
-			});
+			choiceItem.GetComponent<Button>().onClick.AddListener(() => OnDialogueOptionClick(answer));
 			choiceItem.transform.SetParent(scrollRect.content, false);
 		}
 		var rectContent = scrollRect.content;

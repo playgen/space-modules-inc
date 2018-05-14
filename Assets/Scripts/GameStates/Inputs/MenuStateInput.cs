@@ -15,23 +15,16 @@ public class MenuStateInput : TickStateInput
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
-
-	private bool _gameLocked;
 	private GameObject _gameLockedPanel;
 
 	protected override void OnInitialize()
 	{
 		_playButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/PlayButton").GetComponent<Button>();
-		_playButton.onClick.AddListener(OnPlayClick);
-		var settingsButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/SettingsButton").GetComponent<Button>(); ;
-		settingsButton.onClick.AddListener(OnSettingsClick);
-		var leaderboardButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/LeaderboardButton").GetComponent<Button>(); ;
-		leaderboardButton.onClick.AddListener(delegate
+		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
+		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
+		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
-		});
-		leaderboardButton.onClick.AddListener(delegate
-		{
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Asset, "SUGAR" },
@@ -42,13 +35,9 @@ public class MenuStateInput : TickStateInput
 				{ TrackerEvaluationKeys.Event, "ViewLeaderboard" }
 			});
 		});
-		var achievementButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/AchievementButton").GetComponent<Button>(); ;
-		achievementButton.onClick.AddListener(delegate
+		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/AchievementButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Evaluation.DisplayAchievementList();
-		});
-		achievementButton.onClick.AddListener(delegate
-		{
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
 				{ TrackerEvaluationKeys.Asset, "SUGAR" },
@@ -65,15 +54,8 @@ public class MenuStateInput : TickStateInput
 		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
 		_gameLockedPanel.SetActive(false);
 
-		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.RemoveAllListeners();
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
-		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.RemoveAllListeners();
-		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(OnQuitPanelNoClick);
-	}
-
-	private void OnSettingsClick()
-	{
-		SettingsClickedEvent?.Invoke();
+		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(() => OnQuitAttempt(true));
 	}
 
 	protected override void OnEnter()
@@ -84,13 +66,15 @@ public class MenuStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Id, "0" },
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
-		OnQuitPanelNoClick();
+		OnQuitAttempt(true);
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel").BestFit();
 
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
-		_gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
+		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
+		_playButton.interactable = !gameLocked;
+		_gameLockedPanel.SetActive(gameLocked);
 	}
 
 	protected override void OnExit()
@@ -111,36 +95,17 @@ public class MenuStateInput : TickStateInput
 			{
 				SUGARManager.Leaderboard.Hide();
 			}
-			else if (_quitPanel.activeSelf)
-			{
-				OnQuitPanelNoClick();
-			}
 			else
 			{
-				OnQuitAttempt();
+				OnQuitAttempt(_quitPanel.activeSelf);
 			}
 		}
-		_playButton.interactable = !_gameLocked;
-		_gameLockedPanel.SetActive(_gameLocked);
 	}
 
-	private void OnPlayClick()
+	private void OnQuitAttempt(bool showMenu)
 	{
-		PlayClickedEvent?.Invoke();
-	}
-
-	private void OnQuitAttempt()
-	{
-		_menuPanel.SetActive(false);
-		_quitPanel.SetActive(true);
-		_menuPanel.BestFit();
-		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
-	}
-
-	private void OnQuitPanelNoClick()
-	{
-		_menuPanel.SetActive(true);
-		_quitPanel.SetActive(false);
+		_menuPanel.SetActive(showMenu);
+		_quitPanel.SetActive(!showMenu);
 		_menuPanel.BestFit();
 		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
 	}

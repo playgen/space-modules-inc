@@ -13,11 +13,6 @@ public class ModulesController : ICommandAction
 {
 	#region Modules Config
 
-	private struct ModulesDatabase
-	{
-		public ModuleEntry[] Database;
-	}
-
 	private struct ModuleEntry
 	{
 		public string Name;
@@ -37,7 +32,6 @@ public class ModulesController : ICommandAction
 	#endregion
 
 	private readonly GameObject _modulesPopup;
-	private readonly GameObject _popupContent;
 
 	private readonly GameObject _moduleItemPrefab;
 	private readonly GameObject _moduleIndexItemPrefab;
@@ -56,23 +50,20 @@ public class ModulesController : ICommandAction
 		var aotFaqList = new List<FaqEntry> ();
 		var aotModEnt = new ModuleEntry ();
 		var aotModEntList = new List<ModuleEntry> ();
-		var aotModDat = new ModulesDatabase ();
-		var aotModDatList = new List<ModulesDatabase> ();
 
 		_modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
-		var backgroundOverlay = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer");
-		_popupContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View");
-		_modulesContent = _popupContent.GetComponent<ScrollRect>().content;
+		_modulesContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View").GetComponent<ScrollRect>().content;
 		
 		_moduleItemPrefab = Resources.Load("Prefabs/ModuleItem") as GameObject;
 		_moduleIndexItemPrefab = Resources.Load("Prefabs/ModuleIndexItem") as GameObject;
 		_moduleDescriptionItemPrefab = Resources.Load("Prefabs/ModuleDescriptionItem") as GameObject;
 		_moduleIcons = Resources.LoadAll<Sprite>("Sprites/Modules/Icons");
 
-		var backButtonObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton");
-		_backButton = backButtonObject.GetComponent<Button>();
+		_backButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton").GetComponent<Button>();
+		_nextArrow = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow").GetComponent<Button>();
+		_backArrow = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackArrow").GetComponent<Button>();
 
-		backgroundOverlay.GetComponent<Button>().onClick.AddListener(delegate
+		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			TogglePopup();
 			TrackerEventSender.SendEvent(new TraceEvent("ClosedModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
@@ -84,14 +75,11 @@ public class ModulesController : ICommandAction
 			});
 		});
 
-		var nextArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/NextArrow");
-		_nextArrow = nextArrowObject.GetComponent<Button>();
-
-		var backArrowObject = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackArrow");
-		_backArrow = backArrowObject.GetComponent<Button>();
-
-
-		LoadJSONModules();
+		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + Path.Combine(Application.streamingAssetsPath, "modules.json"));
+		while (!www.isDone)
+		{
+		}
+		_modulesDatabase = JsonConvert.DeserializeObject<ModuleEntry[]>(www.text);
 	}
 
 	private void LoadIndex()
@@ -99,17 +87,13 @@ public class ModulesController : ICommandAction
 		ClearList();
 		var moduleTypes = _modulesDatabase.Select(entry => entry.Type).Distinct().ToArray();
 
-		for (var i = 0; i < moduleTypes.Length; i++)
+		foreach (var moduleType in moduleTypes)
 		{
-			var moduleType = moduleTypes[i];
 			var listItem = InstantiateListItem(_moduleIndexItemPrefab);
 			var iconId = _modulesDatabase.FirstOrDefault(entry => entry.Type.Equals(moduleType)).Icon;
 			listItem.transform.Find("Text").GetComponent<Text>().text = moduleType;
 			listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
-
-			var offset = i * listItem.GetComponent<RectTransform>().rect.height;
-			listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
-			listItem.GetComponent<Button>().onClick.AddListener(delegate
+			listItem.GetComponent<Button>().onClick.AddListener(() =>
 			{
 				LoadModules(moduleType);
 				TrackerEventSender.SendEvent(new TraceEvent("SelectedModuleType", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
@@ -125,7 +109,7 @@ public class ModulesController : ICommandAction
 			});
 		}
 
-		_backButton.GetComponent<Button>().onClick.AddListener(delegate
+		_backButton.GetComponent<Button>().onClick.AddListener(() =>
 		{
 			TogglePopup();
 			TrackerEventSender.SendEvent(new TraceEvent("CloseModuleMenu", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
@@ -141,24 +125,20 @@ public class ModulesController : ICommandAction
 	private void LoadModules(string moduleTypeName)
 	{
 		ClearList();
+		_nextArrow.gameObject.SetActive(false);
+		_backArrow.gameObject.SetActive(false);
 		var modules = _modulesDatabase.Where(entry => entry.Type.Equals(moduleTypeName)).ToArray();
 
-		for (var i = 0; i < modules.Length; i++)
+		foreach (var module in modules)
 		{
-			var module = modules[i];
 			var listItem = InstantiateListItem(_moduleItemPrefab);
 
 			listItem.transform.Find("Text").GetComponent<Text>().text = module.Name;
 			listItem.transform.Find("Id").GetComponent<Text>().text = module.Id;
 			listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
-
-			var offset = i * listItem.GetComponent<RectTransform>().rect.height;
-			listItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
-			listItem.GetComponent<Button>().onClick.AddListener(delegate
+			listItem.GetComponent<Button>().onClick.AddListener(() =>
 			{
 				LoadModule(module, listItem);
-				_nextArrow.gameObject.SetActive(true);
-				_backArrow.gameObject.SetActive(true);
 				TrackerEventSender.SendEvent(new TraceEvent("SelectedModule", TrackerAsset.Verb.Accessed, new Dictionary<string, string>
 				{
 					{ TrackerContextKeys.SelectedModuleType.ToString(), moduleTypeName },
@@ -172,7 +152,7 @@ public class ModulesController : ICommandAction
 				});
 			});
 		}
-		_backButton.GetComponent<Button>().onClick.AddListener(delegate
+		_backButton.GetComponent<Button>().onClick.AddListener(() =>
 		{
 			LoadIndex();
 			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleTypeList", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
@@ -187,25 +167,17 @@ public class ModulesController : ICommandAction
 
 	private void LoadModule(ModuleEntry module, GameObject listItem)
 	{
+		ClearList();
+		_nextArrow.onClick.RemoveAllListeners();
+		_backArrow.onClick.RemoveAllListeners();
+		_nextArrow.gameObject.SetActive(true);
+		_backArrow.gameObject.SetActive(true);
 		var currentModuleList = module.Faq;
 		var index = 0;
 
-		var moduleItem = Object.Instantiate(listItem);
-		ClearList();
-		moduleItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
-		moduleItem.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-
-		var problemItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		problemItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("PROBLEM", true);
-		var problemItemText = problemItem.transform.GetChild(2).GetComponent<Text>();
-		problemItemText.text = currentModuleList[0].Problem;
-		problemItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
-
-		var solutionItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		solutionItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get("SOLUTION", true);
-		var solutionItemText = solutionItem.transform.GetChild(2).GetComponent<Text>();
-		solutionItemText.text = currentModuleList[0].Solution;
-		solutionItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
+		InstantiateListItem(listItem);
+		var problemItemText = InstantiateTextItem("PROBLEM", currentModuleList[0].Problem);
+		var solutionItemText = InstantiateTextItem("SOLUTION", currentModuleList[0].Solution);
 
 		// Step through arrow listeners
 		_nextArrow.onClick.AddListener(() =>
@@ -254,10 +226,6 @@ public class ModulesController : ICommandAction
 
 		_backButton.onClick.AddListener(() =>
 		{
-			_nextArrow.onClick.RemoveAllListeners();
-			_backArrow.onClick.RemoveAllListeners();
-			_nextArrow.gameObject.SetActive(false);
-			_backArrow.gameObject.SetActive(false);
 			LoadModules(module.Type);
 			TrackerEventSender.SendEvent(new TraceEvent("BackToModuleDeviceTypes", TrackerAsset.Verb.Accessed, new Dictionary<string, string>(), AccessibleTracker.Accessible.Screen));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
@@ -277,35 +245,36 @@ public class ModulesController : ICommandAction
 	private void ClearList()
 	{
 		_backButton.onClick.RemoveAllListeners();
-		foreach (RectTransform child in _popupContent.GetComponent<ScrollRect>().content)
+		foreach (RectTransform child in _modulesContent)
 		{
 			Object.Destroy(child.gameObject);
 		}
 	}
 
-	private void LoadJSONModules()
-	{
-		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "modules.json");
-		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
-		while (!www.isDone)
-		{
-		}
-		_modulesDatabase = JsonConvert.DeserializeObject<ModulesDatabase>(www.text).Database;
-	}
-
 	private GameObject InstantiateListItem(GameObject prefab)
 	{
 		var listItem = Object.Instantiate(prefab);
-		listItem.transform.SetParent(_popupContent.GetComponent<ScrollRect>().content, false);
+		listItem.transform.SetParent(_modulesContent, false);
+		foreach (var com in listItem.GetComponentsInChildren<Behaviour>())
+		{
+			com.enabled = true;
+		}
 		return listItem;
+	}
+
+	private Text InstantiateTextItem(string titleKey, string description)
+	{
+		var textItem = InstantiateListItem(_moduleDescriptionItemPrefab);
+		textItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get(titleKey, true);
+		textItem.transform.GetChild(2).GetComponent<Text>().text = description;
+		textItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
+		return textItem.transform.GetChild(2).GetComponent<Text>();
 	}
 
 	public void TogglePopup()
 	{
 		if (_modulesPopup.activeInHierarchy)
 		{
-			_nextArrow.onClick.RemoveAllListeners();
-			_backArrow.onClick.RemoveAllListeners();
 			_nextArrow.gameObject.SetActive(false);
 			_backArrow.gameObject.SetActive(false);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
@@ -323,7 +292,6 @@ public class ModulesController : ICommandAction
 			});
 			_modulesPopup.SetActive(true);
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
-			_popupContent.GetComponent<ScrollRect>().verticalScrollbar.enabled = true;
 			LoadIndex();
 		}
 	}

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
-using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreStateInput : TickStateInput
@@ -12,7 +11,6 @@ public class ScoreStateInput : TickStateInput
 
 	private ScorePanelBehaviour _scorePanel;
 	private readonly ScenarioController _scenarioController;
-	private GameObject _nextButton;
 
 	public ScoreStateInput(ScenarioController scenarioController)
 	{
@@ -22,8 +20,7 @@ public class ScoreStateInput : TickStateInput
 	protected override void OnInitialize()
 	{
 		_scorePanel = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel").GetComponent<ScorePanelBehaviour>();
-		_nextButton = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton");
-		_nextButton.GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
+		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton").GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
 	}
 
 	protected override void OnEnter()
@@ -36,21 +33,16 @@ public class ScoreStateInput : TickStateInput
 		});
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
-		_scenarioController.GetScoreDataSuccessEvent += UpdateScore;
+		_scenarioController.GetScoreDataSuccessEvent += _scorePanel.SetScorePanel;
 		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 	}
 
 	protected override void OnExit()
 	{
-		_scenarioController.GetScoreDataSuccessEvent -= UpdateScore;
+		_scenarioController.GetScoreDataSuccessEvent -= _scorePanel.SetScorePanel;
 		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
-	}
-
-	public void UpdateScore(ScenarioController.ScoreObject obj)
-	{
-		_scorePanel.SetScorePanel(obj);
 	}
 
 	private void OnNextButtonClicked()

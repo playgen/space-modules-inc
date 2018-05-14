@@ -82,6 +82,9 @@ public class AchievementListInterface : BaseEvaluationListInterface
 	/// </summary>
 	private void OnLanguageChange()
 	{
-		Show(true);
+		if (gameObject.activeInHierarchy)
+		{
+			Show(true);
+		}
 	}
 }

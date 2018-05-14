@@ -47,7 +47,7 @@ public class GameStateInput : TickStateInput
 		_characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
 		_feedbackPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
 		_feedbackElementPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
-		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(delegate { CommandQueue.AddCommand(new ToggleModulesCommand()); });
+		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new ToggleModulesCommand()));
 
 		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
@@ -170,10 +170,7 @@ public class GameStateInput : TickStateInput
 			choiceItem.transform.GetChild(0).GetComponent<Text>().text = dialogueAction.Utterance;
 			contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
 			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
-			choiceItem.GetComponent<Button>().onClick.AddListener(delegate
-			{
-				CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id));
-			});
+			choiceItem.GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id)));
 			choiceItem.transform.SetParent(scrollRect.content, false);
 		}
 		scrollRect.content.sizeDelta = new Vector2(0, contentTotalHeight);

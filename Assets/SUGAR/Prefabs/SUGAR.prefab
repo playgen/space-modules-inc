@@ -187,8 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _landscapeInterface: {fileID: 0}
-  _portraitInterface: {fileID: 114000014259607728, guid: dc10a0a8ffb27c6428ace1508de391a5,
-    type: 2}
+  _portraitInterface: {fileID: 0}
   _allowAutoLogin: 1
   _allowRegister: 0
   _defaultSourceToken: SPL

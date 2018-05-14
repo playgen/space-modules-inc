@@ -50,8 +50,8 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 	{
 		base.Awake();
 		SUGARManager.Leaderboard.SetPositionCount(_leaderboardPositions.Length);
-		_previousButton.onClick.AddListener(delegate { UpdatePageNumber(-1); });
-		_nextButton.onClick.AddListener(delegate { UpdatePageNumber(1); });
+		_previousButton.onClick.AddListener(() => UpdatePageNumber(-1));
+		_nextButton.onClick.AddListener(() => UpdatePageNumber(1));
 	}
 
 	/// <summary>
@@ -159,6 +159,9 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 	/// </summary>
 	private void OnLanguageChange()
 	{
-		UpdatePageNumber(0);
+		if (gameObject.activeInHierarchy)
+		{
+			UpdatePageNumber(0);
+		}
 	}
 }
