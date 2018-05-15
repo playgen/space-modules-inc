@@ -21,7 +21,7 @@ public class GameStateControllerFactory
 		var gameState = CreateGameState(_scenarioController, _modulesController);
 		var reviewState = CreateReviewState(_scenarioController);
 		var scoreState = CreateScoreState(_scenarioController);
-		var questionnaireState = CreateQuestionnaireState();
+		var questionnaireState = CreateQuestionnaireState(_scenarioController);
 		TrackerEventSender.SetScenarioController(_scenarioController);
 
 		var stateController = new TickStateController(
@@ -151,6 +151,7 @@ public class GameStateControllerFactory
 		input.NextEvent += menuTransition.ChangeState;
 
 		var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
+		input.InGameQuestionnaire += _scenarioController.NextQuestionnaire;
 		input.InGameQuestionnaire += questionnaireTransition.ChangeState;
 
 		state.AddTransitions(menuTransition, questionnaireTransition);
@@ -158,10 +159,10 @@ public class GameStateControllerFactory
 		return state;
 	}
 
-	private QuestionnaireState CreateQuestionnaireState()
+	private QuestionnaireState CreateQuestionnaireState(ScenarioController scenarioController)
 	{
-		var input = new QuestionnaireStateInput();
-		var state = new QuestionnaireState(input);
+		var input = new QuestionnaireStateInput(scenarioController);
+		var state = new QuestionnaireState(input, scenarioController);
 
 		var menuTransition = new EventTransition(MenuState.StateName);
 		input.FinishClickedEvent += menuTransition.ChangeState;

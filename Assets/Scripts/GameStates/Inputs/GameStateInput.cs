@@ -48,27 +48,17 @@ public class GameStateInput : TickStateInput
 		_feedbackPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
 		_feedbackElementPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new ToggleModulesCommand()));
+	}
 
+	protected override void OnEnter()
+	{
 		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
 		_scenarioController.GetCharacterStrongestEmotionSuccessEvent += UpdateCharacterExpression;
 		_scenarioController.FinalStateEvent += HandleFinalState;
 		_scenarioController.StopTalkAnimationEvent += StopCharacterTalkAnimation;
 		_scenarioController.GetFeedbackEvent += UpdateFeedbackForChoice;
-	}
 
-	protected override void OnTerminate()
-	{
-		_scenarioController.GetCharacterStrongestEmotionSuccessEvent -= UpdateCharacterExpression;
-		_scenarioController.GetCharacterDialogueSuccessEvent -= UpdateCharacterDialogue;
-		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
-		_scenarioController.FinalStateEvent -= HandleFinalState;
-		_scenarioController.StopTalkAnimationEvent -= StopCharacterTalkAnimation;
-		_scenarioController.GetFeedbackEvent -= UpdateFeedbackForChoice;
-	}
-
-	protected override void OnEnter()
-	{
 		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
 			{ TrackerEvaluationKeys.Type, "GameState" },
@@ -88,6 +78,13 @@ public class GameStateInput : TickStateInput
 		UnityEngine.Object.Destroy(_characterObject);
 		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
+
+		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
+		_scenarioController.GetCharacterDialogueSuccessEvent -= UpdateCharacterDialogue;
+		_scenarioController.GetCharacterStrongestEmotionSuccessEvent -= UpdateCharacterExpression;
+		_scenarioController.FinalStateEvent -= HandleFinalState;
+		_scenarioController.StopTalkAnimationEvent -= StopCharacterTalkAnimation;
+		_scenarioController.GetFeedbackEvent -= UpdateFeedbackForChoice;
 	}
 
 	public void ShowCharacter(RolePlayCharacterAsset currentCharacter)

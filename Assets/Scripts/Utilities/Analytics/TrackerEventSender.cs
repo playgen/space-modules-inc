@@ -60,10 +60,13 @@ public class TrackerEventSender {
 				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
 			}
 			Tracker.T.setVar(TrackerContextKeys.CurrentScenario.ToString(), _scenarioController.CurrentScenario.Prefix);
-			Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), _moduleDatabase.First(m => m.Id == _scenarioController.ScenarioCode).Type);
-			Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), _scenarioController.ScenarioCode);
-			Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), _scenarioController.CurrentCharacter.VoiceName);
-			Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), _scenarioController.FeedbackLevel.ToString());
+			if (_scenarioController.CurrentScenario.Prefix != "Questionnaire")
+			{
+				Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), _moduleDatabase.First(m => m.Id == _scenarioController.ScenarioCode).Type);
+				Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), _scenarioController.ScenarioCode);
+				Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), _scenarioController.CurrentCharacter.VoiceName);
+				Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), _scenarioController.FeedbackLevel.ToString());
+			}
 			switch (trace.ActionType)
 			{
 				case TrackerAsset.Verb.Accessed:

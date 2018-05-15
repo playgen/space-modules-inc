@@ -198,6 +198,21 @@ public class ScenarioController : ICommandAction
 		}
 	}
 
+	public void NextQuestionnaire()
+	{
+		CurrentScenario = new ScenarioData(CurrentLevel / 5, _allScenarioPaths.Where(x => x.Contains("Questions")).ToArray(), "Neutral", 0, "Questionnaire");
+		var error = string.Empty;
+		ScenarioCode = (CurrentLevel < 15 ? 1 : 2).ToString();
+		_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _allScenarioPaths.First(x => x.Contains("Questions" + ScenarioCode))), out error);
+		if (!string.IsNullOrEmpty(error))
+		{
+			Debug.LogError(error);
+		}
+		CurrentCharacter = RolePlayCharacterAsset.LoadFromFile(_integratedAuthoringTool.GetAllCharacterSources().First(c => c.Source.Contains("Neutral")).Source);
+		CurrentCharacter.LoadAssociatedAssets();
+		_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
+	}
+
 	#endregion
 
 	#region Level Select
@@ -266,7 +281,9 @@ public class ScenarioController : ICommandAction
 			// UCM tracker tracks the filename ID of each player dialogue choice made
 			TrackerEventSender.SendEvent(new TraceEvent("DialogueSelection", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 			{
-				{ TrackerContextKeys.PlayerDialogueChoice.ToString(), reply.CurrentState + " " + reply.FileName }
+				{ TrackerContextKeys.PlayerDialogueState.ToString(), reply.CurrentState },
+				{ TrackerContextKeys.PlayerDialogueCode.ToString(), reply.FileName },
+				{ TrackerContextKeys.PlayerDialogueText.ToString(), reply.Utterance }
 			}));
 			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
 			{
@@ -356,16 +373,23 @@ public class ScenarioController : ICommandAction
 			}
 		}
 
-		_audioClip = new AudioClipModel
+		if (Application.platform == RuntimePlatform.WindowsPlayer ? File.Exists("file://" + Path.Combine(Application.streamingAssetsPath, Path.Combine("Audio", CurrentCharacter.BodyName, audioName) + ".ogg")) : Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
 		{
-			Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
-		};
+			_audioClip = new AudioClipModel
+			{
+				Name = Path.Combine("Audio", CurrentCharacter.BodyName, audioName)
+			};
 
-		if (!string.IsNullOrEmpty(_audioClip.Name))
-		{
-			IsTalking = true;
+			if (!string.IsNullOrEmpty(_audioClip.Name))
+			{
+				IsTalking = true;
 
-			_audioController.Play(_audioClip, onComplete: HandleEndAudio);
+				_audioController.Play(_audioClip, onComplete: HandleEndAudio);
+			}
+			else
+			{
+				HandleEndAudio();
+			}
 		}
 		else
 		{
@@ -380,7 +404,7 @@ public class ScenarioController : ICommandAction
 
 		if (_currentStateName == Name.BuildName("End"))
 		{
-			if (SUGARManager.CurrentUser != null)
+			if (SUGARManager.CurrentUser != null && CurrentScenario.Prefix != "Questionnaire")
 			{
 				TraceScore();
 			}

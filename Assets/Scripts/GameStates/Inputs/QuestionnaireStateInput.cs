@@ -2,79 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameWork.Core.States.Tick.Input;
+
+using IntegratedAuthoringTool.DTOs;
+
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Localization;
+
 using UnityEngine;
 
 public class QuestionnaireStateInput : TickStateInput
 {
+	private readonly ScenarioController _scenarioController;
+
+	public QuestionnaireStateInput(ScenarioController scenarioController)
+	{
+		_scenarioController = scenarioController;
+	}
+
 	public event Action FinishClickedEvent;
-
-	public class TempQuestions
-	{
-		public int Number;
-		public string Question;
-		public string[] Answers;
-	}
-
-	public class TempAnswers
-	{
-		public string Question;
-		public string Answer;
-	}
-	
-	private readonly List<TempQuestions> _questions = new List<TempQuestions>
-	{
-		new TempQuestions
-		{
-			Number = 1,
-			Question = "Hoe mentaal belastend waren de opdrachten in de game?",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		},
-		new TempQuestions
-		{
-			Number = 2,
-			Question = "Hoe fysiek belastend waren de opdrachten in de game?",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		},
-		new TempQuestions
-		{
-			Number = 3,
-			Question = "Hoe gehaast was het tempo van de opdrachten in de game?",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		},
-		new TempQuestions
-		{
-			Number = 4,
-			Question = "Hoe succesvol was je in het doen van de opdrachten in de game?",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		},
-		new TempQuestions
-		{
-			Number = 5,
-			Question = "Hoe hard moest je inspannen om de opdrachten in de game succesvol te kunnen doen?",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		},
-		new TempQuestions
-		{
-			Number = 6,
-			Question = "Hoeveel negatieve gevoelens had je tijdens de opdrachten? (negatieve gevoelens zijn bijvoorbeeld: onzeker, ontmoedigd, geïrriteerd, gestrest, geërgerd)",
-			Answers = new[] { "1. Zeer laag belastend", "2", "3", "4", "5", "6",  "7. Zeer hoog belastend" }
-		}
-	};
 
 	private GameObject _characterPrefab;
 	private GameObject _characterPanel;
 	private GameObject _characterObject;
-
 	private GameObject _listChoicePrefab;
 	private GameObject _dialoguePanel;
-
-	private Text _questionTrackText;
 	private Text _questionText;
-
-	private readonly List<TempAnswers> _tempAnswers = new List<TempAnswers>();
-
 
 	protected override void OnInitialize()
 	{
@@ -85,11 +38,14 @@ public class QuestionnaireStateInput : TickStateInput
 		_dialoguePanel = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/QuestionnaireUI/QuestionPanel/AnswerPanel");
 
 		_questionText = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/QuestionnaireUI/QuestionPanel/QuestionHolder/Question").GetComponent<Text>();
-		_questionTrackText = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/QuestionnaireUI/QuestionTrackPanel/QuestionHolder/QuestionTrack").GetComponent<Text>();
 	}
 
 	protected override void OnEnter()
 	{
+		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
+		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
+		_scenarioController.FinalStateEvent += HandleFinalState;
+
 		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
 		{
 			{ TrackerEvaluationKeys.Type, "QuestionnaireState" },
@@ -98,18 +54,21 @@ public class QuestionnaireStateInput : TickStateInput
 		});
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
-
+		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
+		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
+		_questionText.GetComponent<Text>().text = string.Empty;
 		ShowCharacter();
-		NextQuestion();
 	}
 
 	protected override void OnExit()
 	{
 		UnityEngine.Object.Destroy(_characterObject);
-		_tempAnswers.Clear();
-
 		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
+
+		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
+		_scenarioController.GetCharacterDialogueSuccessEvent -= UpdateCharacterDialogue;
+		_scenarioController.FinalStateEvent -= HandleFinalState;
 	}
 
 	public void ShowCharacter()
@@ -121,96 +80,48 @@ public class QuestionnaireStateInput : TickStateInput
 		_characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
 	}
 
-	public void UpdateQuestion(TempQuestions question)
+	public void UpdatePlayerDialogue(DialogueStateActionDTO[] dialogueActions)
 	{
-		// Clear current dialogue panel container
-		if (_dialoguePanel.GetComponentInChildren<ScrollRect>())
+		foreach (Transform child in _dialoguePanel.transform)
 		{
-			foreach (var child in _dialoguePanel.GetComponentInChildren<ScrollRect>().content)
-			{
-				var childObj = child as Transform;
-				if (childObj != null) UnityEngine.Object.Destroy(childObj.gameObject);
-			}
+			UnityEngine.Object.Destroy(child.gameObject);
 		}
-		foreach (var child in _dialoguePanel.transform)
+		if (dialogueActions.Length == 1)
 		{
-			var childGameObject = child as Transform;
-			if (childGameObject != null) UnityEngine.Object.Destroy(childGameObject.gameObject);
-		}
-
-		// TODO Translate
-		_questionTrackText.text = "Vraag " + question.Number;
-		_questionText.text = question.Question;
-
-		// Generate Answers
-		var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
-		var scrollRect = dialogueObject.GetComponent<ScrollRect>();
-		var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
-		var contentTotalHeight = 0f;
-		dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
-		for (var i = 0; i < question.Answers.Length; i++)
-		{
-			var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
-			choiceItem.transform.GetChild(0).GetComponent<Text>().text = question.Answers[i];
-
-			var offset = i * choiceItem.GetComponent<RectTransform>().rect.height;
-			contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
-
-			choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -offset);
-
-			var answer = new TempAnswers
-			{
-				Question = question.Question,
-				Answer = question.Answers[i]
-			};
-			choiceItem.GetComponent<Button>().onClick.AddListener(() => OnDialogueOptionClick(answer));
-			choiceItem.transform.SetParent(scrollRect.content, false);
-		}
-		var rectContent = scrollRect.content;
-		rectContent.sizeDelta = new Vector2(0, contentTotalHeight);
-
-		ResizeOptions(dialogueObject);
-	}
-
-	public void ResizeOptions(GameObject dialogueObject)
-	{
-		dialogueObject.GetComponent<ScrollRect>().content.BestFit();
-	}
-
-	private void OnDialogueOptionClick(TempAnswers answer)
-	{
-		_tempAnswers.Add(answer);
-		//TODO Game Activity
-		//TODO Asset Activity
-		NextQuestion();
-	}
-
-	private void NextQuestion()
-	{
-		if (_questions.Count > 0)
-		{
-			UpdateQuestion(_questions.First());
-			_questions.RemoveAt(0);
+			CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueActions[0].Id));
 		}
 		else
 		{
-			// continue to next state
-			LogAnswers();
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
+			var rnd = new System.Random();
+			var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
+			var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
+			var scrollRect = dialogueObject.GetComponent<ScrollRect>();
+			var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
+			var contentTotalHeight = 0f;
+			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
+			for (var i = 0; i < randomDialogueActions.Length; i++)
 			{
-				{ TrackerEvaluationKeys.Event, "GameFinish" }
-			});
-			FinishClickedEvent?.Invoke();
+				var dialogueAction = randomDialogueActions[i];
+				var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
+				choiceItem.transform.GetChild(0).GetComponent<Text>().text = Localization.GetAndFormat(dialogueAction.FileName, false, _scenarioController.ScenarioCode);
+				contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
+				choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
+				choiceItem.GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id)));
+				choiceItem.transform.SetParent(scrollRect.content, false);
+			}
+			scrollRect.content.sizeDelta = new Vector2(0, contentTotalHeight);
+			dialogueObject.GetComponent<ScrollRect>().content.BestFit();
 		}
 	}
 
-	private void LogAnswers()
+	public void UpdateCharacterDialogue(string text)
 	{
-		var str = "";
-		foreach (var answer in _tempAnswers)
-		{
-			str += answer.Question + " " + answer.Answer + "\n";
-		}
-		Debug.Log(str);
+		_questionText.GetComponent<Text>().text = text;
+		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
+	}
+
+	public void HandleFinalState()
+	{
+		FinishClickedEvent?.Invoke();
 	}
 }
