@@ -117,6 +117,7 @@ public class CharacterFaceController : MonoBehaviour
 			if (!audioSource.isPlaying)
 			{
 				_talkingAnimation = false;
+				audioSource.timeSamples = audioSource.clip.samples;
 			}
 		}
 		_mouthRenderer.sprite = _currentExpression.Mouth;

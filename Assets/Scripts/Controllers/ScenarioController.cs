@@ -282,7 +282,7 @@ public class ScenarioController : ICommandAction
 
 			var chat = new ChatObject 
 			{
-				Utterence = Localization.Get(reply.FileName),
+				Utterence = Localization.GetAndFormat(reply.FileName, false, ScenarioCode),
 				Agent = "Player",
 				Code = reply.CurrentState + "." + reply.FileName
 			};
@@ -318,7 +318,7 @@ public class ScenarioController : ICommandAction
 				{
 					var chat = new ChatObject
 					{
-						Utterence = Localization.Get(characterDialogue.FileName),
+						Utterence = Localization.GetAndFormat(characterDialogue.FileName, false, ScenarioCode),
 						Agent = "Client",
 						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
 					};
@@ -331,7 +331,7 @@ public class ScenarioController : ICommandAction
 					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
-					GetCharacterDialogueSuccessEvent?.Invoke(Localization.Get(characterDialogue.FileName));
+					GetCharacterDialogueSuccessEvent?.Invoke(Localization.GetAndFormat(characterDialogue.FileName, false, ScenarioCode));
 				}
 			}
 		}

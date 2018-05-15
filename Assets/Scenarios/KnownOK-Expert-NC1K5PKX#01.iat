@@ -449,7 +449,7 @@
 				}, 
 				{
 					"CurrentState": "DataCollected1",
-					"NextState": "WaitForAnswer1",
+					"NextState": "WaitForAnswer",
 					"Meaning": "Faq(1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
