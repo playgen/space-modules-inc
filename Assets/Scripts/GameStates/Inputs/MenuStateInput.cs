@@ -16,6 +16,7 @@ public class MenuStateInput : TickStateInput
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
 	private GameObject _gameLockedPanel;
+	private bool _startTimeCheck = false;
 
 	protected override void OnInitialize()
 	{
@@ -73,6 +74,16 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
 		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
+		if (!Application.isEditor && !gameLocked && !_startTimeCheck)
+		{
+			var dateTimeArg = string.Empty;
+			DateTime launchTime;
+			if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTime.TryParse(dateTimeArg, out launchTime) || DateTime.Now < launchTime || DateTime.Now.Subtract(launchTime).TotalHours > 1)
+			{
+				gameLocked = true;
+			}
+			_startTimeCheck = true;
+		}
 		_playButton.interactable = !gameLocked;
 		_gameLockedPanel.SetActive(gameLocked);
 	}

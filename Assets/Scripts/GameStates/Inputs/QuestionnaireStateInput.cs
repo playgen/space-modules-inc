@@ -92,16 +92,14 @@ public class QuestionnaireStateInput : TickStateInput
 		}
 		else
 		{
-			var rnd = new System.Random();
-			var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
 			var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
 			var scrollRect = dialogueObject.GetComponent<ScrollRect>();
 			var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
 			var contentTotalHeight = 0f;
 			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
-			for (var i = 0; i < randomDialogueActions.Length; i++)
+			for (var i = 0; i < dialogueActions.Length; i++)
 			{
-				var dialogueAction = randomDialogueActions[i];
+				var dialogueAction = dialogueActions[i];
 				var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
 				choiceItem.transform.GetChild(0).GetComponent<Text>().text = Localization.GetAndFormat(dialogueAction.FileName, false, _scenarioController.ScenarioCode);
 				contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;

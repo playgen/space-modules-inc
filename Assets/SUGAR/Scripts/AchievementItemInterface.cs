@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using PlayGen.Unity.Utilities.Localization;
+
+using UnityEngine;
 using UnityEngine.UI;
 
 public class AchievementItemInterface : MonoBehaviour
@@ -23,7 +25,7 @@ public class AchievementItemInterface : MonoBehaviour
 	internal void SetText(string achieveName, bool completed)
 	{
 		gameObject.SetActive(true);
-		_achieveName.text = achieveName;
+		_achieveName.text = Localization.Get(achieveName.Replace(" ", "_").Replace("!", string.Empty));
 		_achieveImage.enabled = completed;
 	}
 

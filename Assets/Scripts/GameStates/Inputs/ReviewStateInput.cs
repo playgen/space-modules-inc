@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
+
+using PlayGen.Unity.Utilities.BestFit;
 using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,6 +48,10 @@ public class ReviewStateInput : TickStateInput
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
+		if (_scenarioController.LevelMax > 0)
+		{
+			PlayerPrefs.SetInt("CurrentLevel", _scenarioController.CurrentLevel);
+		}
 	}
 
 	protected override void OnExit()
@@ -57,12 +63,14 @@ public class ReviewStateInput : TickStateInput
 
 	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood, ScenarioController.FeedbackMode feedbackMode)
 	{
+		_reviewContent.GetComponent<ScrollRect>().verticalScrollbar.value = 0;
 		_characterMood.fillAmount = (mood + 10) / 20;
         foreach (RectTransform child in _reviewContent.GetComponent<ScrollRect>().content)
         {
             UnityEngine.Object.Destroy(child.gameObject);
         }
 
+		var scores = new List<GameObject>();
         foreach (var t in history)
 		{
 			var entryKey = t.ChatObject.Agent;
@@ -77,8 +85,10 @@ public class ReviewStateInput : TickStateInput
                     var score = UnityEngine.Object.Instantiate(_feedbackPrefab, feedbackPanel, false);
                     score.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
                     score.transform.Find("Value").GetComponent<Text>().text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
-                }
+					scores.Add(score);
+				}
             }
 		}
+		scores.BestFit();
 	}
 }

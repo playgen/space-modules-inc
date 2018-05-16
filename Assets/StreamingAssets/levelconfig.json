@@ -2,14 +2,7 @@
   "Rounds":
   [
     {
-      "Levels": [
-        {
-          "ID": 1,
-          "Prefix": "TestScen",
-          "Character": "Positive",
-          "MaxPoints": 0
-        }
-      ]
+      "Levels": []
     },
     {
       "Levels": [

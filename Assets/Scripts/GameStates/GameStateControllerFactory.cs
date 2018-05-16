@@ -15,7 +15,7 @@ public class GameStateControllerFactory
 	{
 		var loadingState = CreateLoadingState();
 		var menuState = CreateMenuState();
-		var settingsState = CreateSettingsState();
+		var settingsState = CreateSettingsState(_scenarioController);
 		var levelState = CreateLevelState(_scenarioController);
 		var callState = CreateCallState();
 		var gameState = CreateGameState(_scenarioController, _modulesController);
@@ -72,9 +72,9 @@ public class GameStateControllerFactory
 		return state;
 	}
 
-	private SettingsState CreateSettingsState()
+	private SettingsState CreateSettingsState(ScenarioController scenarioController)
 	{
-		var input = new SettingsStateInput();
+		var input = new SettingsStateInput(scenarioController);
 		var state = new SettingsState(input);
 
 		var menuTransistion = new EventTransition(MenuState.StateName);
@@ -101,12 +101,6 @@ public class GameStateControllerFactory
 	{
 		var input = new CallStateInput();
 		var state = new CallState(input);
-
-		// To Test questionnaire
-		//var questionnaireTransition = new EventTransition(QuestionnaireState.StateName);
-		//input.AnswerClickedEvent+= questionnaireTransition.ChangeState;
-
-		//state.AddTransitions(questionnaireTransition);
 
 		var gameTransition = new EventTransition(GameState.StateName);
 		input.AnswerClickedEvent += gameTransition.ChangeState;

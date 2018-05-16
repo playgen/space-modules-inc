@@ -52,6 +52,16 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
+		var anim = _feedbackPanel.GetComponent<Animation>();
+		anim.Stop();
+		anim[anim.clip.name].time = 0f;
+		_feedbackPanel.GetComponent<CanvasGroup>().alpha = 0f;
+
+		foreach (var element in _feedbackElements)
+		{
+			UnityEngine.Object.Destroy(element.gameObject);
+		}
+
 		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
 		_scenarioController.GetCharacterStrongestEmotionSuccessEvent += UpdateCharacterExpression;

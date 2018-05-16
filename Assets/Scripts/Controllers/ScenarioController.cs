@@ -163,13 +163,30 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
 		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
-		_roundNumber = CommandLineUtility.CustomArgs.ContainsKey("round") ? int.Parse(CommandLineUtility.CustomArgs["round"]) - 1 : 1;
+		_roundNumber = CommandLineUtility.CustomArgs.ContainsKey("round") ? int.Parse(CommandLineUtility.CustomArgs["round"]) - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0;
 		var round = obj.Rounds[_roundNumber];
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
-		FeedbackLevel = CommandLineUtility.CustomArgs.ContainsKey("feedback") ? (FeedbackMode)int.Parse(CommandLineUtility.CustomArgs["feedback"]) : FeedbackMode.Minimal;
+		FeedbackLevel = CommandLineUtility.CustomArgs.ContainsKey("feedback") ? (FeedbackMode)int.Parse(CommandLineUtility.CustomArgs["feedback"]) : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.Minimal);
+		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
 		// Boolean for checking if the post game questionnaire is opened after the round
 		UseInGameQuestionnaire = CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.Parse(CommandLineUtility.CustomArgs["ingameq"]);
+		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+		{
+			CurrentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
+			if (CurrentLevel >= LevelMax)
+			{
+				if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]))
+				{
+					CommandLineUtility.CustomArgs = null;
+					CurrentLevel = LevelMax;
+				}
+				else
+				{
+					CurrentLevel = 0;
+				}
+			}
+		}
 	}
 
 	public void NextLevel()
@@ -178,7 +195,19 @@ public class ScenarioController : ICommandAction
 
 		_feedbackScores.Clear();
 		GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
-		CurrentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
+		if (_scenarios.Any())
+		{
+			CurrentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
+		}
+		else
+		{
+			var validPaths = _allScenarioPaths.Where(p => p.Contains('#')).ToArray();
+			var prefixes = validPaths.Select(p => p.Substring(0, p.IndexOf('-', p.IndexOf('-') + 1) + 1)).ToList();
+			var rnd = new Random();
+			var character = new List<string> {"Positive", "Neutral", "Negative"}.OrderBy(dto => rnd.Next()).First();
+			var prefix = prefixes.OrderBy(dto => rnd.Next()).First();
+			CurrentScenario = new ScenarioData(CurrentLevel, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), character, 8, prefix);
+		}
 		if (CurrentScenario != null)
 		{
 			var rng = new Random();
@@ -202,7 +231,7 @@ public class ScenarioController : ICommandAction
 	{
 		CurrentScenario = new ScenarioData(CurrentLevel / 5, _allScenarioPaths.Where(x => x.Contains("Questions")).ToArray(), "Neutral", 0, "Questionnaire");
 		var error = string.Empty;
-		ScenarioCode = (CurrentLevel < 15 ? 1 : 2).ToString();
+		ScenarioCode = (CurrentLevel < LevelMax && LevelMax > 0 ? 1 : 2).ToString();
 		_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _allScenarioPaths.First(x => x.Contains("Questions" + ScenarioCode))), out error);
 		if (!string.IsNullOrEmpty(error))
 		{
@@ -467,7 +496,11 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("score", score);
 			SUGARManager.GameData.Send("plays", 1);
 			SUGARManager.GameData.Send("stars", stars);
-			SUGARManager.GameData.Send("level_" + CurrentCharacter.CharacterName.ToString().ToLower() + "_stars", stars);
+			SUGARManager.GameData.Send("closure", GetScore(allScores, "Closure"));
+			SUGARManager.GameData.Send("empathy", GetScore(allScores, "Empathy"));
+			SUGARManager.GameData.Send("faq", GetScore(allScores, "Faq"));
+			SUGARManager.GameData.Send("inquire", GetScore(allScores, "Inquire"));
+			SUGARManager.GameData.Send("polite", GetScore(allScores, "Polite"));
 		}
 		Reset();
 	}
