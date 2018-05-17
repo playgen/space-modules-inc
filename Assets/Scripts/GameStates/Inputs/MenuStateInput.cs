@@ -16,7 +16,7 @@ public class MenuStateInput : TickStateInput
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
 	private GameObject _gameLockedPanel;
-	private bool _startTimeCheck = false;
+	private TimeSpan _startTimeGap = TimeSpan.MinValue;
 
 	protected override void OnInitialize()
 	{
@@ -74,15 +74,30 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
 		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
-		if (!Application.isEditor && !gameLocked && !_startTimeCheck)
+		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
 		{
-			var dateTimeArg = string.Empty;
-			DateTime launchTime;
-			if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTime.TryParse(dateTimeArg, out launchTime) || DateTime.Now < launchTime || DateTime.Now.Subtract(launchTime).TotalHours > 1)
+			if (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch"))
 			{
-				gameLocked = true;
+				_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 			}
-			_startTimeCheck = true;
+			else
+			{
+				string dateTimeArg;
+				DateTimeOffset launchTime;
+				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				{
+					gameLocked = true;
+					_startTimeGap = TimeSpan.MaxValue;
+				}
+				else
+				{
+					_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
+				}
+			}
+		}
+		if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
+		{
+			gameLocked = true;
 		}
 		_playButton.interactable = !gameLocked;
 		_gameLockedPanel.SetActive(gameLocked);

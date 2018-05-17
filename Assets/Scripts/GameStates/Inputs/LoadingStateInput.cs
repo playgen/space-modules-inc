@@ -22,9 +22,6 @@ public class LoadingStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
-	}
-
-	protected override void OnTick(float deltaTime) {
 		// Check for SUGAR login
 		SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
 		{
@@ -35,7 +32,7 @@ public class LoadingStateInput : TickStateInput
 				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
 				{
 					{ TrackerEvaluationKeys.Event, "GameStart" }
-					
+
 				});
 				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.UserProfile, new Dictionary<TrackerEvaluationKeys, string>
 				{
