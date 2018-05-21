@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using AssetManagerPackage;
 using GameWork.Core.Commands.Interfaces;
@@ -18,7 +19,7 @@ using Newtonsoft.Json;
 using PlayGen.Unity.Utilities.Localization;
 
 using TrackerAssetPackage;
-
+using Debug = UnityEngine.Debug;
 using Random = System.Random;
 
 public class ScenarioController : ICommandAction
@@ -479,7 +480,7 @@ public class ScenarioController : ICommandAction
 		var scoreObj = new ScoreObject
 		{
 			Stars = stars,
-			Score = (int)Math.Pow(10, 2 + (4 * (scoreTotal - 1)/(CurrentScenario.MaxPoints - 1))),
+			Score = GetPlayerScore(stars, mood),
 			ScoreFeedbackToken = "FEEDBACK_" + stars,
 			MoodImage = mood >= 0.5,
 			EmotionCommentToken = "COMMENT_" + (mood >= 0.5 ? "POSITIVE" : "NEGATIVE"),
@@ -503,6 +504,36 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("polite", GetScore(allScores, "Polite"));
 		}
 		Reset();
+	}
+
+	private int GetPlayerScore(int stars, float mood)
+	{
+		// will set the player score based on score and player mood and normalize between 2 values depending on score
+		// 1 star: 100 - 1000
+		// 2 stars: 1001 - 5000
+		// 3 stars: 5001 - 15000
+
+		int min;
+		int max;
+		switch (stars)
+		{
+			case 3:
+				min = 10001;
+				max = 15000;
+				break;
+			case 2:
+				min = 5001;
+				max = 10000;
+				break;
+			default:
+				min = 100;
+				max = 5000;
+				break;
+		}
+
+		var diff = max - min;
+		var score = min + Mathf.RoundToInt(diff * mood);
+		return score;
 	}
 
 	private void UpdateScore(DialogueStateActionDTO reply)
