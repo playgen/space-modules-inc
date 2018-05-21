@@ -84,7 +84,8 @@ public class MenuStateInput : TickStateInput
 			{
 				string dateTimeArg;
 				DateTimeOffset launchTime;
-				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
+				    !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
 				{
 					gameLocked = true;
 					_startTimeGap = TimeSpan.MaxValue;
@@ -95,9 +96,14 @@ public class MenuStateInput : TickStateInput
 				}
 			}
 		}
+		else
+		{
+			Debug.LogWarning("Game Locked: Custom Args Missing");
+		}
 		if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
 		{
 			gameLocked = true;
+			Debug.LogWarning("Game Locked: Time Expired");
 		}
 		_playButton.interactable = !gameLocked;
 		_gameLockedPanel.SetActive(gameLocked);
