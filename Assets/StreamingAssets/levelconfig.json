@@ -97,6 +97,70 @@
           "MaxPoints": 14
         }
       ]
+    },
+    {
+      "Levels": [
+        {
+          "ID": 1,
+          "Prefix": "Unknown-Expert-",
+          "Character": "Neutral",
+          "MaxPoints": 10
+        },
+        {
+          "ID": 2,
+          "Prefix": "KnownOK-Expert-",
+          "Character": "Negative",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 3,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 4,
+          "Prefix": "KnownCheck-Expert-",
+          "Character": "Positive",
+          "MaxPoints": 11
+        },
+        {
+          "ID": 5,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 6,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 15
+        },
+        {
+          "ID": 7,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Neutral",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 8,
+          "Prefix": "KnownOK-Novice-",
+          "Character": "Positive",
+          "MaxPoints": 14
+        },
+        {
+          "ID": 9,
+          "Prefix": "KnownCheck-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 15
+        },
+        {
+          "ID": 10,
+          "Prefix": "Unknown-Novice-",
+          "Character": "Negative",
+          "MaxPoints": 15
+        }
+      ]
     }
   ]
 }

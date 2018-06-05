@@ -14,7 +14,7 @@ public class GameStateControllerFactory
 	public TickStateController Create()
 	{
 		var loadingState = CreateLoadingState();
-		var menuState = CreateMenuState();
+		var menuState = CreateMenuState(_scenarioController);
 		var settingsState = CreateSettingsState(_scenarioController);
 		var levelState = CreateLevelState(_scenarioController);
 		var callState = CreateCallState();
@@ -55,9 +55,9 @@ public class GameStateControllerFactory
 		return state;
 	}
 
-	private MenuState CreateMenuState()
+	private MenuState CreateMenuState(ScenarioController scenarioController)
 	{
-		var input = new MenuStateInput();
+		var input = new MenuStateInput(scenarioController);
 		var state = new MenuState(input);
 
 		var settingsTransition = new EventTransition(SettingsState.StateName);

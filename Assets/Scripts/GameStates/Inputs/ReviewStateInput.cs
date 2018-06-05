@@ -50,7 +50,7 @@ public class ReviewStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 		if (_scenarioController.LevelMax > 0)
 		{
-			PlayerPrefs.SetInt("CurrentLevel", _scenarioController.CurrentLevel);
+			PlayerPrefs.SetInt("CurrentLevel" + _scenarioController.RoundNumber, _scenarioController.CurrentLevel);
 		}
 	}
 

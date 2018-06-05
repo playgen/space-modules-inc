@@ -49,14 +49,14 @@ public class ScoreStateInput : TickStateInput
 	{
 		if (_scenarioController.CurrentLevel >= _scenarioController.LevelMax)
 		{
-			if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
+			if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]))
 			{
-				var locked = bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]);
-				if (locked)
-				{
-					CommandLineUtility.CustomArgs = null;
-				}
-			}
+                _scenarioController.CurrentLevel = _scenarioController.LevelMax;
+            }
+            else
+            {
+                _scenarioController.CurrentLevel = 0;
+            }
 		}
 		if (_scenarioController.UseInGameQuestionnaire && _scenarioController.CurrentLevel % 5 == 0)
 		{

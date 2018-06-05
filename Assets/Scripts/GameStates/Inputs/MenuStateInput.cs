@@ -17,8 +17,14 @@ public class MenuStateInput : TickStateInput
 	private GameObject _quitPanel;
 	private GameObject _gameLockedPanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
+    private readonly ScenarioController _scenarioController;
 
-	protected override void OnInitialize()
+    public MenuStateInput(ScenarioController scenarioController)
+    {
+        _scenarioController = scenarioController;
+    }
+
+    protected override void OnInitialize()
 	{
 		_playButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/PlayButton").GetComponent<Button>();
 		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
@@ -73,10 +79,10 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
-		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0;
+		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
 		{
-			if (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch"))
+			if (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback"))
 			{
 				_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 			}
@@ -84,8 +90,7 @@ public class MenuStateInput : TickStateInput
 			{
 				string dateTimeArg;
 				DateTimeOffset launchTime;
-				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
-				    !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
 				{
 					gameLocked = true;
 					_startTimeGap = TimeSpan.MaxValue;
@@ -95,10 +100,6 @@ public class MenuStateInput : TickStateInput
 					_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
 				}
 			}
-		}
-		else
-		{
-			Debug.LogWarning("Game Locked: Custom Args Missing");
 		}
 		if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
 		{

@@ -131,10 +131,10 @@ public class ScenarioController : ICommandAction
 	public ScenarioData CurrentScenario;
 	public string ScenarioCode;
 	public FeedbackMode FeedbackLevel;
+    public int RoundNumber;
 
-	private readonly AudioController _audioController;
+    private readonly AudioController _audioController;
 	private AudioClipModel _audioClip;
-	private int _roundNumber;
 
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<List<ChatScoreObject>, float, FeedbackMode> GetReviewDataSuccessEvent;
@@ -163,32 +163,28 @@ public class ScenarioController : ICommandAction
 		}
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
-		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
-		_roundNumber = CommandLineUtility.CustomArgs.ContainsKey("round") ? int.Parse(CommandLineUtility.CustomArgs["round"]) - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0;
-		var round = obj.Rounds[_roundNumber];
+        // Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
+        RoundNumber = CommandLineUtility.CustomArgs.ContainsKey("round") ? int.Parse(CommandLineUtility.CustomArgs["round"]) - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0;
+		var round = obj.Rounds[RoundNumber];
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
 		FeedbackLevel = CommandLineUtility.CustomArgs.ContainsKey("feedback") ? (FeedbackMode)int.Parse(CommandLineUtility.CustomArgs["feedback"]) : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.Minimal);
 		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
 		// Boolean for checking if the post game questionnaire is opened after the round
 		UseInGameQuestionnaire = CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.Parse(CommandLineUtility.CustomArgs["ingameq"]);
-		if (CommandLineUtility.CustomArgs.ContainsKey("feedback"))
-		{
-			CurrentLevel = PlayerPrefs.GetInt("CurrentLevel", 0);
-			if (CurrentLevel >= LevelMax)
-			{
-				if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]))
-				{
-					CommandLineUtility.CustomArgs = null;
-					CurrentLevel = LevelMax;
-				}
-				else
-				{
-					CurrentLevel = 0;
-				}
-			}
-		}
-	}
+        CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
+        if (CurrentLevel >= LevelMax)
+        {
+            if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]))
+            {
+                CurrentLevel = LevelMax;
+            }
+            else
+            {
+                CurrentLevel = 0;
+            }
+        }
+    }
 
 	public void NextLevel()
 	{

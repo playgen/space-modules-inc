@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Settings;
 using PlayGen.Unity.Utilities.Localization;
+using PlayGen.SUGAR.Unity;
 
 public class SettingsStateInput : TickStateInput
 {
@@ -64,7 +65,7 @@ public class SettingsStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 
-		_feedbackMode.SetActive(_scenarioController.LevelMax == 0);
+		_feedbackMode.SetActive(!CommandLineUtility.CustomArgs.ContainsKey("feedback"));
 		_creator.RebuildLayout();
 
 		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
