@@ -12,6 +12,7 @@ See the LICENSE file included in this project.
   - **Assets**  
     - **DeepLink iOS**: *[Included-Assets](#Included-Assets)*  
     - **DeepLink Plugin**: *[Included-Assets](#Included-Assets)*  
+    - **Evaluation Asset**: *[Included-Assets](#Included-Assets) asset that evaluates the pedagogical efficiency of the game*  
     - **RAGE Analytics**: *[Included-Assets](#Included-Assets) asset to log to the RAGE analytics server*  
   - **StreamingAssets**
     - **levelconfig.json**: *configuration file for levels*  
@@ -37,7 +38,6 @@ See the LICENSE file included in this project.
 - [GameWork](https://github.com/Game-Work/GameWork.Unity) is a game development framework. 
 - [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
 - [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430): for android.
-
 
 # Development:
 ## Requirements:
@@ -93,7 +93,7 @@ Note: It is advised that you do not remove the Prefabs for SUGAR, as these have 
 Standalone, Android and iOS are currently supported using the default Unity build system.
 
 # Installer:
-Space Modules Inc. uses [Wix](http://wixtoolset.org/) to create Windows installers.
+[Wix](http://wixtoolset.org/) is used to create the Windows installer.
 
 ## Requirements:
 - Wix Toolset
