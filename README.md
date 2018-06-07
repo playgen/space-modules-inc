@@ -10,6 +10,8 @@ See the LICENSE file included in this project.
 
 - **Unity Project**: *Project to be opened in the Unity Editor*  
   - **Assets**  
+    - **Editor**
+      - **FATiMAImporter**: *Utility to parse the scenario content files into a Unity readable format.* 
     - **DeepLink iOS**: *[Included-Assets](#Included-Assets)*  
     - **DeepLink Plugin**: *[Included-Assets](#Included-Assets)*  
     - **Evaluation Asset**: *[Included-Assets](#Included-Assets) asset that evaluates the pedagogical efficiency of the game*  
@@ -18,6 +20,8 @@ See the LICENSE file included in this project.
     - **levelconfig.json**: *configuration file for levels*  
     - **modules-en.json**: *space modules data in English*  
     - **modules-nl.json**: *space modules data in Dutch*
+  - **ScenariosRelated**: *Files used by the scenarios.*
+  - **Scenarios**: *The scenarios in game.*
   - **lib**: *precompiled [Included-Assets](#Included-Assets) libraries*  
     - **ExcelToJsonConverter**: *Used to covnert excel localization files to json*  
     - **GameWork**: *Game Development Framework*  
@@ -54,7 +58,9 @@ See the LICENSE file included in this project.
 
 3. Pull the RAGE Analytics Unity Tracker and place the required files into Assets\Plugins\unity-tracker. Note that code changes could be needed as a result of updates to this asset.
 
-4. To get the game running in editor, Navigate to Tools/SUGAR/Set Auto Log-in Values and add the following [Custom Args](#Custom-Args):
+4. In Unity's Project View, select the ScenariosRelated and Scenarios and right-click/ReImport to generate the Resources versions.
+
+5. To get the game running in editor, Navigate to Tools/SUGAR/Set Auto Log-in Values and add the following [Custom Args](#Custom-Args):
 `ingameq=true;lockafterq=true;feedback=2;forcelaunch=true`    
 Note: Each argument should be separated with a `;`  
 
