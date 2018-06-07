@@ -28,15 +28,13 @@ public class ExcelToJsonConverterWindow : EditorWindow
 			_excelProcessor = new ExcelToJsonConverter();
 		}
 
-		_inputPath = EditorPrefs.GetString(kExcelToJsonConverterInputPathPrefsName, Application.dataPath);
-		_outputPath = EditorPrefs.GetString(kExcelToJsonConverterOuputPathPrefsName, Application.dataPath);
-		_onlyModifiedFiles = EditorPrefs.GetBool(kExcelToJsonConverterModifiedFilesOnlyPrefsName, false);
+		_inputPath = Path.Combine(Application.dataPath, "Editor/Localization");
+		_outputPath = Path.Combine(Application.dataPath, "Resources/Localization");
+        _onlyModifiedFiles = EditorPrefs.GetBool(kExcelToJsonConverterModifiedFilesOnlyPrefsName, false);
 	}
 	
 	public void OnDisable()
 	{
-		EditorPrefs.SetString(kExcelToJsonConverterInputPathPrefsName, _inputPath);
-		EditorPrefs.SetString(kExcelToJsonConverterOuputPathPrefsName, _outputPath);
 		EditorPrefs.SetBool(kExcelToJsonConverterModifiedFilesOnlyPrefsName, _onlyModifiedFiles);
 	}
 
@@ -78,6 +76,7 @@ public class ExcelToJsonConverterWindow : EditorWindow
 		if (GUILayout.Button("Convert Excel Files"))
 		{
 			_excelProcessor.ConvertExcelFilesToJson(_inputPath, _outputPath, _onlyModifiedFiles);
+            AssetDatabase.Refresh();
 		}
 
 		GUILayout.EndArea();
@@ -86,7 +85,7 @@ public class ExcelToJsonConverterWindow : EditorWindow
 	}
 }
 
-[InitializeOnLoad]
+//[InitializeOnLoad]
 public class ExcelToJsonAutoConverter 
 {	
 	/// <summary>

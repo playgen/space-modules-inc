@@ -226,7 +226,7 @@
 	},
 	{
 		"Key": "A_DVP_HOT",
-		"en": "Power cell gets hot.",
+		"en": "Power Cell gets hot.",
 		"nl": "De krachtcel wordt heet."
 	},
 	{
@@ -241,7 +241,7 @@
 	},
 	{
 		"Key": "A_DVP_NOISE",
-		"en": "Power cell makes a noise.",
+		"en": "Power Cell makes a noise.",
 		"nl": "De krachtcel geeft een hoog zoemend geluid."
 	},
 	{
@@ -286,7 +286,7 @@
 	},
 	{
 		"Key": "A_ENDGB_A",
-		"en": "Yeah... bye.",
+		"en": "Yeah... bye...",
 		"nl": "Ja, daaagggg."
 	},
 	{
@@ -317,32 +317,32 @@
 	{
 		"Key": "A_OP_N_E",
 		"en": "Hi, I'm having trouble with the warp drive again.",
-		"nl": "Hee, ik heb weer eens problemen met Sterremotor."
+		"nl": "Hee, ik heb weer eens problemen met sterremotor."
 	},
 	{
 		"Key": "A_OP_N_P",
 		"en": "Hi, I'm having trouble with the power cell again.",
-		"nl": "Hee, ik heb weer eens problemen met Krachtcel."
+		"nl": "Hee, ik heb weer eens problemen met krachtcel."
 	},
 	{
 		"Key": "A_OP_N_S",
 		"en": "Hi, I'm having trouble with the sensor array again.",
-		"nl": "Hee, ik heb weer eens problemen met Sensornet."
+		"nl": "Hee, ik heb weer eens problemen met sensornet."
 	},
 	{
 		"Key": "A_OP_P_E",
 		"en": "Hi there, I'm having trouble with the warp drive.",
-		"nl": "Hoi hoi, ik heb problemen met Sterremotor."
+		"nl": "Hoi hoi, ik heb problemen met sterremotor."
 	},
 	{
 		"Key": "A_OP_P_P",
 		"en": "Hi there, I'm having trouble with the power cell.",
-		"nl": "Hoi hoi, ik heb problemen met Krachtcel."
+		"nl": "Hoi hoi, ik heb problemen met krachtcel."
 	},
 	{
 		"Key": "A_OP_P_S",
 		"en": "Hi there, I'm having trouble with the sensor array.",
-		"nl": "Hoi hoi, ik heb problemen met Sensornet."
+		"nl": "Hoi hoi, ik heb problemen met sensornet."
 	},
 	{
 		"Key": "A_OP1_A_E",
@@ -386,7 +386,7 @@
 	},
 	{
 		"Key": "A_RSPANG_P",
-		"en": "Good to hear, but I'm not angry, you know!",
+		"en": "Good to hear, but I'm not angry, you know.",
 		"nl": "Fijn dat je het wilt oplossen, maar boos ben ik niet hoor!"
 	},
 	{
@@ -416,8 +416,8 @@
 	},
 	{
 		"Key": "A_RSPFAIL_P",
-		"en": "Ok, let me try...No, no effect unfortunately...",
-		"nl": "Ok, ik probeer het even...Nee, geen effect, helaas..."
+		"en": "Ok, let me try...No, no effect unfortunately…",
+		"nl": "Ok, ik probeer het even...Nee, geen effect, helaas…"
 	},
 	{
 		"Key": "A_RSPPR_A",
@@ -426,7 +426,7 @@
 	},
 	{
 		"Key": "A_RSPRR_A",
-		"en": "Pfff, this really helps! Thanks a lot.",
+		"en": "Pfff, this really helps! Thanks a lot...",
 		"nl": "Pfff, dat schiet lekker op zeg. Bedankt hoor."
 	},
 	{
@@ -781,7 +781,7 @@
 	},
 	{
 		"Key": "A_RSPWT_A",
-		"en": "Pffff...So be it...",
+		"en": "Pffff... So be it...",
 		"nl": "Pfff...het zij zo..."
 	},
 	{
@@ -1161,7 +1161,7 @@
 	},
 	{
 		"Key": "S_RETRY_R",
-		"en": "Wait...I will look again...",
+		"en": "Wait... I will look again...",
 		"nl": "Effe wachten, ik zoek nog even verder."
 	},
 	{
@@ -1326,12 +1326,12 @@
 	},
 	{
 		"Key": "QS_SU6",
-		"en": "Succesful.",
+		"en": "successful.",
 		"nl": "Succcesvol."
 	},
 	{
 		"Key": "QS_SU7",
-		"en": "Very succesful.",
+		"en": "Very successful.",
 		"nl": "Zeer succesvol."
 	},
 	{
