@@ -286,10 +286,7 @@ public class ScenarioController : ICommandAction
 	public void GetCharacterStrongestEmotion()
 	{
 		var emotion = CurrentCharacter.GetStrongestActiveEmotion();
-		if (emotion != null)
-		{
-			GetCharacterStrongestEmotionSuccessEvent?.Invoke(emotion.EmotionType, CurrentCharacter.Mood);
-		}
+		GetCharacterStrongestEmotionSuccessEvent?.Invoke(emotion?.EmotionType, CurrentCharacter.Mood);
 	}
 
 	public void SetPlayerAction(Guid actionId)
@@ -329,15 +326,30 @@ public class ScenarioController : ICommandAction
 				Agent = "Player",
 				Code = reply.CurrentState + "." + reply.FileName
 			};
-			_chatScoreHistory.Add(new ChatScoreObject
+			if (CurrentScenario.Prefix != "Questionnaire")
 			{
-				ChatObject = chat,
-				Scores = new Dictionary<string, int>()
-			});
-			UpdateScore(reply);
-			_feedbackScores = _chatScoreHistory.Last().Scores;
-			GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
+				_chatScoreHistory.Add(new ChatScoreObject
+				{
+					ChatObject = chat,
+					Scores = new Dictionary<string, int>()
+				});
+
+				UpdateScore(reply);
+				_feedbackScores.Clear();
+				foreach (var chatScore in _chatScoreHistory.Last().Scores)
+				{
+					if (_feedbackScores.ContainsKey(chatScore.Key))
+					{
+						_feedbackScores[chatScore.Key] = chatScore.Value;
+					}
+					else
+					{
+						_feedbackScores.Add(chatScore.Key, chatScore.Value);
+					}
+				}
+			}
 			GetCharacterResponse();
+			GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
 		}
 	}
 
@@ -365,12 +377,26 @@ public class ScenarioController : ICommandAction
 						Agent = "Client",
 						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
 					};
-					_chatScoreHistory.Add(new ChatScoreObject
+					if (CurrentScenario.Prefix != "Questionnaire")
 					{
-						ChatObject = chat,
-						Scores = new Dictionary<string, int>()
-					});
-					UpdateScore(characterDialogue);
+						_chatScoreHistory.Add(new ChatScoreObject
+						{
+							ChatObject = chat,
+							Scores = new Dictionary<string, int>()
+						});
+						UpdateScore(characterDialogue);
+						foreach (var chatScore in _chatScoreHistory.Last().Scores)
+						{
+							if (_feedbackScores.ContainsKey(chatScore.Key))
+							{
+								_feedbackScores[chatScore.Key] = chatScore.Value;
+							}
+							else
+							{
+								_feedbackScores.Add(chatScore.Key, chatScore.Value);
+							}
+						}
+					}
 					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
@@ -514,16 +540,16 @@ public class ScenarioController : ICommandAction
 		switch (stars)
 		{
 			case 3:
-				min = 10001;
+				min = 5001;
 				max = 15000;
 				break;
 			case 2:
-				min = 5001;
-				max = 10000;
+				min = 1001;
+				max = 5000;
 				break;
 			default:
 				min = 100;
-				max = 5000;
+				max = 1000;
 				break;
 		}
 

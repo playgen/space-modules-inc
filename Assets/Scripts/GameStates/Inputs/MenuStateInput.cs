@@ -79,6 +79,11 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
+		if (_startTimeGap == TimeSpan.MinValue && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
+		{
+			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
+			_scenarioController.CurrentLevel = 0;
+		}
 		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
 		{

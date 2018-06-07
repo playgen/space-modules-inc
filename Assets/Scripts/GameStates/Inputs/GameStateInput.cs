@@ -132,14 +132,12 @@ public class GameStateInput : TickStateInput
 		if (feedback.Count > 0 && (int)feedbackMode >= 2)
 		{
 			var rect = _feedbackPanel.GetComponent<RectTransform>().rect;
-			var width = rect.width / feedback.Count;
+			var width = (rect.width / feedback.Count) - 10;
 			var height = Mathf.Min(rect.height, width / 3);
-			width = Mathf.Min(width, _feedbackElementPrefab.GetComponent<RectTransform>().rect.width);
 
 			foreach (var i in feedback)
 			{
-				var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab);
-				element.transform.SetParent(_feedbackPanel.transform, false);
+				var element = UnityEngine.Object.Instantiate(_feedbackElementPrefab, _feedbackPanel.transform, false);
 				element.GetComponent<RectTransform>().sizeDelta = new Vector2(width, height);
 				element.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + i.Key.ToUpper());
 				element.transform.Find("Value").GetComponent<Text>().text = i.Value > 0 ? "+" + i.Value : i.Value.ToString();
