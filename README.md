@@ -62,9 +62,9 @@ Note: Each argument should be separated with a `;`
 - `ingameq`: Should the in game questionnaire be shown
 - `lockafterq`: Should the game be locked after the questions have been complete
 - `feedback`: The feedback level:  
-  - level 1: End game only  
-  - level 2: End game and conversation review  
-  - Level 3: End game, conversation review and in game feedback
+  - level 0: End game only  
+  - level 1: End game and conversation review  
+  - Level 2: End game, conversation review and in game feedback
 - `forcelaunch` If the game should ignore time stamp
 - `round`: which round of scenarios to play
 
@@ -95,17 +95,30 @@ Standalone, Android and iOS are currently supported using the default Unity buil
 # Installer:
 [Wix](http://wixtoolset.org/) is used to create the Windows installer.
 
+The game-launcher repository is used to launch the game from url.
+
 ## Requirements:
 - Wix Toolset
 - Visual Studio 2017
 - Wix Visual Studio Extension
+- [game-launcher](https://gitlab.com/playgen/game-launcher) project
 
 ## Process:
 1. Create a Unity PC Build at Build\WindowsSMI called “SMI”.
-
 2. Once built, go to the project solution (space-modules-inc.sln) and build the space-modules-inc-setup project.
-
 3. The resulting windows installer can be found at space-modules-inc-installer\bin\Debug\space-modules-inc_setup.msi.
+
+todo explain how this works with wix and how to create create an installer etc once you've made a standalone build
+
+# DeepLinks
+The game is configured to launch from DeepLink urls for both Android and iOS.
+
+This url is the same as the launcher url except that where the launcher url starts with:  
+`rage://?gameid=SMI`  
+the deeplink url starts with:  
+`rage://SMI?`  
+After that the rest of the argument are the same e.g:  
+`rage://smi?username=SMI_User1&class=Testing&feedback=2&forcelaunch=true&hash=A2AF8BA8AF05A16E0282A0D318EBF4FDF070636C`
 
 # Unity Game
 ## Key Scene Structure
