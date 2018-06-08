@@ -83,7 +83,11 @@ public class ScenarioController : ICommandAction
 	{
 		public string Utterence;
 		public string Agent;
-		public string Code;
+		public string CurrentState;
+		public string NextState;
+		public string FileName;
+		public string UtteranceId;
+		public Guid DialogueId;
 	}
 
 	public class ChatScoreObject
@@ -133,7 +137,7 @@ public class ScenarioController : ICommandAction
 	public FeedbackMode FeedbackLevel;
     public int RoundNumber;
 
-    private readonly AudioController _audioController;
+	private readonly AudioController _audioController;
 	private AudioClipModel _audioClip;
 
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
@@ -292,7 +296,7 @@ public class ScenarioController : ICommandAction
 	public void SetPlayerAction(Guid actionId)
 	{
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
-		if (reply != null)
+		if (reply != null && _chatScoreHistory.LastOrDefault(c => c.ChatObject.Agent == "Player")?.ChatObject.CurrentState != reply.CurrentState)
 		{
 			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
 
@@ -324,7 +328,11 @@ public class ScenarioController : ICommandAction
 			{
 				Utterence = Localization.GetAndFormat(reply.FileName, false, ScenarioCode),
 				Agent = "Player",
-				Code = reply.CurrentState + "." + reply.FileName
+				CurrentState = reply.CurrentState,
+				NextState = reply.NextState,
+				FileName = reply.FileName,
+				UtteranceId = reply.UtteranceId,
+				DialogueId = reply.Id
 			};
 			if (CurrentScenario.Prefix != "Questionnaire")
 			{
@@ -375,7 +383,11 @@ public class ScenarioController : ICommandAction
 					{
 						Utterence = Localization.GetAndFormat(characterDialogue.FileName, false, ScenarioCode),
 						Agent = "Client",
-						Code = characterDialogue.CurrentState + "." + characterDialogue.FileName
+						CurrentState = characterDialogue.CurrentState,
+						NextState = characterDialogue.NextState,
+						FileName = characterDialogue.FileName,
+						UtteranceId = characterDialogue.UtteranceId,
+						DialogueId = characterDialogue.Id
 					};
 					if (CurrentScenario.Prefix != "Questionnaire")
 					{

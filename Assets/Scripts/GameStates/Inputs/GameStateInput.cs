@@ -52,6 +52,7 @@ public class GameStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
+		CommandQueue.AddCommand(new CloseModulesCommand());
 		var anim = _feedbackPanel.GetComponent<Animation>();
 		anim.Stop();
 		anim[anim.clip.name].time = 0f;

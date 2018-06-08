@@ -278,10 +278,7 @@ public class ModulesController : ICommandAction
 	{
 		if (_modulesPopup.activeInHierarchy)
 		{
-			_nextArrow.gameObject.SetActive(false);
-			_backArrow.gameObject.SetActive(false);
-			_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
-			_modulesPopup.SetActive(false);
+			ClosePopup();
 		}
 		else
 		{
@@ -296,5 +293,13 @@ public class ModulesController : ICommandAction
 			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
 			LoadIndex();
 		}
+	}
+
+	public void ClosePopup()
+	{
+		_nextArrow.gameObject.SetActive(false);
+		_backArrow.gameObject.SetActive(false);
+		_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
+		_modulesPopup.SetActive(false);
 	}
 }

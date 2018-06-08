@@ -6,6 +6,10 @@ using UnityEngine.UI;
 using PlayGen.Unity.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.SUGAR.Unity;
+using PlayGen.Unity.Utilities.BestFit;
+using System.Linq;
+
+using Object = UnityEngine.Object;
 
 public class SettingsStateInput : TickStateInput
 {
@@ -67,11 +71,14 @@ public class SettingsStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 
-		_feedbackMode.SetActive(!CommandLineUtility.CustomArgs.ContainsKey("feedback"));
-		_creator.RebuildLayout();
-
 		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
+
+		if (_feedbackMode && CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+		{
+			Object.Destroy(_feedbackMode);
+		}
+		_creator.RebuildLayout();
 	}
 
 	protected override void OnExit()

@@ -32,6 +32,9 @@ public class GameState : InputTickState
 
 			var toggleModulesCommand = command as ToggleModulesCommand;
 			toggleModulesCommand?.Execute(_modulesController);
+
+			var closeModulesCommand = command as CloseModulesCommand;
+			closeModulesCommand?.Execute(_modulesController);
 		}
 	}
 }
