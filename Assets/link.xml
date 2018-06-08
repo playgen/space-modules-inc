@@ -74,6 +74,14 @@
 	</assembly>
 
 	<assembly fullname="PlayGen.SUGAR.Client">
+		<type fullname="PlayGen.SUGAR.Client.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="PlayGen.SUGAR.Contracts">
 		<type fullname="PlayGen.SUGAR.Contracts.*" preserve="all"/>
+	</assembly>
+
+	<assembly fullname="PlayGen.SUGAR.Common">
+		<type fullname="PlayGen.SUGAR.Common.*" preserve="all"/>
 	</assembly>
 </linker>

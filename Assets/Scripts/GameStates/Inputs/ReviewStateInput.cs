@@ -46,10 +46,6 @@ public class ReviewStateInput : TickStateInput
 		CommandQueue.AddCommand(new GetReviewDataCommand());
 		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
-		if (_scenarioController.LevelMax > 0)
-		{
-			PlayerPrefs.SetInt("CurrentLevel" + _scenarioController.RoundNumber, _scenarioController.CurrentLevel);
-		}
 	}
 
 	protected override void OnExit()

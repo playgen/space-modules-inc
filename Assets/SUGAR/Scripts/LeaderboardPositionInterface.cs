@@ -1,4 +1,4 @@
-﻿using PlayGen.SUGAR.Contracts.Shared;
+﻿using PlayGen.SUGAR.Contracts;
 
 using UnityEngine;
 using UnityEngine.UI;

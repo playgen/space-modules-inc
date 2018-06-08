@@ -115,12 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: -2015201922, guid: 4f8932c3a6246ed4d80bcab92e6d16f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseAddress: http://api.sugarengine.org/
+  _baseAddress: http://api.sugarengine.org/v1/
   _gameToken: SMI
-  _gameId: 1
+  _gameId: 6
   _uiBlocker: {fileID: 1823420820520756, guid: 3bf56a8582cd73945ac50320b9b466a7, type: 2}
   _useBlocker: 1
-  _blockerClickClose: 0
+  _blockerClickClose: 1
   _uiSpinner: {fileID: 114066451447811422, guid: 2184654e3f08b134791f86b429921805,
     type: 2}
   _customInterfaceList: []

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameWork.Core.States.Tick.Input;
-using PlayGen.SUGAR.Common.Shared;
+using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;

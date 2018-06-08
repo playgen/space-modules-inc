@@ -537,6 +537,10 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("inquire", GetScore(allScores, "Inquire"));
 			SUGARManager.GameData.Send("polite", GetScore(allScores, "Polite"));
 		}
+		if (LevelMax > 0)
+		{
+			PlayerPrefs.SetInt("CurrentLevel" + RoundNumber, CurrentLevel);
+		}
 		Reset();
 	}
 
