@@ -2,6 +2,7 @@
 
 using PlayGen.SUGAR.Client.EvaluationEvents;
 using PlayGen.SUGAR.Unity;
+using PlayGen.Unity.Utilities.Localization;
 
 using UnityEngine;
 
@@ -32,7 +33,7 @@ public class AchievementPopupInterface : BaseEvaluationPopupInterface
 	{
 		while (_evaluationQueue.Count > 0)
 		{
-			_name.text = _evaluationQueue[0].Name;
+			_name.text = Localization.Get(_evaluationQueue[0].Name.Replace(" ", "_").Replace("!", string.Empty));;
 			_animation.Play();
 			while (_animation.isPlaying)
 			{

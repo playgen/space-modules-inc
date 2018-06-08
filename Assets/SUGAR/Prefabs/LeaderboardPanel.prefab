@@ -1611,7 +1611,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 3
+  m_Text: 
 --- !u!114 &114116712137856360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1644,7 +1644,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 7
+  m_Text: 
 --- !u!114 &114124562876725900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1704,7 +1704,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114138834698265384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1859,7 +1859,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114185701543799228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1919,7 +1919,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114195678327331420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1952,7 +1952,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114229448736926338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2026,7 +2026,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114258741666680820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2100,7 +2100,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114279445772882316
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2133,7 +2133,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 5
+  m_Text: 
 --- !u!114 &114279674105769968
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2166,7 +2166,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 8
+  m_Text: 
 --- !u!114 &114293605161934762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2227,7 +2227,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114318004378188812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2353,7 +2353,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 10
+  m_Text: 
 --- !u!114 &114337657869064028
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2400,7 +2400,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114344019050122986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2487,7 +2487,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114380993580119598
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2629,7 +2629,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 6
+  m_Text: 
 --- !u!114 &114439314449170358
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2689,7 +2689,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114457249964991004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2782,7 +2782,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114507826323226138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2815,7 +2815,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114509797243732048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2848,7 +2848,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114548559817484966
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2881,7 +2881,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114553714656958902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3062,7 +3062,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114690319954661332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3176,7 +3176,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114722288123667464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3283,7 +3283,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 9
+  m_Text: 
 --- !u!114 &114814945640914070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3357,7 +3357,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 4
+  m_Text: 
 --- !u!114 &114851687991827984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3390,7 +3390,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: Username_here
+  m_Text: 
 --- !u!114 &114857957343357476
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3524,7 +3524,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114927696060916850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3557,7 +3557,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 2
+  m_Text: 
 --- !u!114 &114932117424013946
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3672,7 +3672,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!114 &114956386453293492
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3793,7 +3793,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 1
+  m_Text: 
 --- !u!114 &114999200311139282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3826,7 +3826,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 0.96
-  m_Text: 123,456,789
+  m_Text: 
 --- !u!222 &222014377765207072
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -4270,7 +4270,7 @@ RectTransform:
   m_Father: {fileID: 224721155684796494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4324,7 +4324,7 @@ RectTransform:
   m_Father: {fileID: 224939431480850830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4496,7 +4496,7 @@ RectTransform:
   m_Father: {fileID: 224512600698758948}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4643,7 +4643,7 @@ RectTransform:
   m_Father: {fileID: 224195067494150450}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4704,7 +4704,7 @@ RectTransform:
   m_Father: {fileID: 224231199315356762}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4796,7 +4796,7 @@ RectTransform:
   m_Father: {fileID: 224385173701397378}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4814,7 +4814,7 @@ RectTransform:
   m_Father: {fileID: 224501487141182776}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -4889,7 +4889,7 @@ RectTransform:
   m_Father: {fileID: 224313995652888658}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -5130,7 +5130,7 @@ RectTransform:
   m_Father: {fileID: 224012199232253758}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -5486,7 +5486,7 @@ RectTransform:
   m_Father: {fileID: 224884054783414386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13, y: 0.2}
+  m_AnchorMin: {x: 0.13, y: 0.15}
   m_AnchorMax: {x: 0.73, y: 0.85}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
