@@ -41,6 +41,7 @@ sysinfo.txt
 space-modules-inc-setup/bin/
 
 # Symlinked
+Assets/GameWork
 Assets/GameWork/
 Assets/Plugins/PlayGen Utilities
 Assets/Plugins/IntegratedAuthoringTool
