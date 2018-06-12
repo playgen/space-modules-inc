@@ -111,7 +111,9 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 		_leaderboardType.text = Localization.Get(SUGARManager.Leaderboard.CurrentFilter.ToString());
 		_pageNumberText.text = Localization.GetAndFormat("PAGE", false, _pageNumber + 1);
 		_previousButton.interactable = false;
+		_previousButton.gameObject.SetActive(SUGARManager.Leaderboard.CurrentLeaderboard != null);
 		_nextButton.interactable = false;
+		_nextButton.gameObject.SetActive(SUGARManager.Leaderboard.CurrentLeaderboard != null);
 		SUGARManager.Leaderboard.GetLeaderboardStandings(_pageNumber - 1, success => { }, resultDown =>
 		{
 			_previousButton.interactable = resultDown.ToList().Count > 0 && resultDown.First().ActorName != SUGARManager.Leaderboard.CurrentStandings.First().ActorName;

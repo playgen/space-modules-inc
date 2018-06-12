@@ -74,7 +74,7 @@ public class SettingsStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
-		if (_feedbackMode && CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+		if (_feedbackMode && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback"))
 		{
 			Object.Destroy(_feedbackMode);
 		}

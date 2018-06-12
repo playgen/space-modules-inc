@@ -79,15 +79,15 @@ public class MenuStateInput : TickStateInput
 		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
-		if (_startTimeGap == TimeSpan.MinValue && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
+		if (_startTimeGap == TimeSpan.MinValue && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
 		{
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
 			_scenarioController.CurrentLevel = 0;
 		}
-		var gameLocked = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
+		var gameLocked = SUGARManager.CurrentUser == null || CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
 		{
-			if (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback"))
+			if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
 			{
 				_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 			}
@@ -95,7 +95,7 @@ public class MenuStateInput : TickStateInput
 			{
 				string dateTimeArg;
 				DateTimeOffset launchTime;
-				if (!CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
 				{
 					gameLocked = true;
 					_startTimeGap = TimeSpan.MaxValue;

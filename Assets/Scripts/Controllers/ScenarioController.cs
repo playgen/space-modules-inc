@@ -135,7 +135,7 @@ public class ScenarioController : ICommandAction
 	public ScenarioData CurrentScenario;
 	public string ScenarioCode;
 	public FeedbackMode FeedbackLevel;
-    public int RoundNumber;
+	public int RoundNumber;
 
 	private readonly AudioController _audioController;
 	private AudioClipModel _audioClip;
@@ -167,28 +167,32 @@ public class ScenarioController : ICommandAction
 		}
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
-        // Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
-        RoundNumber = CommandLineUtility.CustomArgs.ContainsKey("round") ? int.Parse(CommandLineUtility.CustomArgs["round"]) - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0;
+		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
+		int parseRound;
+		RoundNumber = SUGARManager.CurrentUser != null ? CommandLineUtility.CustomArgs.ContainsKey("round") ? int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? parseRound - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0 : 0;
 		var round = obj.Rounds[RoundNumber];
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
-		FeedbackLevel = CommandLineUtility.CustomArgs.ContainsKey("feedback") ? (FeedbackMode)int.Parse(CommandLineUtility.CustomArgs["feedback"]) : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.Minimal);
+		int parseFeedback;
+		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.Minimal : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.Minimal);
 		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
 		// Boolean for checking if the post game questionnaire is opened after the round
-		UseInGameQuestionnaire = CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.Parse(CommandLineUtility.CustomArgs["ingameq"]);
-        CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
-        if (CurrentLevel >= LevelMax)
-        {
-            if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.Parse(CommandLineUtility.CustomArgs["lockafterq"]))
-            {
-                CurrentLevel = LevelMax;
-            }
-            else
-            {
-                CurrentLevel = 0;
-            }
-        }
-    }
+		bool parseInGameQ;
+		UseInGameQuestionnaire = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.TryParse(CommandLineUtility.CustomArgs["ingameq"], out parseInGameQ) && parseInGameQ;
+		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
+		if (CurrentLevel >= LevelMax)
+		{
+			bool parseLockAfterQ;
+			if (SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ) && parseLockAfterQ)
+			{
+				CurrentLevel = LevelMax;
+			}
+			else
+			{
+				CurrentLevel = 0;
+			}
+		}
+	}
 
 	public void NextLevel()
 	{
@@ -593,8 +597,9 @@ public class ScenarioController : ICommandAction
 			var keywords = result[0].Split('_');
 			foreach (var keyword in keywords)
 			{
-				var score = int.Parse(result[1]);
-				SaveChatScore(chat, keyword, score);
+				int parseScore;
+				int.TryParse(result[1], out parseScore);
+				SaveChatScore(chat, keyword, parseScore);
 			}
 		}
 	}

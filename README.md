@@ -94,6 +94,9 @@ Update the DLLs found in the lib\SUGAR folder in stm-unity
 
 Note: It is advised that you do not remove the Prefabs for SUGAR, as these have been edited to match the styling of Space Modules Inc. Only replace these assets if they are no longer compatible with the latest version of the SUGAR Unity asset, and even then be aware that you will need to recreate the previous styling if this is done.
 
+### SUGAR-Unity version
+Commit hash: 7e634030d1c4a68c73f8d1e182a01288b6d505c1
+
 # Build:
 ## Process:
 Standalone, Android and iOS are currently supported using the default Unity build system.
@@ -153,7 +156,3 @@ After that the rest of the argument are the same e.g:
 - Controllers/ScenarioController - manages loading and selecting scenarios, loading, sending and receiving player and controller dialogue (including triggering audio to play) and calculates the end score of each scenario played.
 - GameStates/Inputs/GameStateInput - handles UI whilst in the ‘Game’ state, including updating character expression and dialogue and triggering various commands.
 - GameStates/GameStateControllerFactory - creates and sets up events for all states within the game.
-
-
-# Other Key Details
-There are issues with the ExcelToJsonConverter in this project that means it always fail to convert. To convert Excel files for localization, either convert using another project or another asset, such as the ExcelToJsonConverter found in PlayGen’s GitLab.
