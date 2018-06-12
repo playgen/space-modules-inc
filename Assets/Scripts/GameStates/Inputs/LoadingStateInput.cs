@@ -8,6 +8,8 @@ using UnityEngine;
 public class LoadingStateInput : TickStateInput
 {
 	public event Action LoggedInEvent;
+	private float _timeSinceStart;
+	private float _signInTriggerTime;
 
 	protected override void OnInitialize()
 	{
@@ -22,30 +24,47 @@ public class LoadingStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
-		// Check for SUGAR login
-		SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions>().DisplayPanel(success =>
+		_timeSinceStart = 0;
+		SUGARManager.Unity.StartSpinner();
+		if (Application.platform == RuntimePlatform.IPhonePlayer)
 		{
-			if (success)
-			{
-				var settings = new EvaluationAssetSettings { PlayerId = SUGARManager.CurrentUser.Name };
-				EvaluationAsset.Instance.Settings = settings;
-				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
-				{
-					{ TrackerEvaluationKeys.Event, "GameStart" }
+			_signInTriggerTime = 1;
+		}
+	}
 
-				});
-				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.UserProfile, new Dictionary<TrackerEvaluationKeys, string>
+	protected override void OnTick(float deltaTime)
+	{
+		if (_timeSinceStart <= _signInTriggerTime)
+		{
+			_timeSinceStart += deltaTime;
+			if (_timeSinceStart > _signInTriggerTime)
+			{
+				// Check for SUGAR login
+				SUGARManager.Unity.gameObject.GetComponent<AccountUnityClientAdditions> ().DisplayPanel (success =>
 				{
-					{ TrackerEvaluationKeys.Event, "SUGARSignIn" }
-				});
-				TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
-				{
-					{ TrackerEvaluationKeys.Asset, "SUGAR" },
-					{ TrackerEvaluationKeys.Done, "true" }
+					if (success)
+					{
+						var settings = new EvaluationAssetSettings { PlayerId = SUGARManager.CurrentUser.Name };
+						EvaluationAsset.Instance.Settings = settings;
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
+						{
+							{ TrackerEvaluationKeys.Event, "GameStart" }
+						});
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.UserProfile, new Dictionary<TrackerEvaluationKeys, string>
+						{
+							{ TrackerEvaluationKeys.Event, "SUGARSignIn" }
+						});
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string> 
+						{
+							{ TrackerEvaluationKeys.Asset, "SUGAR" },
+							{ TrackerEvaluationKeys.Done, "true" }
+						});
+					}
+					SUGARManager.Unity.StopSpinner();
+					LoggedInEvent?.Invoke ();
 				});
 			}
-			LoggedInEvent?.Invoke();
-		});
+		}
 	}
 
 	protected override void OnExit()

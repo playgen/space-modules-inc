@@ -168,7 +168,7 @@ PlayerSettings:
     iOS: com.playgen.spacemodulesinc
     tvOS: com.PlayGen.SpaceModulesInc
   buildNumber:
-    iOS: 0
+    iOS: 1
   AndroidBundleVersionCode: 6
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
