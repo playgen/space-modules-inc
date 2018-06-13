@@ -47,14 +47,20 @@ public class TrackerEventSender {
 	{
 		try
 		{
+			if (SUGARManager.CurrentUser == null)
+			{
+				Debug.LogWarning("Cannot send events if not currently logged in");
+				return;
+			}
 			foreach (var v in trace.Values.OrderBy(v => v.Key))
 			{
 				Tracker.T.setVar(v.Key, v.Value);
 			}
-			if (SUGARManager.CurrentUser != null)
-			{
-				Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
-			}
+
+			Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
+			Tracker.T.setVar("Round", _scenarioController.RoundNumber);
+			Tracker.T.setVar("CurrentLevel", _scenarioController.CurrentLevel);
+
 			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
 			{
 				Tracker.T.setVar("GroupId", SUGARManager.ClassId);

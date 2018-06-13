@@ -15,6 +15,7 @@ public class MenuStateInput : TickStateInput
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
+	private GameObject _pilotModePanel;
 	private GameObject _gameLockedPanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
     private readonly ScenarioController _scenarioController;
@@ -58,8 +59,9 @@ public class MenuStateInput : TickStateInput
 
 		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
 		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
+		_pilotModePanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/PilotModePanel");
 		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
-		_gameLockedPanel.SetActive(false);
+		_pilotModePanel.SetActive(false);
 
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
 		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(() => OnQuitAttempt(true));
@@ -84,7 +86,8 @@ public class MenuStateInput : TickStateInput
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
 			_scenarioController.CurrentLevel = 0;
 		}
-		var gameLocked = SUGARManager.CurrentUser == null || CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
+		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null && CommandLineUtility.CustomArgs.Count != 0;
+		var gameLocked =  _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
 		{
 			if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
@@ -111,7 +114,9 @@ public class MenuStateInput : TickStateInput
 			gameLocked = true;
 			Debug.LogWarning("Game Locked: Time Expired");
 		}
+		// for iOS build, we cannot simply lock the game, see: Guideline 4.2.3 https://developer.apple.com/app-store/review/guidelines/#minimum-functionality
 		_playButton.interactable = !gameLocked;
+		_pilotModePanel.SetActive(isPilot && !gameLocked);
 		_gameLockedPanel.SetActive(gameLocked);
 	}
 
