@@ -50,7 +50,7 @@
 {"Key":"NO_LEADERBOARD_ERROR","en":"No standings are currently available for this leaderboard for this filter.","nl":"Geen klassement beschikbaar voor dit leaderboard-filter"},
 {"Key":"NO_LEADERBOARD_LIST_ERROR","en":"No leaderboards are currently available for this game for this filter.","nl":"Geen scoreborden beschikbaar voor dit spelfilter"},
 {"Key":"NO_RESULTS_ERROR","en":"No results found.","nl":"Geen resultaten gevonden"},
-{"Key":"NO_USER_ERROR","en":"Error: No user currently signed in.","nl":"Fout: Geen gebruiker die momenteel is aangemeld"},
+{"Key":"NO_USER_ERROR","en":"Error: 'Low Fuel'.\\nUnable to get data.","nl":"Fout: Geen gebruiker die momenteel is aangemeld"},
 {"Key":"PAGE","en":"Page {0}","nl":"Pagina {0}"},
 {"Key":"PLAY","en":"Play","nl":"Speel"},
 {"Key":"PLAY_15_GAMES","en":"Play 15 games!","nl":"Speel 15 spellen!"},
