@@ -6,6 +6,8 @@ using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Extensions;
+using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
 
 public class MenuStateInput : TickStateInput
@@ -20,7 +22,13 @@ public class MenuStateInput : TickStateInput
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
     private readonly ScenarioController _scenarioController;
 
-    public MenuStateInput(ScenarioController scenarioController)
+	private const string LockedTitle = "GAME_LOCK_TITLE";
+	private const string LockedDescription = "GAME_LOCK_TEXT";
+
+	private const string ExpiredTitle = "PILOT_MODE_EXPIRED_TITLE";
+	private const string ExpiredDescription = "PILOT_MODE_EXPIRED_DESCRIPTION";
+
+	public MenuStateInput(ScenarioController scenarioController)
     {
         _scenarioController = scenarioController;
     }
@@ -86,38 +94,57 @@ public class MenuStateInput : TickStateInput
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
 			_scenarioController.CurrentLevel = 0;
 		}
-		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null && CommandLineUtility.CustomArgs.Count != 0;
-		var gameLocked =  _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
-		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
+		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null &&
+		              CommandLineUtility.CustomArgs.Count != 0;
+		var gameLocked = _scenarioController.CurrentLevel >= _scenarioController.LevelMax && isPilot;
+
+		var lockedTitleText = Localization.Get(LockedTitle, true);
+		var lockedDescriptionText = Localization.Get(LockedDescription);
+		
+		// Game locking control for when in pilot
+		if (isPilot)
 		{
-			if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
+			if (_startTimeGap == TimeSpan.MinValue)
 			{
-				_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
-			}
-			else
-			{
-				string dateTimeArg;
-				DateTimeOffset launchTime;
-				if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") ||
+				                                         !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
 				{
-					gameLocked = true;
-					_startTimeGap = TimeSpan.MaxValue;
+					_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 				}
 				else
 				{
-					_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
+					string dateTimeArg;
+					DateTimeOffset launchTime;
+					if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
+					    !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+					{
+						gameLocked = true;
+						_startTimeGap = TimeSpan.MaxValue;
+					}
+					else
+					{
+						_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
+					}
 				}
 			}
-		}
-		if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
-		{
-			gameLocked = true;
-			Debug.LogWarning("Game Locked: Time Expired");
+			if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
+			{
+				gameLocked = true;
+				lockedTitleText = Localization.Get(ExpiredTitle, true);
+				lockedDescriptionText = Localization.Get(ExpiredDescription);
+				Debug.LogWarning("Game Locked: Time Expired");
+			}
 		}
 		// for iOS build, we cannot simply lock the game, see: Guideline 4.2.3 https://developer.apple.com/app-store/review/guidelines/#minimum-functionality
 		_playButton.interactable = !gameLocked;
+
 		_pilotModePanel.SetActive(isPilot && !gameLocked);
 		_gameLockedPanel.SetActive(gameLocked);
+
+		_gameLockedPanel.transform.FindText("TitleText").text = lockedTitleText;
+		_gameLockedPanel.transform.FindText("DescriptionText").text = lockedDescriptionText;
+
+
 	}
 
 	protected override void OnExit()

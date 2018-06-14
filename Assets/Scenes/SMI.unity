@@ -5159,7 +5159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LanguageOverride: 
   Key: PILOT_MODE_DESCRIPTION
-  ToUpper: 1
+  ToUpper: 0
 --- !u!114 &667942185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10037,9 +10037,8 @@ GameObject:
   - component: {fileID: 1442144182}
   - component: {fileID: 1442144185}
   - component: {fileID: 1442144184}
-  - component: {fileID: 1442144183}
   m_Layer: 0
-  m_Name: Text
+  m_Name: TitleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10063,20 +10062,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1442144183
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1442144181}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1807221761, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LanguageOverride: 
-  Key: GAME_LOCK_TITLE
-  ToUpper: 1
 --- !u!114 &1442144184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12207,9 +12192,8 @@ GameObject:
   - component: {fileID: 1819970427}
   - component: {fileID: 1819970430}
   - component: {fileID: 1819970429}
-  - component: {fileID: 1819970428}
   m_Layer: 0
-  m_Name: Text
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12233,20 +12217,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1819970428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1819970426}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1807221761, guid: 8b5126244e33d504bb3fe3f4b5ce7650, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LanguageOverride: 
-  Key: GAME_LOCK_TEXT
-  ToUpper: 1
 --- !u!114 &1819970429
 MonoBehaviour:
   m_ObjectHideFlags: 0
