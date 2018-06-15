@@ -156,3 +156,9 @@ After that the rest of the argument are the same e.g:
 - Controllers/ScenarioController - manages loading and selecting scenarios, loading, sending and receiving player and controller dialogue (including triggering audio to play) and calculates the end score of each scenario played.
 - GameStates/Inputs/GameStateInput - handles UI whilst in the ‘Game’ state, including updating character expression and dialogue and triggering various commands.
 - GameStates/GameStateControllerFactory - creates and sets up events for all states within the game.
+
+### Setting up your game with SUGAR
+For information on Setting up Space Modules Inc. using SUGAR, see [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). *make sure that Assets\StreamingAssets\SUGAR.config.json exists and the BaseUri value matches the Base Address in the SUGAR Prefab.* 
+
+### Running SUGAR Locally
+Using Space Modules inc. with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*
