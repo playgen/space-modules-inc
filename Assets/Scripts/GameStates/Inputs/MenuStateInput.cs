@@ -12,6 +12,8 @@ using UnityEngine;
 
 public class MenuStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "MenuContainer/MenuPanelContainer";
+
 	public event Action SettingsClickedEvent;
 	public event Action PlayClickedEvent;
 	private Button _playButton;
@@ -35,42 +37,25 @@ public class MenuStateInput : TickStateInput
 
     protected override void OnInitialize()
 	{
-		_playButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/PlayButton").GetComponent<Button>();
-		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
+		GameObjectUtilities.FindGameObject(_panelRoute +  "/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Asset, "SUGAR" },
-				{ TrackerEvaluationKeys.Done, "true" }
-			});
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Event, "ViewLeaderboard" }
-			});
+			SendTrackerEvent("ViewLeaderboard");
 		});
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/AchievementButton").GetComponent<Button>().onClick.AddListener(() =>
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/AchievementButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Evaluation.DisplayAchievementList();
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Asset, "SUGAR" },
-				{ TrackerEvaluationKeys.Done, "true" }
-			});
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Event, "ViewAchievements" }
-			});
+			SendTrackerEvent("ViewAchievements");
 		});
+		_playButton = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/PlayButton").GetComponent<Button>();
+		_menuPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel");
+		_quitPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuitPanel");
+		_pilotModePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/PilotModePanel");
+		_gameLockedPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameLockedPanel");
 
-		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
-		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
-		_pilotModePanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/PilotModePanel");
-		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
 		_pilotModePanel.SetActive(false);
-
+		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
 		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(() => OnQuitAttempt(true));
 	}
@@ -84,9 +69,9 @@ public class MenuStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 		OnQuitAttempt(true);
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel").BestFit();
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel").BestFit();
 
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
 		if (_startTimeGap == TimeSpan.MinValue && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
@@ -149,7 +134,7 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
 
@@ -178,5 +163,18 @@ public class MenuStateInput : TickStateInput
 		_quitPanel.SetActive(!showMenu);
 		_menuPanel.BestFit();
 		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
+	}
+
+	private void SendTrackerEvent(string key)
+	{
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
+		{
+			{ TrackerEvaluationKeys.Asset, "SUGAR" },
+			{ TrackerEvaluationKeys.Done, "true" }
+		});
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
+		{
+			{ TrackerEvaluationKeys.Event, key }
+		});
 	}
 }

@@ -5,11 +5,12 @@ using PlayGen.Unity.Utilities.BestFit;
 
 public class CallStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "CallContainer/CallPanelContainer";
 	public event Action AnswerClickedEvent;
 
 	protected override void OnInitialize()
 	{
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/AnswerButton").GetComponent<Button>().onClick.AddListener(OnAnswerClick);
+		GameObjectUtilities.FindGameObject(_panelRoute + "/AnswerButton").GetComponent<Button>().onClick.AddListener(OnAnswerClick);
 	}
 
 	private void OnAnswerClick()
@@ -19,17 +20,17 @@ public class CallStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").BestFit();
+		GameObjectUtilities.FindGameObject(_panelRoute + "/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StartAnimation();
+		GameObjectUtilities.FindGameObject(_panelRoute).BestFit();
 	}
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
-		GameObjectUtilities.FindGameObject("CallContainer/CallPanelContainer/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StopAnimation();
+		GameObjectUtilities.FindGameObject(_panelRoute + "/SatelliteAnimContainer").GetComponent<CallAnimationBehaviour>().StopAnimation();
 
 	}
 }

@@ -183,22 +183,16 @@ public class TrackerEventSender {
 			switch (ev)
 			{
 				case TrackerEvalautionEvents.GameUsage:
-					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKeys.Event));
-					break;
 				case TrackerEvalautionEvents.UserProfile:
+				case TrackerEvalautionEvents.Gamification:
+				case TrackerEvalautionEvents.Support:
 					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKeys.Event));
 					break;
 				case TrackerEvalautionEvents.GameActivity:
 					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKeys.Event) && parameters.Keys.Contains(TrackerEvaluationKeys.GoalOrientation) && parameters.Keys.Contains(TrackerEvaluationKeys.Tool));
 					break;
-				case TrackerEvalautionEvents.Gamification:
-					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKeys.Event));
-					break;
 				case TrackerEvalautionEvents.GameFlow:
 					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKeys.Type) && parameters.Keys.Contains(TrackerEvaluationKeys.Id) && parameters.Keys.Contains(TrackerEvaluationKeys.Completed));
-					break;
-				case TrackerEvalautionEvents.Support:
-					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKeys.Event));
 					break;
 				case TrackerEvalautionEvents.AssetActivity:
 					valid = (parameters.Count == 2 && parameters.Keys.Contains(TrackerEvaluationKeys.Asset) && parameters.Keys.Contains(TrackerEvaluationKeys.Done));

@@ -482,6 +482,15 @@ public class ScenarioController : ICommandAction
 
 	#endregion
 
+	private readonly List<TrackerContextKeys> _scoreMetrics = new List<TrackerContextKeys>
+	{
+		TrackerContextKeys.Closure,
+		TrackerContextKeys.Empathy,
+		TrackerContextKeys.Faq,
+		TrackerContextKeys.Inquire,
+		TrackerContextKeys.Polite
+	};
+
 	#region Scoring
 
 	// Score shown to the player (not the tracker)
@@ -505,15 +514,11 @@ public class ScenarioController : ICommandAction
 		}
 
 		var allScores = GetScoresByKey();
-
-		var measuredPoints = new Dictionary<string, int>
+		var measuredPoints = new Dictionary<string, int>();
+		foreach (var scoreMetric in _scoreMetrics)
 		{
-			{"Closure", GetScore(allScores, "Closure")},
-			{"Empathy", GetScore(allScores, "Empathy")},
-			{"Faq", GetScore(allScores, "Faq")},
-			{"Inquire", GetScore(allScores, "Inquire")},
-			{"Polite", GetScore(allScores, "Polite")}
-		};
+			measuredPoints.Add(scoreMetric.ToString(), GetScore(allScores, scoreMetric.ToString()));
+		}
 
 		var scoreObj = new ScoreObject
 		{
@@ -535,11 +540,10 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("score", score);
 			SUGARManager.GameData.Send("plays", 1);
 			SUGARManager.GameData.Send("stars", stars);
-			SUGARManager.GameData.Send("closure", GetScore(allScores, "Closure"));
-			SUGARManager.GameData.Send("empathy", GetScore(allScores, "Empathy"));
-			SUGARManager.GameData.Send("faq", GetScore(allScores, "Faq"));
-			SUGARManager.GameData.Send("inquire", GetScore(allScores, "Inquire"));
-			SUGARManager.GameData.Send("polite", GetScore(allScores, "Polite"));
+			foreach (var scoreMetric in _scoreMetrics)
+			{
+				SUGARManager.GameData.Send(scoreMetric.ToString().ToLower(), GetScore(allScores, scoreMetric.ToString()));
+			}
 		}
 		if (LevelMax > 0)
 		{
@@ -628,24 +632,19 @@ public class ScenarioController : ICommandAction
 	private void TraceScore()
 	{
 		var allScores = GetScoresByKey();
-
 		// check for scores before referencing key
-		var closure = GetScore(allScores, "Closure");
-		var empathy = GetScore(allScores, "Empathy");
-		var faq = GetScore(allScores, "Faq");
-		var inquire = GetScore(allScores, "Inquire");
-		var polite = GetScore(allScores, "Polite");
 
-		TrackerEventSender.SendEvent(new TraceEvent("LevelComplete", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
+		var eventValues = new Dictionary<string, string>
 		{
-			{ TrackerContextKeys.LevelNumber.ToString(), CurrentLevel.ToString() },
-			{ TrackerContextKeys.Closure.ToString(), closure.ToString() },
-			{ TrackerContextKeys.Empathy.ToString(), empathy.ToString() },
-			{ TrackerContextKeys.Faq.ToString(), faq.ToString() },
-			{ TrackerContextKeys.Inquire.ToString(), inquire.ToString() },
-			{ TrackerContextKeys.Polite.ToString(), polite.ToString() },
-			{ TrackerContextKeys.MaxPoints.ToString(), CurrentScenario.MaxPoints.ToString() }
-		}));
+			{TrackerContextKeys.LevelNumber.ToString(), CurrentLevel.ToString()},
+			{TrackerContextKeys.MaxPoints.ToString(), CurrentScenario.MaxPoints.ToString()}
+		};
+		foreach (var scoreMetric in _scoreMetrics)
+		{
+			var score = GetScore(allScores, scoreMetric.ToString());
+			eventValues.Add(scoreMetric.ToString(), score.ToString());
+		}
+		TrackerEventSender.SendEvent(new TraceEvent("LevelComplete", TrackerAsset.Verb.Initialized, eventValues));
 	}
 
 	private Dictionary<string, int> GetScoresByKey()

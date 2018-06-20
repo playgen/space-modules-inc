@@ -6,6 +6,8 @@ using PlayGen.Unity.Utilities.Localization;
 
 public class LevelStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "LevelContainer/LevelPanelContainer";
+
 	public event Action BackClickedEvent;
 	public event Action LoadLevelEvent;
 
@@ -16,9 +18,9 @@ public class LevelStateInput : TickStateInput
 	{
 		//Tracker.T.Accessible.Accessed("LevelState");
 
-		_gridLayout = GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/GridLayout");
+		_gridLayout = GameObjectUtilities.FindGameObject(_panelRoute + "/LevelPanel/GridLayout");
 		ConfigureGridSize(3, 3);
-		GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 		CommandQueue.AddCommand(new RefreshLevelDataCommand());
 	}
@@ -27,14 +29,13 @@ public class LevelStateInput : TickStateInput
 	{
 
 		_itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
-		//GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/LevelPanel/LevelItem").GetComponent<Button>().onClick.AddListener(LoadLevel);
-		GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+		GameObjectUtilities.FindGameObject(_panelRoute + "/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
 	}
 
 	protected override void OnExit()
 	{
 		ClearList();
-		GameObjectUtilities.FindGameObject("LevelContainer/LevelPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
 

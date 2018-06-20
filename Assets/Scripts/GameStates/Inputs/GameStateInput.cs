@@ -11,6 +11,8 @@ using UnityEngine.UI;
 
 public class GameStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "GameContainer/GamePanelContainer";
+
 	public event Action HandleFinalStateEvent;
 
 	private readonly ScenarioController _scenarioController;
@@ -40,14 +42,14 @@ public class GameStateInput : TickStateInput
 	{
 		_characterFemalePrefab = Resources.Load("Prefabs/Characters/Female") as GameObject;
 		_characterMalePrefab = Resources.Load("Prefabs/Characters/Male") as GameObject;
-		_characterPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/CharacterPanel");
+		_characterPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/CharacterPanel");
 		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
-		_dialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/DialogueOptionPanel");
-		_npcDialoguePanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/BottomPanel/NPCTextHolder/NPCText");
-		_characterMood = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
-		_feedbackPanel = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/FeedbackPanel/IconHolder");
+		_dialoguePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameUI/BottomPanel/DialogueOptionPanel");
+		_npcDialoguePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameUI/BottomPanel/NPCTextHolder/NPCText");
+		_characterMood = GameObjectUtilities.FindGameObject(_panelRoute + "/GameUI/TopBarPanel/StatusBar/Image").GetComponent<Image>();
+		_feedbackPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameUI/FeedbackPanel/IconHolder");
 		_feedbackElementPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
-		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new ToggleModulesCommand()));
+		GameObjectUtilities.FindGameObject(_panelRoute + "/GameUI/TopBarPanel/ModulesButton").GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new ToggleModulesCommand()));
 	}
 
 	protected override void OnEnter()
@@ -79,7 +81,7 @@ public class GameStateInput : TickStateInput
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
 		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
-		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 		_npcDialoguePanel.GetComponent<Text>().text = string.Empty;
 	}
@@ -87,7 +89,7 @@ public class GameStateInput : TickStateInput
 	protected override void OnExit()
 	{
 		UnityEngine.Object.Destroy(_characterObject);
-		GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
 
 		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
@@ -161,14 +163,15 @@ public class GameStateInput : TickStateInput
 		{
 			UnityEngine.Object.Destroy(child.gameObject);
 		}
-
 		var rnd = new System.Random();
 		var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
 		var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
 		var scrollRect = dialogueObject.GetComponent<ScrollRect>();
 		var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
 		var contentTotalHeight = 0f;
+
 		dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
+		
 		for (var i = 0; i < randomDialogueActions.Length; i++)
 		{
 			var dialogueAction = randomDialogueActions[i];

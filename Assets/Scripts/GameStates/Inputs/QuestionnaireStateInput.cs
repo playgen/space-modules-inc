@@ -13,6 +13,8 @@ using UnityEngine;
 
 public class QuestionnaireStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "QuestionnaireContainer/QuestionnairePanelContainer";
+
 	private readonly ScenarioController _scenarioController;
 
 	public QuestionnaireStateInput(ScenarioController scenarioController)
@@ -32,12 +34,12 @@ public class QuestionnaireStateInput : TickStateInput
 	protected override void OnInitialize()
 	{
 		_characterPrefab = Resources.Load("Prefabs/Characters/Generic") as GameObject;
-		_characterPanel = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/CharacterPanel");
+		_characterPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/CharacterPanel");
 
 		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
-		_dialoguePanel = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/QuestionnaireUI/QuestionPanel/AnswerPanel");
+		_dialoguePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuestionnaireUI/QuestionPanel/AnswerPanel");
 
-		_questionText = GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer/QuestionnaireUI/QuestionPanel/QuestionHolder/Question").GetComponent<Text>();
+		_questionText = GameObjectUtilities.FindGameObject(_panelRoute + "/QuestionnaireUI/QuestionPanel/QuestionHolder/Question").GetComponent<Text>();
 	}
 
 	protected override void OnEnter()
@@ -52,7 +54,7 @@ public class QuestionnaireStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Id, "0" },
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
-		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
 		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
 		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
@@ -63,7 +65,7 @@ public class QuestionnaireStateInput : TickStateInput
 	protected override void OnExit()
 	{
 		UnityEngine.Object.Destroy(_characterObject);
-		GameObjectUtilities.FindGameObject("QuestionnaireContainer/QuestionnairePanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
 
 		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;

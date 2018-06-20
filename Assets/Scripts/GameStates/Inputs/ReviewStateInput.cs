@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class ReviewStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "ReviewContainer/ReviewPanelContainer";
+
 	public event Action NextClickedEvent;
 
 	private Image _characterMood;
@@ -25,13 +27,13 @@ public class ReviewStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_characterMood = GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/StatusBar/MoodPanel/FillBar").GetComponent<Image>();
-		_reviewContent = GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/Scroll View");
+		_characterMood = GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/StatusBar/MoodPanel/FillBar").GetComponent<Image>();
+		_reviewContent = GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/Scroll View");
 		_clientChatPrefab = Resources.Load("Prefabs/ClientChatFeedbackItem") as GameObject;
 		_playerChatPrefab = Resources.Load("Prefabs/PlayerChatFeedbackItem") as GameObject;
 		_feedbackPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
 
-		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer/ReviewPanel/NextButton").GetComponent<Button>().onClick.AddListener(() => NextClickedEvent?.Invoke());
+		GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/NextButton").GetComponent<Button>().onClick.AddListener(() => NextClickedEvent?.Invoke());
 	}
 
 	protected override void OnEnter()
@@ -44,14 +46,14 @@ public class ReviewStateInput : TickStateInput
 		});
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
-		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 	}
 
 	protected override void OnExit()
 	{
 		_scenarioController.GetReviewDataSuccessEvent -= BuildReviewData;
-		GameObjectUtilities.FindGameObject("ReviewContainer/ReviewPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
 	}
 

@@ -21,6 +21,7 @@ public class ControllerBehaviour : MonoBehaviour
 	}
 
 
+	// Force the screen to always use a portrait ratio. will display black panels on the side in lanscape view
 	private void FixScreenRatio()
 	{
 		if (Camera.main.aspect > 1)
