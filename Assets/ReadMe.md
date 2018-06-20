@@ -51,6 +51,7 @@
 
 ## Scenes
 - Location of game scene, SMI.unity
+- The naming of objects in scene is used in the StateInput classes to setup each state, for this reason, if changes are made to the ordering or naming of objects in scene, check the stateInput for that container is also updated.
 
 ## Scripts
 - Game behaviours, managing state changes, loading of scenarios and UI transitions.
