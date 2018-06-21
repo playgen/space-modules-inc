@@ -37,8 +37,8 @@ See the [LICENCE](LICENCE.md) file included in this project.
 - [Evaluation Asset](https://gamecomponents.eu/content/338) asset that evaluates the pedagogical efficiency of the game.  
 - [RAGE Analytics](https://gamecomponents.eu/content/232) asset to log to the RAGE analytics server.
 - [IntegratedAuthoringTool](https://gamecomponents.eu/content/201): is used in by the emotional decisionmaking component.
-- ExcelToJsonConverter: is used to convert Excel Localization files to jSON.
-- [PlayGen Unity Utilities](git@codebasehq.com:playgen/components/unityutilities.git): is a collection of simple game utilities.
+- [ExcelToJsonConverter](https://github.com/Benzino/ExcelToJsonConverter): is used to convert Excel Localization files to jSON.
+- [PlayGen Unity Utilities](git@gitlab.com:playgen/unity-utilities.git): is a collection of simple game utilities.
 - [GameWork](https://github.com/Game-Work/GameWork.Unity) is a game development framework. 
 - [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
 - [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430): for android.
