@@ -2,7 +2,7 @@
 
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Unity;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -127,7 +127,7 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 			_nearButton.interactable = SUGARManager.CurrentUser != null && SUGARManager.Leaderboard.CurrentLeaderboard.ActorType == ActorType.User;
 			_friendsButton.interactable = SUGARManager.CurrentUser != null && SUGARManager.Leaderboard.CurrentLeaderboard.ActorType == ActorType.User;
 		}
-		_leaderboardPositions.Select(t => t.gameObject).BestFit();
+		_leaderboardPositions.ToList().BestFit();
 	}
 
 	/// <summary>
@@ -152,8 +152,8 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 	/// </summary>
 	private void DoBestFit()
 	{
-		_leaderboardPositions.Select(t => t.gameObject).BestFit();
-		GetComponentsInChildren<Button>(true).Select(t => t.gameObject).BestFit();
+		_leaderboardPositions.ToList().BestFit();
+		GetComponentsInChildren<Button>(true).ToList().BestFit();
 	}
 
 	/// <summary>

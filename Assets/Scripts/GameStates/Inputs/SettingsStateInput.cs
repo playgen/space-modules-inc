@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
-using PlayGen.Unity.Settings;
+using PlayGen.Unity.Utilities.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.SUGAR.Unity;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 using System.Linq;
 
 using Object = UnityEngine.Object;

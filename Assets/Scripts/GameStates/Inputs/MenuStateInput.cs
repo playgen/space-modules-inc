@@ -5,7 +5,7 @@ using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Extensions;
 using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
@@ -162,7 +162,7 @@ public class MenuStateInput : TickStateInput
 		_menuPanel.SetActive(showMenu);
 		_quitPanel.SetActive(!showMenu);
 		_menuPanel.BestFit();
-		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
+		_quitPanel.GetComponentsInChildren<Button>().ToList().BestFit();
 	}
 
 	private void SendTrackerEvent(string key)

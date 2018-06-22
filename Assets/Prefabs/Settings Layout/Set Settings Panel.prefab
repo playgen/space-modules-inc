@@ -45,7 +45,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 4
-  m_Spacing: 10
+  m_Spacing: 300
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1421199920507232}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 687688893, guid: 182f91a36fd748d498472fc726240f00, type: 3}
+  m_Script: {fileID: 322734396, guid: 7a226d066956d0e43a8c1a50ae990d4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _horizontalLayout: {fileID: 114989573986987162, guid: 43520258070cee14f8c8a911b7bfe9f9,

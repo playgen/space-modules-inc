@@ -1,7 +1,7 @@
 ﻿using System;
 using GameWork.Core.States.Tick.Input;
 using UnityEngine.UI;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 
 public class CallStateInput : TickStateInput
 {

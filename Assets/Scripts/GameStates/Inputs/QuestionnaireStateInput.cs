@@ -6,7 +6,7 @@ using GameWork.Core.States.Tick.Input;
 using IntegratedAuthoringTool.DTOs;
 
 using UnityEngine.UI;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Localization;
 
 using UnityEngine;
