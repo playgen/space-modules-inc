@@ -91,7 +91,7 @@ public class LeaderboardInterface : BaseLeaderboardInterface
 			UpdatePageNumber(-1);
 			return;
 		}
-		if ((!SUGARManager.Leaderboard.CurrentStandings.Any() && _pageNumber < 0))
+		if (!SUGARManager.Leaderboard.CurrentStandings.Any() && _pageNumber < 0)
 		{
 			UpdatePageNumber(1);
 			return;
