@@ -5,7 +5,7 @@ using PlayGen.SUGAR.Unity;
 using UnityEngine;
 using UnityEngine.UI;
 
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Localization;
 
 public class AchievementListInterface : BaseEvaluationListInterface
@@ -57,7 +57,7 @@ public class AchievementListInterface : BaseEvaluationListInterface
 				_achievementItems[i].SetText(achievementList[i].Name, Mathf.Approximately(achievementList[i].Progress, 1.0f));
 			}
 		}
-		_achievementItems.Select(t => t.gameObject).BestFit();
+		_achievementItems.ToList().BestFit();
 	}
 
 	/// <summary>
@@ -73,8 +73,8 @@ public class AchievementListInterface : BaseEvaluationListInterface
 	/// </summary>
 	private void DoBestFit()
 	{
-		_achievementItems.Select(t => t.gameObject).BestFit();
-		GetComponentsInChildren<Button>(true).Select(t => t.gameObject).BestFit();
+		_achievementItems.ToList().BestFit();
+		GetComponentsInChildren<Button>(true).ToList().BestFit();
 	}
 
 	/// <summary>

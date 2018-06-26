@@ -5,62 +5,57 @@ using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Common;
 using PlayGen.SUGAR.Unity;
 using UnityEngine.UI;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
+using PlayGen.Unity.Utilities.Extensions;
+using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
 
 public class MenuStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "MenuContainer/MenuPanelContainer";
+
 	public event Action SettingsClickedEvent;
 	public event Action PlayClickedEvent;
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
+	private GameObject _pilotModePanel;
 	private GameObject _gameLockedPanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
     private readonly ScenarioController _scenarioController;
 
-    public MenuStateInput(ScenarioController scenarioController)
+	private const string LockedTitle = "GAME_LOCK_TITLE";
+	private const string LockedDescription = "GAME_LOCK_TEXT";
+
+	private const string ExpiredTitle = "PILOT_MODE_EXPIRED_TITLE";
+	private const string ExpiredDescription = "PILOT_MODE_EXPIRED_DESCRIPTION";
+
+	public MenuStateInput(ScenarioController scenarioController)
     {
         _scenarioController = scenarioController;
     }
 
     protected override void OnInitialize()
 	{
-		_playButton = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/PlayButton").GetComponent<Button>();
-		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
+		GameObjectUtilities.FindGameObject(_panelRoute +  "/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Leaderboard.Display("smi_stars", LeaderboardFilterType.Near);
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Asset, "SUGAR" },
-				{ TrackerEvaluationKeys.Done, "true" }
-			});
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Event, "ViewLeaderboard" }
-			});
+			SendTrackerEvent("ViewLeaderboard");
 		});
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel/AchievementButton").GetComponent<Button>().onClick.AddListener(() =>
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/AchievementButton").GetComponent<Button>().onClick.AddListener(() =>
 		{
 			SUGARManager.Evaluation.DisplayAchievementList();
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Asset, "SUGAR" },
-				{ TrackerEvaluationKeys.Done, "true" }
-			});
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
-			{
-				{ TrackerEvaluationKeys.Event, "ViewAchievements" }
-			});
+			SendTrackerEvent("ViewAchievements");
 		});
+		_playButton = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/PlayButton").GetComponent<Button>();
+		_menuPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel");
+		_quitPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuitPanel");
+		_pilotModePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/PilotModePanel");
+		_gameLockedPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameLockedPanel");
 
-		_menuPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel");
-		_quitPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/QuitPanel");
-		_gameLockedPanel = GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/GameLockedPanel");
-		_gameLockedPanel.SetActive(false);
-
+		_pilotModePanel.SetActive(false);
+		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
 		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
 		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(() => OnQuitAttempt(true));
 	}
@@ -74,9 +69,9 @@ public class MenuStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 		OnQuitAttempt(true);
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer/MenuPanel").BestFit();
+		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel").BestFit();
 
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
 		if (_startTimeGap == TimeSpan.MinValue && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
@@ -84,40 +79,62 @@ public class MenuStateInput : TickStateInput
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
 			_scenarioController.CurrentLevel = 0;
 		}
-		var gameLocked = SUGARManager.CurrentUser == null || CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0 || _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
-		if (!gameLocked && _startTimeGap == TimeSpan.MinValue)
+		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null &&
+		              CommandLineUtility.CustomArgs.Count != 0;
+		var gameLocked = _scenarioController.CurrentLevel >= _scenarioController.LevelMax && isPilot;
+
+		var lockedTitleText = Localization.Get(LockedTitle, true);
+		var lockedDescriptionText = Localization.Get(LockedDescription);
+		
+		// Game locking control for when in pilot
+		if (isPilot)
 		{
-			if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
+			if (_startTimeGap == TimeSpan.MinValue)
 			{
-				_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
-			}
-			else
-			{
-				string dateTimeArg;
-				DateTimeOffset launchTime;
-				if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+				if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") ||
+				                                         !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
 				{
-					gameLocked = true;
-					_startTimeGap = TimeSpan.MaxValue;
+					_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 				}
 				else
 				{
-					_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
+					string dateTimeArg;
+					DateTimeOffset launchTime;
+					if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
+					    !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+					{
+						gameLocked = true;
+						_startTimeGap = TimeSpan.MaxValue;
+					}
+					else
+					{
+						_startTimeGap = DateTimeOffset.Now.Subtract(launchTime);
+					}
 				}
 			}
+			if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
+			{
+				gameLocked = true;
+				lockedTitleText = Localization.Get(ExpiredTitle, true);
+				lockedDescriptionText = Localization.Get(ExpiredDescription);
+				Debug.LogWarning("Game Locked: Time Expired");
+			}
 		}
-		if (_startTimeGap.TotalSeconds < 0 || _startTimeGap.TotalHours >= 1)
-		{
-			gameLocked = true;
-			Debug.LogWarning("Game Locked: Time Expired");
-		}
+		// for iOS build, we cannot simply lock the game, see: Guideline 4.2.3 https://developer.apple.com/app-store/review/guidelines/#minimum-functionality
 		_playButton.interactable = !gameLocked;
+
+		_pilotModePanel.SetActive(isPilot && !gameLocked);
 		_gameLockedPanel.SetActive(gameLocked);
+
+		_gameLockedPanel.transform.FindText("TitleText").text = lockedTitleText;
+		_gameLockedPanel.transform.FindText("DescriptionText").text = lockedDescriptionText;
+
+
 	}
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject("MenuContainer/MenuPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
 
@@ -145,6 +162,19 @@ public class MenuStateInput : TickStateInput
 		_menuPanel.SetActive(showMenu);
 		_quitPanel.SetActive(!showMenu);
 		_menuPanel.BestFit();
-		_quitPanel.GetComponentsInChildren<Button>().ToList().Select(b => b.GetComponentInChildren<Text>()).BestFit();
+		_quitPanel.GetComponentsInChildren<Button>().ToList().BestFit();
+	}
+
+	private void SendTrackerEvent(string key)
+	{
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
+		{
+			{ TrackerEvaluationKeys.Asset, "SUGAR" },
+			{ TrackerEvaluationKeys.Done, "true" }
+		});
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.Gamification, new Dictionary<TrackerEvaluationKeys, string>
+		{
+			{ TrackerEvaluationKeys.Event, key }
+		});
 	}
 }

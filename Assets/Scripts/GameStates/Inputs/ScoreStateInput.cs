@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ScoreStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "ScoreContainer/ScorePanelContainer";
+
 	public event Action NextEvent;
 	public event Action InGameQuestionnaire;
 
@@ -19,8 +21,8 @@ public class ScoreStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_scorePanel = GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel").GetComponent<ScorePanelBehaviour>();
-		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer/ScorePanel/NextButton").GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
+		_scorePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/ScorePanel").GetComponent<ScorePanelBehaviour>();
+		GameObjectUtilities.FindGameObject(_panelRoute + "/ScorePanel/NextButton").GetComponent<Button>().onClick.AddListener(OnNextButtonClicked);
 	}
 
 	protected override void OnEnter()
@@ -34,14 +36,14 @@ public class ScoreStateInput : TickStateInput
 
 		CommandQueue.AddCommand(new GetScoreDataCommand());
 		_scenarioController.GetScoreDataSuccessEvent += _scorePanel.SetScorePanel;
-		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
 	}
 
 	protected override void OnExit()
 	{
 		_scenarioController.GetScoreDataSuccessEvent -= _scorePanel.SetScorePanel;
-		GameObjectUtilities.FindGameObject("ScoreContainer/ScorePanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
 	}
 

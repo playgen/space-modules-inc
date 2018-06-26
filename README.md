@@ -37,8 +37,8 @@ See the [LICENCE](LICENCE.md) file included in this project.
 - [Evaluation Asset](https://gamecomponents.eu/content/338) asset that evaluates the pedagogical efficiency of the game.  
 - [RAGE Analytics](https://gamecomponents.eu/content/232) asset to log to the RAGE analytics server.
 - [IntegratedAuthoringTool](https://gamecomponents.eu/content/201): is used in by the emotional decisionmaking component.
-- ExcelToJsonConverter: is used to convert Excel Localization files to jSON.
-- [PlayGen Unity Utilities](https://github.com/playgen/unity-utilities): is a collection of simple game utilities.
+- [ExcelToJsonConverter](https://github.com/Benzino/ExcelToJsonConverter): is used to convert Excel Localization files to jSON.
+- [PlayGen Unity Utilities](git@codebasehq.com:playgen/components/unityutilities.git): is a collection of simple game utilities.
 - [GameWork](https://github.com/Game-Work/GameWork.Unity) is a game development framework. 
 - [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
 - [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430): for android.
@@ -156,3 +156,9 @@ After that the rest of the argument are the same e.g:
 - Controllers/ScenarioController - manages loading and selecting scenarios, loading, sending and receiving player and controller dialogue (including triggering audio to play) and calculates the end score of each scenario played.
 - GameStates/Inputs/GameStateInput - handles UI whilst in the ‘Game’ state, including updating character expression and dialogue and triggering various commands.
 - GameStates/GameStateControllerFactory - creates and sets up events for all states within the game.
+
+### Setting up your game with SUGAR
+For information on Setting up Space Modules Inc. using SUGAR, see [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). *make sure that Assets\StreamingAssets\SUGAR.config.json exists and the BaseUri value matches the Base Address in the SUGAR Prefab.* 
+
+### Running SUGAR Locally
+Using Space Modules inc. with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*

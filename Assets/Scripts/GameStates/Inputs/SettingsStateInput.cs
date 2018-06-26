@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using UnityEngine;
 using UnityEngine.UI;
-using PlayGen.Unity.Settings;
+using PlayGen.Unity.Utilities.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.SUGAR.Unity;
-using PlayGen.Unity.Utilities.BestFit;
+using PlayGen.Unity.Utilities.Text;
 using System.Linq;
 
 using Object = UnityEngine.Object;
 
 public class SettingsStateInput : TickStateInput
 {
+	private readonly string _panelRoute = "SettingsContainer/SettingsPanelContainer";
+
 	public event Action BackClickedEvent;
 
 	private GameObject _settingsPanel;
@@ -28,7 +30,7 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_settingsPanel = GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel");
+		_settingsPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/SettingsPanel");
 		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
 		_creator.Wipe();
 		Dropdown feedback;
@@ -41,7 +43,7 @@ public class SettingsStateInput : TickStateInput
 		_creator.TryLanguageForPlatform(out language, true, false);
 		language.onValueChanged.AddListener(OnLanguageChange);
 		_creator.RebuildLayout();
-		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer/SettingsPanel/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+		GameObjectUtilities.FindGameObject(_panelRoute + "/SettingsPanel/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
 	}
 
 	private void OnLanguageChange(int value)
@@ -71,7 +73,7 @@ public class SettingsStateInput : TickStateInput
 			{ TrackerEvaluationKeys.Completed, "success" }
 		});
 
-		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(true);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 
 		if (_feedbackMode && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback"))
@@ -83,7 +85,7 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject("SettingsContainer/SettingsPanelContainer").SetActive(false);
+		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
 	}
 
