@@ -66,11 +66,11 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
-		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameFlow, new Dictionary<TrackerEvaluationKey, string>
 		{
-			{ TrackerEvaluationKeys.Type, "SettingsState" },
-			{ TrackerEvaluationKeys.Id, "0" },
-			{ TrackerEvaluationKeys.Completed, "success" }
+			{ TrackerEvaluationKey.PieceType, "SettingsState" },
+			{ TrackerEvaluationKey.PieceId, "0" },
+			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
 
 		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);

@@ -57,21 +57,21 @@ public class TrackerEventSender {
 				Tracker.T.setVar(v.Key, v.Value);
 			}
 
-			Tracker.T.setVar("UserId", SUGARManager.CurrentUser.Name);
-			Tracker.T.setVar("Round", _scenarioController.RoundNumber);
-			Tracker.T.setVar("CurrentLevel", _scenarioController.CurrentLevel);
+			Tracker.T.setVar(TrackerContextKey.UserId.ToString(), SUGARManager.CurrentUser.Name);
+			Tracker.T.setVar(TrackerContextKey.Round.ToString(), _scenarioController.RoundNumber);
+			Tracker.T.setVar(TrackerContextKey.CurrentLevel.ToString(), _scenarioController.CurrentLevel);
 
 			if (!string.IsNullOrEmpty(SUGARManager.ClassId))
 			{
-				Tracker.T.setVar("GroupId", SUGARManager.ClassId);
+				Tracker.T.setVar(TrackerContextKey.GroupId.ToString(), SUGARManager.ClassId);
 			}
-			Tracker.T.setVar(TrackerContextKeys.CurrentScenario.ToString(), _scenarioController.CurrentScenario.Prefix);
-			Tracker.T.setVar(TrackerContextKeys.CurrentModule.ToString(), _scenarioController.ScenarioCode);
+			Tracker.T.setVar(TrackerContextKey.CurrentScenario.ToString(), _scenarioController.CurrentScenario.Prefix);
+			Tracker.T.setVar(TrackerContextKey.CurrentModule.ToString(), _scenarioController.ScenarioCode);
 			if (_scenarioController.CurrentScenario.Prefix != "Questionnaire")
 			{
-				Tracker.T.setVar(TrackerContextKeys.CurrentModuleType.ToString(), _moduleDatabase.First(m => m.Id == _scenarioController.ScenarioCode).Type);
-				Tracker.T.setVar(TrackerContextKeys.CurrentCharacter.ToString(), _scenarioController.CurrentCharacter.VoiceName);
-				Tracker.T.setVar(TrackerContextKeys.FeedbackMode.ToString(), _scenarioController.FeedbackLevel.ToString());
+				Tracker.T.setVar(TrackerContextKey.CurrentModuleType.ToString(), _moduleDatabase.First(m => m.Id == _scenarioController.ScenarioCode).Type);
+				Tracker.T.setVar(TrackerContextKey.CurrentCharacter.ToString(), _scenarioController.CurrentCharacter.VoiceName);
+				Tracker.T.setVar(TrackerContextKey.FeedbackMode.ToString(), _scenarioController.FeedbackLevel.ToString());
 			}
 			switch (trace.ActionType)
 			{
@@ -175,27 +175,27 @@ public class TrackerEventSender {
 		}
 	}
 
-	public static void SendEvaluationEvent(TrackerEvalautionEvents ev, Dictionary<TrackerEvaluationKeys, string> parameters)
+	public static void SendEvaluationEvent(TrackerEvalautionEvent ev, Dictionary<TrackerEvaluationKey, string> parameters)
 	{
 		try
 		{
 			var valid = false;
 			switch (ev)
 			{
-				case TrackerEvalautionEvents.GameUsage:
-				case TrackerEvalautionEvents.UserProfile:
-				case TrackerEvalautionEvents.Gamification:
-				case TrackerEvalautionEvents.Support:
-					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKeys.Event));
+				case TrackerEvalautionEvent.GameUsage:
+				case TrackerEvalautionEvent.UserProfile:
+				case TrackerEvalautionEvent.Gamification:
+				case TrackerEvalautionEvent.Support:
+					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKey.Event));
 					break;
-				case TrackerEvalautionEvents.GameActivity:
-					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKeys.Event) && parameters.Keys.Contains(TrackerEvaluationKeys.GoalOrientation) && parameters.Keys.Contains(TrackerEvaluationKeys.Tool));
+				case TrackerEvalautionEvent.GameActivity:
+					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.Event) && parameters.Keys.Contains(TrackerEvaluationKey.GoalOrientation) && parameters.Keys.Contains(TrackerEvaluationKey.Tool));
 					break;
-				case TrackerEvalautionEvents.GameFlow:
-					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKeys.Type) && parameters.Keys.Contains(TrackerEvaluationKeys.Id) && parameters.Keys.Contains(TrackerEvaluationKeys.Completed));
+				case TrackerEvalautionEvent.GameFlow:
+					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.PieceType) && parameters.Keys.Contains(TrackerEvaluationKey.PieceId) && parameters.Keys.Contains(TrackerEvaluationKey.PieceCompleted));
 					break;
-				case TrackerEvalautionEvents.AssetActivity:
-					valid = (parameters.Count == 2 && parameters.Keys.Contains(TrackerEvaluationKeys.Asset) && parameters.Keys.Contains(TrackerEvaluationKeys.Done));
+				case TrackerEvalautionEvent.AssetActivity:
+					valid = (parameters.Count == 2 && parameters.Keys.Contains(TrackerEvaluationKey.AssetId) && parameters.Keys.Contains(TrackerEvaluationKey.Action));
 					break;
 			}
 			if (!valid)

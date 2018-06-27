@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 using PlayGen.SUGAR.Unity;
-using RAGE.EvaluationAsset;
 using UnityEngine;
 
 public class LoadingStateInput : TickStateInput
@@ -44,20 +43,18 @@ public class LoadingStateInput : TickStateInput
 				{
 					if (success)
 					{
-						var settings = new EvaluationAssetSettings { PlayerId = SUGARManager.CurrentUser.Name };
-						EvaluationAsset.Instance.Settings = settings;
-						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.GameUsage, new Dictionary<TrackerEvaluationKeys, string>
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvent.GameUsage, new Dictionary<TrackerEvaluationKey, string>
 						{
-							{ TrackerEvaluationKeys.Event, "GameStart" }
+							{ TrackerEvaluationKey.Event, "GameStart" }
 						});
-						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.UserProfile, new Dictionary<TrackerEvaluationKeys, string>
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvent.UserProfile, new Dictionary<TrackerEvaluationKey, string>
 						{
-							{ TrackerEvaluationKeys.Event, "SUGARSignIn" }
+							{ TrackerEvaluationKey.Event, "SUGARSignIn" }
 						});
-						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string> 
+						TrackerEventSender.SendEvaluationEvent (TrackerEvalautionEvent.AssetActivity, new Dictionary<TrackerEvaluationKey, string> 
 						{
-							{ TrackerEvaluationKeys.Asset, "SUGAR" },
-							{ TrackerEvaluationKeys.Done, "true" }
+							{ TrackerEvaluationKey.AssetId, "SUGAR" },
+							{ TrackerEvaluationKey.Action, "SignIn" }
 						});
 					}
 					SUGARManager.Unity.StopSpinner();

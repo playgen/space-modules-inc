@@ -312,20 +312,20 @@ public class ScenarioController : ICommandAction
 			// UCM tracker tracks the filename ID of each player dialogue choice made
 			TrackerEventSender.SendEvent(new TraceEvent("DialogueSelection", TrackerAsset.Verb.Initialized, new Dictionary<string, string>
 			{
-				{ TrackerContextKeys.PlayerDialogueState.ToString(), reply.CurrentState },
-				{ TrackerContextKeys.PlayerDialogueCode.ToString(), reply.FileName },
-				{ TrackerContextKeys.PlayerDialogueText.ToString(), reply.Utterance }
+				{ TrackerContextKey.PlayerDialogueState.ToString(), reply.CurrentState },
+				{ TrackerContextKey.PlayerDialogueCode.ToString(), reply.FileName },
+				{ TrackerContextKey.PlayerDialogueText.ToString(), reply.Utterance }
 			}));
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.AssetActivity, new Dictionary<TrackerEvaluationKeys, string>
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.AssetActivity, new Dictionary<TrackerEvaluationKey, string>
 			{
-				{ TrackerEvaluationKeys.Asset, "FAtiMA" },
-				{ TrackerEvaluationKeys.Done, "true" }
+				{ TrackerEvaluationKey.AssetId, "FAtiMA" },
+				{ TrackerEvaluationKey.Action, "DialogueSelection" }
 			});
-			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+			TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameActivity, new Dictionary<TrackerEvaluationKey, string>
 			{
-				{ TrackerEvaluationKeys.Event, "DialogueSelection" },
-				{ TrackerEvaluationKeys.GoalOrientation, "Progression" },
-				{ TrackerEvaluationKeys.Tool, "DialogueChoices" }
+				{ TrackerEvaluationKey.Event, "DialogueSelection" },
+				{ TrackerEvaluationKey.GoalOrientation, "Progression" },
+				{ TrackerEvaluationKey.Tool, "DialogueChoices" }
 			});
 
 			var chat = new ChatObject 
@@ -482,13 +482,13 @@ public class ScenarioController : ICommandAction
 
 	#endregion
 
-	private readonly List<TrackerContextKeys> _scoreMetrics = new List<TrackerContextKeys>
+	private readonly List<TrackerContextKey> _scoreMetrics = new List<TrackerContextKey>
 	{
-		TrackerContextKeys.Closure,
-		TrackerContextKeys.Empathy,
-		TrackerContextKeys.Faq,
-		TrackerContextKeys.Inquire,
-		TrackerContextKeys.Polite
+		TrackerContextKey.Closure,
+		TrackerContextKey.Empathy,
+		TrackerContextKey.Faq,
+		TrackerContextKey.Inquire,
+		TrackerContextKey.Polite
 	};
 
 	#region Scoring
@@ -636,8 +636,8 @@ public class ScenarioController : ICommandAction
 
 		var eventValues = new Dictionary<string, string>
 		{
-			{TrackerContextKeys.LevelNumber.ToString(), CurrentLevel.ToString()},
-			{TrackerContextKeys.MaxPoints.ToString(), CurrentScenario.MaxPoints.ToString()}
+			{TrackerContextKey.LevelNumber.ToString(), CurrentLevel.ToString()},
+			{TrackerContextKey.MaxPoints.ToString(), CurrentScenario.MaxPoints.ToString()}
 		};
 		foreach (var scoreMetric in _scoreMetrics)
 		{

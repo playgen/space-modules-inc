@@ -231,20 +231,20 @@ public class ModulesController : ICommandAction
 		var eventValues = new Dictionary<string, string>();
 		if (!string.IsNullOrEmpty(moduleType))
 		{
-			eventValues.Add(TrackerContextKeys.SelectedModuleType.ToString(), moduleType);
+			eventValues.Add(TrackerContextKey.SelectedModuleType.ToString(), moduleType);
 		}
 		if (!string.IsNullOrEmpty(moduleId))
 		{
-			eventValues.Add(TrackerContextKeys.SelectedModule.ToString(), moduleId);
+			eventValues.Add(TrackerContextKey.SelectedModule.ToString(), moduleId);
 		}
 
 		TrackerEventSender.SendEvent(new TraceEvent(eventKey, TrackerAsset.Verb.Accessed, eventValues, AccessibleTracker.Accessible.Screen));
 
-		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameActivity, new Dictionary<TrackerEvaluationKeys, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameActivity, new Dictionary<TrackerEvaluationKey, string>
 		{
-			{ TrackerEvaluationKeys.Event, evaluationEventKey },
-			{ TrackerEvaluationKeys.GoalOrientation, "Neutral" },
-			{ TrackerEvaluationKeys.Tool, "ModuleMenu" }
+			{ TrackerEvaluationKey.Event, evaluationEventKey },
+			{ TrackerEvaluationKey.GoalOrientation, "Neutral" },
+			{ TrackerEvaluationKey.Tool, "ModuleMenu" }
 		});
 	}
 

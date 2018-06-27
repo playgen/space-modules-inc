@@ -72,11 +72,11 @@ public class GameStateInput : TickStateInput
 		_scenarioController.StopTalkAnimationEvent += StopCharacterTalkAnimation;
 		_scenarioController.GetFeedbackEvent += UpdateFeedbackForChoice;
 
-		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameFlow, new Dictionary<TrackerEvaluationKey, string>
 		{
-			{ TrackerEvaluationKeys.Type, "GameState" },
-			{ TrackerEvaluationKeys.Id, "0" },
-			{ TrackerEvaluationKeys.Completed, "success" }
+			{ TrackerEvaluationKey.PieceType, "GameState" },
+			{ TrackerEvaluationKey.PieceId, "0" },
+			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
 		ShowCharacter(_scenarioController.CurrentCharacter);
 		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());

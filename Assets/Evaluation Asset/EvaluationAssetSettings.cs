@@ -54,7 +54,7 @@ namespace RAGE.EvaluationAsset
 			PostUrl = "http://css-kti.tugraz.at/evaluationasset/rest/sensordatapost";
 			GameId = "SpaceModulesInc";
 			GameVersion = "1.0";
-			PlayerId = "unknown";
+			PlayerId = SUGARManager.CurrentUser?.Name;
 			Language = Localization.SelectedLanguage.TwoLetterISOLanguageName;
 		}
 

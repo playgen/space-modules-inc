@@ -48,11 +48,11 @@ public class QuestionnaireStateInput : TickStateInput
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
 		_scenarioController.FinalStateEvent += HandleFinalState;
 
-		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvents.GameFlow, new Dictionary<TrackerEvaluationKeys, string>
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameFlow, new Dictionary<TrackerEvaluationKey, string>
 		{
-			{ TrackerEvaluationKeys.Type, "QuestionnaireState" },
-			{ TrackerEvaluationKeys.Id, "0" },
-			{ TrackerEvaluationKeys.Completed, "success" }
+			{ TrackerEvaluationKey.PieceType, "QuestionnaireState" },
+			{ TrackerEvaluationKey.PieceId, "0" },
+			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
 		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
