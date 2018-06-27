@@ -39,7 +39,7 @@ See the [LICENCE](LICENCE.md) file included in this project.
 - [IntegratedAuthoringTool](https://gamecomponents.eu/content/201): is used in by the emotional decisionmaking component.
 - [ExcelToJsonConverter](https://github.com/Benzino/ExcelToJsonConverter): is used to convert Excel Localization files to jSON.
 - [PlayGen Unity Utilities](git@codebasehq.com:playgen/components/unityutilities.git): is a collection of simple game utilities.
-- [GameWork](https://github.com/Game-Work/GameWork.Unity) is a game development framework. 
+- [GameWork](https://github.com/JaredGG/GameWork.Unity) is a game development framework. 
 - [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
 - [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430): for android.
 
