@@ -63,8 +63,10 @@ public class GameStateControllerFactory
 		var settingsTransition = new EventTransition(SettingsState.StateName);
 		input.SettingsClickedEvent += settingsTransition.ChangeState;
 
-		var levelTransition = new EventTransition(CallState.StateName);
-		input.PlayClickedEvent += _scenarioController.NextLevel;
+		var levelTransition = new EventTransition(LevelState.StateName);
+		
+		// TODO Uncomment if going straight to game
+		//input.PlayClickedEvent += _scenarioController.NextLevel;
 		input.PlayClickedEvent += levelTransition.ChangeState;
 
 		state.AddTransitions(settingsTransition, levelTransition);
@@ -87,10 +89,13 @@ public class GameStateControllerFactory
 
 	private LevelState CreateLevelState(ScenarioController scenarioController)
 	{
-		var input = new LevelStateInput();
+		var input = new LevelStateInput(scenarioController);
 		var state = new LevelState(input, scenarioController);
 
 		var callTransition = new EventTransition(CallState.StateName);
+
+		input.LoadLevelEvent += _scenarioController.NextLevel;
+		input.LoadLevelEvent += callTransition.ChangeState;
 
 		state.AddTransitions(callTransition);
 

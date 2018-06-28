@@ -75,7 +75,7 @@ public class ScenarioController : ICommandAction
 
 	public class LevelObject
 	{
-		public string Name;
+		public int Id;
 		public int Stars;
 	}
 
@@ -118,6 +118,7 @@ public class ScenarioController : ICommandAction
 	#endregion
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
+	private RolePlayCharacterAsset[] _characters;
 	private ScenarioData[] _scenarios;
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
@@ -148,6 +149,8 @@ public class ScenarioController : ICommandAction
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
 	public event Action StopTalkAnimationEvent;
 	public event Action FinalStateEvent;
+	public event Action<LevelObject[]> RefreshSuccessEvent;
+	public event Action SetLevelSuccessEvent;
 
 	#region Initialization
 
@@ -252,19 +255,20 @@ public class ScenarioController : ICommandAction
 	#region Level Select
 
 	// Called after selecting a level
-	public void SetCharacter(string name)
+	public void SetLevel(int id)
 	{
-		//CurrentCharacter = _characters.FirstOrDefault(asset => asset.CharacterName.Equals(name));
-		//var enterEventRpcOne = string.Format("Event(Property-Change,{0},Front(Self),Computer)", CurrentCharacter.Perspective);
-		//_events.Add(enterEventRpcOne);
+		CurrentLevel = id-1;
+		SetLevelSuccessEvent();
 	}
 
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshCharacterArray()
 	{
-		//_characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
-		//var levelList = _characters.ToDictionary(k => "level_" + k.CharacterName.ToLower() + "_stars", v => new LevelObject() {Name = v.CharacterName});
-
+		var LevelList = new LevelObject[_scenarios.Length];
+		for (var i = 0; i < _scenarios.Length; i++)
+		{
+			LevelList[i] = new LevelObject{Id = _scenarios[i].LevelId, Stars = 0};
+		}
 		//var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), EvaluationDataType.Long);
 
 		//foreach (var star in stars)
@@ -277,7 +281,7 @@ public class ScenarioController : ICommandAction
 		//    levelList[star.Key] = levelObject;
 		//}
 
-		//if (RefreshSuccessEvent != null) RefreshSuccessEvent(levelList.Values.ToArray());
+		RefreshSuccessEvent?.Invoke(LevelList);
 	}
 
 	#endregion

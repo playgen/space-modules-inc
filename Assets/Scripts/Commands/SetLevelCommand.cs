@@ -2,15 +2,15 @@
 
 public class SetLevelCommand : ICommand<ScenarioController>
 {
-    private readonly string _name;
+    private readonly int _id;
 
-    public SetLevelCommand(string name)
+    public SetLevelCommand(int id)
     {
-        _name = name;
+        _id = id;
     }
 
     public void Execute(ScenarioController parameter)
     {
-        parameter.SetCharacter(_name);
+        parameter.SetLevel(_id);
     }
 }
