@@ -148,6 +148,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114000010765609590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,12 +342,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30b45123d0e112d4eaa043966286a805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _starSprite: {fileID: 21300000, guid: 9bd777025f6c3f1469e3ac25d7c44c38, type: 3}
+  _starSprite: {fileID: 21300000, guid: a1a473353dfd01e47aaee49f6f2d573c, type: 3}
   _itemText: {fileID: 114000011998048650}
   _starSlots:
-  - {fileID: 1000010145805180}
-  - {fileID: 1000014034667220}
-  - {fileID: 1000010080201686}
+  - {fileID: 114000011478560908}
+  - {fileID: 114000011076994430}
+  - {fileID: 114000012128979748}
 --- !u!114 &114000013606568934
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,10 +23,4 @@ public class FeedbackHelper : MonoBehaviour
 	{
 		return FeedbackPoints.Find(k => k.Key == key).Value;
 	}
-
-	public void DoBestFit()
-	{
-		var text = FeedbackPoints.Select(f => f.Value);
-		text.BestFit();
-	}
 }

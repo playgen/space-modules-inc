@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+
+using PlayGen.Unity.Utilities.Extensions;
 using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
@@ -20,7 +22,7 @@ public class ScorePanelBehaviour : MonoBehaviour
 	private Sprite _starEmptySprite;
 
 	[SerializeField]
-	private GameObject[] _starSlots;
+	private Image[] _starSlots;
 
 	[SerializeField]	
 	private Image _emotionImage;
@@ -35,7 +37,7 @@ public class ScorePanelBehaviour : MonoBehaviour
 	private Sprite _emotionNegativeSprite;
 
 	private GameObject _feedbackElementGameObject;
-	private Transform _feedbackPanel;
+	private FeedbackHelper _feedbackPanel;
 	private Text _scoreText;
 	private Text _scoreFeedbackText;
 	private GameObject _scorePanel;
@@ -48,60 +50,43 @@ public class ScorePanelBehaviour : MonoBehaviour
 		_scorePanel = score.MeasuredPoints.Any() ? _finalScoreFeedbackPanel : _finalScorePanel;
 		_scorePanel.SetActive(true);
 
-		_scoreText = _scorePanel.transform.Find("ScoreText").GetComponent<Text>();
-		_scoreFeedbackText = _scorePanel.transform.Find("ScoreFeedback").GetComponent<Text>();
+		_scoreText = _scorePanel.transform.FindText("ScoreText");
+		_scoreFeedbackText = _scorePanel.transform.FindText("ScoreFeedback");
 
 		SetupFeedback();
 		SetFeedbackIcons(score.MeasuredPoints);
-		
+
 		// set stars
-		foreach (var starSlot in _starSlots)
+		for (var i = 0; i < _starSlots.Length; i++)
 		{
-			if (score.Stars > 0)
-			{
-				starSlot.GetComponent<Image>().sprite = _starSprite;
-				score.Stars--;
-			}
-			else
-			{
-				starSlot.GetComponent<Image>().sprite = _starEmptySprite;
-			}
+			_starSlots[i].sprite = score.Stars > i ? _starSprite : _starEmptySprite;
 		}
 		
-		_scoreText.text = score.Score.ToString("N0");
-
+		_scoreText.text = score.Score.ToString("N0", Localization.SpecificSelectedLanguage);
 		_scoreFeedbackText.text = Localization.Get(score.ScoreFeedbackToken);
-
 		_emotionImage.sprite = score.MoodImage ? _emotionPositiveSprite : _emotionNegativeSprite;
-
 		_emotionComment.text = Localization.Get(score.EmotionCommentToken);
 	}
 
 	private void SetupFeedback()
 	{
-		if (_feedbackPanel == null)
+		if (!_feedbackPanel)
 		{
-			_feedbackPanel = _finalScoreFeedbackPanel.transform.Find("FeedbackPanel").GetComponent<FeedbackHelper>().transform;
+			_feedbackPanel = _finalScoreFeedbackPanel?.GetComponentInChildren<FeedbackHelper>(true);
 		}
-		if (_feedbackElementGameObject == null)
+		if (!_feedbackElementGameObject)
 		{
-			_feedbackElementGameObject = Resources.Load("Prefabs/FeedbackElement") as GameObject;
+			_feedbackElementGameObject = Resources.Load<GameObject>("Prefabs/FeedbackElement");
 		}
 	}
 
 	private void SetFeedbackIcons(Dictionary<string, int> points)
 	{
-		var feedbackHelper = _feedbackPanel.GetComponent<FeedbackHelper>();
-
 		foreach (var point in points)
 		{
-			var value = feedbackHelper.GetTextComponent(point.Key);
-
+			var value = _feedbackPanel.GetTextComponent(point.Key);
 			value.text = point.Value > 0 ? "+" + point.Value : point.Value.ToString();
 		}
-		
 		_feedbackPanel.BestFit();
-		feedbackHelper.DoBestFit();
 	}
-
 }

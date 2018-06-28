@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class CallAnimationBehaviour : MonoBehaviour
 {
 	[SerializeField]
-	private GameObject[] _callRings;
+	private Image[] _callRings;
 
 	[SerializeField]
 	private Sprite[] _ringSprites;
@@ -16,21 +16,7 @@ public class CallAnimationBehaviour : MonoBehaviour
 	[SerializeField]
 	private float _animationDelay = 0.1f;
 
-	private Image[] _ringImages;
-
-	private int _frameCounter;
-
 	private bool _ringing;
-
-	private void Awake()
-	{
-		_ringImages = new Image[_callRings.Length];
-
-		for (var i = 0; i < _callRings.Length; i++)
-		{
-			_ringImages[i] = _callRings[i].GetComponent<Image>();
-		}
-	}
 
 	public void StartAnimation()
 	{
@@ -49,26 +35,28 @@ public class CallAnimationBehaviour : MonoBehaviour
 	{
 		_ringing = true;
 		var delay = new WaitForSeconds(_animationDelay);
+		var frameCounter = 0;
+		var maxFrameCount = _ringSprites.Length + _callRings.Length;
 
 		while (_ringing)
 		{
 			yield return delay;
-			for (var i = 0; i < _ringImages.Length; i++)
+			for (var i = 0; i < _callRings.Length; i++)
 			{
-				var index = _frameCounter - i;
+				var index = frameCounter - i;
 				if (index < _ringSprites.Length && index >= 0)
 				{
-					_ringImages[i].sprite = _ringSprites[index];
+					_callRings[i].sprite = _ringSprites[index];
 				}
 				else
 				{
-					_ringImages[i].sprite = _emptySprite;
+					_callRings[i].sprite = _emptySprite;
 				}
 			}
-			_frameCounter++;
-			if (_frameCounter >= 8)
+			frameCounter++;
+			if (frameCounter >= maxFrameCount)
 			{
-				_frameCounter = 0;
+				frameCounter = 0;
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class CharacterFaceController : MonoBehaviour
 	public string Gender;
 
 	[Serializable]
-	private class FacialExpression
+	private struct FacialExpression
 	{
 		public string Name;
 		public Sprite Eyebrows;
@@ -22,9 +23,6 @@ public class CharacterFaceController : MonoBehaviour
 
 	private const float Min = 1f;
 	private const float Max = 10f;
-	[SerializeField]
-	[Range(Min, Max)]
-	private float _blinkDelay;
 
 	[SerializeField]
 	private Image _eyebrowRenderer;
@@ -37,6 +35,7 @@ public class CharacterFaceController : MonoBehaviour
 
 	[SerializeField]
 	private FacialExpression[] _facialExpressions;
+	private Dictionary<string, FacialExpression> _facialExpressionDictionary;
 
 	private FacialExpression _currentExpression;
 	private bool _talkingAnimation;
@@ -44,7 +43,7 @@ public class CharacterFaceController : MonoBehaviour
 
 	private void Start()
 	{
-		LoadSprites();
+		_facialExpressionDictionary = _facialExpressions.ToDictionary(f => f.Name, f => f);
 		SetEmotion("Idle");
 		_eyebrowRenderer.enabled = true;
 		_eyeRenderer.enabled = true;
@@ -53,8 +52,7 @@ public class CharacterFaceController : MonoBehaviour
 
 	public void SetEmotion(string emotion)
 	{
-		_currentExpression = _facialExpressions.FirstOrDefault(facialExpression => facialExpression.Name.Equals(emotion));
-		if (_currentExpression != null)
+		if (_facialExpressionDictionary.TryGetValue(emotion, out _currentExpression))
 		{
 			_eyebrowRenderer.sprite = _currentExpression.Eyebrows;
 			_eyeRenderer.sprite = _currentExpression.Eyes;
@@ -64,22 +62,19 @@ public class CharacterFaceController : MonoBehaviour
 			{
 				StartCoroutine(IdleAnimation());
 			}
-
 		}
 	}
 
 	private IEnumerator IdleAnimation()
 	{
 		_idleAnimation = true;
-		var blinkDelay = new WaitForSeconds(_blinkDelay);
 		var fixedDelay = new WaitForFixedUpdate();
 
 		while (_idleAnimation)
 		{
 			_eyeRenderer.sprite = _currentExpression.Eyes;
-
-			yield return blinkDelay;
-			_blinkDelay = UnityEngine.Random.Range(Min, Max);
+			var blinkDelay = UnityEngine.Random.Range(Min, Max);
+			yield return new WaitForSeconds(blinkDelay);
 			foreach (var sprite in _currentExpression.BlinkFrames)
 			{
 				_eyeRenderer.sprite = sprite;
@@ -122,61 +117,4 @@ public class CharacterFaceController : MonoBehaviour
 		}
 		_mouthRenderer.sprite = _currentExpression.Mouth;
 	}
-
-	private void LoadSprites()
-	{
-		var eyebrowSprites = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Character_" + CharacterId + "/Eyebrows");
-		_facialExpressions = new FacialExpression[eyebrowSprites.Length];
-		for (var i = 0; i < eyebrowSprites.Length; i++)
-		{
-			var substring = "Eyebrows_";
-			var index = eyebrowSprites[i].name.IndexOf(substring, StringComparison.Ordinal);
-			var emotionName = eyebrowSprites[i].name.Substring(index + substring.Length);
-			var mouthId = "02";
-			switch (emotionName)
-			{
-				case "Idle":
-					mouthId = "01";
-					break;
-				case "Fear":
-					mouthId = "03";
-					break;
-				case "Sadness":
-					mouthId = "03";
-					break;
-				case "Joy":
-					mouthId = "04";
-					break;
-			}
-
-			var eyes = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Eyes/" + emotionName);
-			// Flip eye frames
-			var eyeFrames = new Sprite[eyes.Length*2];
-			for (var e = 0; e < eyeFrames.Length; e++)
-			{
-				if (e < eyes.Length)
-				{
-					eyeFrames[e] = eyes[e];
-				}
-				else
-				{
-					var reverseIndex = eyes.Length - (e - (eyes.Length-1));
-					eyeFrames[e] = eyes[reverseIndex];
-				}
-			}
-
-			var mouthFrames = Resources.LoadAll<Sprite>("Sprites/Characters/" + Gender + "_Base/Mouth/Mouth_Loop_" + mouthId);
-			var expression = new FacialExpression
-			{
-				Name = emotionName,
-				Eyebrows = eyebrowSprites[i],
-				Eyes = eyeFrames[0],
-				Mouth = mouthFrames[0],
-				BlinkFrames = eyeFrames,
-				MouthFrames = mouthFrames
-			};
-			_facialExpressions[i] = expression;
-		}
-	}
-
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using AssetManagerPackage;
 using GameWork.Core.Commands.Interfaces;
@@ -124,7 +123,7 @@ public class ScenarioController : ICommandAction
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private string[] _allScenarioPaths;
-	private Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
+	private readonly Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
 
 	// Round Based
 	public int CurrentLevel;
@@ -506,12 +505,6 @@ public class ScenarioController : ICommandAction
 			}
 		}
 		var stars = scoreTotal < CurrentScenario.MaxPoints * 0.4f ? 1 : scoreTotal <= CurrentScenario.MaxPoints * 0.8f ? 2 : 3;
-
-		// Minimum score
-		if (scoreTotal < 1)
-		{
-			scoreTotal = 1;
-		}
 
 		var allScores = GetScoresByKey();
 		var measuredPoints = new Dictionary<string, int>();
