@@ -236,6 +236,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114000010025172124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -469,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_SelectOnUp: {fileID: 114000013650594668}
     m_SelectOnDown: {fileID: 114000013650594668}
     m_SelectOnLeft: {fileID: 0}
@@ -631,7 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 4
+    m_Mode: 0
     m_SelectOnUp: {fileID: 114000012099599384}
     m_SelectOnDown: {fileID: 114000012099599384}
     m_SelectOnLeft: {fileID: 0}

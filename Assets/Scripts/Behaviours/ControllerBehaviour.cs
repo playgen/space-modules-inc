@@ -10,8 +10,6 @@ public class ControllerBehaviour : MonoBehaviour
 
 	private void Awake()
 	{
-		FixScreenRatio();
-
 		_audioController = new AudioController(new ResourceAudioChannelFactory(), 1);
 		var scenarioController = new ScenarioController(_audioController);
 		var modulesController = new ModulesController();
@@ -35,19 +33,5 @@ public class ControllerBehaviour : MonoBehaviour
 			ScreenCapture.CaptureScreenshot(System.DateTime.UtcNow.ToFileTimeUtc() + ".png");
 		}
 #endif
-	}
-
-	// Force the screen to always use a portrait ratio. will display black panels on the side in lanscape view
-	private void FixScreenRatio()
-	{
-		if (Camera.main.aspect > 1)
-		{
-			var portrait = 1 / (Camera.main.aspect * Camera.main.aspect);
-			var x = (1 - portrait) / 2;
-			var y = 0;
-			var w = portrait;
-			var h = 1;
-			Camera.main.rect = new Rect(new Vector2(x, y), new Vector2(w, h));
-		}
 	}
 }
