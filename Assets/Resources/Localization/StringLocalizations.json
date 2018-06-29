@@ -19,7 +19,7 @@
 {"Key":"FEEDBACK_3","en":"Excellent!","nl":"Perfect!"},
 {"Key":"FEEDBACK_ENDGAME","en":"End Game","nl":"Einde Spel"},
 {"Key":"FEEDBACK_INGAME","en":"In Game","nl":"Bezig in Spel"},
-{"Key":"FEEDBACK_MINIMAL","en":"Minimal","nl":"Minimaal"},
+{"Key":"FEEDBACK_INREVIEW","en":"In Review","nl":"In beoordeling"},
 {"Key":"FEEDBACK_MODE","en":"Feedback Mode","nl":"Terugkoppeling Modus"},
 {"Key":"FRIENDS","en":"Friends","nl":"Vrienden"},
 {"Key":"GAME_LOCK_TEXT","en":"Please close the Game and launch from url to continue playing.","nl":"Sluit het spel en start vanuit website om verder te spelen."},

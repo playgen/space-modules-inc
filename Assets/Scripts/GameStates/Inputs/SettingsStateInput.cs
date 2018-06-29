@@ -33,8 +33,8 @@ public class SettingsStateInput : TickStateInput
 		_creator.Wipe();
 		Dropdown feedback;
 		_creator.TryForPlatform("FEEDBACK_MODE", true, out feedback, true, false);
-		feedback.GetComponent<DropdownLocalization>().SetOptions(new List<string> { "FEEDBACK_" + ScenarioController.FeedbackMode.Minimal, "FEEDBACK_" + ScenarioController.FeedbackMode.EndGame, "FEEDBACK_" + ScenarioController.FeedbackMode.InGame });
-		feedback.value = PlayerPrefs.GetInt("Feedback", (int)ScenarioController.FeedbackMode.Minimal);
+		feedback.GetComponent<DropdownLocalization>().SetOptions(new List<string> { "FEEDBACK_" + ScenarioController.FeedbackMode.EndGame, "FEEDBACK_" + ScenarioController.FeedbackMode.InReview, "FEEDBACK_" + ScenarioController.FeedbackMode.InGame });
+		feedback.value = PlayerPrefs.GetInt("Feedback", (int)ScenarioController.FeedbackMode.EndGame);
 		feedback.onValueChanged.AddListener(OnFeedbackChange);
 		_feedbackMode = feedback.transform.parent.gameObject;
 		Dropdown language;
