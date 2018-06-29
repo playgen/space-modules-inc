@@ -168,3 +168,8 @@ For information on Setting up Space Modules Inc. using SUGAR, see [SUGAR Quick S
 
 ### Running SUGAR Locally
 Using Space Modules inc. with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*
+
+### Level Selection
+Space Modules inc. supports both an automatic level progression system, and allowing players to select a level they want to play. In the current version, the level selection screen is never shown. 
+
+To change this, see [GameStateControllerFactory](Assets/Scripts/GameStates/GameStateControllerFactory.cs) for the CreateMenuState logic. This contains 2 variations of nextStateTransition. To change the next state after pressing play, change the EventTransition to be either *CallState* or *LevelState*.
