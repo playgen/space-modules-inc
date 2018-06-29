@@ -28,7 +28,7 @@ public class LevelStateInput : TickStateInput
 		_scenarioController.RefreshSuccessEvent += UpdateLevelList;
 		_scenarioController.SetLevelSuccessEvent += LevelLoaded;
 		_gridLayout = GameObjectUtilities.FindGameObject(_panelRoute + "/LevelPanel/Scroll View/Viewport/Content/GridLayout");
-		ConfigureGridSize(3, 3);
+		ConfigureGridSize(3);
 		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
 		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
 		CommandQueue.AddCommand(new RefreshLevelDataCommand());
@@ -58,14 +58,19 @@ public class LevelStateInput : TickStateInput
 	private void LoadLevel(int id)
 	{
 		CommandQueue.AddCommand(new SetLevelCommand(id));
-		//LoadLevelEvent?.Invoke();
 	}
 
+	/// <summary>
+	/// Called on set level command success to ensure that the level has been successfully loaded before continuing
+	/// </summary>
 	private void LevelLoaded()
 	{
 		LoadLevelEvent?.Invoke();
 	}
 
+	/// <summary>
+	/// Clears the current levels in the grid layout
+	/// </summary>
 	private void ClearList()
 	{
 		// Clear List
@@ -76,6 +81,10 @@ public class LevelStateInput : TickStateInput
 		}
 	}
 
+	/// <summary>
+	/// Iterate through the provided levels and populate the grid layout
+	/// </summary>
+	/// <param name="Levels"></param>
 	public void UpdateLevelList(ScenarioController.LevelObject[] Levels)
 	{
 		for (var i = 0; i < Levels.Length; i++)
@@ -90,20 +99,23 @@ public class LevelStateInput : TickStateInput
 			});
 		}
 		var contentView = _gridLayout.transform.parent.GetComponent<RectTransform>();
-		var originalHeight = contentView.rect.height;
 		var cellHeight = _gridLayout.GetComponent<GridLayoutGroup>().cellSize.y;
 		var rows = (Mathf.Ceil(Levels.Length / (float)_columns));
 		var contentHieght = cellHeight * rows;
-		contentView.sizeDelta = new Vector2(1f, contentHieght-originalHeight);
+		contentView.sizeDelta = new Vector2(1f, contentHieght);
 	}
 
-	private void ConfigureGridSize(int rows, int cols)
+	/// <summary>
+	/// Set the number of columns for the grid, grid is embedded in a scroll view so rows is unlimeted.
+	/// Elements will be forced to be square based on button width
+	/// </summary>
+	/// <param name="cols"></param>
+	private void ConfigureGridSize(int cols)
 	{
 		_columns = cols;
 		var gridRect = _gridLayout.GetComponent<RectTransform>();
-		var buttonHeight = gridRect.rect.height / rows;
 		var buttonWidth = gridRect.rect.width / cols;
 		var gridLayoutGroup = _gridLayout.GetComponent<GridLayoutGroup>();
-		gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonHeight);
+		gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonWidth);
 	}
 }

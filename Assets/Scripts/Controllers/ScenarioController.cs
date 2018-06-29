@@ -14,7 +14,7 @@ using System.IO;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
-
+using PlayGen.Unity.Utilities.Loading;
 using PlayGen.Unity.Utilities.Localization;
 
 using TrackerAssetPackage;
@@ -151,6 +151,8 @@ public class ScenarioController : ICommandAction
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action SetLevelSuccessEvent;
 
+	private int _scoresRetrieved;
+
 	#region Initialization
 
 	public ScenarioController(AudioController audioController)
@@ -263,26 +265,26 @@ public class ScenarioController : ICommandAction
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshCharacterArray()
 	{
+		Loading.Start();
+		_scoresRetrieved = 0;
 		var LevelList = new LevelObject[_scenarios.Length];
-		for (var i = 0; i < _scenarios.Length; i++)
+		var sugarKeys = new string[_scenarios.Length];
+		for (var i = 0; i < sugarKeys.Length; i++)
 		{
-			LevelList[i] = new LevelObject{Id = _scenarios[i].LevelId, Stars = 0};
+			sugarKeys[i] = $"stars_{RoundNumber}_{i + 1}";
 		}
-		//var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), EvaluationDataType.Long);
-
-		//foreach (var star in stars)
-		//{
-		//    LevelObject levelObject;
-		//    if (levelList.TryGetValue(star.Key, out levelObject))
-		//    {
-		//        levelObject.Stars = Int32.Parse(star.Value);
-		//    }
-		//    levelList[star.Key] = levelObject;
-		//}
-
-		RefreshSuccessEvent?.Invoke(LevelList);
+		SUGARManager.GameData.Get(responses =>
+		{
+			for (var i = 0; i < _scenarios.Length; i++)
+			{
+				var key = $"stars_{RoundNumber}_{i + 1}";
+				var mostStars = responses.Where(r => r.Key == key).Select(r => r.Value).Max();
+				LevelList[i] = new LevelObject {Id = _scenarios[i].LevelId, Stars = Convert.ToInt16(mostStars)};
+			}
+			Loading.Stop();
+			RefreshSuccessEvent?.Invoke(LevelList);
+		},sugarKeys);
 	}
-
 	#endregion
 
 	#region Character Interaction
@@ -537,6 +539,7 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("score", score);
 			SUGARManager.GameData.Send("plays", 1);
 			SUGARManager.GameData.Send("stars", stars);
+			SUGARManager.GameData.Send($"stars_{RoundNumber}_{CurrentLevel}", stars);
 			foreach (var scoreMetric in _scoreMetrics)
 			{
 				SUGARManager.GameData.Send(scoreMetric.ToString().ToLower(), GetScore(allScores, scoreMetric.ToString()));
