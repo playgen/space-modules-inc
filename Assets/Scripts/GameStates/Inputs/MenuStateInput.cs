@@ -22,7 +22,7 @@ public class MenuStateInput : TickStateInput
 	private GameObject _pilotModePanel;
 	private GameObject _gameLockedPanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
-    private readonly ScenarioController _scenarioController;
+	private readonly ScenarioController _scenarioController;
 
 	private const string LockedTitle = "GAME_LOCK_TITLE";
 	private const string LockedDescription = "GAME_LOCK_TEXT";
@@ -31,11 +31,11 @@ public class MenuStateInput : TickStateInput
 	private const string ExpiredDescription = "PILOT_MODE_EXPIRED_DESCRIPTION";
 
 	public MenuStateInput(ScenarioController scenarioController)
-    {
-        _scenarioController = scenarioController;
-    }
+	{
+		_scenarioController = scenarioController;
+	}
 
-    protected override void OnInitialize()
+	protected override void OnInitialize()
 	{
 		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/SettingsButton").GetComponent<Button>().onClick.AddListener(() => SettingsClickedEvent?.Invoke());
 		GameObjectUtilities.FindGameObject(_panelRoute +  "/MenuPanel/LeaderboardButton").GetComponent<Button>().onClick.AddListener(() =>
@@ -79,9 +79,8 @@ public class MenuStateInput : TickStateInput
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
 			_scenarioController.CurrentLevel = 0;
 		}
-		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null &&
-		              CommandLineUtility.CustomArgs.Count != 0;
-		var gameLocked = _scenarioController.CurrentLevel >= _scenarioController.LevelMax && isPilot;
+		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null && CommandLineUtility.CustomArgs.Count != 0;
+		var gameLocked = isPilot && _scenarioController.LevelMax > 0 && _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
 
 		var lockedTitleText = Localization.Get(LockedTitle, true);
 		var lockedDescriptionText = Localization.Get(LockedDescription);
@@ -92,7 +91,7 @@ public class MenuStateInput : TickStateInput
 			if (_startTimeGap == TimeSpan.MinValue)
 			{
 				if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") ||
-				                                         !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
+														 !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
 				{
 					_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 				}
@@ -101,7 +100,7 @@ public class MenuStateInput : TickStateInput
 					string dateTimeArg;
 					DateTimeOffset launchTime;
 					if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
-					    !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+						!DateTimeOffset.TryParse(dateTimeArg, out launchTime))
 					{
 						gameLocked = true;
 						_startTimeGap = TimeSpan.MaxValue;

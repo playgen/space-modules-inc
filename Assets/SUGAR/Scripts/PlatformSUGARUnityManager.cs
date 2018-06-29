@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using PlayGen.SUGAR.Client;
+﻿using PlayGen.SUGAR.Client;
 using PlayGen.SUGAR.Unity;
 
 public class PlatformSUGARUnityManager : SUGARUnityManager
 {
-    protected override IHttpHandler CreateHttpHandler()
-    {
-#if UNITY_WEBGL
-        return new UnityWebGlHttpHandler();
+	protected override SUGARClient CreateSUGARClient(string baseAddress)
+	{
+#if UNITY_WEBGL && !UNITY_EDITOR
+		return new SUGARClient(baseAddress, new UnityWebGlHttpHandler(), false);
 #else
-        return null;
+		return base.CreateSUGARClient(baseAddress);
 #endif
-    }
+	}
 }

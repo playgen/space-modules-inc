@@ -158,7 +158,7 @@ public class ScenarioController : ICommandAction
 
 	public void Initialize()
 	{
-		_allScenarioPaths = Application.platform == RuntimePlatform.WindowsPlayer ? Directory.GetFiles(Path.Combine(Application.streamingAssetsPath, "Scenarios"), "*.iat") : Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
+		_allScenarioPaths = Resources.LoadAll("Scenarios").Select(t => t.name).ToArray();
 		var streamingAssetsPath = Path.Combine(Application.streamingAssetsPath, "levelconfig.json");
 		var www = new WWW((Application.platform != RuntimePlatform.Android ? "file:///" : string.Empty) + streamingAssetsPath);
 		while (!www.isDone)
@@ -440,7 +440,7 @@ public class ScenarioController : ICommandAction
 			}
 		}
 
-		if (Application.platform == RuntimePlatform.WindowsPlayer ? File.Exists("file://" + Path.Combine(Application.streamingAssetsPath, Path.Combine("Audio", CurrentCharacter.BodyName, audioName) + ".ogg")) : Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
+		if (Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
 		{
 			_audioClip = new AudioClipModel
 			{
