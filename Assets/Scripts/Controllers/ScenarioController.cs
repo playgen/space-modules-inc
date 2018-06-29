@@ -14,7 +14,7 @@ using System.IO;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
-
+using PlayGen.Unity.Utilities.Loading;
 using PlayGen.Unity.Utilities.Localization;
 
 using TrackerAssetPackage;
@@ -74,7 +74,7 @@ public class ScenarioController : ICommandAction
 
 	public class LevelObject
 	{
-		public string Name;
+		public int Id;
 		public int Stars;
 	}
 
@@ -117,6 +117,7 @@ public class ScenarioController : ICommandAction
 	#endregion
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
+	private RolePlayCharacterAsset[] _characters;
 	private ScenarioData[] _scenarios;
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
@@ -147,6 +148,10 @@ public class ScenarioController : ICommandAction
 	public event Action<string, float> GetCharacterStrongestEmotionSuccessEvent;
 	public event Action StopTalkAnimationEvent;
 	public event Action FinalStateEvent;
+	public event Action<LevelObject[]> RefreshSuccessEvent;
+	public event Action SetLevelSuccessEvent;
+
+	private int _scoresRetrieved;
 
 	#region Initialization
 
@@ -251,34 +256,35 @@ public class ScenarioController : ICommandAction
 	#region Level Select
 
 	// Called after selecting a level
-	public void SetCharacter(string name)
+	public void SetLevel(int id)
 	{
-		//CurrentCharacter = _characters.FirstOrDefault(asset => asset.CharacterName.Equals(name));
-		//var enterEventRpcOne = string.Format("Event(Property-Change,{0},Front(Self),Computer)", CurrentCharacter.Perspective);
-		//_events.Add(enterEventRpcOne);
+		CurrentLevel = id-1;
+		SetLevelSuccessEvent();
 	}
 
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshCharacterArray()
 	{
-		//_characters = _integratedAuthoringTool.GetAllCharacters().ToArray();
-		//var levelList = _characters.ToDictionary(k => "level_" + k.CharacterName.ToLower() + "_stars", v => new LevelObject() {Name = v.CharacterName});
-
-		//var stars = SUGARManager.GameData.GetHighest(_characters.Select(asset => "level_" + asset.CharacterName.ToLower() + "_stars").ToArray(), EvaluationDataType.Long);
-
-		//foreach (var star in stars)
-		//{
-		//    LevelObject levelObject;
-		//    if (levelList.TryGetValue(star.Key, out levelObject))
-		//    {
-		//        levelObject.Stars = Int32.Parse(star.Value);
-		//    }
-		//    levelList[star.Key] = levelObject;
-		//}
-
-		//if (RefreshSuccessEvent != null) RefreshSuccessEvent(levelList.Values.ToArray());
+		Loading.Start();
+		_scoresRetrieved = 0;
+		var LevelList = new LevelObject[_scenarios.Length];
+		var sugarKeys = new string[_scenarios.Length];
+		for (var i = 0; i < sugarKeys.Length; i++)
+		{
+			sugarKeys[i] = $"stars_{RoundNumber}_{i + 1}";
+		}
+		SUGARManager.GameData.Get(responses =>
+		{
+			for (var i = 0; i < _scenarios.Length; i++)
+			{
+				var key = $"stars_{RoundNumber}_{i + 1}";
+				var mostStars = responses.Where(r => r.Key == key).Select(r => r.Value).Max();
+				LevelList[i] = new LevelObject {Id = _scenarios[i].LevelId, Stars = Convert.ToInt16(mostStars)};
+			}
+			Loading.Stop();
+			RefreshSuccessEvent?.Invoke(LevelList);
+		},sugarKeys);
 	}
-
 	#endregion
 
 	#region Character Interaction
@@ -533,6 +539,7 @@ public class ScenarioController : ICommandAction
 			SUGARManager.GameData.Send("score", score);
 			SUGARManager.GameData.Send("plays", 1);
 			SUGARManager.GameData.Send("stars", stars);
+			SUGARManager.GameData.Send($"stars_{RoundNumber}_{CurrentLevel}", stars);
 			foreach (var scoreMetric in _scoreMetrics)
 			{
 				SUGARManager.GameData.Send(scoreMetric.ToString().ToLower(), GetScore(allScores, scoreMetric.ToString()));

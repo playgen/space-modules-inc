@@ -63,11 +63,18 @@ public class GameStateControllerFactory
 		var settingsTransition = new EventTransition(SettingsState.StateName);
 		input.SettingsClickedEvent += settingsTransition.ChangeState;
 
-		var levelTransition = new EventTransition(CallState.StateName);
-		input.PlayClickedEvent += scenarioController.NextLevel;
-		input.PlayClickedEvent += levelTransition.ChangeState;
-
-		state.AddTransitions(settingsTransition, levelTransition);
+		// TODO uncomment the lines for the next state wanted when play is pressed
+		
+		// begin level select
+		// var nextStateTransition = new EventTransition(LevelState.StateName);
+		// end level select
+		
+		// begin straight to gema
+		var nextStateTransition = new EventTransition(CallState.StateName);
+		input.PlayClickedEvent += _scenarioController.NextLevel;
+		// end straight to game
+		input.PlayClickedEvent += nextStateTransition.ChangeState;
+		state.AddTransitions(settingsTransition, nextStateTransition);
 
 		return state;
 	}
@@ -87,12 +94,18 @@ public class GameStateControllerFactory
 
 	private LevelState CreateLevelState(ScenarioController scenarioController)
 	{
-		var input = new LevelStateInput();
+		var input = new LevelStateInput(scenarioController);
 		var state = new LevelState(input, scenarioController);
 
+		var menuTransition = new EventTransition(MenuState.StateName);
 		var callTransition = new EventTransition(CallState.StateName);
 
-		state.AddTransitions(callTransition);
+		input.BackClickedEvent += menuTransition.ChangeState;
+
+		input.LoadLevelEvent += _scenarioController.NextLevel;
+		input.LoadLevelEvent += callTransition.ChangeState;
+
+		state.AddTransitions(callTransition, menuTransition);
 
 		return state;
 	}
