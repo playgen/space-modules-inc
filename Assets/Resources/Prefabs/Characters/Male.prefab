@@ -283,7 +283,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CharacterId: 01
   Gender: Male
-  _blinkDelay: 8.508573
   _eyebrowRenderer: {fileID: 114803968404067230}
   _eyeRenderer: {fileID: 114210538778153404}
   _mouthRenderer: {fileID: 114518843295729898}
