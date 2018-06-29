@@ -1,29 +1,27 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelItemBehaviour : MonoBehaviour
 {
-    [SerializeField]
-    private Sprite _starSprite;
+	[SerializeField]
+	private Sprite _starSprite;
 
-    [SerializeField]
-    private Text _itemText;
+	[SerializeField]
+	private Text _itemText;
 
-    [SerializeField]
-    private GameObject[] _starSlots;
+	[SerializeField]
+	private Image[] _starSlots;
 
-    public void SetupItem(int stars, string itemName)
-    {
-        if (stars > _starSlots.Length)
-        {
-            throw new Exception("stars & slots mismatch");
-        }
-
-        _itemText.text = itemName;
-        for (var i = 0; i < stars; i++)
-        {
-            _starSlots[i].GetComponent<Image>().sprite = _starSprite;
-        }
-    }
+	public void SetupItem(int stars, string itemName)
+	{
+		_itemText.text = itemName;
+		for (var i = 0; i < _starSlots.Length; i++)
+		{
+			if (stars <= i)
+			{
+				return;
+			}
+			_starSlots[i].sprite = _starSprite;
+		}
+	}
 }
