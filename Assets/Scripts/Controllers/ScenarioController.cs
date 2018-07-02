@@ -280,6 +280,7 @@ public class ScenarioController : ICommandAction
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshLevelData()
 	{
+		// TODO: Account for when running a round with no scenarios (currently results in level select with no levels to select)
 		Loading.Start();
 		var levelList = new LevelObject[_scenarios.Length];
 		var sugarKeys = new string[_scenarios.Length];
@@ -293,7 +294,7 @@ public class ScenarioController : ICommandAction
 			for (var i = 0; i < _scenarios.Length; i++)
 			{
 				var key = sugarKeys[i];
-				var mostStars = responseList.Where(r => r.Key == key).Select(r => Convert.ToInt16(r.Value)).Max();
+				var mostStars = responseList.Where(r => r.Key == key).Select(r => Convert.ToInt16(r.Value)).DefaultIfEmpty().Max();
 				levelList[i] = new LevelObject { Id = _scenarios[i].LevelId, Stars = mostStars };
 			}
 			Loading.Stop();
