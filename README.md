@@ -118,58 +118,12 @@ The game-launcher repository is used to launch the game from url.
 - Wix Visual Studio Extension
 - [game-launcher](https://gitlab.com/playgen/game-launcher) project
 
-## Process:
+## TODO Process:
 1. Create a Unity PC Build at Build\WindowsSMI called “SMI”.
 2. Once built, go to the project solution (space-modules-inc.sln) and build the space-modules-inc-setup project.
 3. The resulting windows installer can be found at space-modules-inc-installer\bin\Debug\space-modules-inc_setup.msi.
 
-todo explain how this works with wix and how to create create an installer etc once you've made a standalone build
+TODO explain how this works with wix and how to create create an installer etc once you've made a standalone build
 
-# DeepLinks
-The game is configured to launch from DeepLink urls for both Android and iOS.
-
-This url is the same as the launcher url except that where the launcher url starts with:  
-`rage://?gameid=SMI`  
-the deeplink url starts with:  
-`rage://SMI?`  
-After that the rest of the argument are the same e.g:  
-`rage://smi?username=SMI_User1&class=Testing&feedback=2&forcelaunch=true&hash=A2AF8BA8AF05A16E0282A0D318EBF4FDF070636C`
-
-# Unity Game
-## Key Scene Structure
-- Background Camera - This camera is used to draw a blank black background around the portrait-aligned gameplay in PC builds.
-- Main Camera
-- Controller - contains the ControllerBehaviour script.
-- EventSystem
-- Canvas
-  - BackgroundContainer
-  - SplashContainer
-  - MenuContainer
-  - SettingsContainer
-    - SettingsPanelContainer/SettingsPanel/Set Settings Panel - prefab object. Using the SettingCreation script from the PlayGen Settings asset to create the settings menu at run-time.
-  - LevelContainer
-  - CallContainer
-  - GameContainer
-  - ReviewContainer
-  - ScoreContainer
-- SUGAR - prefab containing all components relating to SUGAR.
-- Tracker - contains the Tracker script for the RAGE Analytics.
-
-## Key Classes
-- Behaviours/CharacterFaceController - Manages loading in facial sprites, changes spirtes based on the emotion of the character and animating talking and blinking.
-- Behaviour/ControllerBehaviour - Starts controllers, fixes aspect ratio to be height/width when width is greater than height on PC.
-- Controllers/ModulesController - controls loading and displaying module information.
-- Controllers/ScenarioController - manages loading and selecting scenarios, loading, sending and receiving player and controller dialogue (including triggering audio to play) and calculates the end score of each scenario played.
-- GameStates/Inputs/GameStateInput - handles UI whilst in the ‘Game’ state, including updating character expression and dialogue and triggering various commands.
-- GameStates/GameStateControllerFactory - creates and sets up events for all states within the game.
-
-### Setting up your game with SUGAR
-For information on Setting up Space Modules Inc. using SUGAR, see [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). *make sure that Assets\StreamingAssets\SUGAR.config.json exists and the BaseUri value matches the Base Address in the SUGAR Prefab.* 
-
-### Running SUGAR Locally
-Using Space Modules inc. with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*
-
-### Level Selection
-Space Modules inc. supports both an automatic level progression system, and allowing players to select a level they want to play. In the current version, the level selection screen is never shown. 
-
-To change this, see [GameStateControllerFactory](Assets/Scripts/GameStates/GameStateControllerFactory.cs) for the CreateMenuState logic. This contains 2 variations of nextStateTransition. To change the next state after pressing play, change the EventTransition to be either *CallState* or *LevelState*.
+## Developer Guide
+See the [Developer Guide](DeveloperGuide.md) for further details about the game.
