@@ -29,6 +29,7 @@ ExportedObj/
 sysinfo.txt
 
 # Builds
+*.keystore
 *.apk
 *.unitypackage
 *.sln
@@ -45,4 +46,3 @@ Assets/GameWork
 Assets/GameWork/
 Assets/Plugins/PlayGen Utilities
 Assets/Plugins/IntegratedAuthoringTool
-
