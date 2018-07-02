@@ -14,6 +14,7 @@ using System.IO;
 using GameWork.Core.Audio;
 using GameWork.Core.Audio.Clip;
 using Newtonsoft.Json;
+
 using PlayGen.Unity.Utilities.Loading;
 using PlayGen.Unity.Utilities.Localization;
 
@@ -103,11 +104,11 @@ public class ScenarioController : ICommandAction
 		/// <summary>
 		/// Feedback only at the end of game
 		/// </summary>
-		EndGame = 0, 
+		EndGame = 0,
 		/// <summary>
 		/// Feedback at the end of game and broken down in the chat history
 		/// </summary>
-		InReview, 
+		InReview,
 		/// <summary>
 		/// Feedback at the end of game, in chat history and during the game
 		/// </summary>
@@ -117,14 +118,17 @@ public class ScenarioController : ICommandAction
 	#endregion
 
 	private IntegratedAuthoringToolAsset _integratedAuthoringTool;
-	private RolePlayCharacterAsset[] _characters;
 	private ScenarioData[] _scenarios;
 	private Name _currentStateName;
 	private DialogueStateActionDTO[] _currentPlayerDialogue;
+	private string[] _allScenarioPaths;
+	private AudioClipModel _audioClip;
+	private Random random = new Random();
+
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
-	private string[] _allScenarioPaths;
 	private readonly Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
+	private readonly AudioController _audioController;
 
 	// Round Based
 	public int CurrentLevel;
@@ -137,9 +141,6 @@ public class ScenarioController : ICommandAction
 	public FeedbackMode FeedbackLevel;
 	public int RoundNumber;
 
-	private readonly AudioController _audioController;
-	private AudioClipModel _audioClip;
-
 	public event Action<DialogueStateActionDTO[]> GetPlayerDialogueSuccessEvent;
 	public event Action<List<ChatScoreObject>, float, FeedbackMode> GetReviewDataSuccessEvent;
 	public event Action<Dictionary<string, int>, FeedbackMode> GetFeedbackEvent;
@@ -151,7 +152,14 @@ public class ScenarioController : ICommandAction
 	public event Action<LevelObject[]> RefreshSuccessEvent;
 	public event Action SetLevelSuccessEvent;
 
-	private int _scoresRetrieved;
+	private readonly List<TrackerContextKey> _scoreMetrics = new List<TrackerContextKey>
+	{
+		TrackerContextKey.Closure,
+		TrackerContextKey.Empathy,
+		TrackerContextKey.Faq,
+		TrackerContextKey.Inquire,
+		TrackerContextKey.Polite
+	};
 
 	#region Initialization
 
@@ -172,8 +180,14 @@ public class ScenarioController : ICommandAction
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
 		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
+		// If no round value is provided in CustomArgs, Round is set to 1 if lockafterq is a CustomArgs key and is true, set to 2 otherwise
 		int parseRound;
-		RoundNumber = SUGARManager.CurrentUser != null ? CommandLineUtility.CustomArgs.ContainsKey("round") ? int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? parseRound - 1 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0 : CommandLineUtility.CustomArgs.ContainsKey("feedback") ? 1 : 0 : 0;
+		var parseLockAfterQ = false;
+		if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
+		{
+			bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ);
+		}
+		RoundNumber = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? Mathf.Max(0, parseRound - 1) : parseLockAfterQ ? 1 : 2;
 		var round = obj.Rounds[RoundNumber];
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
@@ -186,8 +200,7 @@ public class ScenarioController : ICommandAction
 		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 		if (CurrentLevel >= LevelMax)
 		{
-			bool parseLockAfterQ;
-			if (SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("lockafterq") && bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ) && parseLockAfterQ)
+			if (SUGARManager.CurrentUser != null && parseLockAfterQ)
 			{
 				CurrentLevel = LevelMax;
 			}
@@ -212,17 +225,17 @@ public class ScenarioController : ICommandAction
 		{
 			var validPaths = _allScenarioPaths.Where(p => p.Contains('#')).ToArray();
 			var prefixes = validPaths.Select(p => p.Substring(0, p.IndexOf('-', p.IndexOf('-') + 1) + 1)).ToList();
-			var rnd = new Random();
-			var character = new List<string> {"Positive", "Neutral", "Negative"}.OrderBy(dto => rnd.Next()).First();
-			var prefix = prefixes.OrderBy(dto => rnd.Next()).First();
+			var character = new List<string> { "Positive", "Neutral", "Negative" }.OrderBy(dto => random.Next()).First();
+			var prefix = prefixes.OrderBy(dto => random.Next()).First();
+			// MaxPoints currently hardcoded to 8 for random scenarios.
+			// TODO Review validity/balance of MaxPoints = 8
 			CurrentScenario = new ScenarioData(CurrentLevel, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), character, 8, prefix);
 		}
 		if (CurrentScenario != null)
 		{
-			var rng = new Random();
-			var index = rng.Next(CurrentScenario.ScenarioPaths.Length);
+			var index = random.Next(CurrentScenario.ScenarioPaths.Length);
 			Debug.Log(CurrentScenario.ScenarioPaths[index]);
-			var error = string.Empty;
+			string error;
 			ScenarioCode = CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
 			_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", CurrentScenario.ScenarioPaths[index]), out error);
 			if (!string.IsNullOrEmpty(error))
@@ -232,14 +245,16 @@ public class ScenarioController : ICommandAction
 			CurrentCharacter = RolePlayCharacterAsset.LoadFromFile(_integratedAuthoringTool.GetAllCharacterSources().First(c => c.Source.Contains(CurrentScenario.Character)).Source);
 			CurrentCharacter.LoadAssociatedAssets();
 			_integratedAuthoringTool.BindToRegistry(CurrentCharacter.DynamicPropertiesRegistry);
-			CurrentCharacter.BodyName = rng.NextDouble() >= 0.5 ? "Male" : "Female";
+			CurrentCharacter.BodyName = random.NextDouble() >= 0.5 ? "Male" : "Female";
 		}
 	}
 
 	public void NextQuestionnaire()
 	{
+		// Pilot logic to set level id to match CurrentLevel divided by 5, as questionnaires occur every 5 levels. Needs changing if occurance rate of questionnaires change 
 		CurrentScenario = new ScenarioData(CurrentLevel / 5, _allScenarioPaths.Where(x => x.Contains("Questions")).ToArray(), "Neutral", 0, "Questionnaire");
-		var error = string.Empty;
+		string error;
+		// Pilot logic to set different questionnaire depending on how many levels have been played. Needs changing if expected appearence of questionnaire changes
 		ScenarioCode = (CurrentLevel < LevelMax && LevelMax > 0 ? 1 : 2).ToString();
 		_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", _allScenarioPaths.First(x => x.Contains("Questions" + ScenarioCode))), out error);
 		if (!string.IsNullOrEmpty(error))
@@ -258,16 +273,15 @@ public class ScenarioController : ICommandAction
 	// Called after selecting a level
 	public void SetLevel(int id)
 	{
-		CurrentLevel = id-1;
-		SetLevelSuccessEvent();
+		CurrentLevel = id - 1;
+		SetLevelSuccessEvent?.Invoke();
 	}
 
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
 	public void RefreshCharacterArray()
 	{
 		Loading.Start();
-		_scoresRetrieved = 0;
-		var LevelList = new LevelObject[_scenarios.Length];
+		var levelList = new LevelObject[_scenarios.Length];
 		var sugarKeys = new string[_scenarios.Length];
 		for (var i = 0; i < sugarKeys.Length; i++)
 		{
@@ -275,15 +289,16 @@ public class ScenarioController : ICommandAction
 		}
 		SUGARManager.GameData.Get(responses =>
 		{
+			var responseList = responses.ToList();
 			for (var i = 0; i < _scenarios.Length; i++)
 			{
-				var key = $"stars_{RoundNumber}_{i + 1}";
-				var mostStars = responses.Where(r => r.Key == key).Select(r => r.Value).Max();
-				LevelList[i] = new LevelObject {Id = _scenarios[i].LevelId, Stars = Convert.ToInt16(mostStars)};
+				var key = sugarKeys[i];
+				var mostStars = responseList.Where(r => r.Key == key).Select(r => Convert.ToInt16(r.Value)).Max();
+				levelList[i] = new LevelObject { Id = _scenarios[i].LevelId, Stars = mostStars };
 			}
 			Loading.Stop();
-			RefreshSuccessEvent?.Invoke(LevelList);
-		},sugarKeys);
+			RefreshSuccessEvent?.Invoke(levelList);
+		}, sugarKeys);
 	}
 	#endregion
 
@@ -307,7 +322,7 @@ public class ScenarioController : ICommandAction
 		var reply = _currentPlayerDialogue.FirstOrDefault(a => a.Id.Equals(actionId));
 		if (reply != null && _chatScoreHistory.LastOrDefault(c => c.ChatObject.Agent == "Player")?.ChatObject.CurrentState != reply.CurrentState)
 		{
-			var actionFormat = string.Format("Speak({0},{1},{2},{3})", reply.CurrentState, reply.NextState, reply.Meaning, reply.Style);
+			var actionFormat = $"Speak({reply.CurrentState},{reply.NextState},{reply.Meaning},{reply.Style})";
 
 			// Submit dialogue choice to the IAT event list.
 			_events.Add(EventHelper.ActionStart(IATConsts.PLAYER, actionFormat, CurrentCharacter.CharacterName.ToString()));
@@ -332,39 +347,8 @@ public class ScenarioController : ICommandAction
 				{ TrackerEvaluationKey.GoalOrientation, "Progression" },
 				{ TrackerEvaluationKey.Tool, "DialogueChoices" }
 			});
-
-			var chat = new ChatObject 
-			{
-				Utterence = Localization.GetAndFormat(reply.FileName, false, ScenarioCode),
-				Agent = "Player",
-				CurrentState = reply.CurrentState,
-				NextState = reply.NextState,
-				FileName = reply.FileName,
-				UtteranceId = reply.UtteranceId,
-				DialogueId = reply.Id
-			};
-			if (CurrentScenario.Prefix != "Questionnaire")
-			{
-				_chatScoreHistory.Add(new ChatScoreObject
-				{
-					ChatObject = chat,
-					Scores = new Dictionary<string, int>()
-				});
-
-				UpdateScore(reply);
-				_feedbackScores.Clear();
-				foreach (var chatScore in _chatScoreHistory.Last().Scores)
-				{
-					if (_feedbackScores.ContainsKey(chatScore.Key))
-					{
-						_feedbackScores[chatScore.Key] = chatScore.Value;
-					}
-					else
-					{
-						_feedbackScores.Add(chatScore.Key, chatScore.Value);
-					}
-				}
-			}
+			_feedbackScores.Clear();
+			UpdateFeedbackScores(reply, "Player");
 			GetCharacterResponse();
 			GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
 		}
@@ -388,45 +372,51 @@ public class ScenarioController : ICommandAction
 				var characterDialogue = dialogues.FirstOrDefault(dto => string.Equals(dto.Meaning.ToString(), action.Parameters[2].ToString(), StringComparison.CurrentCultureIgnoreCase) && string.Equals(dto.Style.ToString(), action.Parameters[3].ToString(), StringComparison.CurrentCultureIgnoreCase));
 				if (characterDialogue != null)
 				{
-					var chat = new ChatObject
-					{
-						Utterence = Localization.GetAndFormat(characterDialogue.FileName, false, ScenarioCode),
-						Agent = "Client",
-						CurrentState = characterDialogue.CurrentState,
-						NextState = characterDialogue.NextState,
-						FileName = characterDialogue.FileName,
-						UtteranceId = characterDialogue.UtteranceId,
-						DialogueId = characterDialogue.Id
-					};
-					if (CurrentScenario.Prefix != "Questionnaire")
-					{
-						_chatScoreHistory.Add(new ChatScoreObject
-						{
-							ChatObject = chat,
-							Scores = new Dictionary<string, int>()
-						});
-						UpdateScore(characterDialogue);
-						foreach (var chatScore in _chatScoreHistory.Last().Scores)
-						{
-							if (_feedbackScores.ContainsKey(chatScore.Key))
-							{
-								_feedbackScores[chatScore.Key] = chatScore.Value;
-							}
-							else
-							{
-								_feedbackScores.Add(chatScore.Key, chatScore.Value);
-							}
-						}
-					}
-					_events.Add((Name) string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
+					UpdateFeedbackScores(characterDialogue, "Client");
+					_events.Add((Name)string.Format("Event(Property-Change,{0},DialogueState(Player),{1})", CurrentCharacter.CharacterName, nextState));
 					UpdateCurrentState();
 					PlayDialogueAudio(characterDialogue.FileName);
 					GetCharacterDialogueSuccessEvent?.Invoke(Localization.GetAndFormat(characterDialogue.FileName, false, ScenarioCode));
 				}
 			}
 		}
-		
+
 		GetCharacterStrongestEmotion();
+	}
+
+	private void UpdateFeedbackScores(DialogueStateActionDTO reply, string agent)
+	{
+		var chat = new ChatObject
+		{
+			Utterence = Localization.GetAndFormat(reply.FileName, false, ScenarioCode),
+			Agent = agent,
+			CurrentState = reply.CurrentState,
+			NextState = reply.NextState,
+			FileName = reply.FileName,
+			UtteranceId = reply.UtteranceId,
+			DialogueId = reply.Id
+		};
+		if (CurrentScenario.Prefix != "Questionnaire")
+		{
+			_chatScoreHistory.Add(new ChatScoreObject
+			{
+				ChatObject = chat,
+				Scores = new Dictionary<string, int>()
+			});
+
+			UpdateScore(reply);
+			foreach (var chatScore in _chatScoreHistory.Last().Scores)
+			{
+				if (_feedbackScores.ContainsKey(chatScore.Key))
+				{
+					_feedbackScores[chatScore.Key] = chatScore.Value;
+				}
+				else
+				{
+					_feedbackScores.Add(chatScore.Key, chatScore.Value);
+				}
+			}
+		}
 	}
 
 	private void UpdateCurrentState()
@@ -440,10 +430,7 @@ public class ScenarioController : ICommandAction
 	{
 		if (!string.IsNullOrEmpty(_audioClip?.Name))
 		{
-			if (_audioClip != null)
-			{
-				_audioController.Stop(_audioClip);
-			}
+			_audioController.Stop(_audioClip);
 		}
 
 		if (Resources.Load<AudioClip>(Path.Combine("Audio", CurrentCharacter.BodyName, audioName)))
@@ -456,18 +443,11 @@ public class ScenarioController : ICommandAction
 			if (!string.IsNullOrEmpty(_audioClip.Name))
 			{
 				IsTalking = true;
-
 				_audioController.Play(_audioClip, onComplete: HandleEndAudio);
-			}
-			else
-			{
-				HandleEndAudio();
+				return;
 			}
 		}
-		else
-		{
-			HandleEndAudio();
-		}
+		HandleEndAudio();
 	}
 
 	private void HandleEndAudio()
@@ -487,15 +467,6 @@ public class ScenarioController : ICommandAction
 
 	#endregion
 
-	private readonly List<TrackerContextKey> _scoreMetrics = new List<TrackerContextKey>
-	{
-		TrackerContextKey.Closure,
-		TrackerContextKey.Empathy,
-		TrackerContextKey.Faq,
-		TrackerContextKey.Inquire,
-		TrackerContextKey.Polite
-	};
-
 	#region Scoring
 
 	// Score shown to the player (not the tracker)
@@ -510,6 +481,7 @@ public class ScenarioController : ICommandAction
 				scoreTotal += i;
 			}
 		}
+		// Scores required to get certain star ratings semi-hard coded. If balance is off, change these values
 		var stars = scoreTotal < CurrentScenario.MaxPoints * 0.4f ? 1 : scoreTotal <= CurrentScenario.MaxPoints * 0.8f ? 2 : 3;
 
 		var allScores = GetScoresByKey();
@@ -591,7 +563,7 @@ public class ScenarioController : ICommandAction
 	// extract scores from Meanings and Styles
 	private void HandleKeywords(string s)
 	{
-		char[] delimitedChars = {'(', ')'};
+		char[] delimitedChars = { '(', ')' };
 
 		var result = s.Split(delimitedChars);
 

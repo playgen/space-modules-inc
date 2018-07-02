@@ -91,6 +91,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 		try
 		{
 			var request = (HttpWebRequest)WebRequest.Create(requestSettings.uri);
+			var stream = request.GetRequestStream();
 			request.Method = requestSettings.method;
 			if (requestSettings.requestHeaders.ContainsKey("Accept"))
 			{
@@ -113,7 +114,6 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 				}
 				request.ContentLength = data.Length;
 				request.ServicePoint.Expect100Continue = false;
-				var stream = request.GetRequestStream();
 				stream.Write(data, 0, data.Length);
 				stream.Close();
 			}
@@ -138,7 +138,7 @@ public class AssetManagerBridge : IBridge, ILog, IDataStorage, IWebServiceReques
 				}
 			}
 			result.responseCode = (int)((HttpWebResponse)response).StatusCode;
-			using (var reader = new StreamReader(response.GetResponseStream()))
+			using (var reader = new StreamReader(stream))
 			{
 				result.body = reader.ReadToEnd();
 			}

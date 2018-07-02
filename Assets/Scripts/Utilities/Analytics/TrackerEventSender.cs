@@ -29,7 +29,8 @@ public class TraceEvent
 /// <summary>
 /// Class used to handle events before passing them to the RAGE tracker
 /// </summary>
-public class TrackerEventSender {
+public class TrackerEventSender
+{
 	private static ScenarioController _scenarioController;
 	private static ModulesController.ModuleEntry[] _moduleDatabase;
 
@@ -186,16 +187,19 @@ public class TrackerEventSender {
 				case TrackerEvalautionEvent.UserProfile:
 				case TrackerEvalautionEvent.Gamification:
 				case TrackerEvalautionEvent.Support:
-					valid = (parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKey.Event));
+					valid = parameters.Count == 1 && parameters.Keys.Contains(TrackerEvaluationKey.Event);
 					break;
 				case TrackerEvalautionEvent.GameActivity:
-					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.Event) && parameters.Keys.Contains(TrackerEvaluationKey.GoalOrientation) && parameters.Keys.Contains(TrackerEvaluationKey.Tool));
+					valid = parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.Event) && parameters.Keys.Contains(TrackerEvaluationKey.GoalOrientation) && parameters.Keys.Contains(TrackerEvaluationKey.Tool);
 					break;
 				case TrackerEvalautionEvent.GameFlow:
-					valid = (parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.PieceType) && parameters.Keys.Contains(TrackerEvaluationKey.PieceId) && parameters.Keys.Contains(TrackerEvaluationKey.PieceCompleted));
+					valid = parameters.Count == 3 && parameters.Keys.Contains(TrackerEvaluationKey.PieceType) && parameters.Keys.Contains(TrackerEvaluationKey.PieceId) && parameters.Keys.Contains(TrackerEvaluationKey.PieceCompleted);
 					break;
 				case TrackerEvalautionEvent.AssetActivity:
-					valid = (parameters.Count == 2 && parameters.Keys.Contains(TrackerEvaluationKey.AssetId) && parameters.Keys.Contains(TrackerEvaluationKey.Action));
+					valid = parameters.Count == 2 && parameters.Keys.Contains(TrackerEvaluationKey.AssetId) && parameters.Keys.Contains(TrackerEvaluationKey.Action);
+					break;
+				default:
+					Debug.LogError("Invalid Evaluation Asset data");
 					break;
 			}
 			if (!valid)

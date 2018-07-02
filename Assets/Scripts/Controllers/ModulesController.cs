@@ -51,11 +51,11 @@ public class ModulesController : ICommandAction
 	{
 		var aotFaqList = new List<FaqEntry>();
 		var aotModEntList = new List<ModuleEntry>();
-		Localization.Get("Start");
+		Localization.Initialize();
 
 		_modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
 		_modulesContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View").GetComponent<ScrollRect>().content;
-		
+
 		_moduleItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleItem");
 		_moduleIndexItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleIndexItem");
 		_moduleDescriptionItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleDescriptionItem");
@@ -117,7 +117,6 @@ public class ModulesController : ICommandAction
 		foreach (var module in modules)
 		{
 			var listItem = InstantiateListItem(_moduleItemPrefab);
-
 			listItem.transform.FindText("Text").text = module.Name;
 			listItem.transform.FindText("Id").text = module.Id;
 			listItem.transform.FindImage("Icon").sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
@@ -142,6 +141,7 @@ public class ModulesController : ICommandAction
 		_nextArrow.gameObject.SetActive(true);
 		_backArrow.gameObject.SetActive(true);
 		var currentModuleList = module.Faq;
+		var moduleType = module.Type;
 		var index = 0;
 
 		InstantiateListItem(listItem);
@@ -158,7 +158,7 @@ public class ModulesController : ICommandAction
 			}
 			problemItemText.text = currentModuleList[index].Problem;
 			solutionItemText.text = currentModuleList[index].Solution;
-			SendTrackerEvents("NextModuleFAQ", "ViewNextProblem", module.Type, module.Id);
+			SendTrackerEvents("NextModuleFAQ", "ViewNextProblem", moduleType, module.Id);
 		});
 
 		_backArrow.onClick.AddListener(() =>
@@ -170,12 +170,12 @@ public class ModulesController : ICommandAction
 			}
 			problemItemText.text = currentModuleList[index].Problem;
 			solutionItemText.text = currentModuleList[index].Solution;
-			SendTrackerEvents("PreviousModuleFAQ", "ViewPreviousProblem", module.Type, module.Id);
+			SendTrackerEvents("PreviousModuleFAQ", "ViewPreviousProblem", moduleType, module.Id);
 		});
 
 		_backButton.onClick.AddListener(() =>
 		{
-			LoadModules(module.Type);
+			LoadModules(moduleType);
 			SendTrackerEvents("BackToModuleDeviceTypes", "BackToModuleList");
 		});
 	}
@@ -229,7 +229,7 @@ public class ModulesController : ICommandAction
 		}
 	}
 
-	private void SendTrackerEvents(string eventKey, string evaluationEventKey, string moduleType = "", string moduleId = "")
+	private static void SendTrackerEvents(string eventKey, string evaluationEventKey, string moduleType = "", string moduleId = "")
 	{
 		var eventValues = new Dictionary<string, string>();
 		if (!string.IsNullOrEmpty(moduleType))

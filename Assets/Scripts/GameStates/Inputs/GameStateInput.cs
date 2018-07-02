@@ -58,15 +58,7 @@ public class GameStateInput : TickStateInput
 	protected override void OnEnter()
 	{
 		CommandQueue.AddCommand(new CloseModulesCommand());
-		var anim = _feedbackPanel.GetComponent<Animation>();
-		anim.Stop();
-		anim[anim.clip.name].time = 0f;
-		_feedbackPanel.GetComponent<CanvasGroup>().alpha = 0f;
-
-		foreach (var element in _feedbackElements)
-		{
-			UnityEngine.Object.Destroy(element.gameObject);
-		}
+		ResetFeedbackAnim();
 
 		_scenarioController.GetPlayerDialogueSuccessEvent += UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent += UpdateCharacterDialogue;
@@ -122,16 +114,7 @@ public class GameStateInput : TickStateInput
 
 	public void UpdateFeedbackForChoice(Dictionary<string, int> feedback, ScenarioController.FeedbackMode feedbackMode)
 	{
-		// Make sure the anim plays from the beginning
-		var anim = _feedbackPanel.GetComponent<Animation>();
-		anim.Stop();
-		anim[anim.clip.name].time = 0f;
-		_feedbackPanel.GetComponent<CanvasGroup>().alpha = 0f;
-
-		foreach (var element in _feedbackElements)
-		{
-			UnityEngine.Object.Destroy(element.gameObject);
-		}
+		ResetFeedbackAnim();
 
 		if (feedback.Count > 0 && feedbackMode >= ScenarioController.FeedbackMode.InGame)
 		{
@@ -149,7 +132,21 @@ public class GameStateInput : TickStateInput
 			}
 
 			_feedbackPanel.BestFit();
-			anim.Play();
+			_feedbackPanel.GetComponent<Animation>().Play();
+		}
+	}
+
+	private void ResetFeedbackAnim()
+	{
+		// Make sure the anim plays from the beginning
+		var anim = _feedbackPanel.GetComponent<Animation>();
+		anim.Stop();
+		anim[anim.clip.name].time = 0f;
+		_feedbackPanel.GetComponent<CanvasGroup>().alpha = 0f;
+
+		foreach (var element in _feedbackElements)
+		{
+			UnityEngine.Object.Destroy(element.gameObject);
 		}
 	}
 
@@ -168,7 +165,7 @@ public class GameStateInput : TickStateInput
 		var randomDialogueActions = dialogueActions.OrderBy(dto => rnd.Next()).ToArray();
 		var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab, _dialoguePanel, false);
 		var contentTotalHeight = 0f;
-		
+
 		for (var i = 0; i < randomDialogueActions.Length; i++)
 		{
 			var dialogueAction = randomDialogueActions[i];
