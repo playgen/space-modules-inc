@@ -103,11 +103,11 @@ public class ScenarioController : ICommandAction
 		/// <summary>
 		/// Feedback only at the end of game
 		/// </summary>
-		Minimal = 0, 
+		EndGame = 0, 
 		/// <summary>
 		/// Feedback at the end of game and broken down in the chat history
 		/// </summary>
-		EndGame, 
+		InReview, 
 		/// <summary>
 		/// Feedback at the end of game, in chat history and during the game
 		/// </summary>
@@ -178,7 +178,7 @@ public class ScenarioController : ICommandAction
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
 		int parseFeedback;
-		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.Minimal : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.Minimal);
+		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.EndGame : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
 		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
 		// Boolean for checking if the post game questionnaire is opened after the round
 		bool parseInGameQ;
