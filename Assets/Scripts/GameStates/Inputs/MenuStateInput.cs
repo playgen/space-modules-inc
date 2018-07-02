@@ -13,22 +13,25 @@ using UnityEngine;
 public class MenuStateInput : TickStateInput
 {
 	private readonly string _panelRoute = "MenuContainer/MenuPanelContainer";
+	private readonly ScenarioController _scenarioController;
+
+	private const string PilotTitle = "PILOT_MODE_TITLE";
+	private const string PilotDescription = "PILOT_MODE_DESCRIPTION";
+	private const string LockedTitle = "GAME_LOCK_TITLE";
+	private const string LockedDescription = "GAME_LOCK_TEXT";
+	private const string ExpiredTitle = "PILOT_MODE_EXPIRED_TITLE";
+	private const string ExpiredDescription = "PILOT_MODE_EXPIRED_DESCRIPTION";
 
 	public event Action SettingsClickedEvent;
 	public event Action PlayClickedEvent;
+
+	private GameObject _panel;
+	private GameObject _background;
 	private Button _playButton;
 	private GameObject _menuPanel;
 	private GameObject _quitPanel;
-	private GameObject _pilotModePanel;
-	private GameObject _gameLockedPanel;
+	private GameObject _messagePanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
-	private readonly ScenarioController _scenarioController;
-
-	private const string LockedTitle = "GAME_LOCK_TITLE";
-	private const string LockedDescription = "GAME_LOCK_TEXT";
-
-	private const string ExpiredTitle = "PILOT_MODE_EXPIRED_TITLE";
-	private const string ExpiredDescription = "PILOT_MODE_EXPIRED_DESCRIPTION";
 
 	public MenuStateInput(ScenarioController scenarioController)
 	{
@@ -48,16 +51,17 @@ public class MenuStateInput : TickStateInput
 			SUGARManager.Evaluation.DisplayAchievementList();
 			SendTrackerEvent("ViewAchievements");
 		});
+		_panel = GameObjectUtilities.FindGameObject(_panelRoute);
+		_background = GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage");
 		_playButton = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel/PlayButton").GetComponent<Button>();
 		_menuPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel");
 		_quitPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuitPanel");
-		_pilotModePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/PilotModePanel");
-		_gameLockedPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/GameLockedPanel");
+		_messagePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/MessagePanel");
 
-		_pilotModePanel.SetActive(false);
+		_messagePanel.SetActive(false);
 		_playButton.onClick.AddListener(() => PlayClickedEvent?.Invoke());
-		_quitPanel.transform.Find("YesButton").GetComponent<Button>().onClick.AddListener(Application.Quit);
-		_quitPanel.transform.Find("NoButton").GetComponent<Button>().onClick.AddListener(() => OnQuitAttempt(true));
+		_quitPanel.transform.FindButton("YesButton").onClick.AddListener(Application.Quit);
+		_quitPanel.transform.FindButton("NoButton").onClick.AddListener(() => OnQuitAttempt(true));
 	}
 
 	protected override void OnEnter()
@@ -69,10 +73,10 @@ public class MenuStateInput : TickStateInput
 			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
 		OnQuitAttempt(true);
-		GameObjectUtilities.FindGameObject(_panelRoute + "/MenuPanel").BestFit();
+		_menuPanel.BestFit();
 
-		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(true);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
+		_panel.SetActive(true);
+		_background.SetActive(true);
 
 		if (_startTimeGap == TimeSpan.MinValue && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
 		{
@@ -90,8 +94,7 @@ public class MenuStateInput : TickStateInput
 		{
 			if (_startTimeGap == TimeSpan.MinValue)
 			{
-				if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") ||
-														 !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
+				if (SUGARManager.CurrentUser != null && (CommandLineUtility.CustomArgs.ContainsKey("forcelaunch") || !CommandLineUtility.CustomArgs.ContainsKey("feedback")))
 				{
 					_startTimeGap = DateTimeOffset.Now.Subtract(DateTimeOffset.Now.AddSeconds(-10));
 				}
@@ -99,8 +102,7 @@ public class MenuStateInput : TickStateInput
 				{
 					string dateTimeArg;
 					DateTimeOffset launchTime;
-					if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) ||
-						!DateTimeOffset.TryParse(dateTimeArg, out launchTime))
+					if (SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.TryGetValue("tstamp", out dateTimeArg) || !DateTimeOffset.TryParse(dateTimeArg, out launchTime))
 					{
 						gameLocked = true;
 						_startTimeGap = TimeSpan.MaxValue;
@@ -122,19 +124,16 @@ public class MenuStateInput : TickStateInput
 		// for iOS build, we cannot simply lock the game, see: Guideline 4.2.3 https://developer.apple.com/app-store/review/guidelines/#minimum-functionality
 		_playButton.interactable = !gameLocked;
 
-		_pilotModePanel.SetActive(isPilot && !gameLocked);
-		_gameLockedPanel.SetActive(gameLocked);
+		_messagePanel.SetActive(isPilot);
 
-		_gameLockedPanel.transform.FindText("TitleText").text = lockedTitleText;
-		_gameLockedPanel.transform.FindText("DescriptionText").text = lockedDescriptionText;
-
-
+		_messagePanel.transform.FindText("TitleText").text = gameLocked ? lockedTitleText : Localization.Get(PilotTitle);
+		_messagePanel.transform.FindText("DescriptionText").text = gameLocked ? lockedDescriptionText : Localization.Get(PilotDescription);
 	}
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject(_panelRoute + "").SetActive(false);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
+		_panel.SetActive(false);
+		_background.SetActive(false);
 	}
 
 	protected override void OnTick(float deltaTime)

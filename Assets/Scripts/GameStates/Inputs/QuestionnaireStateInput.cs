@@ -4,6 +4,8 @@ using GameWork.Core.States.Tick.Input;
 
 using IntegratedAuthoringTool.DTOs;
 
+using PlayGen.Unity.Utilities.Extensions;
+
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Localization;
@@ -13,30 +15,36 @@ using UnityEngine;
 public class QuestionnaireStateInput : TickStateInput
 {
 	private readonly string _panelRoute = "QuestionnaireContainer/QuestionnairePanelContainer";
-
 	private readonly ScenarioController _scenarioController;
+
+	public event Action FinishClickedEvent;
+
+	private GameObject _panel;
+	private GameObject _background;
+	private GameObject _characterPrefab;
+	private Transform _characterPanel;
+	private RectTransform _characterObject;
+	private GameObject _choiceItemPrefab;
+	private GameObject _listChoicePrefab;
+	private Transform _dialoguePanel;
+	private Text _questionText;
 
 	public QuestionnaireStateInput(ScenarioController scenarioController)
 	{
 		_scenarioController = scenarioController;
 	}
 
-	public event Action FinishClickedEvent;
-
-	private GameObject _characterPrefab;
-	private GameObject _characterPanel;
-	private GameObject _characterObject;
-	private GameObject _listChoicePrefab;
-	private GameObject _dialoguePanel;
-	private Text _questionText;
-
 	protected override void OnInitialize()
 	{
-		_characterPrefab = Resources.Load("Prefabs/Characters/Generic") as GameObject;
-		_characterPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/CharacterPanel");
+		_panel = GameObjectUtilities.FindGameObject(_panelRoute);
+		_background = GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage");
 
-		_listChoicePrefab = Resources.Load("Prefabs/ListChoiceGroup") as GameObject;
-		_dialoguePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuestionnaireUI/QuestionPanel/AnswerPanel");
+		_characterPrefab = Resources.Load<GameObject>("Prefabs/Characters/Generic");
+		_characterPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/CharacterPanel").transform;
+
+		_choiceItemPrefab = Resources.Load<GameObject>("Prefabs/DialogueItemScroll");
+		_listChoicePrefab = Resources.Load<GameObject>("Prefabs/ListChoiceGroup");
+		_dialoguePanel = GameObjectUtilities.FindGameObject(_panelRoute + "/QuestionnaireUI/QuestionPanel/AnswerPanel").transform;
 
 		_questionText = GameObjectUtilities.FindGameObject(_panelRoute + "/QuestionnaireUI/QuestionPanel/QuestionHolder/Question").GetComponent<Text>();
 	}
@@ -53,19 +61,19 @@ public class QuestionnaireStateInput : TickStateInput
 			{ TrackerEvaluationKey.PieceId, "0" },
 			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(true);
+		_panel.SetActive(true);
+		_background.SetActive(true);
 		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
 		CommandQueue.AddCommand(new RefreshCharacterResponseCommand());
-		_questionText.GetComponent<Text>().text = string.Empty;
+		_questionText.text = string.Empty;
 		ShowCharacter();
 	}
 
 	protected override void OnExit()
 	{
-		UnityEngine.Object.Destroy(_characterObject);
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/GameBackgroundImage").SetActive(false);
+		UnityEngine.Object.Destroy(_characterObject.gameObject);
+		_panel.SetActive(false);
+		_background.SetActive(false);
 
 		_scenarioController.GetPlayerDialogueSuccessEvent -= UpdatePlayerDialogue;
 		_scenarioController.GetCharacterDialogueSuccessEvent -= UpdateCharacterDialogue;
@@ -74,39 +82,35 @@ public class QuestionnaireStateInput : TickStateInput
 
 	public void ShowCharacter()
 	{
-		_characterObject = UnityEngine.Object.Instantiate(_characterPrefab);
-
-		_characterObject.transform.SetParent(_characterPanel.transform, false);
-		_characterObject.GetComponent<RectTransform>().offsetMax = Vector2.one;
-		_characterObject.GetComponent<RectTransform>().offsetMin = Vector2.zero;
+		_characterObject = UnityEngine.Object.Instantiate(_characterPrefab, _characterPanel, false).RectTransform();
+		_characterObject.offsetMax = Vector2.one;
+		_characterObject.offsetMin = Vector2.zero;
 	}
 
 	public void UpdatePlayerDialogue(DialogueStateActionDTO[] dialogueActions)
 	{
-		foreach (Transform child in _dialoguePanel.transform)
+		foreach (Transform child in _dialoguePanel)
 		{
 			UnityEngine.Object.Destroy(child.gameObject);
 		}
+		//skip dialogue where the player is only presented with one option
 		if (dialogueActions.Length == 1)
 		{
 			CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueActions[0].Id));
 		}
 		else
 		{
-			var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab);
+			var dialogueObject = UnityEngine.Object.Instantiate(_listChoicePrefab, _dialoguePanel, false);
 			var scrollRect = dialogueObject.GetComponent<ScrollRect>();
-			var choiceItemPrefab = Resources.Load("Prefabs/DialogueItemScroll") as GameObject;
 			var contentTotalHeight = 0f;
-			dialogueObject.transform.SetParent(_dialoguePanel.transform, false);
 			for (var i = 0; i < dialogueActions.Length; i++)
 			{
 				var dialogueAction = dialogueActions[i];
-				var choiceItem = UnityEngine.Object.Instantiate(choiceItemPrefab);
-				choiceItem.transform.GetChild(0).GetComponent<Text>().text = Localization.GetAndFormat(dialogueAction.FileName, false, _scenarioController.ScenarioCode);
-				contentTotalHeight += choiceItem.GetComponent<RectTransform>().rect.height;
-				choiceItem.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
+				var choiceItem = UnityEngine.Object.Instantiate(_choiceItemPrefab, scrollRect.content, false);
+				choiceItem.GetComponentInChildren<Text>().text = Localization.GetAndFormat(dialogueAction.FileName, false, _scenarioController.ScenarioCode);
+				contentTotalHeight += choiceItem.RectTransform().rect.height;
+				choiceItem.RectTransform().anchoredPosition = new Vector2(0, -i * choiceItem.GetComponent<RectTransform>().rect.height);
 				choiceItem.GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new SetPlayerActionCommand(dialogueAction.Id)));
-				choiceItem.transform.SetParent(scrollRect.content, false);
 			}
 			scrollRect.content.sizeDelta = new Vector2(0, contentTotalHeight);
 			dialogueObject.GetComponent<ScrollRect>().content.BestFit();
@@ -115,7 +119,7 @@ public class QuestionnaireStateInput : TickStateInput
 
 	public void UpdateCharacterDialogue(string text)
 	{
-		_questionText.GetComponent<Text>().text = text;
+		_questionText.text = text;
 		CommandQueue.AddCommand(new RefreshPlayerDialogueCommand());
 	}
 

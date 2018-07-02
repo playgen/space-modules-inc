@@ -6,20 +6,19 @@ using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Settings;
 using PlayGen.Unity.Utilities.Localization;
 using PlayGen.SUGAR.Unity;
-
-using Object = UnityEngine.Object;
+using PlayGen.Unity.Utilities.Extensions;
 
 public class SettingsStateInput : TickStateInput
 {
+	private readonly ScenarioController _scenarioController;
 	private readonly string _panelRoute = "SettingsContainer/SettingsPanelContainer";
 
 	public event Action BackClickedEvent;
 
-	private GameObject _settingsPanel;
+	private GameObject _panel;
+	private GameObject _background;
 	private SettingCreation _creator;
 	private GameObject _feedbackMode;
-
-	private readonly ScenarioController _scenarioController;
 
 	public SettingsStateInput(ScenarioController scenarioController)
 	{
@@ -28,15 +27,16 @@ public class SettingsStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
-		_settingsPanel = GameObjectUtilities.FindGameObject(_panelRoute + "/SettingsPanel");
-		_creator = _settingsPanel.GetComponentInChildren<SettingCreation>();
+		_panel = GameObjectUtilities.FindGameObject(_panelRoute);
+		_background = GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage");
+		_creator = GameObjectUtilities.FindGameObject(_panelRoute + "/SettingsPanel").GetComponentInChildren<SettingCreation>();
 		_creator.Wipe();
 		Dropdown feedback;
 		_creator.TryForPlatform("FEEDBACK_MODE", true, out feedback, true, false);
 		feedback.GetComponent<DropdownLocalization>().SetOptions(new List<string> { "FEEDBACK_" + ScenarioController.FeedbackMode.Minimal, "FEEDBACK_" + ScenarioController.FeedbackMode.EndGame, "FEEDBACK_" + ScenarioController.FeedbackMode.InGame });
 		feedback.value = PlayerPrefs.GetInt("Feedback", (int)ScenarioController.FeedbackMode.Minimal);
 		feedback.onValueChanged.AddListener(OnFeedbackChange);
-		_feedbackMode = feedback.transform.parent.gameObject;
+		_feedbackMode = feedback.Parent();
 		Dropdown language;
 		_creator.TryLanguageForPlatform(out language, true, false);
 		language.onValueChanged.AddListener(OnLanguageChange);
@@ -71,20 +71,16 @@ public class SettingsStateInput : TickStateInput
 			{ TrackerEvaluationKey.PieceCompleted, "success" }
 		});
 
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
-
-		if (_feedbackMode && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback"))
-		{
-			Object.Destroy(_feedbackMode);
-		}
+		_panel.SetActive(true);
+		_background.SetActive(true);
+		_feedbackMode.SetActive(!_feedbackMode || SUGARManager.CurrentUser == null || !CommandLineUtility.CustomArgs.ContainsKey("feedback"));
 		_creator.RebuildLayout();
 	}
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
+		_panel.SetActive(false);
+		_background.SetActive(false);
 	}
 
 	protected override void OnTick(float deltaTime)

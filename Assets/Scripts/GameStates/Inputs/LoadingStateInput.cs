@@ -10,19 +10,16 @@ public class LoadingStateInput : TickStateInput
 	private float _timeSinceStart;
 	private float _signInTriggerTime;
 
+	private GameObject _splash;
+
 	protected override void OnInitialize()
 	{
-		var backgrounds = GameObjectUtilities.FindGameObject("BackgroundContainer");
-		var aspect = Camera.main.aspect;
-		var backgroundSize = (3f / 4f) / aspect;
-		backgroundSize = backgroundSize < 1 ? 1 : backgroundSize;
-		((RectTransform) backgrounds.transform).anchorMin = new Vector2((1 - backgroundSize) * 0.5f, 0);
-		((RectTransform) backgrounds.transform).anchorMax = new Vector2(((backgroundSize - 1) * 0.5f) + 1, 1);
+		_splash = GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer");
 	}
 
 	protected override void OnEnter()
 	{
-		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(true);
+		_splash.SetActive(true);
 		_timeSinceStart = 0;
 		SUGARManager.Unity.StartSpinner();
 		if (Application.platform == RuntimePlatform.IPhonePlayer)
@@ -66,6 +63,6 @@ public class LoadingStateInput : TickStateInput
 
 	protected override void OnExit()
 	{
-		GameObjectUtilities.FindGameObject("SplashContainer/SplashPanelContainer").SetActive(false);
+		_splash.SetActive(false);
 	}
 }

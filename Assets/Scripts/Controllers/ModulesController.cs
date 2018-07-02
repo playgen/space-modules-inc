@@ -3,6 +3,9 @@ using System.IO;
 using System.Linq;
 using GameWork.Core.Commands.Interfaces;
 using Newtonsoft.Json;
+
+using PlayGen.Unity.Utilities.Extensions;
+
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
@@ -53,9 +56,9 @@ public class ModulesController : ICommandAction
 		_modulesPopup = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup");
 		_modulesContent = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/Scroll View").GetComponent<ScrollRect>().content;
 		
-		_moduleItemPrefab = Resources.Load("Prefabs/ModuleItem") as GameObject;
-		_moduleIndexItemPrefab = Resources.Load("Prefabs/ModuleIndexItem") as GameObject;
-		_moduleDescriptionItemPrefab = Resources.Load("Prefabs/ModuleDescriptionItem") as GameObject;
+		_moduleItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleItem");
+		_moduleIndexItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleIndexItem");
+		_moduleDescriptionItemPrefab = Resources.Load<GameObject>("Prefabs/ModuleDescriptionItem");
 		_moduleIcons = Resources.LoadAll<Sprite>("Sprites/Modules/Icons");
 
 		_backButton = GameObjectUtilities.FindGameObject("GameContainer/GamePanelContainer/ModulesContainer/ModulesPopup/BackButton").GetComponent<Button>();
@@ -88,8 +91,8 @@ public class ModulesController : ICommandAction
 		{
 			var listItem = InstantiateListItem(_moduleIndexItemPrefab);
 			var iconId = _modulesDatabase[Localization.SelectedLanguage.Name].FirstOrDefault(entry => entry.Type.Equals(moduleType)).Icon;
-			listItem.transform.Find("Text").GetComponent<Text>().text = moduleType;
-			listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
+			listItem.transform.FindText("Text").text = moduleType;
+			listItem.transform.FindImage("Icon").sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(iconId));
 			listItem.GetComponent<Button>().onClick.AddListener(() =>
 			{
 				LoadModules(moduleType);
@@ -115,9 +118,9 @@ public class ModulesController : ICommandAction
 		{
 			var listItem = InstantiateListItem(_moduleItemPrefab);
 
-			listItem.transform.Find("Text").GetComponent<Text>().text = module.Name;
-			listItem.transform.Find("Id").GetComponent<Text>().text = module.Id;
-			listItem.transform.Find("Icon").GetComponent<Image>().sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
+			listItem.transform.FindText("Text").text = module.Name;
+			listItem.transform.FindText("Id").text = module.Id;
+			listItem.transform.FindImage("Icon").sprite = _moduleIcons.FirstOrDefault(sprite => sprite.name.Equals(module.Icon));
 			listItem.GetComponent<Button>().onClick.AddListener(() =>
 			{
 				LoadModule(module, listItem);
@@ -193,8 +196,7 @@ public class ModulesController : ICommandAction
 
 	private GameObject InstantiateListItem(GameObject prefab)
 	{
-		var listItem = Object.Instantiate(prefab);
-		listItem.transform.SetParent(_modulesContent, false);
+		var listItem = Object.Instantiate(prefab, _modulesContent, false);
 		foreach (var com in listItem.GetComponentsInChildren<Behaviour>())
 		{
 			com.enabled = true;
@@ -205,10 +207,11 @@ public class ModulesController : ICommandAction
 	private Text InstantiateTextItem(string titleKey, string description)
 	{
 		var textItem = InstantiateListItem(_moduleDescriptionItemPrefab);
-		textItem.transform.Find("Title").GetComponent<Text>().text = Localization.Get(titleKey, true);
-		textItem.transform.GetChild(2).GetComponent<Text>().text = description;
+		textItem.transform.FindText("Title").text = Localization.Get(titleKey, true);
+		var descriptionText = textItem.transform.FindText("Text");
+		descriptionText.text = description;
 		textItem.GetComponent<ContentSizeFitterHelper>().Action = Rebuild;
-		return textItem.transform.GetChild(2).GetComponent<Text>();
+		return descriptionText;
 	}
 
 	public void TogglePopup()
@@ -221,7 +224,7 @@ public class ModulesController : ICommandAction
 		{
 			SendTrackerEvents("ModuleList", "ViewModules");
 			_modulesPopup.SetActive(true);
-			_modulesPopup.transform.parent.GetComponent<Image>().enabled = true;
+			_modulesPopup.Parent().GetComponent<Image>().enabled = true;
 			LoadIndex();
 		}
 	}
@@ -252,7 +255,7 @@ public class ModulesController : ICommandAction
 	{
 		_nextArrow.gameObject.SetActive(false);
 		_backArrow.gameObject.SetActive(false);
-		_modulesPopup.transform.parent.GetComponent<Image>().enabled = false;
+		_modulesPopup.Parent().GetComponent<Image>().enabled = false;
 		_modulesPopup.SetActive(false);
 	}
 }

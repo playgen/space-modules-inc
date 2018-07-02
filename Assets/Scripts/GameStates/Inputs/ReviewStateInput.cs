@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GameWork.Core.States.Tick.Input;
 
+using PlayGen.Unity.Utilities.Extensions;
 using PlayGen.Unity.Utilities.Text;
 using PlayGen.Unity.Utilities.Localization;
 using UnityEngine;
@@ -10,15 +11,17 @@ using UnityEngine.UI;
 public class ReviewStateInput : TickStateInput
 {
 	private readonly string _panelRoute = "ReviewContainer/ReviewPanelContainer";
+	private readonly ScenarioController _scenarioController;
 
 	public event Action NextClickedEvent;
 
+	private GameObject _panel;
+	private GameObject _background;
 	private Image _characterMood;
-	private GameObject _reviewContent;
+	private ScrollRect _reviewContent;
 	private GameObject _clientChatPrefab;
 	private GameObject _playerChatPrefab;
 	private GameObject _feedbackPrefab;
-	private readonly ScenarioController _scenarioController;
 
 	public ReviewStateInput(ScenarioController scenarioController)
 	{
@@ -27,11 +30,14 @@ public class ReviewStateInput : TickStateInput
 
 	protected override void OnInitialize()
 	{
+		_panel = GameObjectUtilities.FindGameObject(_panelRoute);
+		_background = GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage");
+
 		_characterMood = GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/StatusBar/MoodPanel/FillBar").GetComponent<Image>();
-		_reviewContent = GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/Scroll View");
-		_clientChatPrefab = Resources.Load("Prefabs/ClientChatFeedbackItem") as GameObject;
-		_playerChatPrefab = Resources.Load("Prefabs/PlayerChatFeedbackItem") as GameObject;
-		_feedbackPrefab = Resources.Load("Prefabs/FeedbackElement") as GameObject;
+		_reviewContent = GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/Scroll View").GetComponent<ScrollRect>();
+		_clientChatPrefab = Resources.Load<GameObject>("Prefabs/ClientChatFeedbackItem");
+		_playerChatPrefab = Resources.Load<GameObject>("Prefabs/PlayerChatFeedbackItem");
+		_feedbackPrefab = Resources.Load<GameObject>("Prefabs/FeedbackElement");
 
 		GameObjectUtilities.FindGameObject(_panelRoute + "/ReviewPanel/NextButton").GetComponent<Button>().onClick.AddListener(() => NextClickedEvent?.Invoke());
 	}
@@ -46,25 +52,25 @@ public class ReviewStateInput : TickStateInput
 		});
 		_scenarioController.GetReviewDataSuccessEvent += BuildReviewData;
 		CommandQueue.AddCommand(new GetReviewDataCommand());
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(true);
+		_panel.SetActive(true);
+		_background.SetActive(true);
 	}
 
 	protected override void OnExit()
 	{
 		_scenarioController.GetReviewDataSuccessEvent -= BuildReviewData;
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/CallBackgroundImage").SetActive(false);
+		_panel.SetActive(false);
+		_background.SetActive(false);
 	}
 
 	public void BuildReviewData(List<ScenarioController.ChatScoreObject> history, float mood, ScenarioController.FeedbackMode feedbackMode)
 	{
-		_reviewContent.GetComponent<ScrollRect>().verticalScrollbar.value = 1;
+		_reviewContent.verticalScrollbar.value = 1;
 		_characterMood.fillAmount = (mood + 10) / 20;
-        foreach (RectTransform child in _reviewContent.GetComponent<ScrollRect>().content)
-        {
-            UnityEngine.Object.Destroy(child.gameObject);
-        }
+		foreach (RectTransform child in _reviewContent.content)
+		{
+			UnityEngine.Object.Destroy(child.gameObject);
+		}
 
 		var scores = new List<GameObject>();
 
@@ -85,15 +91,15 @@ public class ReviewStateInput : TickStateInput
 					}
 				}
 			}
-			var chatObject = UnityEngine.Object.Instantiate(entryKey == "Client" ? _clientChatPrefab : _playerChatPrefab, _reviewContent.GetComponent<ScrollRect>().content, false);
-            chatObject.transform.Find("Panel").GetChild(0).GetComponent<Text>().text = history[i].ChatObject.Utterence;
-            if (entryKey == "Player" && (int)feedbackMode >= 1 && history[i] != null && history[i].Scores.Count > 0)
+			var chatObject = UnityEngine.Object.Instantiate(entryKey == "Client" ? _clientChatPrefab : _playerChatPrefab, _reviewContent.content, false);
+			chatObject.transform.Find("Panel/BubbleText").GetComponent<Text>().text = history[i].ChatObject.Utterence;
+			if (entryKey == "Player" && feedbackMode >= ScenarioController.FeedbackMode.EndGame && history[i] != null && history[i].Scores.Count > 0)
 			{
-                var feedbackPanel = chatObject.transform.Find("FeedbackPanel").transform;
+				var feedbackPanel = chatObject.transform.Find("FeedbackPanel");
 				var scoreWidth = 0f;
-                foreach (var feedbackScore in history[i].Scores)
-                {
-					if (feedbackPanel.GetComponent<LayoutGroup>().minWidth + scoreWidth > _reviewContent.GetComponent<ScrollRect>().content.rect.width)
+				foreach (var feedbackScore in history[i].Scores)
+				{
+					if (feedbackPanel.GetComponent<LayoutGroup>().minWidth + scoreWidth > _reviewContent.content.rect.width)
 					{
 						var newFeedbackPanel = UnityEngine.Object.Instantiate(feedbackPanel, chatObject.transform, false);
 						foreach (RectTransform child in newFeedbackPanel)
@@ -102,14 +108,14 @@ public class ReviewStateInput : TickStateInput
 						}
 						feedbackPanel = newFeedbackPanel;
 					}
-                    var score = UnityEngine.Object.Instantiate(_feedbackPrefab, feedbackPanel, false);
-                    score.transform.Find("Title").GetComponent<Text>().text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
-                    score.transform.Find("Value").GetComponent<Text>().text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
+					var score = UnityEngine.Object.Instantiate(_feedbackPrefab, feedbackPanel, false);
+					score.transform.FindText("Title").text = Localization.Get("POINTS_" + feedbackScore.Key.ToUpper());
+					score.transform.FindText("Value").text = feedbackScore.Value > 0 ? "+" + feedbackScore.Value : feedbackScore.Value.ToString();
 					scores.Add(score);
 					score.BestFit();
-					scoreWidth = ((RectTransform)score.transform).rect.width;
+					scoreWidth = score.RectTransform().rect.width;
 				}
-            }
+			}
 		}
 		scores.BestFit();
 	}

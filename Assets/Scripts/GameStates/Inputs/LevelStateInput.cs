@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using GameWork.Core.States.Tick.Input;
+
+using PlayGen.Unity.Utilities.Extensions;
+
 using UnityEngine;
 using UnityEngine.UI;
 using PlayGen.Unity.Utilities.Localization;
@@ -7,14 +12,16 @@ using PlayGen.Unity.Utilities.Localization;
 public class LevelStateInput : TickStateInput
 {
 	private readonly string _panelRoute = "LevelContainer/LevelPanelContainer";
+	private readonly ScenarioController _scenarioController;
 
 	public event Action BackClickedEvent;
 	public event Action LoadLevelEvent;
 
-	private GameObject _gridLayout;
+	private GameObject _panel;
+	private GameObject _background;
+	private GridLayoutGroup _gridLayout;
 	private GameObject _itemPrefab;
 
-	private readonly ScenarioController _scenarioController;
 	private int _columns;
 
 	public LevelStateInput(ScenarioController scenarioController)
@@ -22,22 +29,29 @@ public class LevelStateInput : TickStateInput
 		_scenarioController = scenarioController;
 	}
 
-	protected override void OnEnter()
-	{
-		//Tracker.T.Accessible.Accessed("LevelState");
-		_scenarioController.RefreshSuccessEvent += UpdateLevelList;
-		_scenarioController.SetLevelSuccessEvent += LevelLoaded;
-		_gridLayout = GameObjectUtilities.FindGameObject(_panelRoute + "/LevelPanel/Scroll View/Viewport/Content/GridLayout");
-		ConfigureGridSize(3);
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(true);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(true);
-		CommandQueue.AddCommand(new RefreshLevelDataCommand());
-	}
-
 	protected override void OnInitialize()
 	{
-		_itemPrefab = Resources.Load("Prefabs/LevelItem") as GameObject;
+		_panel = GameObjectUtilities.FindGameObject(_panelRoute);
+		_background = GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage");
+		_itemPrefab = Resources.Load<GameObject>("Prefabs/LevelItem");
+		_gridLayout = GameObjectUtilities.FindGameObject(_panelRoute + "/LevelPanel/Scroll View/Viewport/Content/GridLayout").GetComponent<GridLayoutGroup>();
 		GameObjectUtilities.FindGameObject(_panelRoute + "/BackButton").GetComponent<Button>().onClick.AddListener(OnBackClick);
+	}
+
+	protected override void OnEnter()
+	{
+		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameFlow, new Dictionary<TrackerEvaluationKey, string>
+		{
+			{ TrackerEvaluationKey.PieceType, "LevelSelectState" },
+			{ TrackerEvaluationKey.PieceId, "0" },
+			{ TrackerEvaluationKey.PieceCompleted, "success" }
+		});
+		_scenarioController.RefreshSuccessEvent += UpdateLevelList;
+		_scenarioController.SetLevelSuccessEvent += LevelLoaded;
+		ConfigureGridSize(3);
+		_panel.SetActive(true);
+		_background.SetActive(true);
+		CommandQueue.AddCommand(new RefreshLevelDataCommand());
 	}
 
 	protected override void OnExit()
@@ -46,18 +60,13 @@ public class LevelStateInput : TickStateInput
 		_scenarioController.SetLevelSuccessEvent -= LevelLoaded;
 
 		ClearList();
-		GameObjectUtilities.FindGameObject(_panelRoute).SetActive(false);
-		GameObjectUtilities.FindGameObject("BackgroundContainer/MenuBackgroundImage").SetActive(false);
+		_panel.SetActive(false);
+		_background.SetActive(false);
 	}
 
 	private void OnBackClick()
 	{
 		BackClickedEvent?.Invoke();
-	}
-
-	private void LoadLevel(int id)
-	{
-		CommandQueue.AddCommand(new SetLevelCommand(id));
 	}
 
 	/// <summary>
@@ -74,33 +83,28 @@ public class LevelStateInput : TickStateInput
 	private void ClearList()
 	{
 		// Clear List
-		foreach (var cell in _gridLayout.transform)
+		foreach (Transform cell in _gridLayout.transform)
 		{
-			var cellGameObject = cell as Transform;
-			if (cellGameObject != null) UnityEngine.Object.Destroy(cellGameObject.gameObject);
+			UnityEngine.Object.Destroy(cell.gameObject);
 		}
 	}
 
 	/// <summary>
 	/// Iterate through the provided levels and populate the grid layout
 	/// </summary>
-	/// <param name="Levels"></param>
-	public void UpdateLevelList(ScenarioController.LevelObject[] Levels)
+	/// <param name="levels"></param>
+	public void UpdateLevelList(ScenarioController.LevelObject[] levels)
 	{
-		for (var i = 0; i < Levels.Length; i++)
+		for (var i = 0; i < levels.Length; i++)
 		{
-			var levelItem = UnityEngine.Object.Instantiate(_itemPrefab);
-			levelItem.GetComponent<LevelItemBehaviour>().SetupItem(Levels[i].Stars, Localization.GetAndFormat("LINE", true, Levels[i].Id));
-			levelItem.transform.SetParent(_gridLayout.transform, false);
+			var levelItem = UnityEngine.Object.Instantiate(_itemPrefab, _gridLayout.transform, false);
+			levelItem.GetComponent<LevelItemBehaviour>().SetupItem(levels[i].Stars, Localization.GetAndFormat("LINE", true, levels[i].Id));
 			var index = i;
-			levelItem.GetComponent<Button>().onClick.AddListener(delegate
-			{
-				LoadLevel(Levels[index].Id);
-			});
+			levelItem.GetComponent<Button>().onClick.AddListener(() => CommandQueue.AddCommand(new SetLevelCommand(levels[index].Id)));
 		}
-		var contentView = _gridLayout.transform.parent.GetComponent<RectTransform>();
-		var cellHeight = _gridLayout.GetComponent<GridLayoutGroup>().cellSize.y;
-		var rows = (Mathf.Ceil(Levels.Length / (float)_columns));
+		var contentView = _gridLayout.Parent().RectTransform();
+		var cellHeight = _gridLayout.cellSize.y;
+		var rows = Mathf.Ceil(levels.Length / (float)_columns);
 		var contentHieght = cellHeight * rows;
 		contentView.sizeDelta = new Vector2(1f, contentHieght);
 	}
@@ -113,9 +117,16 @@ public class LevelStateInput : TickStateInput
 	private void ConfigureGridSize(int cols)
 	{
 		_columns = cols;
-		var gridRect = _gridLayout.GetComponent<RectTransform>();
+		var gridRect = _gridLayout.RectTransform();
 		var buttonWidth = gridRect.rect.width / cols;
-		var gridLayoutGroup = _gridLayout.GetComponent<GridLayoutGroup>();
-		gridLayoutGroup.cellSize = new Vector2(buttonWidth, buttonWidth);
+		_gridLayout.cellSize = new Vector2(buttonWidth, buttonWidth);
+	}
+
+	protected override void OnTick(float deltaTime)
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			OnBackClick();
+		}
 	}
 }
