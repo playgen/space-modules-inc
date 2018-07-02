@@ -278,7 +278,7 @@ public class ScenarioController : ICommandAction
 	}
 
 	// Gets all the characters in the scenario - might need to be changed to get all the scenario variations
-	public void RefreshCharacterArray()
+	public void RefreshLevelData()
 	{
 		Loading.Start();
 		var levelList = new LevelObject[_scenarios.Length];

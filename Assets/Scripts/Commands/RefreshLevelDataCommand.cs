@@ -4,6 +4,6 @@ public class RefreshLevelDataCommand : ICommand<ScenarioController>
 {
     public void Execute(ScenarioController parameter)
     {
-        parameter.RefreshCharacterArray();
+        parameter.RefreshLevelData();
     }
 }
