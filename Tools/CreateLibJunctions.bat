@@ -54,7 +54,5 @@
  ::::::::::::::::::::::::::::
  REM Run shell as admin (example) - put here code as you like
  mklink /j "..\Assets\GameWork" "..\lib\GameWork"
- mklink /j "..\Assets\SUGAR\bin" "..\lib\SUGAR"
- mklink /j "..\Assets\Editor\ExcelToJsonConverter\bin" "..\lib\ExcelToJsonConverter"
  mklink /j "..\Assets\Plugins\IntegratedAuthoringTool" "..\lib\IntegratedAuthoringTool"
  mklink /j "..\Assets\Plugins\PlayGen Utilities" "..\lib\PlayGenUtilities"
