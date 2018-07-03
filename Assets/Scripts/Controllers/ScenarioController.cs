@@ -217,9 +217,9 @@ public class ScenarioController : ICommandAction
 
 		_feedbackScores.Clear();
 		GetFeedbackEvent?.Invoke(_feedbackScores, FeedbackLevel);
-		if (_scenarios.Any())
+		if (_scenarios.Any(data => data.LevelId.Equals(CurrentLevel)))
 		{
-			CurrentScenario = _scenarios.FirstOrDefault(data => data.LevelId.Equals(CurrentLevel));
+			CurrentScenario = _scenarios.First(data => data.LevelId.Equals(CurrentLevel));
 		}
 		else
 		{

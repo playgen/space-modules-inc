@@ -1,57 +1,67 @@
 # Developer Guide
-Below are more details about getting started with making changes in Space Modules inc.
+Below are more details about getting started when making changes in Space Modules Inc.
 
 ## DeepLinks
-The game is configured to launch from DeepLink urls for both Android and iOS.
+The game is configured to launch from a URL for Android, iOS (both via Deep Links) and PC (via the [Game Launcher](https://gitlab.com/playgen/game-launcher)).
 
-This url is the same as the launcher url except that where the launcher url starts with:  
-`rage://?gameid=SMI`  
-the deeplink url starts with:  
-`rage://SMI?`  
-After that the rest of the argument are the same e.g:  
-`rage://smi?username=SMI_User1&class=Testing&feedback=2&forcelaunch=true&hash=A2AF8BA8AF05A16E0282A0D318EBF4FDF070636C`
+Game Launcher URLs starts with: `rage://?gameid=SMI`  
+Mobile URLs start with: `rage://SMI?`  
+After that all URLs use the same system for passing arguments using key value pairs, such as: `username=SMI_User1&class=Testing&feedback=2&forcelaunch=true&hash=A2AF8BA8AF05A16E0282A0D318EBF4FDF070636C`
 
 ## Unity Game
 ### Key Scene Structure
 - **Background Camera**: This camera is used to draw a blank black background around the portrait-aligned gameplay in PC builds.
-- **Main Camera**
-- **Controller**: contains the ControllerBehaviour script.
-- **EventSystem**
+- **Main Camera**: Camera used by the Canvas, meaning all UI and thus all gameplay is displayed on this camera. ForcePortraitCamera script ensures gameplay aspect ratio is always portrait.
+- **Controller**: Contains the ControllerBehaviour and UnityDeeplinks scripts.
+- **EventSystem**: StandaloneInputModule made as generic as possible to further limit ability to interact with UI using the keyboard.
 - **Canvas**
   - **BackgroundContainer**
   - **SplashContainer**
   - **MenuContainer**
   - **SettingsContainer**
-    - **SettingsPanelContainer/SettingsPanel/Set Settings Panel**: prefab object. Using the SettingCreation script from the PlayGen Settings asset to create the settings menu at run-time.
+    - **SettingsPanelContainer/SettingsPanel/Set Settings Panel**: Prefab object. Using the SettingCreation script from the Settings asset in PlayGen Unity Utilities to create the settings menu at run-time.
   - **LevelContainer**
   - **CallContainer**
   - **GameContainer**
   - **ReviewContainer**
   - **ScoreContainer**
-- **SUGAR**: prefab containing all components relating to SUGAR.
-- **Tracker**: contains the Tracker script for the RAGE Analytics.
+- **SUGAR**: Prefab containing all components relating to SUGAR, including the SUGAR Unity Manager, Response Handler and Unity Clients.
+- **Tracker**: Contains the Tracker script for the RAGE Analytics.
 
 ## Key Classes
-- Behaviours/CharacterFaceController - Manages loading in facial sprites, changes spirtes based on the emotion of the character and animating talking and blinking.
-- Behaviour/ControllerBehaviour - Starts controllers, fixes aspect ratio to be height/width when width is greater than height on PC.
-- Controllers/ModulesController - controls loading and displaying module information.
-- Controllers/ScenarioController - manages loading and selecting scenarios, loading, sending and receiving player and controller dialogue (including triggering audio to play) and calculates the end score of each scenario played.
-- GameStates/Inputs/GameStateInput - handles UI whilst in the ‘Game’ state, including updating character expression and dialogue and triggering various commands.
-- GameStates/GameStateControllerFactory - creates and sets up events for all states within the game.
+- **Behaviours/CharacterFaceController** - Manages changeing sprites based on the strongest emotion of the character and animating their talking and blinking.
+- **Behaviour/ControllerBehaviour** - Creates the controllers for Audio, GameStates, Scenarios and Modules and puts the created GameStateControllerFactory into the initial game state.
+- **Behaviour/ForcePortraitCamera** - Forces cameras with a landscape aspect ratio to instead use the portrait equivalent of that aspect ratio.
+- **Controllers/ModulesController** - Controls loading and displaying module information.
+- **Controllers/ScenarioController** - Manages everything to do with scenarios, including loading and selecting scenarios, sending and receiving player and NPC dialogue (which includes triggering audio to play) and calculating the end score of each scenario.
+- **GameStates/Inputs/GameStateInput** - handles UI whilst in the ‘Game’ state, including updating the NPC's expression and dialogue and displaying dialogue options to the player.
+- **GameStates/GameStateControllerFactory** - creates all of the states and sets up the transition events needed to move between them.
 
 ## Setting up your game with SUGAR
-For information on Setting up Space Modules Inc. using SUGAR, see [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). *make sure that Assets\StreamingAssets\SUGAR.config.json exists and the BaseUri value matches the Base Address in the SUGAR Prefab.* 
+For information on setting up Space Modules Inc to use SUGAR, see the [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). **Make sure that *Assets\StreamingAssets\SUGAR.config.json* exists and the BaseUri value matches the Base Address in the SUGAR Prefab.** 
 
 ### Running SUGAR Locally
-Using Space Modules inc. with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*
+Using Space Modules Inc with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*.
 
 ## Level Selection
-Space Modules inc. supports both an automatic level progression system, and allowing players to select a level they want to play. In the current version, the level selection screen is never shown. 
+Space Modules Inc supports both an automatic level progression system and a level selection system. The current version defaults to automatic progression and as a result the level selection screen is never shown. 
 
-To change this, see [GameStateControllerFactory](Assets/Scripts/GameStates/GameStateControllerFactory.cs) for the CreateMenuState logic. This contains 2 variations of nextStateTransition. To change the next state after pressing play, change the EventTransition to be either *CallState* or *LevelState*.
+To change this, go to the CreateMenuState method in the [GameStateControllerFactory](Assets/Scripts/GameStates/GameStateControllerFactory.cs) class. This contains 2 variations of nextStateTransition. To change the next state after pressing play, change the EventTransition to be either *CallState* (automatic progression) or *LevelState* (level progression).
 
-## TODO Scenario Structure
-TODO how are they defined, what information is required, current setup, loading scenarios, worked example
+## Scenario Structure
+The base of a scenario is an [IntegratedAuthoringTool](https://gamecomponents.eu/content/201) file created using the [FAtiMA Toolkit](https://gitlab.com/playgen/FAtiMA-Toolkit). These files allow us to define player and NPC dialogue options and what NPCs ([RolePlayCharacter](https://www.gamecomponents.eu/content/196)) should be available. A RolePlayCharacter can in turn refer to other files which define their starting emotions and temperament ([EmotionalAppraisal](https://www.gamecomponents.eu/content/224)) and their decision making process ([EmotionalDecisionMaking](https://www.gamecomponents.eu/content/218)). Note that it is key that the PlayGen fork of FAtiMA is used, as this version contains additional features required for Space Modules Inc, most notably the 'File Name' value for each piece of dialogue which is used to find and play dialogue audio.
+
+The scenarios to use are defined within *Assets\StreamingAssets\levelconfig.json*. A LevelConfig is made up of a collection of Rounds, which in turn is made up of a collection of ScenarioData called Levels. ScenarioData contains the following:
+- **ID**: A unique identifier for the level.
+- **Prefix**: A string which identifies the type of scenario to load.
+- **Character**: Which character to use in the scenario.
+- **MaxPoints**: The most points a player can earn from metrics playing one of these scenarios.
+
+The collection of ScenarioData to use is determined using the RoundNumber value in ScenarioController.
+
+A ScenarioData is used when the CurrentLevel in the ScenarioController matches the **ID**. Any scenario that contains the **Prefix** provided can be used, with the provided **Character** used. A player's star rating at the end of the level is then defined using the **MaxPoints** value provided. If no ScenarioData is provided for a Round or if no scenarios match the prefix provided in a ScenarioData, a random ScenarioData is created from all scenarios available.
+
+The process of loading and setting up a scenario is performed within the NextLevel() method in ScenarioController. Further information on loading scenarios and characters can be found in the [FAtiMA Toolkit Cheat Sheet](https://gitlab.com/playgen/FAtiMA-Toolkit/blob/master/PlayGen-Cheat-Sheet.md).
 
 ## TODO Character Emotions
 TODO how are character emotions defined, what does the game currently support, how would you go about adding additional emotions/art assets
@@ -60,29 +70,16 @@ TODO how are character emotions defined, what does the game currently support, h
 TODO overview of game state management, perhaps link to gamework docs
 
 ## Scoring
-Player scoring is determined based on the 5 metrics that are tracked; closure, inquire, faq, empathy and polite. For each scenario, a maximum score is known, and is used to calculate how well players have done. The number of stars achieved is based on the players actual score and the maximum score. 
+Player scoring is determined based on the five metrics that are tracked; closure, inquire, faq, empathy and polite. For each scenario, a maximum score is known and is used to calculate how well players have done. The number of stars achieved is based on the player's actual score and the maximum score. 
 
 % of max points | Stars | Score Range
 --- | --- |---
-0 - 40 | 1 Star | 100 - 1000
+0 - Less than 40 | 1 Star | 100 - 1000
 40 - 80 | 2 Stars | 1001 - 5000
-80 - 100 | 3 stars | 5001 - 15000
+Greater than 80 - 100 | 3 Stars | 5001 - 15000
 
-The characters mood is used to determine the players score using the score range for the number of stars achieved
+The character's mood is used to determine the players score within the score range for the number of stars earned.
 
-Full Scoring details can be found in GetScoreData() in [ScenariosController.cs](Assets\Scripts\Controllers\ScenarioController.cs)
+The player's score, the number of stars earned and their score in each scoring metrics is sent to SUGAR At the conclusion of every scenario. In addition to this, 1 is sent for the 'plays' key, which records how many scenarios they have played, and the number of stars earned is also sent to a key which contains the Round and Level number, allowing for a record of their result in that scenario to be recorded and displayed on the level selection screen.
 
-### Saving Scores
-Star ratings for each level are saved to SUGAR at the end of each scenario, using the following:
-
-``` c#
-    // Send Game Data
-    SUGARManager.GameData.Send(string name, long value);
-    SUGARManager.GameData.Send(string name, bool value);
-    SUGARManager.GameData.Send(string name, float value);
-    SUGARManager.GameData.Send(string name, string value);
-
-
-    // Get Game Data 
-    SUGARManager.GameData.Get(Action<IEnumberableM<EvaluationDataResponse>> success, string[] keys = null)
-```
+Full scoring details can be found in GetScoreData() in [ScenariosController.cs](Assets\Scripts\Controllers\ScenarioController.cs).

@@ -20,19 +20,19 @@ From | To
 - **Unity Project**: *Project to be opened in the Unity Editor.*  
   - **Assets**  
     - **Editor**
-      - **ExcelToJson**: *[Included-Assets](#Included-Assets)*
+      - **ExcelToJson**: *[Included-Assets](#included-assets)*
       - **FATiMAImporter**: *Utility to parse the scenario content files into a Unity readable format.* 
-    - **DeepLink iOS**: *[Included-Assets](#Included-Assets)*  
-    - **DeepLink Plugin**: *[Included-Assets](#Included-Assets)*  
-    - **Evaluation Asset**: *[Included-Assets](#Included-Assets) - an asset which helps evaluate the pedagogical efficiency of a game.*  
-    - **RAGE Analytics**: *[Included-Assets](#Included-Assets) - an asset to log to the RAGE analytics server.*  
+    - **DeepLink iOS**: *[Included-Assets](#included-assets)*  
+    - **DeepLink Plugin**: *[Included-Assets](#included-assets)*  
+    - **Evaluation Asset**: *[Included-Assets](#included-assets) - an asset which helps evaluate the pedagogical efficiency of a game.*  
+    - **RAGE Analytics**: *[Included-Assets](#included-assets) - an asset to log to the RAGE analytics server.*  
     - **StreamingAssets**
       - **levelconfig.json**: *Configuration file for levels.*  
       - **modules-en.json**: *Space modules data in English.*  
       - **modules-nl.json**: *Space modules data in Dutch.*
     - **ScenariosRelated**: *Files used by the scenarios.*
     - **Scenarios**: *The scenarios in game.*
-  - **lib**: *Precompiled [included-assets](#Included-Assets) libraries.*
+  - **lib**: *Precompiled [included-assets](#included-assets) libraries.*
     - **GameWork**: *Game Development Framework.*
     - **IntegratedAuthoringTool**: *An asset collection related to NPC conversations and emotions.*  
     - **PlayGenUtilities**: *A collection of simple Unity Utilities.*  
