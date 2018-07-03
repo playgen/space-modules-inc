@@ -641,45 +641,9 @@
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-OVERL",
-					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
-					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-HSWIP",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken.",
-					"UtteranceId": "TTS-7E20D3B134F7F3996DC5B4DC494C36F1"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-RECH",
-					"Utterance": "Laadt de cel een volle 12 uur op voordat je hem weer gebruikt.",
-					"UtteranceId": "TTS-2D39A2DC3674F778F905DE537C2A8182"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-HSSCR",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan.",
-					"UtteranceId": "TTS-E35DBF29378306C51D72A199963846EF"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-LOAD",
-					"Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus.",
-					"UtteranceId": "TTS-FEF8117B69784EF63ABFA47144C4E178"
+					"FileName": "S-DSP-HUM",
+					"Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in.",
+					"UtteranceId": "TTS-D9C80F94770416BB0EAAF44219787DE5"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
@@ -695,15 +659,6 @@
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HOTOK",
-					"Utterance": "Dit type krachtcel wordt inderdaad erg heet. Waarschijnlijk ligt er stof op wat de rook veroorzaakt. Schoonmaken en wel goed in de gaten blijven houden.",
-					"UtteranceId": "TTS-8685F730E2E4E23E6573F8526F093914"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
 					"FileName": "S-DSP-REPL",
 					"Utterance": "De krachtcel is versleten en moet worden vervangen.",
 					"UtteranceId": "TTS-2D29F4D4ADD120EB48D055A68D8C4F43"
@@ -713,9 +668,54 @@
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSP-HSSCR",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan.",
+					"UtteranceId": "TTS-E35DBF29378306C51D72A199963846EF"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-FLARE",
+					"Utterance": "Dit komt vaak door zonnevlammen van een nabije ster. Hier vandaan vliegen zou het probleem moeten oplossen.",
+					"UtteranceId": "TTS-24FFD396D58649EA8C232AB2DB33D0CB"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-MAGF",
+					"Utterance": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel.",
+					"UtteranceId": "TTS-294B36A7679C8B163626D9606B87C627"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSP-HSCLS",
 					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
 					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-HSBR",
+					"Utterance": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen.",
+					"UtteranceId": "TTS-EA1FF918BE33EBA377C7F0D0CDBC54EC"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-LOAD",
+					"Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus.",
+					"UtteranceId": "TTS-FEF8117B69784EF63ABFA47144C4E178"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
@@ -812,15 +812,6 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HSCLS",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
-					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
-				}, 
-				{
-					"CurrentState": "FaqResponse2",
-					"NextState": "TrySolutionFail2",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
 					"FileName": "S-DSP-REPL",
 					"Utterance": "De krachtcel is versleten en moet worden vervangen.",
 					"UtteranceId": "TTS-2D29F4D4ADD120EB48D055A68D8C4F43"
@@ -830,9 +821,27 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HSBR",
-					"Utterance": "De container van de krachtcel is waarschijnlijk teveel beschadigd. Zo snel mogelijk de krachtcel vervangen.",
-					"UtteranceId": "TTS-EA1FF918BE33EBA377C7F0D0CDBC54EC"
+					"FileName": "S-DSP-HSWIP",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken.",
+					"UtteranceId": "TTS-7E20D3B134F7F3996DC5B4DC494C36F1"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-OVERL",
+					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
+					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-CORCO",
+					"Utterance": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon.",
+					"UtteranceId": "TTS-35E32F847CEE9492C40EFF2518D108FF"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
@@ -857,18 +866,18 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HUM",
-					"Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in.",
-					"UtteranceId": "TTS-D9C80F94770416BB0EAAF44219787DE5"
+					"FileName": "S-DSP-HOTOK",
+					"Utterance": "Dit type krachtcel wordt inderdaad erg heet. Waarschijnlijk ligt er stof op wat de rook veroorzaakt. Schoonmaken en wel goed in de gaten blijven houden.",
+					"UtteranceId": "TTS-8685F730E2E4E23E6573F8526F093914"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HSWIP",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los door wat vuil. Open maken, schoon wrijven en weer goed aandrukken.",
-					"UtteranceId": "TTS-7E20D3B134F7F3996DC5B4DC494C36F1"
+					"FileName": "S-DSP-HSCLS",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
+					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
@@ -878,15 +887,6 @@
 					"FileName": "S-DSP-THPST",
 					"Utterance": "Dit is voorlopig op te lossen door de behuizing te vullen met thermische pasta. De krachtcel wel bij gelegenheid vervangen.",
 					"UtteranceId": "TTS-6E46DB6A63D960D9E0E4A6557D1AB7D8"
-				}, 
-				{
-					"CurrentState": "FaqResponse2",
-					"NextState": "TrySolutionFail2",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-OVERL",
-					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
-					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",

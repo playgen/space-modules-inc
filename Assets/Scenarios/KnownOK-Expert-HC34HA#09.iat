@@ -11,57 +11,57 @@
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-OP-P-P",
-					"Utterance": "Hoi hoi, ik heb problemen met Krachtcel",
-					"UtteranceId": "TTS-AA027F9D60521D8A16EB4CE1BA1C85F5"
+					"FileName": "A-OPE-P-P3",
+					"Utterance": "Hoi hoi, ik heb problemen met Krachtcel, type HC34HA",
+					"UtteranceId": "TTS-C019EC6F07DD7D59C96831C07500E8B0"
 				}, 
 				{
 					"CurrentState": "Opening1",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-OP-N-P",
-					"Utterance": "Hee, ik heb weer eens problemen met Krachtcel",
-					"UtteranceId": "TTS-307CEB2B3849B5CDFD51A0936E97E228"
+					"FileName": "A-OPE-N-P3",
+					"Utterance": "Hee, ik heb weer eens problemen met Krachtcel, type HC34HA",
+					"UtteranceId": "TTS-10A3D0CAF268574A722809EBA43F69AD"
 				}, 
 				{
 					"CurrentState": "Opening1",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-OP1-A-P",
-					"Utterance": "Krachtcel doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
-					"UtteranceId": "TTS-63C916D639C43B729FDAF7895F994742"
+					"FileName": "A-OP1E-A-P3",
+					"Utterance": "Krachtcel type HC34HA doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
+					"UtteranceId": "TTS-20220FDF6D4FB457716E78DB30C6CC5F"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-OP-P-P",
-					"Utterance": "Hoi hoi, ik heb problemen met Krachtcel",
-					"UtteranceId": "TTS-AA027F9D60521D8A16EB4CE1BA1C85F5"
+					"FileName": "A-OPE-P-P3",
+					"Utterance": "Hoi hoi, ik heb problemen met Krachtcel, type HC34HA",
+					"UtteranceId": "TTS-C019EC6F07DD7D59C96831C07500E8B0"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-OP-N-P",
-					"Utterance": "Hee, ik heb weer eens problemen met Krachtcel",
-					"UtteranceId": "TTS-307CEB2B3849B5CDFD51A0936E97E228"
+					"FileName": "A-OPE-N-P3",
+					"Utterance": "Hee, ik heb weer eens problemen met Krachtcel, type HC34HA",
+					"UtteranceId": "TTS-10A3D0CAF268574A722809EBA43F69AD"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-OP2-A-P",
-					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! Krachtcel is weer eens kapot, waardeloos is het!!",
-					"UtteranceId": "TTS-BE3813B5C12F9B5DF29A17C7DDFFEFF2"
+					"FileName": "A-OP2E-A-P3",
+					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! Krachtcel type HC34HA is weer eens kapot, waardeloos is het!!",
+					"UtteranceId": "TTS-6BD42E2067F4FF0AEB8B51BA561FB095"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "DataCollected1",
 					"Meaning": "Empathy(1)",
 					"Style": "Positive",
@@ -70,7 +70,7 @@
 					"UtteranceId": "TTS-67F4122730634BFA75BC68B4C57433BE"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "DataCollected1",
 					"Meaning": "Empathy(1)",
 					"Style": "Neutral",
@@ -79,7 +79,7 @@
 					"UtteranceId": "TTS-67F4122730634BFA75BC68B4C57433BE"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "SecondChance",
 					"Meaning": "Empathy(-1)",
 					"Style": "Negative",
@@ -89,7 +89,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPANG-P",
@@ -98,7 +98,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPANG-N",
@@ -107,8 +107,8 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
-					"Meaning": "Empathy(3)",
+					"NextState": "AskDetails",
+					"Meaning": "Empathy(2)",
 					"Style": "Negative",
 					"FileName": "A-RSPANG-A",
 					"Utterance": "Nou, dat hoop ik ook, want het is knap vervelend.",
@@ -116,7 +116,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPCLM-P",
@@ -125,7 +125,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPCLM-N",
@@ -176,33 +176,6 @@
 					"FileName": "A-RSPRR-A",
 					"Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor.",
 					"UtteranceId": "TTS-D2C2AC6027E2A658F15FB081E1DA4341"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "DataCollected2",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPTP2-P-P3",
-					"Utterance": "Oh, vergeetachtig? Het is type HC34HA",
-					"UtteranceId": "TTS-CC4B32B8A360D3A68147F3E3058752A9"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "DataCollected2",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPTP2-N-P3",
-					"Utterance": "Oh, had ik al gezegd he. Maar het is type HC34HA",
-					"UtteranceId": "TTS-A8A53F4AB21F05EB11E16C4A23099792"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "End",
-					"Meaning": "-",
-					"Style": "Negative",
-					"FileName": "A-RSPTP2-A",
-					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
-					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
 				}, 
 				{
 					"CurrentState": "WaitForAnswer",
@@ -286,6 +259,33 @@
 					"UtteranceId": "TTS-0EC6A479A423F6FA3BC2F6CDF4097DEF"
 				}, 
 				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-DDP-NONE",
+					"Utterance": "Alle niet belangrijke apparaten krijgen geen stroom.",
+					"UtteranceId": "TTS-67F4122730634BFA75BC68B4C57433BE"
+				}, 
+				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-DDP-NONE",
+					"Utterance": "Alle niet belangrijke apparaten krijgen geen stroom.",
+					"UtteranceId": "TTS-67F4122730634BFA75BC68B4C57433BE"
+				}, 
+				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-DDP-NONE",
+					"Utterance": "Alle niet belangrijke apparaten krijgen geen stroom.",
+					"UtteranceId": "TTS-67F4122730634BFA75BC68B4C57433BE"
+				}, 
+				{
 					"CurrentState": "RespSolution",
 					"NextState": "Closure",
 					"Meaning": "-",
@@ -311,6 +311,33 @@
 					"FileName": "A-RSPSOL-A",
 					"Utterance": "Ok, dan hoop ik maar dat dat werkt...",
 					"UtteranceId": "TTS-A465D67F53E5ADB48632087CFE588AB9"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPTP2-P-P3",
+					"Utterance": "Oh, vergeetachtig? Het is type HC34HA",
+					"UtteranceId": "TTS-CC4B32B8A360D3A68147F3E3058752A9"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPTP2-N-P3",
+					"Utterance": "Oh, had ik al gezegd he. Maar het is type HC34HA",
+					"UtteranceId": "TTS-A8A53F4AB21F05EB11E16C4A23099792"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPTP2-A",
+					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
+					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
 				}, 
 				{
 					"CurrentState": "Start",
@@ -341,7 +368,7 @@
 				}, 
 				{
 					"CurrentState": "FirstResponse",
-					"NextState": "AnswerDetails",
+					"NextState": "AnswerDetails1",
 					"Meaning": "-",
 					"Style": "Polite(1)",
 					"FileName": "S-ASKPR-P",
@@ -350,7 +377,7 @@
 				}, 
 				{
 					"CurrentState": "FirstResponse",
-					"NextState": "AnswerDetails",
+					"NextState": "AnswerDetails1",
 					"Meaning": "-",
 					"Style": "Polite(-3)",
 					"FileName": "S-ASKPR-R",
@@ -412,69 +439,6 @@
 					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
 				}, 
 				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerDetails",
-					"Meaning": "-",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKPR2-P",
-					"Utterance": "Kunt U aangeven wat het probleem is?",
-					"UtteranceId": "TTS-8DEB99A8280A50207CAFCFF449D67F0E"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerDetails",
-					"Meaning": "-",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKPR-R",
-					"Utterance": "Wat is het probleem dan?",
-					"UtteranceId": "TTS-2BF1F72470169011DFB019F09412CAA2"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKTP1-P",
-					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
-					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKTP1-R",
-					"Utterance": "Typenummer?",
-					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "WaitForAnswer",
-					"Meaning": "Faq(1)",
-					"Style": "-",
-					"FileName": "S-LKUP",
-					"Utterance": "Ik ga het voor U even opzoeken...",
-					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "-",
-					"FileName": "S-ASKTP2",
-					"Utterance": "Wat was het typenummer ook al weer?",
-					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
-				}, 
-				{
 					"CurrentState": "Closure",
 					"NextState": "Goodbye1",
 					"Meaning": "Closure(3)",
@@ -502,18 +466,27 @@
 					"UtteranceId": "TTS-45B0D2F46A77681FB1A4DC759AAFE34C"
 				}, 
 				{
-					"CurrentState": "DataCollected2",
+					"CurrentState": "AskDetails",
 					"NextState": "WaitForAnswer",
-					"Meaning": "Faq(1)",
+					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
 					"Utterance": "Ik ga het voor U even opzoeken...",
 					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
 				}, 
 				{
-					"CurrentState": "DataCollected2",
+					"CurrentState": "AskDetails",
+					"NextState": "AnswerDetails2",
+					"Meaning": "Inquire(1)",
+					"Style": "-",
+					"FileName": "S-ASKDET-P",
+					"Utterance": "Wat is er precies aan de hand?",
+					"UtteranceId": "TTS-06DF47CCCE3A5A0E243CAC69C4D97A6A"
+				}, 
+				{
+					"CurrentState": "AskDetails",
 					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
+					"Meaning": "Faq_Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-REROUTE",
 					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
@@ -524,9 +497,54 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSP-REPL",
+					"Utterance": "De krachtcel is versleten en moet worden vervangen.",
+					"UtteranceId": "TTS-2D29F4D4ADD120EB48D055A68D8C4F43"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-CORCO",
+					"Utterance": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon.",
+					"UtteranceId": "TTS-35E32F847CEE9492C40EFF2518D108FF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-THPST",
+					"Utterance": "Dit is voorlopig op te lossen door de behuizing te vullen met thermische pasta. De krachtcel wel bij gelegenheid vervangen.",
+					"UtteranceId": "TTS-6E46DB6A63D960D9E0E4A6557D1AB7D8"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSP-OVERL",
 					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
 					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-HSCLS",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
+					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-LOAD",
+					"Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus.",
+					"UtteranceId": "TTS-FEF8117B69784EF63ABFA47144C4E178"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -551,54 +569,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-CORCO",
-					"Utterance": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon.",
-					"UtteranceId": "TTS-35E32F847CEE9492C40EFF2518D108FF"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-REPL",
-					"Utterance": "De krachtcel is versleten en moet worden vervangen.",
-					"UtteranceId": "TTS-2D29F4D4ADD120EB48D055A68D8C4F43"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-HOTOK",
-					"Utterance": "Dit type krachtcel wordt inderdaad erg heet. Waarschijnlijk ligt er stof op wat de rook veroorzaakt. Schoonmaken en wel goed in de gaten blijven houden.",
-					"UtteranceId": "TTS-8685F730E2E4E23E6573F8526F093914"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
 					"FileName": "S-DSP-HUM",
 					"Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in.",
 					"UtteranceId": "TTS-D9C80F94770416BB0EAAF44219787DE5"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-LOAD",
-					"Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus.",
-					"UtteranceId": "TTS-FEF8117B69784EF63ABFA47144C4E178"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-HSCLS",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
-					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -617,6 +590,51 @@
 					"FileName": "S-NOTFND",
 					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
 					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "WaitForAnswer",
+					"Meaning": "Faq(1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "AnswerType2",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-ASKTP2",
+					"Utterance": "Wat was het typenummer ook al weer?",
+					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
+				}, 
+				{
+					"CurrentState": "DataCollected2",
+					"NextState": "WaitForAnswer",
+					"Meaning": "Faq(1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected2",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
 				}]
 		},
 	"types": [

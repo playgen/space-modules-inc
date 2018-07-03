@@ -43,6 +43,81 @@ For information on setting up Space Modules Inc to use SUGAR, see the [SUGAR Qui
 ### Running SUGAR Locally
 Using Space Modules Inc with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in *Assets\StreamingAssets\SUGAR.config.json*.
 
+## Converting IntegratedAuthoringTool into current format
+In order to convert an IntegratedAuthoringTool file which follows the older file format into the current format, the following steps should be followed:
+
+1.
+```JSON
+// Old Format
+"Characters": [
+      {
+        "Name": "Positive",
+        "Source": "Positive.rpc"
+      },
+      {
+        "Name": "Neutral",
+        "Source": "Neutral.rpc"
+      },
+      {
+        "Name": "Negative",
+        "Source": "Negative.rpc"
+      }
+    ],
+```
+```JSON
+// New Format
+"CharacterSources": ["..\\ScenarioRelated\\Negative.rpc", "..\\ScenarioRelated\\Neutral.rpc", "..\\ScenarioRelated\\Positive.rpc"],
+```
+2.
+```JSON
+// Old Format
+"Meaning": [
+```
+```JSON
+// New Format
+"Meaning": 
+```
+3.
+```JSON
+// Old Format
+],
+        "Style": [
+```
+```JSON
+// New Format
+,
+				"Style": 
+```
+4.
+```JSON
+// Old Format
+],
+        "FileName":
+```
+```JSON
+// New Format
+,
+				"FileName":
+```
+5.
+```JSON
+// Old Format
+": ,
+```
+```JSON
+// New Format
+": "-",
+```
+6.
+```JSON
+// Old Format (also check for other values other than -1)
+(-1)", "
+```
+```JSON
+// New Format
+_
+```
+7. Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.
 ## Level Selection
 Space Modules Inc supports both an automatic level progression system and a level selection system. The current version defaults to automatic progression and as a result the level selection screen is never shown. 
 

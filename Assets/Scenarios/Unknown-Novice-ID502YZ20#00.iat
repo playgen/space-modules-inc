@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,9 +560,27 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-LOWRF",
+					"Utterance": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!",
+					"UtteranceId": "TTS-C83BE0AB7EBAA366314D9E7E549DB789"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -578,27 +596,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+					"FileName": "S-DSE-NOSL",
+					"Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken.",
+					"UtteranceId": "TTS-D49A711B8CEF5423FB0D5070BC28BEEF"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTRES5",
-					"Utterance": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden",
-					"UtteranceId": "TTS-563F9D8F92557D5E21D2897BED64E4E1"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+					"FileName": "S-DSE-SAFE",
+					"Utterance": "De veiligheidsmode staat dan aan. Zet deze eerst uit.",
+					"UtteranceId": "TTS-C29FAF073B352519300B07A3202780C9"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -614,27 +623,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXFLY",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
-					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
+					"FileName": "S-DSE-HULL",
+					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
+					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-LOW-RSST",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
-					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HRDRES5",
-					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
-					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
+					"FileName": "S-DSE-HOTRES5",
+					"Utterance": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden",
+					"UtteranceId": "TTS-563F9D8F92557D5E21D2897BED64E4E1"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,6 +560,24 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSE-HOTLIQ",
+					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
+					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-MGMT",
+					"Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk.",
+					"UtteranceId": "TTS-2EB58FD110C06C1E36803701198CD7DA"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSE-UPGRADE",
 					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
 					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
@@ -569,27 +587,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-NOSL",
-					"Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken.",
-					"UtteranceId": "TTS-D49A711B8CEF5423FB0D5070BC28BEEF"
+					"FileName": "S-DSE-PROXFLY",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
+					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXST2",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
-					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNINC",
-					"Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies.",
-					"UtteranceId": "TTS-1A7A1B614E799897CCCF62F092494282"
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -605,36 +614,27 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+					"FileName": "S-DSE-SNINC",
+					"Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies.",
+					"UtteranceId": "TTS-1A7A1B614E799897CCCF62F092494282"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTWAIT",
-					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
-					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
+					"FileName": "S-DSE-PROXST2",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
+					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTRES5",
-					"Utterance": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden",
-					"UtteranceId": "TTS-563F9D8F92557D5E21D2897BED64E4E1"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SAFE",
-					"Utterance": "De veiligheidsmode staat dan aan. Zet deze eerst uit.",
-					"UtteranceId": "TTS-C29FAF073B352519300B07A3202780C9"
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

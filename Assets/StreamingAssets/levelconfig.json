@@ -10,25 +10,25 @@
           "ID": 1,
           "Prefix": "KnownCheck-Expert-",
           "Character": "Positive",
-          "MaxPoints": 9
+          "MaxPoints": 11
         },
         {
           "ID": 2,
           "Prefix": "KnownOK-Novice-",
           "Character": "Positive",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 3,
           "Prefix": "Unknown-Expert-",
           "Character": "Neutral",
-          "MaxPoints": 9
+          "MaxPoints": 11
         },
         {
           "ID": 4,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Neutral",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 5,
@@ -40,13 +40,13 @@
           "ID": 6,
           "Prefix": "KnownOK-Novice-",
           "Character": "Positive",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 7,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Neutral",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 8,
@@ -64,13 +64,13 @@
           "ID": 10,
           "Prefix": "Unknown-Novice-",
           "Character": "Neutral",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 11,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Neutral",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 12,
@@ -82,19 +82,19 @@
           "ID": 13,
           "Prefix": "Unknown-Novice-",
           "Character": "Neutral",
-          "MaxPoints": 12
+          "MaxPoints": 14
         },
         {
           "ID": 14,
           "Prefix": "KnownCheck-Novice-",
           "Character": "Negative",
-          "MaxPoints": 14
+          "MaxPoints": 15
         },
         {
           "ID": 15,
           "Prefix": "Unknown-Novice-",
           "Character": "Negative",
-          "MaxPoints": 14
+          "MaxPoints": 15
         }
       ]
     },
@@ -104,13 +104,13 @@
           "ID": 1,
           "Prefix": "Unknown-Expert-",
           "Character": "Neutral",
-          "MaxPoints": 10
+          "MaxPoints": 11
         },
         {
           "ID": 2,
           "Prefix": "KnownOK-Expert-",
           "Character": "Negative",
-          "MaxPoints": 14
+          "MaxPoints": 13
         },
         {
           "ID": 3,

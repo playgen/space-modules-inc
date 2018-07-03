@@ -11,57 +11,57 @@
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-OP-P-S",
-					"Utterance": "Hoi hoi, ik heb problemen met Sensornet",
-					"UtteranceId": "TTS-9E7BCD2D0036AFD4B4680EECA7499DA5"
+					"FileName": "A-OPE-P-S1",
+					"Utterance": "Hoi hoi, ik heb problemen met Sensornet, type SA67YY3",
+					"UtteranceId": "TTS-D45FBAB858EA3856D89F0BC30F28D005"
 				}, 
 				{
 					"CurrentState": "Opening1",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-OP-N-S",
-					"Utterance": "Hee, ik heb weer eens problemen met Sensornet",
-					"UtteranceId": "TTS-D9962AB6AF55085263C6665478AAB5CA"
+					"FileName": "A-OPE-N-S1",
+					"Utterance": "Hee, ik heb weer eens problemen met Sensornet, type SA67YY3",
+					"UtteranceId": "TTS-4FDC804613709B0161AA2ACF057361E8"
 				}, 
 				{
 					"CurrentState": "Opening1",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-OP1-A-S",
-					"Utterance": "Sensornet doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
-					"UtteranceId": "TTS-36EABCFF193D51423E4AE31778CFFDA9"
+					"FileName": "A-OP1E-A-S1",
+					"Utterance": "Sensornet type SA67YY3 doet het weer eens niet, waardeloos! Wat voor troep verkopen jullie eigenlijk?",
+					"UtteranceId": "TTS-2A2C63419FE115CE86CA70C56D0782BC"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Positive",
-					"FileName": "A-OP-P-S",
-					"Utterance": "Hoi hoi, ik heb problemen met Sensornet",
-					"UtteranceId": "TTS-9E7BCD2D0036AFD4B4680EECA7499DA5"
+					"FileName": "A-OPE-P-S1",
+					"Utterance": "Hoi hoi, ik heb problemen met Sensornet, type SA67YY3",
+					"UtteranceId": "TTS-D45FBAB858EA3856D89F0BC30F28D005"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Neutral",
-					"FileName": "A-OP-N-S",
-					"Utterance": "Hee, ik heb weer eens problemen met Sensornet",
-					"UtteranceId": "TTS-D9962AB6AF55085263C6665478AAB5CA"
+					"FileName": "A-OPE-N-S1",
+					"Utterance": "Hee, ik heb weer eens problemen met Sensornet, type SA67YY3",
+					"UtteranceId": "TTS-4FDC804613709B0161AA2ACF057361E8"
 				}, 
 				{
 					"CurrentState": "Opening2",
 					"NextState": "FirstResponse",
 					"Meaning": "-",
 					"Style": "Negative",
-					"FileName": "A-OP2-A-S",
-					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! Sensornet is weer eens kapot, waardeloos is het!!",
-					"UtteranceId": "TTS-E66623C9FAC9992AC7B82C95DBDC30FC"
+					"FileName": "A-OP2E-A-S1",
+					"Utterance": "Wat is er aan de hand? Wat is er aan de hand?! Sensornet type SA67YY3 is weer eens kapot, waardeloos is het!!",
+					"UtteranceId": "TTS-B9B0E60454401D2294D9DF9E076A99E9"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "DataCollected1",
 					"Meaning": "Empathy(1)",
 					"Style": "Positive",
@@ -70,7 +70,7 @@
 					"UtteranceId": "TTS-27A46929874AF4861E59E23F17FA4422"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "DataCollected1",
 					"Meaning": "Empathy(1)",
 					"Style": "Neutral",
@@ -79,7 +79,7 @@
 					"UtteranceId": "TTS-27A46929874AF4861E59E23F17FA4422"
 				}, 
 				{
-					"CurrentState": "AnswerDetails",
+					"CurrentState": "AnswerDetails1",
 					"NextState": "SecondChance",
 					"Meaning": "Empathy(-1)",
 					"Style": "Negative",
@@ -89,7 +89,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPANG-P",
@@ -98,7 +98,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPANG-N",
@@ -107,8 +107,8 @@
 				}, 
 				{
 					"CurrentState": "DealAnger1",
-					"NextState": "AskProblem",
-					"Meaning": "Empathy(3)",
+					"NextState": "AskDetails",
+					"Meaning": "Empathy(2)",
 					"Style": "Negative",
 					"FileName": "A-RSPANG-A",
 					"Utterance": "Nou, dat hoop ik ook, want het is knap vervelend.",
@@ -116,7 +116,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Positive",
 					"FileName": "A-RSPCLM-P",
@@ -125,7 +125,7 @@
 				}, 
 				{
 					"CurrentState": "DealAnger2",
-					"NextState": "AskProblem",
+					"NextState": "AskDetails",
 					"Meaning": "Empathy(-1)",
 					"Style": "Neutral",
 					"FileName": "A-RSPCLM-N",
@@ -176,33 +176,6 @@
 					"FileName": "A-RSPRR-A",
 					"Utterance": "Pfff, dat schiet lekker op zeg. Bedankt hoor.",
 					"UtteranceId": "TTS-D2C2AC6027E2A658F15FB081E1DA4341"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "DataCollected2",
-					"Meaning": "-",
-					"Style": "Positive",
-					"FileName": "A-RSPTP2-P-S1",
-					"Utterance": "Oh, vergeetachtig? Het is type SA67YY3",
-					"UtteranceId": "TTS-8A725315BF7A1FC0650E7E741C5F2A00"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "DataCollected2",
-					"Meaning": "-",
-					"Style": "Neutral",
-					"FileName": "A-RSPTP2-N-S1",
-					"Utterance": "Oh, had ik al gezegd he. Maar het is type SA67YY3",
-					"UtteranceId": "TTS-0FE61B8383ACAAF724CEE2D8E347D463"
-				}, 
-				{
-					"CurrentState": "AnswerType",
-					"NextState": "End",
-					"Meaning": "-",
-					"Style": "Negative",
-					"FileName": "A-RSPTP2-A",
-					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
-					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
 				}, 
 				{
 					"CurrentState": "WaitForAnswer",
@@ -286,6 +259,33 @@
 					"UtteranceId": "TTS-0EC6A479A423F6FA3BC2F6CDF4097DEF"
 				}, 
 				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-DDS-IMGFR",
+					"Utterance": "De sensoren vallen regelmatig uit. Net daarvoor slaat het scherm vast.",
+					"UtteranceId": "TTS-27A46929874AF4861E59E23F17FA4422"
+				}, 
+				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-DDS-IMGFR",
+					"Utterance": "De sensoren vallen regelmatig uit. Net daarvoor slaat het scherm vast.",
+					"UtteranceId": "TTS-27A46929874AF4861E59E23F17FA4422"
+				}, 
+				{
+					"CurrentState": "AnswerDetails2",
+					"NextState": "DataCollected1",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-DDS-IMGFR",
+					"Utterance": "De sensoren vallen regelmatig uit. Net daarvoor slaat het scherm vast.",
+					"UtteranceId": "TTS-27A46929874AF4861E59E23F17FA4422"
+				}, 
+				{
 					"CurrentState": "RespSolution",
 					"NextState": "Closure",
 					"Meaning": "-",
@@ -311,6 +311,33 @@
 					"FileName": "A-RSPSOL-A",
 					"Utterance": "Ok, dan hoop ik maar dat dat werkt...",
 					"UtteranceId": "TTS-A465D67F53E5ADB48632087CFE588AB9"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Positive",
+					"FileName": "A-RSPTP2-P-S1",
+					"Utterance": "Oh, vergeetachtig? Het is type SA67YY3",
+					"UtteranceId": "TTS-8A725315BF7A1FC0650E7E741C5F2A00"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "DataCollected2",
+					"Meaning": "-",
+					"Style": "Neutral",
+					"FileName": "A-RSPTP2-N-S1",
+					"Utterance": "Oh, had ik al gezegd he. Maar het is type SA67YY3",
+					"UtteranceId": "TTS-0FE61B8383ACAAF724CEE2D8E347D463"
+				}, 
+				{
+					"CurrentState": "AnswerType2",
+					"NextState": "End",
+					"Meaning": "-",
+					"Style": "Negative",
+					"FileName": "A-RSPTP2-A",
+					"Utterance": "Ja sorry hoor, dat heb ik al gegeven. Ik probeer even een andere medewerker van jullie!",
+					"UtteranceId": "TTS-109AE30432C26362FD0D848B509ECDD5"
 				}, 
 				{
 					"CurrentState": "Start",
@@ -341,7 +368,7 @@
 				}, 
 				{
 					"CurrentState": "FirstResponse",
-					"NextState": "AnswerDetails",
+					"NextState": "AnswerDetails1",
 					"Meaning": "-",
 					"Style": "Polite(1)",
 					"FileName": "S-ASKPR-P",
@@ -350,7 +377,7 @@
 				}, 
 				{
 					"CurrentState": "FirstResponse",
-					"NextState": "AnswerDetails",
+					"NextState": "AnswerDetails1",
 					"Meaning": "-",
 					"Style": "Polite(-3)",
 					"FileName": "S-ASKPR-R",
@@ -412,69 +439,6 @@
 					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
 				}, 
 				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerDetails",
-					"Meaning": "-",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKPR2-P",
-					"Utterance": "Kunt U aangeven wat het probleem is?",
-					"UtteranceId": "TTS-8DEB99A8280A50207CAFCFF449D67F0E"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerDetails",
-					"Meaning": "-",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKPR-R",
-					"Utterance": "Wat is het probleem dan?",
-					"UtteranceId": "TTS-2BF1F72470169011DFB019F09412CAA2"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(1)",
-					"FileName": "S-ASKTP1-P",
-					"Utterance": "Kunt U mij vertellen wat het typenummer is?",
-					"UtteranceId": "TTS-2D749FCA1293CEDDDF00223EF9F47EE4"
-				}, 
-				{
-					"CurrentState": "AskProblem",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "Polite(-3)",
-					"FileName": "S-ASKTP1-R",
-					"Utterance": "Typenummer?",
-					"UtteranceId": "TTS-F1B031A31D1C8E6F07864A16F0D8C9D3"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "WaitForAnswer",
-					"Meaning": "Faq(1)",
-					"Style": "-",
-					"FileName": "S-LKUP",
-					"Utterance": "Ik ga het voor U even opzoeken...",
-					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "Reroute",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-REROUTE",
-					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
-					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "DataCollected1",
-					"NextState": "AnswerType",
-					"Meaning": "Inquire(-1)",
-					"Style": "-",
-					"FileName": "S-ASKTP2",
-					"Utterance": "Wat was het typenummer ook al weer?",
-					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
-				}, 
-				{
 					"CurrentState": "Closure",
 					"NextState": "Goodbye1",
 					"Meaning": "Closure(3)",
@@ -502,6 +466,150 @@
 					"UtteranceId": "TTS-45B0D2F46A77681FB1A4DC759AAFE34C"
 				}, 
 				{
+					"CurrentState": "AskDetails",
+					"NextState": "WaitForAnswer",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "AskDetails",
+					"NextState": "AnswerDetails2",
+					"Meaning": "Inquire(1)",
+					"Style": "-",
+					"FileName": "S-ASKDET-P",
+					"Utterance": "Wat is er precies aan de hand?",
+					"UtteranceId": "TTS-06DF47CCCE3A5A0E243CAC69C4D97A6A"
+				}, 
+				{
+					"CurrentState": "AskDetails",
+					"NextState": "Reroute",
+					"Meaning": "Faq_Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-BROKEN",
+					"Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt.",
+					"UtteranceId": "TTS-7F1BC9C83F22E44D8F473BA76A7BDA33"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-UPGR",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden.",
+					"UtteranceId": "TTS-2DCEE55864379100227A13DF21C13CAC"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-CLEAN",
+					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
+					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-MAGF",
+					"Utterance": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type.",
+					"UtteranceId": "TTS-AE22D4C1A86AB508FBD5A5696C828E99"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-FAST",
+					"Utterance": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor.",
+					"UtteranceId": "TTS-D1A6D71E92F8BB102D63484D7D6CD99C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-COLD",
+					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
+					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-REPL",
+					"Utterance": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen.",
+					"UtteranceId": "TTS-EED093EFA0CC60D929B80452BADAFBD4"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-BOOT",
+					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
+					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-RECAL",
+					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
+					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "Reroute",
+					"Meaning": "Faq(3)",
+					"Style": "-",
+					"FileName": "S-NOTFND",
+					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
+					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "WaitForAnswer",
+					"Meaning": "Faq(1)",
+					"Style": "-",
+					"FileName": "S-LKUP",
+					"Utterance": "Ik ga het voor U even opzoeken...",
+					"UtteranceId": "TTS-DB1F4F4FD8CC014C221ACA80C6492F1D"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "Reroute",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-REROUTE",
+					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
+					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
+				}, 
+				{
+					"CurrentState": "DataCollected1",
+					"NextState": "AnswerType2",
+					"Meaning": "Inquire(-1)",
+					"Style": "-",
+					"FileName": "S-ASKTP2",
+					"Utterance": "Wat was het typenummer ook al weer?",
+					"UtteranceId": "TTS-86C0F10098C38E7E495944C7890C572C"
+				}, 
+				{
 					"CurrentState": "DataCollected2",
 					"NextState": "WaitForAnswer",
 					"Meaning": "Faq(1)",
@@ -518,96 +626,6 @@
 					"FileName": "S-REROUTE",
 					"Utterance": "Ik moet U helaas het nummer geven van de specialist. Het telefoonnummer is 099-452345",
 					"UtteranceId": "TTS-00486EB427704A3BBAD6315764CC092B"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-COLD",
-					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
-					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-RECAL",
-					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
-					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-UPGR",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden.",
-					"UtteranceId": "TTS-2DCEE55864379100227A13DF21C13CAC"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-POWR",
-					"Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net.",
-					"UtteranceId": "TTS-38FDECC11E36B9ED5BADE9BF6769A286"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-CLEAN",
-					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
-					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-BOOT",
-					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
-					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-BROKEN",
-					"Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt.",
-					"UtteranceId": "TTS-7F1BC9C83F22E44D8F473BA76A7BDA33"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-FAST",
-					"Utterance": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor.",
-					"UtteranceId": "TTS-D1A6D71E92F8BB102D63484D7D6CD99C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-REPL",
-					"Utterance": "Het sensornet is waarschijnlijk kapot. Zo snel mogelijk vervangen.",
-					"UtteranceId": "TTS-EED093EFA0CC60D929B80452BADAFBD4"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "Reroute",
-					"Meaning": "Faq(3)",
-					"Style": "-",
-					"FileName": "S-NOTFND",
-					"Utterance": "Ik kon helaas niets vinden, ik geef U het nummer van de specialist: 099-452345. Hij kan U verder helpen.",
-					"UtteranceId": "TTS-16E8B18C7517CCBD9CD8812F8E2234DB"
 				}]
 		},
 	"types": [

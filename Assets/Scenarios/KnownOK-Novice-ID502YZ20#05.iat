@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,15 +560,6 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PWRCAP",
-					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
-					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
 					"FileName": "S-DSE-HOTRSST",
 					"Utterance": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop.",
 					"UtteranceId": "TTS-9480B66213554E44F679A268C7003859"
@@ -578,36 +569,63 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+					"FileName": "S-DSE-LOWRF",
+					"Utterance": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!",
+					"UtteranceId": "TTS-C83BE0AB7EBAA366314D9E7E549DB789"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXSTR",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
-					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
+					"FileName": "S-DSE-PROXFLY",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
+					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HULL",
-					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
-					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
+					"FileName": "S-DSE-RECAL",
+					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
+					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-MAINT",
-					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
-					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
+					"FileName": "S-DSE-PWRCAP",
+					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
+					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-NOSL",
+					"Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken.",
+					"UtteranceId": "TTS-D49A711B8CEF5423FB0D5070BC28BEEF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXST2",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
+					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -617,24 +635,6 @@
 					"FileName": "S-DSE-FIX",
 					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
 					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNSTRT",
-					"Utterance": "Druk op de start knop totdat hij weer start.",
-					"UtteranceId": "TTS-BE21BA8E312149592CEE6AB99A4C6220"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNINC",
-					"Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies.",
-					"UtteranceId": "TTS-1A7A1B614E799897CCCF62F092494282"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

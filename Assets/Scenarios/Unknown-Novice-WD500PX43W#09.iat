@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,36 +560,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+					"FileName": "S-DSE-PROXFLY",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
+					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PWRCAP",
-					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
-					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SAFE",
-					"Utterance": "De veiligheidsmode staat dan aan. Zet deze eerst uit.",
-					"UtteranceId": "TTS-C29FAF073B352519300B07A3202780C9"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HOTRES5",
-					"Utterance": "Dit type moet eerst afkoelen. Je kunt de warmte snel afvoeren door Reset knop 5 seconden ingedrukt te houden",
-					"UtteranceId": "TTS-563F9D8F92557D5E21D2897BED64E4E1"
+					"FileName": "S-DSE-FIX",
+					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
+					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -605,6 +587,42 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSE-SAFE",
+					"Utterance": "De veiligheidsmode staat dan aan. Zet deze eerst uit.",
+					"UtteranceId": "TTS-C29FAF073B352519300B07A3202780C9"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNINC",
+					"Utterance": "Je motor en sensornet zijn niet compatible. Ga naar een servicepunt van ons voor advies.",
+					"UtteranceId": "TTS-1A7A1B614E799897CCCF62F092494282"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSE-LOWRF",
 					"Utterance": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!",
 					"UtteranceId": "TTS-C83BE0AB7EBAA366314D9E7E549DB789"
@@ -614,27 +632,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-MAINT",
-					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
-					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-LOW-RSST",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
-					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
+					"FileName": "S-DSE-PROXSTR",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
+					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,54 +560,36 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXSTR",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
-					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+					"FileName": "S-DSE-HOTRSST",
+					"Utterance": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop.",
+					"UtteranceId": "TTS-9480B66213554E44F679A268C7003859"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-FIX",
-					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
-					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
+					"FileName": "S-DSE-LOWST2",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten.",
+					"UtteranceId": "TTS-6DBDD54DFBB9DD9C325F0F10630B5259"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PWRCAP",
-					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
-					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HRDRES5",
-					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
-					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-PROXFLY",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
-					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
+					"FileName": "S-DSE-HULL",
+					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
+					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -623,18 +605,36 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-RECAL",
-					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
-					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
+					"FileName": "S-DSE-PWRCAP",
+					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
+					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HULL",
-					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
-					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
+					"FileName": "S-DSE-HOTLIQ",
+					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
+					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-LOWST5",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
+					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-FIX",
+					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
+					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

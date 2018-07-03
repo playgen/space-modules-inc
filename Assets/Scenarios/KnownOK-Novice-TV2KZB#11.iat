@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,27 +560,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-RECAL",
-					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
-					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-COLD",
-					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
-					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-HEAT",
-					"Utterance": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen.",
-					"UtteranceId": "TTS-15F3473534B665DA11790680E24862B4"
+					"FileName": "S-DSS-CLEAN",
+					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
+					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -596,6 +578,15 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSS-POWR",
+					"Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net.",
+					"UtteranceId": "TTS-38FDECC11E36B9ED5BADE9BF6769A286"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSS-FAST",
 					"Utterance": "Dit probleem treedt op als het schip te snel gaat. Verlaag het vermogen naar de motor.",
 					"UtteranceId": "TTS-D1A6D71E92F8BB102D63484D7D6CD99C"
@@ -605,9 +596,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-CLEAN",
-					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
-					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
+					"FileName": "S-DSS-BOOT",
+					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
+					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-COLD",
+					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
+					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -632,9 +632,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-BOOT",
-					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
-					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
+					"FileName": "S-DSS-RECAL",
+					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
+					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

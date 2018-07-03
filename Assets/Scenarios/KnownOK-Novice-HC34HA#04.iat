@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,9 +560,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-MAGF",
-					"Utterance": "Is er een Materie-Rangschikker dichtbij? De magnetische velden van dit apparaat staan erom bekend problemen te veroorzaken bij dit type krachtcel.",
-					"UtteranceId": "TTS-294B36A7679C8B163626D9606B87C627"
+					"FileName": "S-DSP-OVERL",
+					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
+					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-CAPLS",
+					"Utterance": "Soms springt de koelingskap los. Controleer of deze goed dicht zit.",
+					"UtteranceId": "TTS-9F64B1E53B275CF0A87AB6FA4AB0312A"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -572,6 +581,33 @@
 					"FileName": "S-DSP-LOAD",
 					"Utterance": "De krachtcel staat vermoedelijk nog in Laadmodus. Zet hem op normale modus.",
 					"UtteranceId": "TTS-FEF8117B69784EF63ABFA47144C4E178"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-HSSCR",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan.",
+					"UtteranceId": "TTS-E35DBF29378306C51D72A199963846EF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-HSCLS",
+					"Utterance": "De container van de krachtcel is waarschijnlijk los. Open de klep en sluit hem weer en druk aan todat je een klik hoort.",
+					"UtteranceId": "TTS-FCB3A1AC7B661E264478FCF4D629F120"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSP-HUM",
+					"Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in.",
+					"UtteranceId": "TTS-D9C80F94770416BB0EAAF44219787DE5"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -596,45 +632,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSP-HSSCR",
-					"Utterance": "De container van de krachtcel is waarschijnlijk los. Draai de schroeven goed aan.",
-					"UtteranceId": "TTS-E35DBF29378306C51D72A199963846EF"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-LST20",
-					"Utterance": "Dit gebeurt als de krachtcel nog maar voor 20% vol is. Bijvullen moet dit oplossen.",
-					"UtteranceId": "TTS-9D059AD77415CD614C769F78347FF71C"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-CORCO",
-					"Utterance": "Dit kan gebeuren als de contacten vuil zijn. Maak eerst de contactstrip goed schoon.",
-					"UtteranceId": "TTS-35E32F847CEE9492C40EFF2518D108FF"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-OVERL",
-					"Utterance": "Je hebt teveel apparaten aangesloten op dit type krachtcel. Zet apparaten uit en vervangen door een krachtiger type krachtcel.",
-					"UtteranceId": "TTS-DA6E66A83C1E27063548C74ECBF96887"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSP-HUM",
-					"Utterance": "De vochtigheidsgraad is waarschijnlijk te hoog. Deze zou moeten liggen tussen 5% en 40%. Stel het ventilatiesysteem anders in.",
-					"UtteranceId": "TTS-D9C80F94770416BB0EAAF44219787DE5"
+					"FileName": "S-DSP-FLARE",
+					"Utterance": "Dit komt vaak door zonnevlammen van een nabije ster. Hier vandaan vliegen zou het probleem moeten oplossen.",
+					"UtteranceId": "TTS-24FFD396D58649EA8C232AB2DB33D0CB"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

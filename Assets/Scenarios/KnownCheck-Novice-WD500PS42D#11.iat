@@ -641,9 +641,45 @@
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-LOW-RSST",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
+					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-MAINT",
+					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
+					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HOTLIQ",
+					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
+					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
+				}, 
+				{
+					"CurrentState": "FaqResponse1",
+					"NextState": "TrySolutionFail1",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNSTRT",
+					"Utterance": "Druk op de start knop totdat hij weer start.",
+					"UtteranceId": "TTS-BE21BA8E312149592CEE6AB99A4C6220"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
@@ -659,63 +695,27 @@
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HULL",
-					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
-					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
+					"FileName": "S-DSE-LOWST2",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten.",
+					"UtteranceId": "TTS-6DBDD54DFBB9DD9C325F0F10630B5259"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
 					"NextState": "TrySolutionFail1",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-RECAL",
-					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
-					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-LOWRF",
-					"Utterance": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!",
-					"UtteranceId": "TTS-C83BE0AB7EBAA366314D9E7E549DB789"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HOTRSST",
-					"Utterance": "Dat is een beveliging. Als je toch wilt starten eerst de reset indrukken dan binnen 5 seconden de start knop.",
-					"UtteranceId": "TTS-9480B66213554E44F679A268C7003859"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-PROXST5",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
-					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
-				}, 
-				{
-					"CurrentState": "FaqResponse1",
-					"NextState": "TrySolutionFail1",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-PROXST2",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
-					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
+					"FileName": "S-DSE-PROXSTR",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
+					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
 				}, 
 				{
 					"CurrentState": "FaqResponse1",
@@ -812,6 +812,33 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSE-PROXST5",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
+					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
+				}, 
+				{
+					"CurrentState": "FaqResponse2",
+					"NextState": "TrySolutionFail2",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSE-HULL",
 					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
 					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
@@ -821,45 +848,18 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-LOWST5",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
-					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
+					"FileName": "S-DSE-LOWRF",
+					"Utterance": "Je brandstof is dan bijna op. Je zult eerst ergens moeten tanken!",
+					"UtteranceId": "TTS-C83BE0AB7EBAA366314D9E7E549DB789"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-MAINT",
-					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
-					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
-				}, 
-				{
-					"CurrentState": "FaqResponse2",
-					"NextState": "TrySolutionFail2",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
-				}, 
-				{
-					"CurrentState": "FaqResponse2",
-					"NextState": "TrySolutionFail2",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-RECAL",
-					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
-					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
-				}, 
-				{
-					"CurrentState": "FaqResponse2",
-					"NextState": "TrySolutionFail2",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-LOWST2",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten.",
-					"UtteranceId": "TTS-6DBDD54DFBB9DD9C325F0F10630B5259"
+					"FileName": "S-DSE-NOSL",
+					"Utterance": "Dat betekent dat de motor in deze omgeving te weinig sterrelicht opvangt voor hoger vermogen. In andere gebieden zou het wel moeten werken.",
+					"UtteranceId": "TTS-D49A711B8CEF5423FB0D5070BC28BEEF"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
@@ -875,18 +875,18 @@
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXSTR",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
-					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",
 					"NextState": "TrySolutionFail2",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+					"FileName": "S-DSE-PROXSTR",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
+					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
 				}, 
 				{
 					"CurrentState": "FaqResponse2",

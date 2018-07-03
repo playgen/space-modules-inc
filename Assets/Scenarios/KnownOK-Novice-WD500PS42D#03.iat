@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,18 +560,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+					"FileName": "S-DSE-LOWST2",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten.",
+					"UtteranceId": "TTS-6DBDD54DFBB9DD9C325F0F10630B5259"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-SNSTRT",
-					"Utterance": "Druk op de start knop totdat hij weer start.",
-					"UtteranceId": "TTS-BE21BA8E312149592CEE6AB99A4C6220"
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -587,9 +587,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PWRCAP",
-					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
-					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -605,36 +614,27 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-MGMT",
-					"Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk.",
-					"UtteranceId": "TTS-2EB58FD110C06C1E36803701198CD7DA"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-FIX",
-					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
-					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-LOWST2",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk tweemal op start binnen 5 seconden om de motor toch te starten.",
-					"UtteranceId": "TTS-6DBDD54DFBB9DD9C325F0F10630B5259"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
 					"FileName": "S-DSE-MAINT",
 					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
 					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXSTR",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet start en reset gelijk indrukken.",
+					"UtteranceId": "TTS-256173BF2BD58390A214FD696BD9DB10"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-PROXST5",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
+					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,27 +560,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSE-MAINT",
+					"Utterance": "Er is waarschijnlijk een zuurstof lek dichtbij je motor. Je motor heeft onderhoud nodig.",
+					"UtteranceId": "TTS-1A0CE0FEB4750E66478663B832F8E7E3"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSE-RECAL",
 					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
 					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-PWRCAP",
-					"Utterance": "De stroomaansluiting zit waarschijnlijk los. Probeer die eens vast te draaien.",
-					"UtteranceId": "TTS-C6A2A55B935F67260F8A13E6718C4CBB"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -596,18 +587,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-LOW-RSST",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Druk eerst op reset en dan binnen 5 seconden op start om de motor toch te starten.",
-					"UtteranceId": "TTS-15F501F79E2CB7676579D0A11F45724F"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+					"FileName": "S-DSE-HOTWAIT",
+					"Utterance": "Dit type moet eerst afkoelen. Je moet een uur wachten",
+					"UtteranceId": "TTS-546807A182EB197C3F5ADF2929FCA541"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -623,9 +605,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-PROXST5",
-					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet startknop 5 seconden ingedrukt houden.",
-					"UtteranceId": "TTS-E431A51B3CB9DA054415CF6ABAED3B65"
+					"FileName": "S-DSE-MGMT",
+					"Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk.",
+					"UtteranceId": "TTS-2EB58FD110C06C1E36803701198CD7DA"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -635,6 +626,15 @@
 					"FileName": "S-DSE-HRDRES5",
 					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
 					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-LOWST5",
+					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
+					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

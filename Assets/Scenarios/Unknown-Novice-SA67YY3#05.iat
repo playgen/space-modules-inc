@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,6 +560,24 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSS-RECAL",
+					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
+					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSS-COLD",
+					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
+					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSS-CLEAN",
 					"Utterance": "Maak het sensornet schoon. Er is waarschijnlijk iets op terecht gekomen.",
 					"UtteranceId": "TTS-BDF91FE94CA6EDA2CAFC679D127DC258"
@@ -569,18 +587,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-UPGR",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van het sensornet upgraden.",
-					"UtteranceId": "TTS-2DCEE55864379100227A13DF21C13CAC"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-BOOT",
-					"Utterance": "Probeer eens te herstarten, de software is waarschijnlijk vastgelopen.",
-					"UtteranceId": "TTS-6B75A482B713C0EA9E31233A8BFB3F0C"
+					"FileName": "S-DSS-BROKEN",
+					"Utterance": "Er zijn waarschijnlijk wat aansluitingen kapot. Laat zsm repararen bij een servicepunt.",
+					"UtteranceId": "TTS-7F1BC9C83F22E44D8F473BA76A7BDA33"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -590,15 +599,6 @@
 					"FileName": "S-DSS-HEAT",
 					"Utterance": "Dit treedt op als het net te warm wordt. Niet te dicht bij een zon vliegen zou moeten helpen.",
 					"UtteranceId": "TTS-15F3473534B665DA11790680E24862B4"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSS-RECAL",
-					"Utterance": "Waarschijnlijk is het sensornet wat verlopen. Hercalibreren zou moeten helpen.",
-					"UtteranceId": "TTS-D21ABA800E0122F01E51C23973C25D0C"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -623,18 +623,18 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-POWR",
-					"Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net.",
-					"UtteranceId": "TTS-38FDECC11E36B9ED5BADE9BF6769A286"
+					"FileName": "S-DSS-MAGF",
+					"Utterance": "Dit type is gevoelig voor magnetische velden. Als dit te vaak optreedt, dan laten afschermen of vervangen door een ongevoeliger type.",
+					"UtteranceId": "TTS-AE22D4C1A86AB508FBD5A5696C828E99"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSS-COLD",
-					"Utterance": "De sensoren zijn dan onderkoeld. Zet de verwarming van de sensoren aan.",
-					"UtteranceId": "TTS-C3491DC2B9A3C4584D96486517495D13"
+					"FileName": "S-DSS-POWR",
+					"Utterance": "Het sensornet krijgt dan te weinig stroom. Verhoog de output naar het net.",
+					"UtteranceId": "TTS-38FDECC11E36B9ED5BADE9BF6769A286"
 				}, 
 				{
 					"CurrentState": "FaqResponse",

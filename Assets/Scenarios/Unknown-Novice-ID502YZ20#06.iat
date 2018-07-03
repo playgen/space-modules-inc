@@ -485,7 +485,7 @@
 				}, 
 				{
 					"CurrentState": "InquireFurther",
-					"NextState": "WaitForAnswer",
+					"NextState": "WaitForAnswer1",
 					"Meaning": "Inquire(-1)",
 					"Style": "-",
 					"FileName": "S-LKUP",
@@ -560,6 +560,24 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
+					"FileName": "S-DSE-PROXFLY",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet eerst er vandaan vliegen",
+					"UtteranceId": "TTS-4593700FD67B71515C4691BE86140CFB"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-SNWAIT",
+					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
+					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
 					"FileName": "S-DSE-SNSTRT",
 					"Utterance": "Druk op de start knop totdat hij weer start.",
 					"UtteranceId": "TTS-BE21BA8E312149592CEE6AB99A4C6220"
@@ -569,45 +587,9 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-HOTLIQ",
-					"Utterance": "Dan is de koelvloeistof waarschijnlijk bijna op. Probeer deze eens bij te vullen.",
-					"UtteranceId": "TTS-E28AA34F3B47F819F616EF1FF88B5482"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HRDRES5",
-					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
-					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-RECAL",
-					"Utterance": "Je krachtcel stuurt de motor niet goed aan. Hercalibreren moet helpen.",
-					"UtteranceId": "TTS-ACD6F1AE4F30FA748B609EE229B741CA"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-UPGRADE",
-					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
-					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
-				}, 
-				{
-					"CurrentState": "FaqResponse",
-					"NextState": "RespSolution",
-					"Meaning": "Faq(-1)",
-					"Style": "-",
-					"FileName": "S-DSE-HULL",
-					"Utterance": "De romp van je schip is ergens beschadigd. Laat dit zo snel mogelijk nakijken!",
-					"UtteranceId": "TTS-E70C680DBAD611EF163DF60B4718085B"
+					"FileName": "S-DSE-PROXST2",
+					"Utterance": "Dat is een waarschuwing omdat je dicht bij een planeet zit. Je moet 2x start indrukken binnen 5 seconden.",
+					"UtteranceId": "TTS-C3DB1933EA4A77845FB6F4FF62214DBE"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
@@ -623,18 +605,36 @@
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-LOWST5",
-					"Utterance": "Dat is een extra waarschuwing dat je brandstof bijna op is. Houdt start 5 seconden ingedrukt om de motor toch te starten.",
-					"UtteranceId": "TTS-33F1F5A055E39EC5FBD07DA48AD2F6E3"
+					"FileName": "S-DSE-MGMT",
+					"Utterance": "Je motor branstof circuit is kapot. Voorlopig uitschakelen en laten repareren indien mogelijk.",
+					"UtteranceId": "TTS-2EB58FD110C06C1E36803701198CD7DA"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
 					"NextState": "RespSolution",
 					"Meaning": "Faq(-1)",
 					"Style": "-",
-					"FileName": "S-DSE-SNWAIT",
-					"Utterance": "Zorg ervoor dat de motor minstens een half uur draait voordat je de sensoren aan zet.",
-					"UtteranceId": "TTS-D4E2871BEB9D8CF7AB19EDD47B12D4DF"
+					"FileName": "S-DSE-FIX",
+					"Utterance": "De motor is dan niet goed genoeg vastgezet. Laat dit repareren.",
+					"UtteranceId": "TTS-540815828F794CD7C8B36135F27A09C0"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-UPGRADE",
+					"Utterance": "Dit is een bekend probleem dat recent is opgelost. Je moet de firmware van de motor upgraden.",
+					"UtteranceId": "TTS-F04AB9B8052B80AD9181ADD879CEB2E5"
+				}, 
+				{
+					"CurrentState": "FaqResponse",
+					"NextState": "RespSolution",
+					"Meaning": "Faq(-1)",
+					"Style": "-",
+					"FileName": "S-DSE-HRDRES5",
+					"Utterance": "Je moet de motor hard resetten. Houdt de Reset knop 5 seconden ingedrukt.",
+					"UtteranceId": "TTS-1AA6345C9AAB2E898FB89C27478AD53A"
 				}, 
 				{
 					"CurrentState": "FaqResponse",
