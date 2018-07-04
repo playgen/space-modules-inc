@@ -86,7 +86,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224000013027156642}
-  - component: {fileID: 222000012893681528}
   - component: {fileID: 114000013568216342}
   m_Layer: 0
   m_Name: Female
@@ -540,12 +539,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000014242520734}
---- !u!222 &222000012893681528
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1000012390936534}
 --- !u!222 &222000013004868196
 CanvasRenderer:
   m_ObjectHideFlags: 1

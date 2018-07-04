@@ -82,7 +82,7 @@ TextureImporter:
     buildTarget: iPhone
     maxTextureSize: 512
     resizeAlgorithm: 0
-    textureFormat: 33
+    textureFormat: 65
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 1

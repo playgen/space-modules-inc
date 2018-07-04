@@ -68,7 +68,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224381903834978580}
-  - component: {fileID: 222036096508840004}
   - component: {fileID: 114531760190365244}
   m_Layer: 0
   m_Name: Male
@@ -511,12 +510,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!222 &222036096508840004
-CanvasRenderer:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1463558313453338}
 --- !u!222 &222045131906892836
 CanvasRenderer:
   m_ObjectHideFlags: 1
