@@ -47,8 +47,8 @@ Using Space Modules Inc with a local version of SUGAR is as simple as changing t
 In order to convert an IntegratedAuthoringTool file which follows the older file format into the current format, the following steps should be followed:
 
 1.
+**Old Format**
 ```JSON
-// Old Format
 "Characters": [
       {
         "Name": "Positive",
@@ -64,57 +64,57 @@ In order to convert an IntegratedAuthoringTool file which follows the older file
       }
     ],
 ```
+**New Format**
 ```JSON
-// New Format
 "CharacterSources": ["..\\ScenarioRelated\\Negative.rpc", "..\\ScenarioRelated\\Neutral.rpc", "..\\ScenarioRelated\\Positive.rpc"],
 ```
 2.
+**Old Format**
 ```JSON
-// Old Format
 "Meaning": [
 ```
+**New Format**
 ```JSON
-// New Format
 "Meaning": 
 ```
 3.
+**Old Format**
 ```JSON
-// Old Format
 ],
         "Style": [
 ```
+**New Format**
 ```JSON
-// New Format
 ,
 				"Style": 
 ```
 4.
+**Old Format**
 ```JSON
-// Old Format
 ],
         "FileName":
 ```
+**New Format**
 ```JSON
-// New Format
 ,
 				"FileName":
 ```
 5.
+**Old Format**
 ```JSON
-// Old Format
 ": ,
 ```
+**New Format**
 ```JSON
-// New Format
 ": "-",
 ```
 6.
-```JSON
-// Old Format (also check for other values other than -1)
+**Old Format** (also check for other values other than -1)
+```JSON 
 (-1)", "
 ```
+**New Format**
 ```JSON
-// New Format
 _
 ```
 7. Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.

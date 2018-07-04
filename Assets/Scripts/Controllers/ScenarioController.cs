@@ -187,7 +187,7 @@ public class ScenarioController : ICommandAction
 		{
 			bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ);
 		}
-		RoundNumber = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? Mathf.Max(0, parseRound - 1) : parseLockAfterQ ? 1 : 2;
+		RoundNumber = SUGARManager.CurrentUser != null ? CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? Mathf.Max(0, parseRound - 1) : parseLockAfterQ ? 1 : 2 : 0;
 		var round = obj.Rounds[RoundNumber];
 		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
 		LevelMax = _scenarios.Length;
