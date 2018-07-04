@@ -141,3 +141,6 @@ The process for setting up a game installer is detailed within the [Game Launche
 
 ## Developer Guide
 See the [Developer Guide](DeveloperGuide.md) for further details about the game.
+
+## Unity Project Structure
+See the [Unity Project Structure](Assets/ReadMe.md) documentation for further details about the folders contained within the project.
