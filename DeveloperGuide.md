@@ -89,14 +89,14 @@ For Player Dialogues, the format changes as follows:
 
 ```JSON
   "Dialogues": [
-  {
-    "CurrentState": "Opening1",
-    "NextState": "FirstResponse",
-    "Meaning": "Faq_Inquire(-1)",
-    "Style": "-",
-    "FileName": "S-OP-P",
-    "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?",
-  }, 
+    {
+      "CurrentState": "Opening1",
+      "NextState": "FirstResponse",
+      "Meaning": "Faq_Inquire(-1)",
+      "Style": "-",
+      "FileName": "S-OP-P",
+      "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?",
+    }, 
 ```
 
 Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.
