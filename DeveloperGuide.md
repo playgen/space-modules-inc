@@ -46,9 +46,8 @@ Using Space Modules Inc with a local version of SUGAR is as simple as changing t
 ## Converting IntegratedAuthoringTool into current format
 In order to convert an IntegratedAuthoringTool file which follows the older file format into the current format, the following steps should be followed:
 
-1.
-**Old Format**
-```
+**Old**
+```JSON
 "Characters": [
       {
         "Name": "Positive",
@@ -64,60 +63,43 @@ In order to convert an IntegratedAuthoringTool file which follows the older file
       }
     ],
 ```
-**New Format**
-```
+**New**
+
+```JSON
 "CharacterSources": ["..\\ScenarioRelated\\Negative.rpc", "..\\ScenarioRelated\\Neutral.rpc", "..\\ScenarioRelated\\Positive.rpc"],
 ```
-2.
-**Old Format**
+
+For Player Dialogues, the format changes as follows:
+
+**Old**
+
+```JSON
+  "PlayerDialogues": [
+    {
+      "CurrentState": "Opening1",
+      "NextState": "FirstResponse",
+      "Meaning": ["Faq(-1)", "Inquire(-1)"],
+      "Style": [],
+      "FileName": "S-OP-P",
+      "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?"
+    },
 ```
-"Meaning": [
+
+**New**
+
+```JSON
+  "Dialogues": [
+  {
+    "CurrentState": "Opening1",
+    "NextState": "FirstResponse",
+    "Meaning": "Faq_Inquire(-1)",
+    "Style": "-",
+    "FileName": "S-OP-P",
+    "Utterance": "Goodmorning, this is Space Modules Inc. How can I be of service?",
+  }, 
 ```
-**New Format**
-```
-"Meaning": 
-```
-3.
-**Old Format**
-```
-],
-        "Style": [
-```
-**New Format**
-```
-,
-        "Style": 
-```
-4.
-**Old Format**
-```
-],
-        "FileName":
-```
-**New Format**
-```
-,
-        "FileName":
-```
-5.
-**Old Format**
-```
-": ,
-```
-**New Format**
-```
-": "-",
-```
-6.
-**Old Format** (also check for other values other than -1)
-``` 
-(-1)", "
-```
-**New Format**
-```
-_
-```
-7. Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.
+
+Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.
 
 ## Level Selection
 Space Modules Inc supports both an automatic level progression system and a level selection system. The current version defaults to automatic progression and as a result the level selection screen is never shown. 
