@@ -20,26 +20,27 @@ From | To
 - **Unity Project**: *Project to be opened in the Unity Editor.*  
   - **Assets**  
     - **Editor**
-      - **ExcelToJson**: *[Included-Assets](#included-assets)*
+      - **ExcelToJson**: *[Included Assets](#included-assets)*
       - **FATiMAImporter**: *Utility to parse the scenario content files into a Unity readable format.* 
-    - **DeepLink iOS**: *[Included-Assets](#included-assets)*  
-    - **DeepLink Plugin**: *[Included-Assets](#included-assets)*  
-    - **Evaluation Asset**: *[Included-Assets](#included-assets) - an asset which helps evaluate the pedagogical efficiency of a game.*  
-    - **RAGE Analytics**: *[Included-Assets](#included-assets) - an asset to log to the RAGE analytics server.*  
+    - **DeepLink iOS**: *[Included Assets](#included-assets)*  
+    - **DeepLink Plugin**: *[Included Assets](#included-assets)*  
+    - **Evaluation Asset**: *[Included Assets](#included-assets) - An asset which helps evaluate the pedagogical efficiency of a game.*  
+    - **RAGE Analytics**: *[Included Assets](#included-assets) - An asset to log to the RAGE analytics server.*  
     - **StreamingAssets**
       - **levelconfig.json**: *Configuration file for levels.*  
       - **modules-en.json**: *Space modules data in English.*  
       - **modules-nl.json**: *Space modules data in Dutch.*
     - **ScenariosRelated**: *Files used by the scenarios.*
     - **Scenarios**: *The scenarios in game.*
-  - **lib**: *Precompiled [included-assets](#included-assets) libraries.*
+    - **SUGAR**: *[Included Assets](#included-assets) - An asset which adds social gamification features, including account management, achievements and leaderboards.*
+  - **lib**: *[Included Assets](#included-assets) - Precompiled libraries.*
     - **GameWork**: *Game Development Framework.*
     - **IntegratedAuthoringTool**: *An asset collection related to NPC conversations and emotions.*  
     - **PlayGenUtilities**: *A collection of simple Unity Utilities.*  
-  - **space-modules-inc-setup**: *installer project*  
+  - **space-modules-inc-setup**: *Installer project*  
   - **Tools**: *Setup scripts.*
 
-# Included Assets:
+# Included Assets
 - [Integrated Authoring Tool](https://gamecomponents.eu/content/201)
 - [Role-Play Character](https://www.gamecomponents.eu/content/196)
 - [Emotional Appraisal Asset](https://www.gamecomponents.eu/content/224)
@@ -57,8 +58,8 @@ From | To
 - [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
 - [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430) - for android.
 
-# Development:
-## Requirements:
+# Development
+## Requirements
 - Windows
 - Git LFS
 - Visual Studio 2017
@@ -77,7 +78,7 @@ From | To
 
 5. To run the game with Evaluation Asset functionality, please refer to the [Evaluation Asset Documentation](Assets/Evaluation%20Asset/ReadMe.md).
 
-### SUGAR Custom Args:
+### SUGAR Custom Args
 Key | Potential Values | Description
 -- | -- | --
 round | 1, 2, 3... | Which round of scenarios to play.
@@ -88,7 +89,7 @@ tstamp | yyyy-MM-ddTHH:mm | Timestamp related to when the game should be accessi
 forcelaunch |  | For debug purposes only. If the game should launch regardless of the validity of the timestamp. Any value will enable this functionality.
 wipeprogress |  | For debug purposes only. Wipes the current progress in a round when playing over different sessions.
 
-## Updating:
+## Updating
 ### FAtiMA Toolkit 
 Using PlayGen's forked version of the FAtiMA Toolkit, build solution and place new DLLs (found in FAtiMA-Toolkit\Assets\IntegratedAuthoringTool\bin\Debug) into lib\IntegratedAuthoringTool folder. Note that code changes could be needed as a result of updates to this asset.
 
@@ -121,22 +122,22 @@ Follow the instructions provided in the [Evaluation Asset Documentation](Assets/
 
 **Commit hash: 6c4551df61ac1a1829ed0cbf7b9788362ee1342a**
 
-# Build:
-## Process:
+# Build
+## Process
 Standalone, Android and iOS are currently supported using the default Unity build system.
 
-# Installer:
+# Installer
 [Wix](http://wixtoolset.org/) is used to create the Windows installer.
 
 Using the game-launcher repository, games can be launched using a url.
 
-## Requirements:
+## Requirements
 - Wix Toolset
 - Visual Studio 2017
 - Wix Visual Studio Extension
 - [Game Launcher](https://gitlab.com/playgen/game-launcher) project
 
-## Process:
+## Process
 The process for setting up a game installer is detailed within the [Game Launcher documentation](https://gitlab.com/playgen/game-launcher/blob/master/ReadMe.md#game-installer).
 
 ## Developer Guide
