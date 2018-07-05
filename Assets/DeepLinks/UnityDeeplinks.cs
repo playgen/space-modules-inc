@@ -30,6 +30,4 @@ public class UnityDeeplinks : MonoBehaviour {
 		Debug.Log("onDeeplink " + deeplink);
 		DeepLink = deeplink;
 	}
-
-
 }

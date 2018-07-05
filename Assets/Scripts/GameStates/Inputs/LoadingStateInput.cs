@@ -22,7 +22,7 @@ public class LoadingStateInput : TickStateInput
 		_splash.SetActive(true);
 		_timeSinceStart = 0;
 		SUGARManager.Unity.StartSpinner();
-		if (Application.platform == RuntimePlatform.IPhonePlayer)
+		if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.Android)
 		{
 			_signInTriggerTime = 1;
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
@@ -30,12 +31,7 @@ public class AccountUnityClientAdditions : MonoBehaviour
 	public void DisplayPanel(Action<bool> success)
 	{
 		_signInCallback = success;
-
-		if (Application.platform == RuntimePlatform.Android && SUGARManager.Client != null)
-		{
-			SignIn(AndroidDeepLink.GetURL());
-		}
-		else if (Application.platform == RuntimePlatform.IPhonePlayer && SUGARManager.Client != null)
+		if ((Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer) && SUGARManager.Client != null)
 		{
 			SignIn(UnityDeeplinks.DeepLink);
 		}
