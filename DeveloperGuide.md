@@ -38,13 +38,13 @@ After that all URLs use the same system for passing arguments using key value pa
 - [**GameStates/GameStateControllerFactory**](Assets/Scripts/GameStates/GameStateControllerFactory.cs) - Creates all of the states and sets up the transition events needed to move between them.
 
 ## Setting up your game with SUGAR
-For information on setting up Space Modules Inc to use SUGAR, see the [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). **Make sure that [*Assets\StreamingAssets\SUGAR.config.json*](Assets\StreamingAssets\SUGAR.config.json) exists and the BaseUri value matches the Base Address in the SUGAR Prefab.** 
+For information on setting up Space Modules Inc to use SUGAR, see the [SUGAR Quick Start Guide](http://api.sugarengine.org/v1/unity-client/tutorials/quick-start.html). **Make sure that [*Assets/StreamingAssets/SUGAR.config.json*](Assets/StreamingAssets/SUGAR.config.json) exists and the BaseUri value matches the Base Address in the SUGAR Prefab.** 
 
 ### Running SUGAR Locally
-Using Space Modules Inc with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in [*Assets\StreamingAssets\SUGAR.config.json*](Assets\StreamingAssets\SUGAR.config.json).
+Using Space Modules Inc with a local version of SUGAR is as simple as changing the Base Address in the SUGAR Prefab, and the BaseUri value in [*Assets/StreamingAssets/SUGAR.config.json*](Assets/StreamingAssets/SUGAR.config.json).
 
 ## Converting IntegratedAuthoringTool into current format
-In order to convert an IntegratedAuthoringTool file which follows the older file format into the current format, the following steps should be followed:
+In order to convert an IntegratedAuthoringTool file which follows the older file format into the current format, the following alterations need to be made:
 
 **Old**
 ```JSON
@@ -99,7 +99,7 @@ For Player Dialogues, the format changes as follows:
     }, 
 ```
 
-Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit\AuthoringTools\IntegratedAuthoringToolWF\bin\Debug* and save.
+Open the file using the IntegratedAuthoringToolWF.exe found in *FAtiMA-Toolkit/AuthoringTools/IntegratedAuthoringToolWF/bin/Debug* and save.
 
 ## Level Selection
 Space Modules Inc supports both an automatic level progression system and a level selection system. The current version defaults to automatic progression and as a result the level selection screen is never shown. 
@@ -173,4 +173,4 @@ The character's mood is used to determine the players score within the score ran
 
 The player's score, the number of stars earned and their score in each scoring metrics is sent to SUGAR at the conclusion of every scenario. In addition to this, a value of '1' is sent for the 'plays' key, which records how many scenarios have been played, and the number of stars earned is also sent to a key which contains the Round and Level number, allowing for a record of their result in that scenario to be recorded and displayed on the level selection screen.
 
-Full scoring details can be found in GetScoreData() in [ScenariosController](Assets\Scripts\Controllers\ScenarioController.cs).
+Full scoring details can be found in GetScoreData() in [ScenariosController](Assets/Scripts/Controllers/ScenarioController.cs).
