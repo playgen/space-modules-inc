@@ -22,8 +22,7 @@ From | To
     - **Editor**
       - **ExcelToJson**: *[Included Assets](#included-assets)*
       - **FATiMAImporter**: *Utility to parse the scenario content files into a Unity readable format.* 
-    - **DeepLink iOS**: *[Included Assets](#included-assets)*  
-    - **DeepLink Plugin**: *[Included Assets](#included-assets)*  
+    - **DeepLink**: *[Included Assets](#included-assets)*  
     - **Evaluation Asset**: *[Included Assets](#included-assets) - An asset which helps evaluate the pedagogical efficiency of a game.*  
     - **RAGE Analytics**: *[Included Assets](#included-assets) - An asset to log to the RAGE analytics server.*  
     - **StreamingAssets**
@@ -55,8 +54,7 @@ From | To
 - [PlayGen Unity Utilities](https://github.com/playgen/unity-utilities) - a collection of simple Unity utilities.
 - [GameWork](https://github.com/JaredGG/GameWork.Unity) - a game development framework.
 - [ExcelToJsonConverter](https://github.com/Benzino/ExcelToJsonConverter) - used to convert Excel Localization files to JSON.
-- [DeepLink iOS](https://github.com/TROPHiT/UnityDeeplinks)
-- [DeepLink Plugin](https://assetstore.unity.com/packages/tools/integration/deeplink-plugin-30430) - for android.
+- [DeepLink](https://github.com/TROPHiT/UnityDeeplinks)
 
 # Development
 ## Requirements
