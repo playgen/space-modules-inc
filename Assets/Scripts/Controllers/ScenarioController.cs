@@ -124,11 +124,14 @@ public class ScenarioController : ICommandAction
 	private string[] _allScenarioPaths;
 	private AudioClipModel _audioClip;
 	private Random random = new Random();
+	private bool _isDemo;
 
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private readonly Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
 	private readonly AudioController _audioController;
+	private readonly string _demoScenarioPrefix = "TestScen";
+	private readonly string _demoUtterance = "";
 
 	// Round Based
 	public int CurrentLevel;
@@ -187,10 +190,18 @@ public class ScenarioController : ICommandAction
 		{
 			bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ);
 		}
-		RoundNumber = SUGARManager.CurrentUser != null ? CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? Mathf.Max(0, parseRound - 1) : parseLockAfterQ ? 1 : 2 : 0;
+		RoundNumber = SUGARManager.CurrentUser != null 
+			? CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) 
+				? Mathf.Max(0, parseRound - 1) 
+				: parseLockAfterQ 
+					? 1 
+					: 2 
+			: 0;
 		var round = obj.Rounds[RoundNumber];
-		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+
+		
 		LevelMax = _scenarios.Length;
+
 		int parseFeedback;
 		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.EndGame : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
 		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
@@ -209,6 +220,20 @@ public class ScenarioController : ICommandAction
 				CurrentLevel = 0;
 			}
 		}
+
+		_isDemo = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0
+		          && RoundNumber <= 0
+		          && CurrentLevel >= LevelMax;
+
+		if (_isDemo)
+		{
+			var prefix = _demoScenarioPrefix + _demoUtterance;
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
+		else
+		{
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
 	}
 
 	public void NextLevel()
@@ -226,7 +251,11 @@ public class ScenarioController : ICommandAction
 			var validPaths = _allScenarioPaths.Where(p => p.Contains('#')).ToArray();
 			var prefixes = validPaths.Select(p => p.Substring(0, p.IndexOf('-', p.IndexOf('-') + 1) + 1)).ToList();
 			var character = new List<string> { "Positive", "Neutral", "Negative" }.OrderBy(dto => random.Next()).First();
-			var prefix = prefixes.OrderBy(dto => random.Next()).First();
+
+			var prefix = _isDemo
+				? _demoScenarioPrefix + _demoUtterance
+				: prefixes.OrderBy(dto => random.Next()).First();
+
 			// MaxPoints currently hardcoded to 8 for random scenarios.
 			// TODO Review validity/balance of MaxPoints = 8
 			CurrentScenario = new ScenarioData(CurrentLevel, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), character, 8, prefix);
@@ -236,7 +265,11 @@ public class ScenarioController : ICommandAction
 			var index = random.Next(CurrentScenario.ScenarioPaths.Length);
 			Debug.Log(CurrentScenario.ScenarioPaths[index]);
 			string error;
-			ScenarioCode = CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
+
+			ScenarioCode = _isDemo
+				? _demoUtterance.Split('#')[0]
+				: CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
+
 			_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", CurrentScenario.ScenarioPaths[index]), out error);
 			if (!string.IsNullOrEmpty(error))
 			{
