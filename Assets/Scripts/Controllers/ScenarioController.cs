@@ -198,8 +198,23 @@ public class ScenarioController : ICommandAction
 					: 2 
 			: 0;
 		var round = obj.Rounds[RoundNumber];
+		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 
-		
+
+		_isDemo = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0
+		          && RoundNumber <= 0
+				  && CurrentLevel > 0;
+
+		if (_isDemo)
+		{
+			var prefix = _demoScenarioPrefix + _demoUtterance;
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
+		else
+		{
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
+
 		LevelMax = _scenarios.Length;
 
 		int parseFeedback;
@@ -208,7 +223,6 @@ public class ScenarioController : ICommandAction
 		// Boolean for checking if the post game questionnaire is opened after the round
 		bool parseInGameQ;
 		UseInGameQuestionnaire = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.TryParse(CommandLineUtility.CustomArgs["ingameq"], out parseInGameQ) && parseInGameQ;
-		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 		if (CurrentLevel >= LevelMax)
 		{
 			if (SUGARManager.CurrentUser != null && parseLockAfterQ)
@@ -221,19 +235,6 @@ public class ScenarioController : ICommandAction
 			}
 		}
 
-		_isDemo = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0
-		          && RoundNumber <= 0
-		          && CurrentLevel >= LevelMax;
-
-		if (_isDemo)
-		{
-			var prefix = _demoScenarioPrefix + _demoUtterance;
-			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
-		}
-		else
-		{
-			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
-		}
 	}
 
 	public void NextLevel()
