@@ -201,9 +201,9 @@ public class ScenarioController : ICommandAction
 		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 
 
-		_isDemo = CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0
+		_isDemo = (CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0)
 		          && RoundNumber <= 0
-				  && CurrentLevel > 0;
+				  && CurrentLevel <= 0;
 
 		if (_isDemo)
 		{
