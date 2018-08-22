@@ -32,6 +32,7 @@ public class MenuStateInput : TickStateInput
 	private GameObject _quitPanel;
 	private GameObject _messagePanel;
 	private TimeSpan _startTimeGap = TimeSpan.MinValue;
+	private bool _gameUnlocked;
 
 	public MenuStateInput(ScenarioController scenarioController)
 	{
@@ -66,6 +67,7 @@ public class MenuStateInput : TickStateInput
 
 	protected override void OnEnter()
 	{
+
 		TrackerEventSender.SendEvaluationEvent(TrackerEvalautionEvent.GameFlow, new Dictionary<TrackerEvaluationKey, string>
 		{
 			{ TrackerEvaluationKey.PieceType, "MainMenuState" },
@@ -78,13 +80,17 @@ public class MenuStateInput : TickStateInput
 		_panel.SetActive(true);
 		_background.SetActive(true);
 
+
 		if (_startTimeGap == TimeSpan.MinValue && SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("wipeprogress"))
 		{
 			PlayerPrefs.DeleteKey("CurrentLevel" + _scenarioController.RoundNumber);
+			PlayerPrefs.DeleteKey("GameUnlocked");
+			_gameUnlocked = false;
 			_scenarioController.CurrentLevel = 0;
 		}
 		var isPilot = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs != null && CommandLineUtility.CustomArgs.Count != 0;
-		var gameLocked = isPilot && _scenarioController.LevelMax > 0 && _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
+		var gameLocked = !_gameUnlocked && isPilot && _scenarioController.LevelMax > 0 && _scenarioController.CurrentLevel >= _scenarioController.LevelMax;
+		_gameUnlocked = PlayerPrefs.GetInt("GameUnlocked") == 1;
 
 		var lockedTitleText = Localization.Get(LockedTitle, true);
 		var lockedDescriptionText = Localization.Get(LockedDescription);

@@ -182,27 +182,43 @@ public class ScenarioController : ICommandAction
 		}
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
-		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
+
 		// If no round value is provided in CustomArgs, Round is set to 1 if lockafterq is a CustomArgs key and is true, set to 2 otherwise
-		int parseRound;
 		var parseLockAfterQ = false;
 		if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
 		{
 			bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ);
 		}
-		RoundNumber = SUGARManager.CurrentUser != null 
-			? CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) 
-				? Mathf.Max(0, parseRound - 1) 
-				: parseLockAfterQ 
-					? 1 
-					: 2 
-			: 0;
+
+		var hasPilotArgs = CommandLineUtility.CustomArgs.ContainsKey("feedback") &&
+		                     CommandLineUtility.CustomArgs.ContainsKey("lockafterq");
+		var gameUnlocked = PlayerPrefs.GetInt("GameUnlocked") == 1;
+
+
+		RoundNumber = SUGARManager.CurrentUser != null && hasPilotArgs
+			? parseLockAfterQ
+				? 1
+				: 2
+			: gameUnlocked 
+				? 2
+				: 0;
+
+		
+		int parseFeedback;
+		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") 
+			? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) 
+				? (FeedbackMode)parseFeedback 
+				: FeedbackMode.EndGame 
+			: (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
+
+		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
+
 		var round = obj.Rounds[RoundNumber];
 		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 
-
 		_isDemo = (CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0)
-		          && RoundNumber <= 0
+		          && !hasPilotArgs
+				  && !gameUnlocked
 				  && CurrentLevel <= 0;
 
 		if (_isDemo)
@@ -217,17 +233,22 @@ public class ScenarioController : ICommandAction
 
 		LevelMax = _scenarios.Length;
 
-		int parseFeedback;
-		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.EndGame : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
-		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
 		// Boolean for checking if the post game questionnaire is opened after the round
 		bool parseInGameQ;
 		UseInGameQuestionnaire = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.TryParse(CommandLineUtility.CustomArgs["ingameq"], out parseInGameQ) && parseInGameQ;
 		if (CurrentLevel >= LevelMax)
 		{
-			if (SUGARManager.CurrentUser != null && parseLockAfterQ)
+			if (SUGARManager.CurrentUser != null)
 			{
-				CurrentLevel = LevelMax;
+				if (parseLockAfterQ)
+				{
+					CurrentLevel = LevelMax;
+				}
+				else
+				{
+					PlayerPrefs.SetInt("GameUnlocked", 1);
+					CurrentLevel = 0;
+				}
 			}
 			else
 			{
