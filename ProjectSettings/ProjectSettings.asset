@@ -121,7 +121,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 1.1
+  bundleVersion: 1.2.1
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -160,8 +160,8 @@ PlayerSettings:
     iOS: com.playgen.spacemodulesinc
     tvOS: com.PlayGen.SpaceModulesInc
   buildNumber:
-    iOS: 2
-  AndroidBundleVersionCode: 8
+    iOS: 3
+  AndroidBundleVersionCode: 10
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 1

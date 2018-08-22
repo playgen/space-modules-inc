@@ -124,11 +124,14 @@ public class ScenarioController : ICommandAction
 	private string[] _allScenarioPaths;
 	private AudioClipModel _audioClip;
 	private Random random = new Random();
+	private bool _isDemo;
 
 	private readonly List<Name> _events = new List<Name>();
 	private readonly List<ChatScoreObject> _chatScoreHistory = new List<ChatScoreObject>();
 	private readonly Dictionary<string, int> _feedbackScores = new Dictionary<string, int>();
 	private readonly AudioController _audioController;
+	private readonly string _demoScenarioPrefix = "TestScen";
+	private readonly string _demoUtterance = "";
 
 	// Round Based
 	public int CurrentLevel;
@@ -179,36 +182,80 @@ public class ScenarioController : ICommandAction
 		}
 		var obj = JsonConvert.DeserializeObject<RoundConfig>(www.text);
 
-		// Takes round number from command line args (minus 1 for SPL not able to pass round=0 via URL)
+
 		// If no round value is provided in CustomArgs, Round is set to 1 if lockafterq is a CustomArgs key and is true, set to 2 otherwise
-		int parseRound;
 		var parseLockAfterQ = false;
 		if (CommandLineUtility.CustomArgs.ContainsKey("lockafterq"))
 		{
 			bool.TryParse(CommandLineUtility.CustomArgs["lockafterq"], out parseLockAfterQ);
 		}
-		RoundNumber = SUGARManager.CurrentUser != null ? CommandLineUtility.CustomArgs.ContainsKey("round") && int.TryParse(CommandLineUtility.CustomArgs["round"], out parseRound) ? Mathf.Max(0, parseRound - 1) : parseLockAfterQ ? 1 : 2 : 0;
-		var round = obj.Rounds[RoundNumber];
-		_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
-		LevelMax = _scenarios.Length;
+
+		var hasPilotArgs = CommandLineUtility.CustomArgs.ContainsKey("feedback") &&
+		                     CommandLineUtility.CustomArgs.ContainsKey("lockafterq");
+		var gameUnlocked = PlayerPrefs.GetInt("GameUnlocked") == 1;
+
+
+		RoundNumber = SUGARManager.CurrentUser != null && hasPilotArgs
+			? parseLockAfterQ
+				? 1
+				: 2
+			: gameUnlocked 
+				? 2
+				: 0;
+
+		
 		int parseFeedback;
-		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") ? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) ? (FeedbackMode)parseFeedback : FeedbackMode.EndGame : (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
+		FeedbackLevel = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("feedback") 
+			? int.TryParse(CommandLineUtility.CustomArgs["feedback"], out parseFeedback) 
+				? (FeedbackMode)parseFeedback 
+				: FeedbackMode.EndGame 
+			: (FeedbackMode)PlayerPrefs.GetInt("Feedback", (int)FeedbackMode.EndGame);
+
 		PlayerPrefs.SetInt("Feedback", (int)FeedbackLevel);
+
+		var round = obj.Rounds[RoundNumber];
+		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
+
+		_isDemo = (CommandLineUtility.CustomArgs == null || CommandLineUtility.CustomArgs.Count == 0)
+		          && !hasPilotArgs
+				  && !gameUnlocked
+				  && CurrentLevel <= 0;
+
+		if (_isDemo)
+		{
+			var prefix = _demoScenarioPrefix + _demoUtterance;
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
+		else
+		{
+			_scenarios = round.Levels.Select(level => new ScenarioData(level.Id, _allScenarioPaths.Where(x => x.Contains(level.Prefix)).ToArray(), level.Character, level.MaxPoints, level.Prefix)).ToArray();
+		}
+
+		LevelMax = _scenarios.Length;
+
 		// Boolean for checking if the post game questionnaire is opened after the round
 		bool parseInGameQ;
 		UseInGameQuestionnaire = SUGARManager.CurrentUser != null && CommandLineUtility.CustomArgs.ContainsKey("ingameq") && bool.TryParse(CommandLineUtility.CustomArgs["ingameq"], out parseInGameQ) && parseInGameQ;
-		CurrentLevel = PlayerPrefs.GetInt("CurrentLevel" + RoundNumber, 0);
 		if (CurrentLevel >= LevelMax)
 		{
-			if (SUGARManager.CurrentUser != null && parseLockAfterQ)
+			if (SUGARManager.CurrentUser != null)
 			{
-				CurrentLevel = LevelMax;
+				if (parseLockAfterQ)
+				{
+					CurrentLevel = LevelMax;
+				}
+				else
+				{
+					PlayerPrefs.SetInt("GameUnlocked", 1);
+					CurrentLevel = 0;
+				}
 			}
 			else
 			{
 				CurrentLevel = 0;
 			}
 		}
+
 	}
 
 	public void NextLevel()
@@ -226,7 +273,11 @@ public class ScenarioController : ICommandAction
 			var validPaths = _allScenarioPaths.Where(p => p.Contains('#')).ToArray();
 			var prefixes = validPaths.Select(p => p.Substring(0, p.IndexOf('-', p.IndexOf('-') + 1) + 1)).ToList();
 			var character = new List<string> { "Positive", "Neutral", "Negative" }.OrderBy(dto => random.Next()).First();
-			var prefix = prefixes.OrderBy(dto => random.Next()).First();
+
+			var prefix = _isDemo
+				? _demoScenarioPrefix + _demoUtterance
+				: prefixes.OrderBy(dto => random.Next()).First();
+
 			// MaxPoints currently hardcoded to 8 for random scenarios.
 			// TODO Review validity/balance of MaxPoints = 8
 			CurrentScenario = new ScenarioData(CurrentLevel, _allScenarioPaths.Where(x => x.Contains(prefix)).ToArray(), character, 8, prefix);
@@ -236,7 +287,11 @@ public class ScenarioController : ICommandAction
 			var index = random.Next(CurrentScenario.ScenarioPaths.Length);
 			Debug.Log(CurrentScenario.ScenarioPaths[index]);
 			string error;
-			ScenarioCode = CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
+
+			ScenarioCode = _isDemo
+				? _demoUtterance.Split('#')[0]
+				: CurrentScenario.ScenarioPaths[index].Replace(CurrentScenario.Prefix, string.Empty).Split('#')[0];
+
 			_integratedAuthoringTool = IntegratedAuthoringToolAsset.LoadFromFile(Path.Combine("Scenarios", CurrentScenario.ScenarioPaths[index]), out error);
 			if (!string.IsNullOrEmpty(error))
 			{

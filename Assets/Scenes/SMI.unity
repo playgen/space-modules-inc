@@ -5939,10 +5939,10 @@ MonoBehaviour:
   rawCopy: 0
   flushInterval: 3
   checkInterval: 3
-  storageType: local
-  traceFormat: csv
-  host: 
-  trackingCode: 
+  storageType: net
+  traceFormat: xapi
+  host: https://rage-analytics.stichtingpraktijkleren.nl/
+  trackingCode: 5b6c40ee8a08a80082016cf3gdw107zsdab
   debug: 0
   username: 
   password: 
